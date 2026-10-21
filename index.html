@@ -722,6 +722,62 @@ button.feed-follow-plus{padding:0;cursor:pointer}
 #mssheet .rd{color:var(--err)}
 .ms-pa{width:36px;height:36px;border-radius:50%;overflow:hidden;background:#bbb;display:grid;place-items:center;flex:none;color:#fff}
 .ms-pa img{width:100%;height:100%;object-fit:cover}
+.font-preview{margin-top:12px;padding:12px 14px;border-radius:12px;background:var(--p);font-size:17px;line-height:1.6}
+.tr-box{margin-top:4px;padding:8px 12px;border-radius:12px;background:var(--p);color:var(--sub);font-size:calc(var(--chat-font-size,14px) - 1px);line-height:1.55;white-space:pre-wrap;align-self:flex-start;max-width:100%;overflow-wrap:anywhere}
+.tr-box small{display:block;font-size:11px;opacity:.7;margin-bottom:2px}
+#v-cset,#v-cset .body{background:#f2f2f7}
+[data-theme=dark] #v-cset,[data-theme=dark] #v-cset .body{background:#000}
+.is-wrap{padding:6px 16px 48px}
+.is-h{font-size:13px;color:#6d6d72;margin:24px 16px 7px}
+.is-f{font-size:13px;color:#6d6d72;margin:7px 16px 0;line-height:1.45}
+[data-theme=dark] .is-h,[data-theme=dark] .is-f{color:#8d8d93}
+.is-g{background:#fff;border-radius:12px;overflow:hidden}
+[data-theme=dark] .is-g{background:#1c1c1e}
+.is-c{display:flex;align-items:center;gap:12px;min-height:46px;padding:9px 16px;position:relative;color:var(--ink)}
+.is-c+.is-c:before{content:"";position:absolute;top:0;left:16px;right:0;height:.5px;background:rgba(60,60,67,.29)}
+[data-theme=dark] .is-c+.is-c:before{background:rgba(84,84,88,.65)}
+.is-tap{cursor:pointer}
+.is-tap:active{background:rgba(128,128,128,.12)}
+.is-dim{opacity:.45;pointer-events:none}
+.is-i{width:29px;height:29px;border-radius:7px;color:#fff;display:grid;place-items:center;flex:none}
+.is-i svg{width:18px;height:18px}
+.is-t{flex:1;min-width:0}
+.is-t b{display:block;font-weight:400;font-size:17px}
+.is-t small{display:block;color:#8e8e93;font-size:13px;margin-top:1px}
+.is-v{color:#8e8e93;font-size:17px;max-width:48%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.is-chev{color:#c4c4c7;display:grid;place-items:center}
+.is-chev svg{width:16px;height:16px}
+.is-col{flex-direction:column;align-items:stretch;gap:6px}
+.is-col>b{font-weight:400;font-size:17px}
+.is-c textarea{background:none;border:0;border-radius:0;padding:4px 0;font-size:16px;width:100%;color:var(--ink)}
+.is-c input[type=range]{width:100%;padding:0;background:none;border:0;accent-color:#007aff}
+.is-prof{padding:14px 16px}
+.is-prof .av{width:56px;height:56px;font-size:22px}
+.is-sw{position:relative;width:51px;height:31px;flex:none}
+.is-sw input{position:absolute;inset:0;opacity:0;width:100%;height:100%;margin:0;padding:0;z-index:2;cursor:pointer;appearance:none;-webkit-appearance:none}
+.is-sw i{position:absolute;inset:0;border-radius:16px;background:#e9e9ea;transition:background .2s}
+[data-theme=dark] .is-sw i{background:#39393d}
+.is-sw i:after{content:"";position:absolute;top:2px;left:2px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.25);transition:transform .2s}
+.is-sw input:checked+i{background:#34c759}
+.is-sw input:checked+i:after{transform:translateX(20px)}
+.is-sel{margin-left:auto;background:none!important;border:0!important;padding:0!important;width:auto!important;color:#8e8e93;font-size:17px;max-width:55%}
+#langsheet{position:fixed;inset:0;background:var(--shade);display:none;align-items:flex-end;justify-content:center;z-index:85}
+#langsheet.on{display:flex}
+.ls-box{width:100%;max-width:640px;background:#f2f2f7;border-radius:14px 14px 0 0;max-height:78vh;display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom,0px)}
+[data-theme=dark] .ls-box{background:#1c1c1e}
+.ls-top{display:flex;align-items:center;justify-content:space-between;padding:14px 16px}
+.ls-top b{font-size:17px}
+.ls-top button{font-size:17px;color:#007aff}
+.ls-list{overflow-y:auto;margin:0 16px;border-radius:12px;background:#fff}
+[data-theme=dark] .ls-list{background:#2c2c2e}
+.ls-row{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;font-size:17px;cursor:pointer;position:relative;color:var(--ink)}
+.ls-row+.ls-row:before{content:"";position:absolute;top:0;left:16px;right:0;height:.5px;background:rgba(128,128,128,.3)}
+.ls-row i{color:#007aff;display:grid}
+.ls-row i svg{width:20px;height:20px}
+.ls-add{display:flex;gap:8px;padding:12px 16px}
+.ls-add input{flex:1;min-width:0;background:#fff;border:0;border-radius:10px;padding:10px 12px;color:var(--ink)}
+[data-theme=dark] .ls-add input{background:#2c2c2e}
+.ls-add button{color:#007aff;font-size:16px;padding:0 6px}
 </style>
 <style id="ucss"></style>
 </head>
@@ -842,6 +898,21 @@ button.feed-follow-plus{padding:0;cursor:pointer}
   </div>
   <div class="body settings-sub" id="settings-appearance" style="display:none">
     <div class="cap">外观</div><div class="seg" id="c-theme"><button data-v="light">白天</button><button data-v="dark">夜间</button><button data-v="auto">跟随系统</button></div>
+    <div class="cap">字体</div><div class="card">
+      <label style="margin-top:0">当前字体</label><select id="font-select"></select>
+      <div class="font-preview" id="font-preview">字体预览 Aa 你好，世界 1234567890</div>
+      <div style="display:flex;gap:8px;margin-top:10px"><button class="btn" id="font-file" type="button" style="margin:0;flex:1">导入字体文件</button><button class="btn" id="font-url" type="button" style="margin:0;flex:1">粘贴字体链接</button></div>
+      <button class="btn del" id="font-del" type="button">删除所选自定义字体</button>
+      <label>字体大小：<b id="font-scale-v">100%</b></label><input type="range" id="font-scale" min="80" max="140" step="2" style="width:100%;padding:0;border:0;background:none">
+      <button class="btn" id="font-scale-reset" type="button">恢复默认大小</button>
+      <p class="note">支持 ttf、otf、woff、woff2。字体文件和字号只保存在本机。链接需要对方服务器允许跨域读取。字号在 iOS Safari 里对整体文字生效，个别固定字号的小字可能不跟着变。</p>
+    </div>
+    <div class="cap">字体预设</div><div class="card">
+      <div style="display:flex;gap:8px;align-items:center"><select id="font-preset-select" style="flex:1;min-width:0"></select><button class="btn" id="font-preset-use" type="button" style="margin:0">使用</button></div>
+      <input id="font-preset-name" placeholder="预设名称，例如：阅读用大字" autocomplete="off" style="margin-top:10px">
+      <div style="display:flex;gap:8px;margin-top:10px"><button class="btn fill" id="font-preset-save" type="button" style="margin:0;flex:1">保存当前为预设</button><button class="btn" id="font-preset-del" type="button" style="margin:0">删除所选</button></div>
+      <p class="note">预设会同时记住字体和字号。</p>
+    </div>
   </div>
   <div class="body settings-sub" id="settings-api" style="display:none">
     <div class="cap">接口设置</div><div class="card">
@@ -966,7 +1037,7 @@ function __openStoreDB(){return new Promise((resolve,reject)=>{const req=indexed
 async function __readStoredState(){try{const db=await __openStoreDB();const val=await new Promise((resolve,reject)=>{const tx=db.transaction('state','readonly');const req=tx.objectStore('state').get('xsj');req.onsuccess=()=>resolve(req.result||null);req.onerror=()=>reject(req.error)});db.close();if(val){try{return typeof val==='string'?JSON.parse(val):val}catch(e){console.warn('IndexedDB 中的状态无法解析',e)}}}catch(e){console.warn('读取 IndexedDB 失败，将尝试旧存储',e)}try{return JSON.parse(localStorage.getItem('xsj')||'null')}catch(e){return null}}
 async function __writeStoredState(serialized){const db=await __openStoreDB();await new Promise((resolve,reject)=>{const tx=db.transaction('state','readwrite');tx.objectStore('state').put(serialized,'xsj');tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error||new Error('数据库写入失败'));tx.onabort=()=>reject(tx.error||new Error('数据库写入中断'))});db.close();}
 let S=await __readStoredState();
-S=Object.assign(DEF(),S||{});S.stickerGroups=S.stickerGroups||['默认'];S.stickers=(S.stickers||[]).map(x=>({...x,group:x.group||'默认'}));S.apiPresets=S.apiPresets||[];S.secondaryPresets=S.secondaryPresets||[];S.userProfiles=S.userProfiles||[];S.diaries=S.diaries||[];S.postDecorations=S.postDecorations||[];if(!S.userProfiles.length){S.userProfiles=[Object.assign({id:'u1'},S.me)];S.activeUserProfile='u1'};S.activeUserProfile=S.activeUserProfile||S.userProfiles[0].id;S.me=Object.assign({},S.userProfiles.find(x=>x.id===S.activeUserProfile)||S.me);
+S=Object.assign(DEF(),S||{});S.stickerGroups=S.stickerGroups||['默认'];S.stickers=(S.stickers||[]).map(x=>({...x,group:x.group||'默认'}));S.apiPresets=S.apiPresets||[];S.secondaryPresets=S.secondaryPresets||[];S.fonts=S.fonts||[];S.fontPresets=S.fontPresets||[];S.fontActive=S.fontActive||'sys';S.fontScale=S.fontScale||100;S.userProfiles=S.userProfiles||[];S.diaries=S.diaries||[];S.postDecorations=S.postDecorations||[];if(!S.userProfiles.length){S.userProfiles=[Object.assign({id:'u1'},S.me)];S.activeUserProfile='u1'};S.activeUserProfile=S.activeUserProfile||S.userProfiles[0].id;S.me=Object.assign({},S.userProfiles.find(x=>x.id===S.activeUserProfile)||S.me);
 const MEMK=['traditionalMemory','memoryEntries','vectorMemories','lastAutoSummaryCount'];
 S.chatsByUser=S.chatsByUser||{};S.memByUser=S.memByUser||{};S.cc=S.cc||{};
 {const first=S.userProfiles[0].id;
@@ -1032,7 +1103,7 @@ async function ask(msgs,onD,opt,configOverride){
 function build(p,h){
   const recent=h.slice(-6).map(m=>m.content).join('\n');
   const cc=CC(p.id),wb=S.worlds.filter(w=>w.on!==false&&w.content&&((w.scope||'global')==='global'||(w.scope==='contact'&&(w.contacts||[]).includes(p.id)))&&(!w.keys.trim()||(w.trigger==='keyword'&&w.keys.split(/[,，\s]+/).filter(Boolean).some(k=>recent.includes(k))))).map(w=>({content:w.content,position:w.position||'after'}));
-  let sys=p.prompt||'';if((S.cfg.memoryMode||'traditional')==='traditional'&&cc.traditionalMemory)sys+='\n\n【传统记忆】\n'+cc.traditionalMemory;const generatedMem=(cc.memoryEntries||[]).filter(m=>m&&String(m.text||'').trim());if(generatedMem.length)sys+='\n\n【自动总结记忆条目】\n'+generatedMem.map((m,i)=>`${i+1}. ${m.text}`).join('\n');if(S.globalPrompt)sys+='\n\n【全局 AI 扮演提示词】\n'+S.globalPrompt;if(cc.sys)sys+='\n\n'+cc.sys;
+  let sys=p.prompt||'';if((S.cfg.memoryMode||'traditional')==='traditional'&&cc.traditionalMemory)sys+='\n\n【传统记忆】\n'+cc.traditionalMemory;const generatedMem=(cc.memoryEntries||[]).filter(m=>m&&String(m.text||'').trim());if(generatedMem.length)sys+='\n\n【自动总结记忆条目】\n'+generatedMem.map((m,i)=>`${i+1}. ${m.text}`).join('\n');if(S.globalPrompt)sys+='\n\n【全局 AI 扮演提示词】\n'+S.globalPrompt;if(cc.sys)sys+='\n\n'+cc.sys;if(cc.trOn&&(cc.trOut||[]).length)sys+='\n\n【输出语言】请用以下语言回复用户：'+cc.trOut.join('、')+'。'+(cc.trOut.length>1?'可以在同一条消息里自然地混用这些语言。':'')+'不要在回复里自行附带翻译或括号注释。';
   if(S.me.bio)sys+='\n\n【用户设定】'+S.me.name+'：'+S.me.bio;if(S.music&&S.music.together&&S.music.together.pid===p.id&&S.music.together.title)sys+='\n\n【一起听歌】用户正在和你一起听《'+S.music.together.title+'》（'+(S.music.together.artist||'未知艺人')+'）。你知道这件事，可以自然地聊到这首歌，但不要生硬复述歌名。';
   const wbBefore=wb.filter(w=>w.position==='before').map(w=>w.content),wbAfter=wb.filter(w=>w.position!=='before').map(w=>w.content);if(wbBefore.length)sys='【世界书】\n'+wbBefore.join('\n\n')+'\n\n'+sys;if(wbAfter.length)sys+='\n\n【世界书】\n'+wbAfter.join('\n\n');
   const o=[];h.slice(-(+S.cfg.hist||30)).forEach(m=>{const l=o[o.length-1];if(l&&l.role===m.role)l.content+='\n'+m.content;else o.push({role:m.role,content:m.image?[{type:'text',text:m.content||'用户发送了一张图片，请结合图片内容回复。'},{type:'image_url',image_url:{url:m.image}}]:m.content})});
@@ -1289,8 +1360,6 @@ function desktopApply(){
  applyDesktopOrder();
 }
 function applyDesktopOrder(){const d=S.desktop||{};[['first',$('.wrap')],['second',$('#home-page2 .home-app-grid')],['dock',$('#v-home .dock')]].forEach(([key,par])=>{if(!par)return;const order=d.order&&d.order[key];if(!Array.isArray(order))return;const els=[...par.children];order.forEach(id=>{const el=els.find(x=>x.dataset.homeItem===id||x.dataset.go===id||x.dataset.dwId===id);if(el)par.appendChild(el)});});}
-function desktopFile(cb){const i=document.createElement('input');i.type='file';i.accept='image/*';i.onchange=()=>{const f=i.files&&i.files[0];if(!f)return;const r=new FileReader();r.onload=()=>cb(String(r.result||''));r.readAsDataURL(f)};i.click()}
-async function desktopImageSource(title){const choice=await askText(title+'：输入图片链接；留空则从手机相册选择','https://...');if(choice===null)return null;if(choice.trim())return choice.trim();return await new Promise(resolve=>desktopFile(resolve));}
 function renderDesktopCustomizer(){const root=$('#desktop-customizer');if(!root)return;const d=S.desktop;root.innerHTML=`<p class="note">在这里美化桌面：换壁纸、替换软件图标、添加小组件。图片可从手机相册选，也可以粘贴图片直链。底部四个软件栏固定贴近屏幕底部，不会随桌面内容上移。长按软件/组件进入摆放模式；软件可以与底部栏的软件交换位置，小组件只能放在桌面区域。</p><div class="dc-preview" style="background-image:${d.wallpaper?`url('${String(d.wallpaper).replace(/'/g,'%27')}')`:'none'}"><b>桌面预览</b><div style="font-size:12px;margin-top:6px;opacity:.8">${d.wallpaper?'已设置壁纸':'当前为默认背景'}</div></div><button class="btn fill" id="dc-wallpaper">更换桌面壁纸</button><button class="btn" id="dc-wallpaper-clear">恢复默认壁纸</button><div class="cap" style="margin-top:18px">软件图标</div><p class="note">选择要更换的图标，支持图片链接或相册图片。</p><div class="dc-grid">${[...new Map([...$$('#home-page2 [data-go], #v-home .dock [data-go]')].map(el=>[el.dataset.go,{id:el.dataset.go,name:el.innerText.trim()}])).values()].map(x=>`<button class="btn" data-dc-icon="${x.id}">${esc(x.name)} · 更换图标</button>`).join('')}</div><div class="cap" style="margin-top:20px">主页小组件</div><div class="dc-grid"><button class="btn fill" id="dc-add-text">＋ 添加文字组件</button><button class="btn fill" id="dc-add-image">＋ 添加图片组件</button><button class="btn fill" id="dc-add-clock">＋ 添加时钟组件</button><button class="btn" id="dc-arrange">桌面摆放模式说明</button></div><div id="dc-widgets-list">${d.widgets.map(w=>`<div class="dc-widget-row"><span><b>${esc(w.title||({text:'文字组件',image:'图片组件',clock:'时钟组件'}[w.kind]||'组件'))}</b><small style="display:block;color:var(--sub)">${w.kind==='text'?esc((w.text||'').slice(0,45)):w.kind==='image'?'图片组件': '日本日期与时间'}</small></span><button class="pill" data-dc-edit="${w.id}">编辑</button><button class="pill" data-dc-del="${w.id}">删除</button></div>`).join('')||'<p class="note">还没有自定义小组件。</p>'}</div><button class="btn del" id="dc-reset">重置所有桌面美化</button>`;
  $('#dc-wallpaper').onclick=async()=>{const src=await desktopImageSource('桌面壁纸');if(src===null)return;if(!src)return toast('没有选择图片');d.wallpaper=src;save();desktopApply();renderDesktopCustomizer();toast('壁纸已更新')};
  $('#dc-wallpaper-clear').onclick=()=>{d.wallpaper='';save();desktopApply();renderDesktopCustomizer();toast('已恢复默认壁纸')};
@@ -1560,7 +1629,7 @@ function bub(m,i,first,last){
   r.className='r '+(me?'me':'ai')+(first?' first':'');if(i>=0)r.dataset.i=i;
   r.innerHTML=`<div class="av" ${!me&&i>=0?'data-thought-i="'+i+'" title="查看角色内心想法"':''}>${av(u)}</div><div class="col">${first&&!me?`<div class="nm">${esc(u.name)}</div>`:''}<div class="bw"><div class="m"></div>${last&&m.t?`<span class="tm">${hm(m.t)}</span>`:''}</div></div>`;
   const el=r.querySelector('.m'),sk=m.stk&&S.stickers.find(x=>x.id===m.stk);
-  if(m.image){el.classList.add('image-msg');el.innerHTML=`${m.content?`<div>${esc(m.content)}</div>`:''}<img src="${m.image}" alt="聊天图片" style="display:block;max-width:min(240px,62vw);max-height:320px;object-fit:contain;border-radius:12px;margin-top:${m.content?'6px':'0'}">`}else if(sk){el.classList.add('stk');el.innerHTML=`<img src="${sk.src}" alt="">`}else if(m.audio){el.classList.add('voice-msg');el.innerHTML=`<button type="button" class="voice-play" data-play-audio="${i}" aria-label="展开或收起语音文字"><span class="voice-arrow" aria-hidden="true"></span><span class="voice-wave" aria-hidden="true">${'<i></i>'.repeat(9)}</span></button><span class="voice-transcript">${esc(m.content||'语音消息')}</span>`;el.addEventListener('click',ev=>{ev.preventDefault();ev.stopPropagation();el.classList.toggle('show-text')})}else {el.textContent=m.content}$('#msgs').appendChild(r);$('#msgs').scrollTop=1e9;return el;
+  if(m.image){el.classList.add('image-msg');el.innerHTML=`${m.content?`<div>${esc(m.content)}</div>`:''}<img src="${m.image}" alt="聊天图片" style="display:block;max-width:min(240px,62vw);max-height:320px;object-fit:contain;border-radius:12px;margin-top:${m.content?'6px':'0'}">`}else if(sk){el.classList.add('stk');el.innerHTML=`<img src="${sk.src}" alt="">`}else if(m.audio){el.classList.add('voice-msg');el.innerHTML=`<button type="button" class="voice-play" data-play-audio="${i}" aria-label="展开或收起语音文字"><span class="voice-arrow" aria-hidden="true"></span><span class="voice-wave" aria-hidden="true">${'<i></i>'.repeat(9)}</span></button><span class="voice-transcript">${esc(m.content||'语音消息')}</span>`;el.addEventListener('click',ev=>{ev.preventDefault();ev.stopPropagation();el.classList.toggle('show-text')})}else {el.textContent=m.content}if(CC(cur).trOn&&m.trOpen&&m.role==='assistant'&&!m.image&&!m.audio&&!sk)r.querySelector('.col').insertAdjacentHTML('beforeend',trBoxHTML(m));$('#msgs').appendChild(r);$('#msgs').scrollTop=1e9;return el;
 }
 function applyChatFont(){const box=$('#msgs');if(box)box.style.setProperty('--chat-font-size',(Number(CC(cur).fontSize)||14)+'px')}
 let multiSelectMode=false;let selectedMsgIndices=new Set();
@@ -1597,6 +1666,7 @@ $('#msgs').onclick=e=>{
  if(msgLongPressed){msgLongPressed=false;e.preventDefault();return}
  const r=e.target.closest('.r');if(!r)return;const i=+r.dataset.i;if(!Number.isFinite(i))return;
  if(multiSelectMode){if(selectedMsgIndices.has(i))selectedMsgIndices.delete(i);else selectedMsgIndices.add(i);draw();return}
+ const mm=S.chats[cur][i];if(CC(cur).trOn&&mm&&mm.role==='assistant'&&!mm.recalled&&!mm.image&&!mm.stk&&!mm.audio&&mm.content&&e.target.closest('.m')){trToggle(i);return}
  const on=r.classList.contains('sel');$$('.r.sel').forEach(x=>x.classList.remove('sel'));if(!on)r.classList.add('sel');
 };
 
@@ -1721,30 +1791,50 @@ function rChatMemory(){
 function rCset(){
   if(csetPage==='memory'){rChatMemory();return;}
   const p=P(cur),cc=CC(cur);
-  $('#cbody').innerHTML=`<div class="cap" style="margin-top:6px">联系人</div>
-  <div class="row nb0" data-go="personas"><div class="av">${av(p)}</div><div><p>${esc(p.name)}</p><small>编辑名字、简介、开场白、人设提示词</small></div><span class="chev">›</span></div>
-  <div class="cap">记忆</div><div class="card"><div class="row nb0" id="open-chat-memory" style="cursor:pointer"><div><p>记忆管理</p><small>生成总结条目、编辑删除记忆、自定义总结指令</small></div><span class="chev">›</span></div></div>
-  <div class="cap">角色备注</div><div class="card"><p class="note">填写后会替换聊天界面顶栏的角色名字；留空则显示原角色名。仅用于界面显示，不会作为角色台词发送。</p><textarea id="cs-role-note" rows="2" placeholder="输入你想在聊天顶栏显示的名字或备注……">${esc(cc.roleNote||'')}</textarea></div>
-  <div class="cap">聊天显示</div><div class="card"><label for="cs-font-size">聊天字体大小：<b id="cs-font-value">${Number(cc.fontSize)||14}px</b></label><input id="cs-font-size" type="range" min="11" max="20" step="1" value="${Number(cc.fontSize)||14}" style="width:100%"><p class="note">只调整当前聊天的文字大小；气泡边距已收紧。</p></div>
-  <div class="cap">附加系统提示</div>
-  <div class="card"><textarea id="cs-sys" rows="4" placeholder="只对这个聊天生效，接在人设提示词后面">${esc(cc.sys)}</textarea></div>
-  <div class="cap">绑定世界书</div>
-  <div class="card">${S.worlds.map(w=>`<label class="chk"><input type="checkbox" data-wb="${w.id}" ${cc.wb.includes(w.id)?'checked':''}>${esc(w.title||(w.content||'').slice(0,14)||'未命名')}</label>`).join('')||'<p class="note">还没有世界书条目，先去桌面「世界书」添加</p>'}<p class="note">不勾选＝使用全部已启用条目</p></div>
-  <div class="cap">绑定表情包</div>
-  <div class="card">${S.stickers.length?`<div class="sg">${S.stickers.map(s=>`<button class="st${cc.stk.includes(s.id)?' on':''}" data-bs="${s.id}"><img src="${s.src}" alt=""></button>`).join('')}</div>`:'<p class="note">还没有表情包，在聊天输入框的笑脸里上传</p>'}<p class="note">不选＝全部可用；选中后这个聊天只显示选中的</p></div>
-  <div class="cap">美化</div>
-  <div class="card"><select id="cs-css"><option value="">默认</option>${S.themes.map(t=>`<option value="${t.id}"${cc.css===t.id?' selected':''}>${esc(t.name)}</option>`).join('')}</select>
-    <div class="row nb0" data-go="css" style="padding-top:16px"><div><p>管理美化</p><small>自己写 CSS，保存后在这里切换</small></div><span class="chev">›</span></div></div>
-  <div class="cap">隐私</div>
-  <div class="card"><label class="chk"><input type="checkbox" id="cs-bl" ${p.blocked?'checked':''}>拉黑此联系人</label><p class="note">拉黑后不能发消息或请求回复，可在「联系人」里解除</p></div>`;
+  $('#cbody').innerHTML=`<div class="is-wrap">
+  <div class="is-g"><div class="is-c is-tap is-prof" data-go="personas"><div class="av">${av(p)}</div><div class="is-t"><b>${esc(p.name)}</b><small>编辑名字、简介、开场白、人设提示词</small></div><span class="is-chev">${rpSvg('chr')}</span></div></div>
+  <div class="is-h">翻译</div>
+  <div class="is-g">
+    <div class="is-c"><span class="is-i" style="background:#34c759">${rpSvg('gl')}</span><span class="is-t"><b>开启翻译</b></span><span class="is-sw"><input type="checkbox" id="cs-tr-on" ${cc.trOn?'checked':''}><i></i></span></div>
+    <div class="is-c is-tap${cc.trOn?'':' is-dim'}" id="cs-tr-out"><span class="is-i" style="background:#007aff">${rpSvg('tg')}</span><span class="is-t"><b>角色输出语种</b></span><span class="is-v">${esc((cc.trOut||[]).join('、')||'未设置')}</span><span class="is-chev">${rpSvg('chr')}</span></div>
+    <div class="is-c is-tap${cc.trOn?'':' is-dim'}" id="cs-tr-to"><span class="is-i" style="background:#ff9500">${rpSvg('gl')}</span><span class="is-t"><b>翻译成</b></span><span class="is-v">${esc(cc.trTo||'简体中文')}</span><span class="is-chev">${rpSvg('chr')}</span></div>
+  </div>
+  <div class="is-f">开启后，点一下角色的消息气泡，会在下方展开译文。「角色输出语种」可以多选，角色会按所选语种回复，也可以在一条消息里混用多种语言；「翻译成」是译文使用的语言。</div>
+  <div class="is-h">聊天</div>
+  <div class="is-g">
+    <div class="is-c is-tap" id="open-chat-memory"><span class="is-i" style="background:#af52de">${rpSvg('mm')}</span><span class="is-t"><b>记忆管理</b><small>生成总结条目、编辑删除记忆、自定义总结指令</small></span><span class="is-chev">${rpSvg('chr')}</span></div>
+    <div class="is-c is-col"><b>角色备注</b><textarea id="cs-role-note" rows="2" placeholder="替换聊天顶栏的角色名字，留空显示原名">${esc(cc.roleNote||'')}</textarea></div>
+    <div class="is-c is-col"><div style="display:flex;justify-content:space-between;align-items:center"><b style="font-weight:400;font-size:17px">聊天字体大小</b><span class="is-v" id="cs-font-value">${Number(cc.fontSize)||14}px</span></div><input id="cs-font-size" type="range" min="11" max="20" step="1" value="${Number(cc.fontSize)||14}"></div>
+  </div>
+  <div class="is-f">角色备注只用于界面显示，不会作为台词发送；字体大小只对当前聊天生效。</div>
+  <div class="is-h">附加系统提示</div>
+  <div class="is-g"><div class="is-c is-col"><textarea id="cs-sys" rows="4" placeholder="只对这个聊天生效，接在人设提示词后面">${esc(cc.sys)}</textarea></div></div>
+  <div class="is-h">绑定世界书</div>
+  <div class="is-g">${S.worlds.map(w=>`<div class="is-c"><span class="is-t"><b>${esc(w.title||(w.content||'').slice(0,14)||'未命名')}</b></span><span class="is-sw"><input type="checkbox" data-wb="${w.id}" ${cc.wb.includes(w.id)?'checked':''}><i></i></span></div>`).join('')||'<div class="is-c"><span class="is-t"><small>还没有世界书条目，先去桌面「世界书」添加</small></span></div>'}</div>
+  <div class="is-f">不勾选＝使用全部已启用条目。</div>
+  <div class="is-h">绑定表情包</div>
+  <div class="is-g"><div class="is-c is-col">${S.stickers.length?`<div class="sg">${S.stickers.map(s=>`<button class="st${cc.stk.includes(s.id)?' on':''}" data-bs="${s.id}"><img src="${s.src}" alt=""></button>`).join('')}</div>`:'<small style="color:#8e8e93">还没有表情包，在聊天输入框的笑脸里上传</small>'}</div></div>
+  <div class="is-f">不选＝全部可用；选中后这个聊天只显示选中的。</div>
+  <div class="is-h">美化</div>
+  <div class="is-g">
+    <div class="is-c"><span class="is-i" style="background:#ff2d55">${rpSvg('br')}</span><span class="is-t"><b>当前美化</b></span><select id="cs-css" class="is-sel"><option value="">默认</option>${S.themes.map(t=>`<option value="${t.id}"${cc.css===t.id?' selected':''}>${esc(t.name)}</option>`).join('')}</select></div>
+    <div class="is-c is-tap" data-go="css"><span class="is-t"><b>管理美化</b><small>自己写 CSS，保存后在这里切换</small></span><span class="is-chev">${rpSvg('chr')}</span></div>
+  </div>
+  <div class="is-h">隐私</div>
+  <div class="is-g"><div class="is-c"><span class="is-i" style="background:#8e8e93">${rpSvg('no')}</span><span class="is-t"><b>拉黑此联系人</b></span><span class="is-sw"><input type="checkbox" id="cs-bl" ${p.blocked?'checked':''}><i></i></span></div></div>
+  <div class="is-f">拉黑后不能发消息或请求回复，可在「联系人」里解除。</div>
+</div>`;
   $('#open-chat-memory').onclick=()=>{csetPage='memory';rChatMemory()};
-  $('#cs-role-note').oninput=e=>{cc.roleNote=e.target.value;save();const title=$('#ctitle');if(title)title.textContent=cc.roleNote.trim()||((S.people.find(p=>p.id===cur)||{}).name||'聊天');const note=$('#chat-role-note');if(note)note.textContent=''};
+  $('#cs-role-note').oninput=e=>{cc.roleNote=e.target.value;save();const title=$('#ctitle');if(title)title.textContent=cc.roleNote.trim()||((S.personas.find(p=>p.id===cur)||{}).name||'聊天');const note=$('#chat-role-note');if(note)note.textContent=''};
   $('#cs-font-size').oninput=e=>{cc.fontSize=Number(e.target.value);$('#cs-font-value').textContent=cc.fontSize+'px';applyChatFont();save()};
   $('#cs-sys').oninput=e=>{cc.sys=e.target.value;save()};
   $$('#cbody [data-wb]').forEach(c=>c.onchange=()=>{const id=c.dataset.wb;cc.wb=c.checked?[...cc.wb,id]:cc.wb.filter(x=>x!==id);save()});
   $$('#cbody [data-bs]').forEach(b=>b.onclick=()=>{const id=b.dataset.bs;cc.stk=cc.stk.includes(id)?cc.stk.filter(x=>x!==id):[...cc.stk,id];save();rCset()});
   $('#cs-css').onchange=e=>{cc.css=e.target.value;save()};
   $('#cs-bl').onchange=e=>{p.blocked=e.target.checked;save()};
+  $('#cs-tr-on').onchange=e=>{cc.trOn=e.target.checked;save();['#cs-tr-out','#cs-tr-to'].forEach(s=>$(s).classList.toggle('is-dim',!cc.trOn));draw()};
+  $('#cs-tr-out').onclick=()=>langPick({title:'角色输出语种（可多选）',multi:true,selected:cc.trOut||[],onDone:l=>{cc.trOut=l;save();$('#cs-tr-out .is-v').textContent=l.join('、')||'未设置'}});
+  $('#cs-tr-to').onclick=()=>langPick({title:'翻译成',multi:false,selected:[cc.trTo||'简体中文'],onDone:l=>{cc.trTo=l[0]||'简体中文';save();$('#cs-tr-to .is-v').textContent=cc.trTo}});
 }
 function rCss(){
   $('#clist').innerHTML=S.themes.map(t=>`<div class="card" data-id="${t.id}"><input class="tn" placeholder="美化名称" value="${esc(t.name)}"><label>CSS</label><textarea class="tc" rows="9" spellcheck="false" style="font-family:ui-monospace,Menlo,monospace;font-size:13px">${esc(t.css)}</textarea><button class="btn del">删除</button></div>`).join('')||'<div class="empty">还没有美化</div>';
@@ -1804,7 +1894,7 @@ function rSettings(){
   $('#add-voice-world').onclick=()=>{const w={id:uid(),title:'语音表现设定',keys:'',content:`【语音表现】
 请保持角色固定的说话习惯、音色氛围与情绪表达。语音内容应像自然聊天，不要朗读系统提示或动作描写；根据情绪使用自然停顿，避免夸张播音腔。`,on:true,scope:'global',trigger:'global',position:'after',contacts:[]};S.worlds.push(w);save();editWorld(w)};
   $('#manage-voice-worlds').onclick=()=>{$('[data-go=worlds]')?.click();};
-  FS.forEach(([s,o,k])=>{const e=$(s);e.value=S[o][k]??'';e.oninput=()=>{S[o][k]=e.type==='number'?Number(e.value):e.value;if(o==='me'&&S.activeUserProfile){const up=S.userProfiles.find(x=>x.id===S.activeUserProfile);if(up)up[k]=S.me[k]}save();if(o==='me'&&k==='name')$('#ios-name').textContent=S.me.name||'我的资料'}});[['c-secondary-base','secondaryBase'],['c-secondary-key','secondaryKey'],['c-secondary-model','secondaryModel']].forEach(([id,k])=>{const e=$('#'+id);if(e){e.value=S.cfg[k]||'';e.oninput=()=>{S.cfg[k]=e.value.trim();save()}}});secApiInit();sysInit();
+  FS.forEach(([s,o,k])=>{const e=$(s);e.value=S[o][k]??'';e.oninput=()=>{S[o][k]=e.type==='number'?Number(e.value):e.value;if(o==='me'&&S.activeUserProfile){const up=S.userProfiles.find(x=>x.id===S.activeUserProfile);if(up)up[k]=S.me[k]}save();if(o==='me'&&k==='name')$('#ios-name').textContent=S.me.name||'我的资料'}});[['c-secondary-base','secondaryBase'],['c-secondary-key','secondaryKey'],['c-secondary-model','secondaryModel']].forEach(([id,k])=>{const e=$('#'+id);if(e){e.value=S.cfg[k]||'';e.oninput=()=>{S.cfg[k]=e.value.trim();save()}}});secApiInit();sysInit();fontUi();
   $('#c-stream').checked=!!S.cfg.stream;$('#c-stream').onchange=e=>{S.cfg.stream=e.target.checked;save()};const imageToggle=$('#c-image-enabled');if(imageToggle){imageToggle.checked=!!S.cfg.imageEnabled;imageToggle.onchange=()=>{S.cfg.imageEnabled=imageToggle.checked;save();toast(imageToggle.checked?'已开启对方生图':'已关闭对方生图')}};
   const ip=$('#c-image-provider');if(ip){ip.value=S.cfg.imageProvider||'gpt';const syncImageProvider=()=>{S.cfg.imageProvider=ip.value;$('#image-gpt-fields').style.display=ip.value==='gpt'?'block':'none';$('#image-nai-fields').style.display=ip.value==='novelai'?'block':'none'};syncImageProvider();ip.onchange=syncImageProvider;
     const fields={ 'c-image-base':['imageBase','https://api.openai.com/v1'],'c-image-key':['imageKey',''],'c-image-model':['imageModel','gpt-image-1'],'c-gpt-positive':['gptPositive',''],'c-gpt-negative':['gptNegative',''],'c-gpt-detail':['gptDetail',''],'c-gpt-size':['gptSize','1024x1024'],'c-gpt-quality':['gptQuality','auto'],'c-gpt-style':['gptStyle',''],'c-gpt-n':['gptN',1],'c-nai-base':['naiBase','https://image.novelai.net'],'c-nai-key':['naiKey',''],'c-nai-model':['naiModel','nai-diffusion-4-full'],'c-nai-positive':['naiPositive',''],'c-nai-negative':['naiNegative',''],'c-nai-detail':['naiDetail',''],'c-nai-width':['naiWidth',832],'c-nai-height':['naiHeight',1216],'c-nai-scale':['naiScale',5],'c-nai-steps':['naiSteps',28],'c-nai-sampler':['naiSampler','k_euler_ancestral'],'c-nai-cfgrescale':['naiCfgRescale',0],'c-nai-seed':['naiSeed','']};
@@ -2125,6 +2215,108 @@ $('#v-music').addEventListener('click',e=>{
  if(q('[data-ms-together]')){msPickChar();return}
  if(x=q('[data-ms-go]')){if(x.dataset.msGo==='lib'){MS.tab=3;MS.sub=null}else if(MS.cur)MS.detail=true;else MS.tab=1;MS.reset=1;msRender();return}
 });
+/* ===== fonts, translation, iOS chat settings ===== */
+Object.assign(RPI,{
+ gl:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/>',
+ mm:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+ pr:'<path d="M6 3.5h9l3 3V20a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 5 20V5a1.5 1.5 0 0 1 1-1.5Z"/><path d="M8 11h7M8 14.5h7M8 18h4"/>',
+ ck:'<path d="M5 12.5l4.5 4.5L19 7.5" stroke-width="2.4"/>',
+ fs:'<path d="M3.5 18l5-12 5 12M5.3 14h6.4M16 18l2.7-6.5L21.4 18"/>',
+ br:'<path d="M12 3.5c-5 0-9 3.6-9 8s3.6 8.5 8 8.5c1.4 0 2-.9 2-1.8 0-1.8-1.6-1.9-1.6-3.3 0-1 .8-1.7 1.9-1.7H17c2.2 0 4-1.6 4-3.8C21 6.5 17 3.5 12 3.5Z"/><circle cx="7.5" cy="11" r="1" fill="currentColor"/><circle cx="10.5" cy="7.5" r="1" fill="currentColor"/><circle cx="15.5" cy="8" r="1" fill="currentColor"/>',
+ no:'<circle cx="12" cy="12" r="9"/><path d="M5.7 5.7l12.6 12.6"/>'});
+/* custom fonts */
+const FONT_BASE='-apple-system,"PingFang SC","Noto Sans SC","Hiragino Sans","Microsoft YaHei",sans-serif';
+const FONT_BUILTIN=[{id:'sys',name:'系统默认',stack:FONT_BASE},{id:'serif',name:'宋体 / 衬线',stack:'"Songti SC","Noto Serif SC","Source Han Serif SC",serif'},{id:'kai',name:'楷体',stack:'"Kaiti SC","STKaiti","KaiTi",serif'},{id:'round',name:'圆体',stack:'"Yuanti SC","Hiragino Maru Gothic ProN","PingFang SC",sans-serif'},{id:'mono',name:'等宽',stack:'ui-monospace,"SF Mono",Menlo,monospace'}];
+const fontDB=()=>new Promise((res,rej)=>{const r=indexedDB.open('xsj-fonts',1);r.onupgradeneeded=()=>r.result.createObjectStore('f');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)});
+async function fontPut(k,b){const d=await fontDB();return new Promise((res,rej)=>{const t=d.transaction('f','readwrite');t.objectStore('f').put(b,k);t.oncomplete=res;t.onerror=()=>rej(t.error)})}
+async function fontGet(k){const d=await fontDB();return new Promise((res,rej)=>{const r=d.transaction('f').objectStore('f').get(k);r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)})}
+async function fontDel(k){const d=await fontDB();return new Promise((res,rej)=>{const t=d.transaction('f','readwrite');t.objectStore('f').delete(k);t.oncomplete=res;t.onerror=()=>rej(t.error)})}
+const fontLoaded=new Set();
+async function fontLoad(f){
+ if(fontLoaded.has(f.id))return true;
+ try{
+  if(f.kind==='file'){const buf=await fontGet(f.id);if(!buf)throw new Error('字体文件已丢失，请重新导入');const ff=new FontFace(f.family,buf);await ff.load();document.fonts.add(ff)}
+  else if(f.kind==='url'){const ff=new FontFace(f.family,'url("'+String(f.url).replace(/"/g,'%22')+'")');await ff.load();document.fonts.add(ff)}
+  else{await new Promise((res,rej)=>{const l=document.createElement('link');l.rel='stylesheet';l.href=f.url;l.onload=res;l.onerror=()=>rej(new Error('字体样式表加载失败'));document.head.appendChild(l)});await document.fonts.load('16px "'+f.family+'"')}
+  fontLoaded.add(f.id);return true;
+ }catch(e){toast('字体加载失败：'+(e.message||'请检查链接或跨域权限'));return false}
+}
+const fontStack=id=>{const b=FONT_BUILTIN.find(x=>x.id===id);if(b)return b.stack;const f=S.fonts.find(x=>x.id===id);return f?'"'+f.family+'",'+FONT_BASE:FONT_BASE};
+function applyFont(){
+ let st=$('#font-style');if(!st){st=document.createElement('style');st.id='font-style';document.head.appendChild(st)}
+ const sc=(Number(S.fontScale)||100)/100;
+ st.textContent=':root{--sans:'+fontStack(S.fontActive)+'}html{-webkit-text-size-adjust:'+Math.round(sc*100)+'%;text-size-adjust:'+Math.round(sc*100)+'%}body{font-size:'+(15*sc).toFixed(1)+'px}';
+}
+async function fontBoot(){applyFont();for(const f of S.fonts){await fontLoad(f)}applyFont()}
+function fontUi(){
+ const sel=$('#font-select');if(!sel)return;
+ const all=()=>[...FONT_BUILTIN.map(x=>({id:x.id,name:x.name})),...S.fonts.map(x=>({id:x.id,name:x.name+'（自定义）'}))];
+ const fill=()=>{sel.innerHTML=all().map(x=>'<option value="'+esc(x.id)+'">'+esc(x.name)+'</option>').join('');sel.value=S.fontActive;$('#font-preview').style.fontFamily=fontStack(S.fontActive);$('#font-scale').value=S.fontScale;$('#font-scale-v').textContent=S.fontScale+'%';
+  const ps=$('#font-preset-select');ps.innerHTML='<option value="">选择已保存预设</option>'+S.fontPresets.map(x=>'<option value="'+esc(x.id)+'">'+esc(x.name)+'</option>').join('')};
+ fill();
+ const use=async id=>{const f=S.fonts.find(x=>x.id===id);if(f&&!(await fontLoad(f)))return false;S.fontActive=id;applyFont();save();fill();return true};
+ sel.onchange=()=>use(sel.value);
+ $('#font-file').onclick=()=>{const i=document.createElement('input');i.type='file';i.accept='.ttf,.otf,.woff,.woff2,font/*';
+  i.onchange=async()=>{const file=i.files&&i.files[0];if(!file)return;const base=file.name.replace(/\.[^.]+$/,''),nm=await askText('字体名称（用于列表显示）',base);if(nm===null)return;
+   const id=uid(),f={id,name:(nm||'').trim()||base,kind:'file',family:'xf'+id};
+   try{await fontPut(id,await file.arrayBuffer())}catch(e){return toast('保存字体失败：'+e.message)}
+   S.fonts.push(f);if(!(await use(id))){S.fonts=S.fonts.filter(x=>x.id!==id);fontDel(id).catch(()=>{});fill();return}toast('字体已导入并启用')};
+  i.click()};
+ $('#font-url').onclick=async()=>{
+  const u=((await askText('粘贴字体链接：字体文件（ttf / otf / woff / woff2）或 Google Fonts 的 css 链接','https://...'))||'').trim();if(!u)return;
+  const id=uid(),isFile=/\.(ttf|otf|woff2?)(\?.*)?$/i.test(u);let fam=isFile?'xf'+id:decodeURIComponent((u.match(/family=([^&:;]+)/)||[])[1]||'').replace(/\+/g,' ');
+  if(!fam){const a=await askText('这个样式表里的字体名称（font-family）','例如：Noto Serif SC');if(!a||!a.trim())return;fam=a.trim()}
+  const dn=isFile?decodeURIComponent((u.split('?')[0].split('/').pop()||'').replace(/\.[^.]+$/,'')):fam,nm=await askText('字体名称（用于列表显示）',dn||'自定义字体');if(nm===null)return;
+  const f={id,name:(nm||'').trim()||dn||'自定义字体',kind:isFile?'url':'css',family:fam,url:u};
+  S.fonts.push(f);if(!(await use(id))){S.fonts=S.fonts.filter(x=>x.id!==id);fill();return}toast('字体已添加并启用')};
+ $('#font-del').onclick=async()=>{const f=S.fonts.find(x=>x.id===sel.value);if(!f)return toast('系统自带字体不能删除');if(!confirm('删除自定义字体「'+f.name+'」？'))return;
+  if(f.kind==='file')fontDel(f.id).catch(()=>{});S.fonts=S.fonts.filter(x=>x.id!==f.id);S.fontPresets.forEach(p=>{if(p.font===f.id)p.font='sys'});if(S.fontActive===f.id)S.fontActive='sys';applyFont();save();fill()};
+ $('#font-scale').oninput=e=>{S.fontScale=Number(e.target.value);$('#font-scale-v').textContent=S.fontScale+'%';applyFont()};
+ $('#font-scale').onchange=()=>save();
+ $('#font-scale-reset').onclick=()=>{S.fontScale=100;applyFont();save();fill()};
+ $('#font-preset-save').onclick=()=>{const n=$('#font-preset-name').value.trim();if(!n)return toast('先给预设起个名字');const d={font:S.fontActive,scale:S.fontScale},o=S.fontPresets.find(x=>x.name===n);if(o)Object.assign(o,d);else S.fontPresets.push(Object.assign({id:uid(),name:n},d));save();fill();toast('字体预设已保存')};
+ $('#font-preset-use').onclick=async()=>{const p=S.fontPresets.find(x=>x.id===$('#font-preset-select').value);if(!p)return toast('请先选择一个预设');S.fontScale=p.scale||100;if(!(await use(p.font||'sys')))return;applyFont();save();fill();toast('已使用预设')};
+ $('#font-preset-del').onclick=()=>{const p=S.fontPresets.find(x=>x.id===$('#font-preset-select').value);if(!p)return toast('请先选择要删除的预设');if(confirm('删除字体预设「'+p.name+'」？')){S.fontPresets=S.fontPresets.filter(x=>x.id!==p.id);save();fill()}};
+}
+/* desktop images: pick directly from the phone */
+function desktopFile(cb){const i=document.createElement('input');i.type='file';i.accept='image/*';
+ i.onchange=()=>{const f=i.files&&i.files[0];if(!f)return;const im=new Image();
+  im.onload=()=>{const k=Math.min(1,1600/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);cb(c.toDataURL(f.type==='image/png'?'image/png':'image/jpeg',.88));URL.revokeObjectURL(im.src)};
+  im.onerror=()=>cb('');im.src=URL.createObjectURL(f)};
+ i.click()}
+function desktopImageSource(title){return new Promise(resolve=>{let done=false;const fin=v=>{if(!done){done=true;resolve(v)}};
+ msSheet([{label:'从手机相册或文件选择',run:()=>desktopFile(v=>fin(v))},{label:'粘贴图片链接',run:async()=>{const u=await askText(title+'：粘贴图片链接','https://...');fin(u===null?null:u.trim())}},{label:'取消',run:()=>fin(null)}]);
+ const sh=$('#mssheet');if(sh)sh.addEventListener('click',ev=>{if(ev.target===sh)setTimeout(()=>fin(null),0)},{once:true})})}
+/* language picker */
+const LANGS=['简体中文','繁體中文','English','日本語','한국어','Français','Deutsch','Español','Italiano','Português','Русский','ภาษาไทย','Tiếng Việt','العربية','Bahasa Indonesia'];
+function langPick(o){
+ let sel=[...(o.selected||[])],el=$('#langsheet');if(!el){el=document.createElement('div');el.id='langsheet';document.body.appendChild(el)}
+ const draw=()=>{const custom=sel.filter(x=>!LANGS.includes(x));
+  el.innerHTML='<div class="ls-box"><div class="ls-top"><button data-ls="cancel">取消</button><b>'+esc(o.title)+'</b><button data-ls="done">完成</button></div><div class="ls-list">'+LANGS.concat(custom).map(l=>'<div class="ls-row" data-l="'+esc(l)+'"><span>'+esc(l)+'</span>'+(sel.includes(l)?'<i>'+rpSvg('ck')+'</i>':'')+'</div>').join('')+'</div><div class="ls-add"><input id="ls-new" placeholder="添加其他语种，例如：粤语、Latin"><button data-ls="add">添加</button></div></div>';el.classList.add('on')};
+ draw();
+ el.onclick=e=>{const r=e.target.closest('.ls-row'),b=e.target.closest('[data-ls]');
+  if(r){const l=r.dataset.l;sel=o.multi?(sel.includes(l)?sel.filter(x=>x!==l):[...sel,l]):[l];draw();return}
+  if(b){const a=b.dataset.ls;if(a==='add'){const v=$('#ls-new').value.trim();if(v&&!sel.includes(v))sel=o.multi?[...sel,v]:[v];draw();return}el.classList.remove('on');if(a==='done')o.onDone(sel);return}
+  if(e.target===el)el.classList.remove('on')};
+}
+/* translation */
+async function translateMsg(text,lang){
+ const sec=S.cfg.secondaryKey&&(S.cfg.secondaryBase||S.cfg.base),cfg=sec?{base:S.cfg.secondaryBase||S.cfg.base,key:S.cfg.secondaryKey,model:S.cfg.secondaryModel||S.cfg.model,temp:.2}:Object.assign({},S.cfg,{temp:.2});
+ return await ask([{role:'system',content:'你是一个只输出译文的翻译引擎。把用户给出的文本翻译成「'+lang+'」。保留原有的语气、表情符号和换行；原文里已经是「'+lang+'」的部分保持原样；不要解释，不要添加引号或任何额外内容。'},{role:'user',content:text}],null,{},cfg);
+}
+function trBoxHTML(m){const lang=m.trLang||CC(cur).trTo||'简体中文';return '<div class="tr-box"><small>'+esc(lang)+'</small>'+(m.trLoading?'翻译中…':m.trErr?'翻译失败：'+esc(m.trErr):esc(m.tr||''))+'</div>'}
+function trRender(i){const m=(S.chats[cur]||[])[i],row=$('#msgs .r[data-i="'+i+'"]');if(!row||!m)return;const old=row.querySelector('.tr-box');if(old)old.remove();if(m.trOpen)row.querySelector('.col').insertAdjacentHTML('beforeend',trBoxHTML(m))}
+async function trToggle(i){
+ const cc=CC(cur),m=S.chats[cur][i],lang=cc.trTo||'简体中文',pid=cur;
+ if(m.trOpen){m.trOpen=false;trRender(i);save();return}
+ m.trOpen=true;
+ if(m.tr&&m.trLang===lang){trRender(i);save();return}
+ if(!S.cfg.key){m.trOpen=false;return toast('请先在设置里填写 API Key')}
+ m.trLoading=1;m.trErr='';trRender(i);
+ try{m.tr=String(await translateMsg(m.content,lang)).trim();m.trLang=lang}catch(e){m.trErr=e.message||'请求失败'}
+ m.trLoading=0;save();if(cur===pid)trRender(i);
+}
+fontBoot();
 })();
 </script>
 </body>
