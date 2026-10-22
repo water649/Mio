@@ -778,6 +778,111 @@ button.feed-follow-plus{padding:0;cursor:pointer}
 .ls-add input{flex:1;min-width:0;background:#fff;border:0;border-radius:10px;padding:10px 12px;color:var(--ink)}
 [data-theme=dark] .ls-add input{background:#2c2c2e}
 .ls-add button{color:#007aff;font-size:16px;padding:0 6px}
+.pz-list{background:var(--p);border-radius:12px;overflow:hidden}
+.pz-row{display:flex;align-items:center;gap:10px;padding:12px 14px;position:relative;cursor:pointer}
+.pz-row+.pz-row:before{content:"";position:absolute;top:0;left:14px;right:0;height:.5px;background:var(--line)}
+.pz-t{flex:1;min-width:0}
+.pz-t b{display:block;font-weight:500;font-size:16px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.pz-t small{display:block;color:var(--sub);font-size:13px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.pz-ck{color:#007aff;display:grid}
+.pz-ck svg{width:20px;height:20px}
+.pz-del{color:#ff3b30;font-size:14px;padding:6px 4px;flex:none}
+.pz-empty{padding:18px;color:var(--sub);text-align:center;font-size:14px}
+.pz-add{display:flex;gap:8px;margin-top:10px;align-items:center}
+.pz-add input{flex:1;min-width:0;border:0;border-radius:12px;background:var(--p);padding:12px 14px}
+.pz-save{background:var(--ink);color:var(--bg);border-radius:12px;padding:0 16px;height:44px;font-weight:600;white-space:nowrap;flex:none}
+.skm{padding:12px 14px 40px}
+.skm-top{display:flex;gap:8px;margin-bottom:6px}
+.skm-top .btn{margin:0;width:auto;padding:10px 18px}
+.skm-g{margin-top:18px}
+.skm-h{display:flex;align-items:center;gap:8px}
+.skm-h b{font-size:17px;flex:1;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.skm-h small{color:var(--sub);font-size:12px;flex:none}
+.skm-h button{font-size:14px;padding:6px 12px;border-radius:14px;background:var(--p);color:var(--ink);flex:none}
+.skm-h button.rd{color:var(--err)}
+.skm-h button.on{background:var(--ink);color:var(--bg)}
+.skm-tool{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 2px}
+.skm-tool button{font-size:13px;padding:7px 12px;border-radius:14px;background:var(--p);color:var(--ink)}
+.skm-tool .rd{color:var(--err)}
+.skm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:10px;margin-top:10px}
+.skm-c{position:relative;min-width:0}
+.skm-img{aspect-ratio:1;background:var(--p);border-radius:12px;display:grid;place-items:center;overflow:hidden}
+.skm-img img{width:100%;height:100%;object-fit:contain;-webkit-touch-callout:none;pointer-events:none;user-select:none}
+.skm-c small{margin-top:4px;font-size:12px;color:var(--sub);text-align:center;line-height:1.3;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow-wrap:anywhere}
+.skm-c .ck{position:absolute;top:6px;right:6px;width:22px;height:22px;border-radius:50%;border:2px solid #fff;background:rgba(0,0,0,.25);display:none;place-items:center;color:#fff}
+.skm-c .ck svg{width:13px;height:13px}
+.skm-mg .skm-c .ck{display:grid}
+.skm-c.on .ck{background:#007aff;border-color:#007aff}
+.skm-c.on .skm-img{outline:2px solid #007aff}
+.skm-e{grid-column:1/-1;color:var(--sub);text-align:center;padding:22px;font-size:14px}
+.stw{min-width:0}
+.stw small{display:block;font-size:11px;color:var(--sub);text-align:center;margin-top:2px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+#sgprompt{position:fixed;inset:0;background:var(--shade);display:none;align-items:center;justify-content:center;z-index:130;padding:24px}
+#sgprompt.on{display:flex}
+.sgp-box{width:100%;max-width:320px;background:var(--bg);border-radius:16px;padding:18px 16px 0;overflow:hidden}
+.sgp-box b{display:block;text-align:center;font-size:17px;margin-bottom:12px}
+.sgp-box input{background:var(--p)}
+.sgp-b{display:flex;margin:16px -16px 0;border-top:1px solid var(--line)}
+.sgp-b button{flex:1;padding:13px;font-size:17px;color:#007aff}
+.sgp-b button+button{border-left:1px solid var(--line);font-weight:600}
+#toast{z-index:200}
+#mssheet{z-index:140}
+.skm-strip{display:flex;gap:8px;overflow-x:auto;margin-top:10px;padding-bottom:2px;scrollbar-width:none}
+.skm-strip::-webkit-scrollbar{display:none}
+.skm-strip .skm-c{flex:none;width:68px}
+.skm-strip .skm-img{border-radius:10px}
+.skm-strip small{font-size:11px;-webkit-line-clamp:1}
+.skm-more{flex:none;width:68px;aspect-ratio:1;border-radius:10px;background:var(--p);color:var(--sub);display:grid;place-items:center;font-size:13px}
+#skpage{position:fixed;inset:0;z-index:125;background:var(--bg);display:none;flex-direction:column;padding-top:env(safe-area-inset-top,0px)}
+#skpage.on{display:flex}
+.skp-bar{display:flex;align-items:center;gap:8px;padding:8px 14px;flex:none}
+.skp-bar b{flex:1;font-size:18px;text-align:center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.skp-bar button{font-size:17px;color:#007aff;min-width:44px;padding:8px 0}
+.skp-bar .bk{font-size:30px;line-height:1;color:var(--ink);text-align:left}
+.skp-sc{flex:1;overflow-y:auto;padding:4px 14px 20px}
+.skp-tool{display:flex;gap:8px;flex-wrap:wrap;padding:10px 14px calc(12px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);flex:none}
+.skp-tool button{font-size:14px;padding:9px 14px;border-radius:14px;background:var(--p);color:var(--ink)}
+.skp-tool .rd{color:var(--err)}
+.tf-msg{padding:0!important;background:none!important;border:0!important;box-shadow:none!important}
+.tf-card{width:min(264px,70vw);border-radius:20px;overflow:hidden;background:#f4f4f5;color:#5a5a60;cursor:pointer;text-align:left}
+[data-theme=dark] .tf-card{background:#2a2a2c;color:#c8c8cc}
+.tf-main{display:flex;align-items:center;gap:14px;padding:18px 18px 16px}
+.tf-ico{width:58px;height:58px;border-radius:50%;background:#43434a;color:#fff;display:grid;place-items:center;flex:none}
+.tf-ico svg{width:30px;height:30px}
+.tf-txt{min-width:0;display:flex;flex-direction:column;gap:6px;text-align:left}
+.tf-txt b{font-size:24px;font-weight:700;letter-spacing:.01em}
+.tf-txt small{font-size:14px;line-height:1.35;overflow-wrap:anywhere}
+.tf-foot{background:#61666e;color:#fff;font-size:13px;padding:6px 16px;text-align:left}
+.tf-card.accepted,.tf-card.refunded{opacity:.72}
+#trsheet{position:fixed;inset:0;background:var(--shade);display:none;align-items:flex-end;justify-content:center;z-index:125}
+#trsheet.on{display:flex}
+.trs-box{width:100%;max-width:640px;background:var(--bg);border-radius:18px 18px 0 0;padding:14px 18px calc(18px + env(safe-area-inset-bottom,0px))}
+.trs-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.trs-top b{font-size:17px}
+.trs-top button{color:#007aff;font-size:17px;min-width:44px;text-align:left}
+.trs-amt{display:flex;align-items:baseline;gap:8px;border-bottom:1px solid var(--line);padding:8px 0 10px}
+.trs-amt span{font-size:30px;font-weight:700}
+.trs-amt input{font-size:34px;font-weight:700;background:none;border:0;padding:0;width:100%;border-radius:0}
+.trs-note{margin-top:12px;background:var(--p);border:0}
+.trs-bal{display:block;color:var(--sub);margin:10px 2px 14px;font-size:13px}
+.trs-ok{width:100%;background:var(--ink);color:var(--bg);border-radius:14px;padding:14px;font-size:17px;font-weight:600}
+.wl-card{margin:8px 0 18px;border-radius:22px;padding:22px 22px 18px;background:linear-gradient(135deg,#2b2b30,#111);color:#fff}
+.wl-card small{opacity:.7;font-size:13px}
+.wl-card b{display:block;font-size:36px;font-weight:700;margin:6px 0 16px}
+.wl-act{display:flex;gap:10px}
+.wl-act button{flex:1;background:rgba(255,255,255,.16);color:#fff;border-radius:14px;padding:11px;font-size:15px;font-weight:600}
+.wl-h{font-size:13px;color:var(--sub);margin:4px 4px 8px;letter-spacing:.08em}
+.wl-list{background:var(--p);border-radius:16px;overflow:hidden}
+.wl-r{display:flex;align-items:center;gap:12px;padding:13px 14px;position:relative}
+.wl-r+.wl-r:before{content:"";position:absolute;top:0;left:64px;right:0;height:.5px;background:var(--line)}
+.wl-i{width:38px;height:38px;border-radius:50%;background:var(--bg);display:grid;place-items:center;color:var(--ink);flex:none}
+.wl-i svg{width:20px;height:20px}
+.wl-t{flex:1;min-width:0}
+.wl-t b{display:block;font-weight:500;font-size:16px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.wl-t small{color:var(--sub);font-size:13px}
+.wl-a{font-weight:600;font-size:16px;flex:none}
+.wl-a.p{color:#34c759}
+.wl-e{padding:28px;text-align:center;color:var(--sub)}
 </style>
 <style id="ucss"></style>
 </head>
@@ -790,7 +895,7 @@ button.feed-follow-plus{padding:0;cursor:pointer}
     <div id="memo-image-card" class="w"><input id="memo-image-title" type="text" maxlength="60" placeholder="自定义标题" aria-label="自定义图片标题"><input id="memo-image-file" type="file" accept="image/*" hidden><div id="memo-image-box" role="button" tabindex="0" aria-label="点击选择图片"></div></div>
     <div class="w recent-glass"><div class="wl">最近的对话</div><div id="rc"></div></div>
   </div>
-  <div id="home-page2" style="display:none;flex:1;width:100%;max-width:560px;padding:20px 0;overflow:auto"><div class="clock"><b style="font-size:30px;font-weight:500;letter-spacing:.02em">人と人の漣</b></div><div class="home-app-grid" id="desktop-widgets"><button class="app home-app" data-go="diary"><i class="diary-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.5h9l3 3V20a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 5 20V5a1.5 1.5 0 0 1 1-1.5Z"/><path d="M14.5 3.8V7H18M8 11h7M8 14.5h7M8 18h4"/></svg></i><span>日记</span></button><button class="app home-app" data-go="rolephones"><i class="diary-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><path d="M9 5.5h6M10 18.5h4"/><circle cx="12" cy="11" r="3.2"/><path d="m10.8 11 1 1 1.8-2"/></svg></i><span>iPhone</span></button><button class="app home-app" data-go="desktopcustom"><i class="diary-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M3 9h18M9 9v12"/><circle cx="6" cy="6" r=".6" fill="currentColor"/></svg></i><span>桌面美化</span></button><button class="app home-app" data-go="music"><i class="diary-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 17V6l10-2v11"/><circle cx="7" cy="17" r="2.5"/><circle cx="17" cy="15" r="2.5"/></svg></i><span>音乐</span></button></div></div>
+  <div id="home-page2" style="display:none;flex:1;width:100%;max-width:560px;padding:20px 0;overflow:auto"><div class="clock"><b style="font-size:30px;font-weight:500;letter-spacing:.02em">人と人の漣</b></div><div class="home-app-grid" id="desktop-widgets"><button class="app home-app" data-go="diary"><i class="diary-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.5h9l3 3V20a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 5 20V5a1.5 1.5 0 0 1 1-1.5Z"/><path d="M14.5 3.8V7H18M8 11h7M8 14.5h7M8 18h4"/></svg></i><span>日记</span></button><button class="app home-app" data-go="rolephones"><i class="diary-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><path d="M9 5.5h6M10 18.5h4"/><circle cx="12" cy="11" r="3.2"/><path d="m10.8 11 1 1 1.8-2"/></svg></i><span>iPhone</span></button><button class="app home-app" data-go="desktopcustom"><i class="diary-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M3 9h18M9 9v12"/><circle cx="6" cy="6" r=".6" fill="currentColor"/></svg></i><span>桌面美化</span></button><button class="app home-app" data-go="music"><i class="diary-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 17V6l10-2v11"/><circle cx="7" cy="17" r="2.5"/><circle cx="17" cy="15" r="2.5"/></svg></i><span>音乐</span></button><button class="app home-app" data-go="wallet"><i class="diary-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18v3"/><rect x="3" y="7.5" width="18" height="12" rx="2.5"/><circle cx="16.5" cy="13.5" r="1.2" fill="currentColor"/></svg></i><span>钱包</span></button></div></div>
   <div id="home-dots" style="display:flex;justify-content:center;gap:8px;padding:0 0 4px"><span>●</span><span style="opacity:.3">●</span></div>
   <div class="dock">
     <button class="app" data-go="app"><i data-ic="ch"></i>聊天</button>
@@ -799,6 +904,8 @@ button.feed-follow-plus{padding:0;cursor:pointer}
     <button class="app" data-go="settings"><i data-ic="st"></i>设置</button>
   </div>
 </section>
+
+<section class="view" id="v-wallet"><div class="bar"><button class="bk" data-back>‹</button><h2>钱包</h2></div><div class="body" id="wl-body"></div></section>
 
 <section class="view" id="v-music"><div class="ms" id="ms-root"></div></section>
 
@@ -862,7 +969,7 @@ button.feed-follow-plus{padding:0;cursor:pointer}
   <div id="sres"></div>
   <div id="msgs"></div>
   <div id="inp">
-    <div id="pm"><button id="redo">AI 回复 / 重答</button><button id="clear">清空对话</button><button id="pm-image" type="button">发送图片</button><button id="pm-voice" type="button">发送语音（模拟）</button><input id="chat-image-file" type="file" accept="image/*" hidden></div>
+    <div id="pm"><button id="redo">AI 回复 / 重答</button><button id="clear">清空对话</button><button id="pm-image" type="button">发送图片</button><button id="pm-transfer" type="button">转账</button><button id="pm-voice" type="button">发送语音（模拟）</button><input id="chat-image-file" type="file" accept="image/*" hidden></div>
     <div id="sp"></div>
     <button id="plus" data-ic="pl" aria-label="菜单"></button>
     <div class="ib"><textarea id="ta" rows="1" placeholder="输入一条信息"></textarea><button id="smile" type="button" aria-label="表情包"></button><button id="send" type="button" aria-label="发送 / AI 回复"></button></div>
@@ -907,22 +1014,17 @@ button.feed-follow-plus{padding:0;cursor:pointer}
       <button class="btn" id="font-scale-reset" type="button">恢复默认大小</button>
       <p class="note">支持 ttf、otf、woff、woff2。字体文件和字号只保存在本机。链接需要对方服务器允许跨域读取。字号在 iOS Safari 里对整体文字生效，个别固定字号的小字可能不跟着变。</p>
     </div>
-    <div class="cap">字体预设</div><div class="card">
-      <div style="display:flex;gap:8px;align-items:center"><select id="font-preset-select" style="flex:1;min-width:0"></select><button class="btn" id="font-preset-use" type="button" style="margin:0">使用</button></div>
-      <input id="font-preset-name" placeholder="预设名称，例如：阅读用大字" autocomplete="off" style="margin-top:10px">
-      <div style="display:flex;gap:8px;margin-top:10px"><button class="btn fill" id="font-preset-save" type="button" style="margin:0;flex:1">保存当前为预设</button><button class="btn" id="font-preset-del" type="button" style="margin:0">删除所选</button></div>
-      <p class="note">预设会同时记住字体和字号。</p>
-    </div>
+    <div class="cap">字体预设</div><div id="pz-font"></div><p class="note">点一下预设就会使用；预设会同时记住字体和字号。</p>
   </div>
   <div class="body settings-sub" id="settings-api" style="display:none">
     <div class="cap">接口设置</div><div class="card">
       <label style="margin-top:0">接口地址（OpenAI 兼容）</label><input id="c-base" placeholder="https://api.openai.com/v1">
       <label>API Key</label><input id="c-key" type="password" placeholder="sk-...">
       <label>模型 ID</label><div style="display:flex;gap:8px;align-items:center"><input id="c-model" placeholder="可手动填写模型 ID" style="flex:1;min-width:0"><button class="btn" id="pull-models" type="button" style="white-space:nowrap">拉取模型</button></div><label style="margin-top:10px">已获取的模型（点选即可）</label><select id="c-model-select" style="width:100%;padding:13px;border:1px solid var(--line);border-radius:12px;background:var(--fld);color:var(--text)"><option value="">请先拉取模型</option></select><p class="note" id="models-result">填写接口地址和 API Key 后，点击「拉取模型」；成功后在下方列表点选。</p>
-      <label>已保存的 API 预设</label><div style="display:flex;gap:8px;align-items:center"><select id="api-preset-select" style="flex:1;min-width:0;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--fld);color:var(--text)"><option value="">选择已保存预设</option></select><button class="btn" id="api-preset-load" type="button">使用</button></div><div style="margin-top:12px;padding:12px;border:1px solid var(--line);border-radius:14px;background:var(--fld)"><label for="api-preset-name" style="display:block;margin:0 0 7px;font-weight:600;color:var(--text)">新预设名称</label><input id="api-preset-name" type="text" autocomplete="off" placeholder="例如：我的主力模型 API" style="display:block;width:100%;box-sizing:border-box;min-width:0;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--text);font-size:16px"><p class="note" style="margin:6px 0 10px">先在这里输入名称，再点下面的保存按钮。保存后下次可直接从上方列表选择。</p><div style="display:flex;gap:8px"><button class="btn fill" id="api-preset-save" type="button" style="flex:1">保存为预设</button><button class="btn" id="api-preset-delete" type="button">删除所选</button></div></div>
+      <div style="display:none"><label>已保存的 API 预设</label><div style="display:flex;gap:8px;align-items:center"><select id="api-preset-select" style="flex:1;min-width:0;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--fld);color:var(--text)"><option value="">选择已保存预设</option></select><button class="btn" id="api-preset-load" type="button">使用</button></div><div style="margin-top:12px;padding:12px;border:1px solid var(--line);border-radius:14px;background:var(--fld)"><label for="api-preset-name" style="display:block;margin:0 0 7px;font-weight:600;color:var(--text)">新预设名称</label><input id="api-preset-name" type="text" autocomplete="off" placeholder="例如：我的主力模型 API" style="display:block;width:100%;box-sizing:border-box;min-width:0;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--text);font-size:16px"><p class="note" style="margin:6px 0 10px">先在这里输入名称，再点下面的保存按钮。保存后下次可直接从上方列表选择。</p><div style="display:flex;gap:8px"><button class="btn fill" id="api-preset-save" type="button" style="flex:1">保存为预设</button><button class="btn" id="api-preset-delete" type="button">删除所选</button></div></div></div><div class="cap" style="margin-top:16px">API 预设</div><div id="pz-api"></div>
       <div class="cap" style="margin-top:18px">副 API（可选，用于记忆总结）</div><p class="note">用于自动总结 / 手动总结聊天记忆。留空时会自动使用上面的主 API。</p><label>副 API 地址</label><input id="c-secondary-base" placeholder="留空则使用主 API 地址"><label>副 API Key</label><input id="c-secondary-key" type="password" placeholder="留空则使用主 API Key"><label>副 API 模型 ID</label><input id="c-secondary-model" placeholder="留空则使用主模型 ID">
 <div style="display:flex;gap:8px;margin-top:10px"><button class="btn" id="pull-sec-models" type="button" style="white-space:nowrap;margin:0">拉取模型</button></div><label style="margin-top:10px">已获取的模型（点选即可）</label><select id="c-sec-model-select" style="width:100%;padding:13px;border:1px solid var(--line);border-radius:12px;background:var(--fld);color:var(--text)"><option value="">请先拉取模型</option></select><p class="note" id="sec-models-result">地址或 Key 留空时使用主 API；点「拉取模型」后在列表里点选。</p>
-<label>已保存的副 API 预设</label><div style="display:flex;gap:8px;align-items:center"><select id="sec-preset-select" style="flex:1;min-width:0;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--fld);color:var(--text)"><option value="">选择已保存预设</option></select><button class="btn" id="sec-preset-load" type="button" style="margin:0">使用</button></div><div style="margin-top:12px;padding:12px;border:1px solid var(--line);border-radius:14px;background:var(--fld)"><label for="sec-preset-name" style="display:block;margin:0 0 7px;font-weight:600;color:var(--text)">新预设名称</label><input id="sec-preset-name" type="text" autocomplete="off" placeholder="例如：便宜的总结模型" style="display:block;width:100%;box-sizing:border-box;min-width:0;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--text);font-size:16px"><div style="display:flex;gap:8px;margin-top:10px"><button class="btn fill" id="sec-preset-save" type="button" style="flex:1">保存为预设</button><button class="btn" id="sec-preset-delete" type="button">删除所选</button></div></div>
+<div style="display:none"><label>已保存的副 API 预设</label><div style="display:flex;gap:8px;align-items:center"><select id="sec-preset-select" style="flex:1;min-width:0;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--fld);color:var(--text)"><option value="">选择已保存预设</option></select><button class="btn" id="sec-preset-load" type="button" style="margin:0">使用</button></div><div style="margin-top:12px;padding:12px;border:1px solid var(--line);border-radius:14px;background:var(--fld)"><label for="sec-preset-name" style="display:block;margin:0 0 7px;font-weight:600;color:var(--text)">新预设名称</label><input id="sec-preset-name" type="text" autocomplete="off" placeholder="例如：便宜的总结模型" style="display:block;width:100%;box-sizing:border-box;min-width:0;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--text);font-size:16px"><div style="display:flex;gap:8px;margin-top:10px"><button class="btn fill" id="sec-preset-save" type="button" style="flex:1">保存为预设</button><button class="btn" id="sec-preset-delete" type="button">删除所选</button></div></div></div><div class="cap" style="margin-top:16px">副 API 预设</div><div id="pz-sec"></div>
       <label>温度</label><input id="c-temp" type="number" step="0.1" min="0" max="2">
       <label>携带的历史条数</label><input id="c-hist" type="number" min="0" max="100">
       <label class="chk" style="margin-top:16px"><input type="checkbox" id="c-stream">流式输出</label>
@@ -1078,10 +1180,6 @@ function pick(cb){const i=document.createElement('input');i.type='file';i.accept
       c.getContext('2d').drawImage(im,(im.width-s)/2,(im.height-s)/2,s,s,0,0,96,96);cb(c.toDataURL('image/jpeg',.8))};
     im.src=URL.createObjectURL(f)};i.click()}
 function pickImage(cb){const i=document.createElement('input');i.type='file';i.accept='image/*';i.onchange=()=>{const f=i.files&&i.files[0];if(!f)return;const r=new FileReader();r.onload=()=>cb(r.result);r.readAsDataURL(f)};i.click()}
-function importTextFile(cb){const i=document.createElement('input');i.type='file';i.accept='.txt,.md,.markdown,.json,.text,.docx,text/plain,text/markdown,application/json,application/vnd.openxmlformats-officedocument.wordprocessingml.document';i.onchange=async()=>{const f=i.files&&i.files[0];if(!f)return;try{let text;if(/\.docx$/i.test(f.name)){text=await readDocxText(f)}else text=await f.text();cb(String(text||''),f.name)}catch(e){alert('读取文件失败：'+e.message)}};i.click()}
-async function readDocxText(file){if(!('DecompressionStream' in window))throw new Error('此浏览器不支持 DOCX 解压，请先另存为 TXT');const ab=await file.arrayBuffer(),v=new DataView(ab);let off=0,compressed=null;while(off+30<ab.byteLength){if(v.getUint32(off,true)===0x04034b50){const method=v.getUint16(off+8,true),cs=v.getUint32(off+18,true),nl=v.getUint16(off+26,true),el=v.getUint16(off+28,true),name=new TextDecoder().decode(new Uint8Array(ab,off+30,nl));if(name==='word/document.xml'){compressed=new Uint8Array(ab,off+30+nl+el,cs);if(method===0){const xml=new TextDecoder().decode(compressed);return docxXmlText(xml)}if(method===8){const stream=new Blob([compressed]).stream().pipeThrough(new DecompressionStream('deflate-raw'));return docxXmlText(await new Response(stream).text())}throw new Error('不支持的 DOCX 压缩格式')}off+=30+nl+el+cs}else break}throw new Error('没有找到 Word 文档正文')}
-function docxXmlText(xml){return xml.replace(/<w:tab\b[^>]*\/>/g,'\t').replace(/<w:br\b[^>]*\/>/g,'\n').replace(/<\/w:p>/g,'\n').replace(/<[^>]+>/g,'').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&apos;/g,"'")}
-
 function modal(t,cb){const m=$('#modal'),ta=m.querySelector('textarea');ta.value=t;m.classList.add('on');ta.focus();
   m.querySelector('.ok').onclick=()=>{m.classList.remove('on');cb(ta.value)};m.querySelector('.no').onclick=()=>m.classList.remove('on')}
 function askText(title,placeholder='可留空'){return new Promise(resolve=>{const m=$('#modal'),ta=m.querySelector('textarea'),old=ta.placeholder;ta.placeholder=placeholder;ta.value='';m.classList.add('on');setTimeout(()=>ta.focus(),50);m.querySelector('.ok').onclick=()=>{m.classList.remove('on');ta.placeholder=old;resolve(ta.value)};m.querySelector('.no').onclick=()=>{m.classList.remove('on');ta.placeholder=old;resolve(null)}})}
@@ -1380,7 +1478,7 @@ function setupDesktopGestures(){const home=$('#v-home');home.addEventListener('p
 
 /* nav */
 let stack=['home'],cur=null,T=0,PID='me';
-const R={music:()=>msRender(),home:rHome,app:rApp,prof:rProf,chat:draw,deco:rDeco,cset:rCset,css:rCss,personas:rPersonas,worlds:rWorlds,settings:rSettings,roleprompt:rSettings,diary:rDiary,stickers:rProfileStickers,postdetail:rPostDetail,rolephones:rolePhoneRender,desktopcustom:renderDesktopCustomizer};
+const R={music:()=>msRender(),wallet:()=>wlRender(),home:rHome,app:rApp,prof:rProf,chat:draw,deco:rDeco,cset:rCset,css:rCss,personas:rPersonas,worlds:rWorlds,settings:rSettings,roleprompt:rSettings,diary:rDiary,stickers:rProfileStickers,postdetail:rPostDetail,rolephones:rolePhoneRender,desktopcustom:renderDesktopCustomizer};
 function go(v,push=true){if(v==='chat'&&!P(cur))return;if(v==='settings'&&stack[stack.length-1]!=='settings')settingsPage='main';if(v!=='chat')$('#ucss').textContent='';
   $$('.view').forEach(e=>e.classList.toggle('on',e.id==='v-'+v));if(push)stack.push(v);R[v]()}
 function back(){if(stack[stack.length-1]==='cset'&&csetPage==='memory'){csetPage='main';rCset();return}if(stack[stack.length-1]==='settings'&&settingsPage!=='main'){settingsPage='main';rSettings();return}stack.pop();go(stack[stack.length-1]||'home',false)}
@@ -1443,26 +1541,11 @@ let sxHome=0,syHome=0;$('#v-home').addEventListener('touchstart',e=>{sxHome=e.to
 function rDiary(){const b=$('#diary-body');b.innerHTML=(S.diaries||[]).slice().sort((a,c)=>c.time-a.time).map(d=>`<div class="w" style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;gap:8px"><b>${esc(d.title||'无标题日记')}</b><small>${new Date(d.time).toLocaleDateString()}</small></div><p style="white-space:pre-wrap;margin:10px 0">${esc(d.content)}</p><div class="cap">用户点评</div><textarea data-diary-comment="${d.id}" rows="2" placeholder="写下你的点评">${esc(d.comment||'')}</textarea><button class="btn" data-diary-save="${d.id}">保存点评</button><button class="btn del" data-diary-del="${d.id}">删除日记</button></div>`).join('')||'<div class="empty">还没有日记，点右上角开始写</div>';$$('[data-diary-comment]').forEach(e=>e.oninput=()=>{const d=S.diaries.find(x=>x.id===e.dataset.diaryComment);if(d){d.comment=e.value;save()}});$$('[data-diary-save]').forEach(e=>e.onclick=()=>{save();toast('点评已保存')});$$('[data-diary-del]').forEach(e=>e.onclick=()=>{S.diaries=S.diaries.filter(d=>d.id!==e.dataset.diaryDel);save();rDiary()})}
 $('#diary-add').onclick=()=>modal('',v=>{if(!v.trim())return;S.diaries.push({id:uid(),title:v.trim().split('\n')[0].slice(0,32),content:v.trim(),comment:'',time:Date.now(),pid:cur||''});save();rDiary()});
 $('#diary-ai').onclick=async()=>{const p=P(cur)||S.personas[0];if(!p)return toast('请先新增一个角色');if(!S.cfg.key)return toast('请先在设置里填写 API Key');const b=$('#diary-ai');b.disabled=true;b.textContent='生成中…';try{const content=await ask([{role:'system',content:p.prompt||''},{role:'user',content:'请以你的角色身份写一篇日记，可以是短便签也可以是长篇日记。自然、有具体细节，只输出日记正文。'}],null);S.diaries.push({id:uid(),title:p.name+'的日记',content,time:Date.now(),comment:'',pid:p.id});save();rDiary()}catch(e){toast('生成失败：'+e.message)}finally{b.disabled=false;b.textContent='角色写日记'}};
-function stickerManagerHTML(where='page'){
- const groups=S.stickerGroups||['默认'];
- return `<div style="padding:12px 14px"><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
- <label class="btn" style="position:relative;display:inline-flex;align-items:center;overflow:hidden">＋ 导入图片<input type="file" multiple data-sticker-file="images" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer"></label><label class="btn" style="position:relative;display:inline-flex;align-items:center;overflow:hidden">⇧ 导入链接/描述文件<input type="file" multiple data-sticker-file="links" accept=".txt,.json,.csv,.md,text/plain,application/json,text/csv" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer"></label><button class="btn" data-sticker-group-add>＋ 新建分组</button>
- </div><p class="note">支持直接导入 PNG、JPG、WebP、GIF 图片；也支持导入 TXT/JSON/CSV 链接文件。链接文件每组写“描述词：开心大笑”，下一行写“图片链接：https://…”，也支持直接用“描述词 + 图片 URL”两行格式。</p>
- <div style="display:flex;gap:8px;align-items:center;margin:10px 0"><label style="white-space:nowrap">查看分组</label><select data-sticker-filter style="flex:1;padding:9px;border-radius:10px;background:var(--bg);color:var(--ink);border:1px solid var(--line)"><option value="全部">全部分组</option>${groups.map(g=>`<option value="${esc(g)}">${esc(g)}</option>`).join('')}</select></div>
- <div class="sg" data-sticker-grid>${S.stickers.map(x=>`<div class="st" data-sticker-card="${x.id}" style="position:relative;display:flex;flex-direction:column;gap:5px;padding:4px"><img src="${x.src}" alt="${esc(x.name||'表情包')}" style="width:100%;object-fit:contain"><small style="font-size:11px;overflow-wrap:anywhere">${esc(x.name||'表情包')}</small>${x.description?`<small style="font-size:10px;opacity:.72;overflow-wrap:anywhere">${esc(x.description)}</small>`:''}<select data-sticker-group="${x.id}" aria-label="表情包分组" style="max-width:100%;font-size:11px;padding:4px;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:6px">${groups.map(g=>`<option value="${esc(g)}" ${(x.group||'默认')===g?'selected':''}>${esc(g)}</option>`).join('')}</select><button data-pstk-del="${x.id}" aria-label="删除表情包" style="position:absolute;right:2px;top:2px;background:#0009;color:white;border-radius:12px;padding:2px 7px">×</button></div>`).join('')||'<div class="empty" style="grid-column:1/-1">还没有表情包，点击上方导入</div>'}</div></div>`;
-}
 function renderStickerManager(where='page'){
  const target=where==='profile'?$('#profile-tab-content'):$('#profile-sticker-list');if(!target)return;
  target.innerHTML=where==='profile'?stickerManagerHTML('profile'):stickerManagerHTML('page');bindStickerManager(target,where);
 }
-function bindStickerManager(target,where){
- target.querySelectorAll('[data-sticker-file]').forEach(i=>i.onchange=()=>{const files=Array.from(i.files||[]);if(files.length){if(i.dataset.stickerFile==='links')importStickerLinkFiles(files,where);else importStickerFiles(files,where)}i.value=''});
- target.querySelectorAll('[data-sticker-group-add]').forEach(b=>b.onclick=async e=>{e.preventDefault();e.stopPropagation();const name=await askText('新建表情包分组','请输入分组名称');if(name===null||!name.trim())return;const n=name.trim();if((S.stickerGroups||[]).includes(n))return toast('这个分组已存在');S.stickerGroups=S.stickerGroups||['默认'];S.stickerGroups.push(n);save();renderStickerManager(where);toast('分组已创建：'+n)});
- target.querySelectorAll('[data-sticker-filter]').forEach(sel=>sel.onchange=()=>{target.querySelectorAll('[data-sticker-card]').forEach(card=>{const x=S.stickers.find(s=>s.id===card.dataset.stickerCard);card.style.display=sel.value==='全部'||(x&&((x.group||'默认')===sel.value))?'':'none'})});
- target.querySelectorAll('[data-sticker-group]').forEach(sel=>sel.onchange=()=>{const x=S.stickers.find(s=>s.id===sel.dataset.stickerGroup);if(x){x.group=sel.value;save();toast('已移动到「'+sel.value+'」')}});
- target.querySelectorAll('[data-pstk-del]').forEach(b=>b.onclick=()=>{if(!confirm('删除这个表情包？'))return;S.stickers=S.stickers.filter(x=>x.id!==b.dataset.pstkDel);save();renderStickerManager(where)});
-}
-function chooseStickerFiles(folder,where){
+function chooseStickerFiles(folder,where,grp){
  // iOS Safari is more reliable when the file input is attached to the document
  // and the native picker is opened directly inside the user's tap handler.
  const i=document.createElement('input');i.type='file';i.multiple=true; // 不设置 accept：避免 iOS 文件选择器把某些图片或云端文件过滤掉
@@ -1470,36 +1553,14 @@ function chooseStickerFiles(folder,where){
  i.setAttribute('aria-label','选择要导入的表情包图片');
  i.style.cssText='position:fixed;left:-10000px;top:0;width:1px;height:1px;opacity:0;';
  document.body.appendChild(i);
- i.addEventListener('change',()=>{const files=Array.from(i.files||[]);i.remove();if(files.length)importStickerFiles(files,where);else toast('没有选择文件');},{once:true});
+ i.addEventListener('change',()=>{const files=Array.from(i.files||[]);i.remove();if(files.length)importStickerFiles(files,where,grp);else toast('没有选择文件');},{once:true});
  i.addEventListener('cancel',()=>{i.remove()},{once:true});
  try{i.click()}catch(err){i.remove();toast('无法打开文件选择器，请在 Safari 中打开此 HTML 后重试')}
 } 
-function parseStickerLinkText(raw){
- const trimmed=String(raw||'').trim();if(!trimmed)return [];
- // JSON formats: [{description/url/src}], {stickers:[...]}, or a description-to-URL map
- try{const j=JSON.parse(trimmed);let arr=Array.isArray(j)?j:(j.stickers||j.items||j.emojis||j.data||null);if(arr&&Array.isArray(arr)){return arr.map(x=>({description:String(x.description||x.desc||x.prompt||x.name||x.keyword||''),url:String(x.url||x.src||x.image||x.imageUrl||x.image_url||'')})).filter(x=>/^https?:\/\//i.test(x.url))}if(j&&typeof j==='object'){const out=[];for(const [description,url] of Object.entries(j)){if(typeof url==='string'&&/^https?:\/\//i.test(url))out.push({description,url});}if(out.length)return out}}catch(_){}
- const lines=trimmed.split(/\r?\n/).map(x=>x.trim()).filter(Boolean),out=[];let pending='';
- const isUrl=x=>/^https?:\/\//i.test(x.replace(/^图片链接\s*[:：]\s*/i,''));
- for(let line of lines){
-   if(/^(表情包名称|描述词|描述|关键词|关键字|名称|description|desc|keyword|prompt)\s*[:：]/i.test(line)){pending=line.replace(/^[^:：]+[:：]\s*/,'').trim();continue}
-   if(/^(图片链接|图片URL|图片地址|链接|URL|image(?:_url)?|src)\s*[:：]/i.test(line)){const url=line.replace(/^[^:：]+[:：]\s*/,'').trim();if(/^https?:\/\//i.test(url)){out.push({description:pending||'表情包',url});pending=''}continue}
-   if(isUrl(line)){const url=line.replace(/^图片链接\s*[:：]\s*/i,'');out.push({description:pending||'表情包',url});pending='';continue}
-   // Simple paired format: description line, then URL line
-   if(pending){pending+=' '+line}else{pending=line}
- }
- return out;
-}
-async function importStickerLinkFiles(files,where){
- let added=0,failed=[];const group=(S.stickerGroups||['默认'])[0]||'默认';
- for(const f of files){try{const text=await f.text();const entries=parseStickerLinkText(text);if(!entries.length){failed.push(f.name+'：没有找到图片 URL');continue}for(const item of entries){const url=item.url.trim();if(!/^https?:\/\//i.test(url))continue;S.stickers.push({id:uid(),name:(item.description||'表情包').slice(0,80),description:item.description||'',src:url,group});added++}}catch(e){failed.push(f.name+'：'+e.message)}}
- save();if(where==='profile')renderStickerManager('profile');else if(where==='chat')rSP();else rProfileStickers();
- if(added)toast('已从链接文件导入 '+added+' 个表情包');if(failed.length)alert('以下文件未能完整导入：\n'+failed.slice(0,8).join('\n'));if(!added&&!failed.length)toast('文件里没有可识别的图片链接');
-}
-
-async function importStickerFiles(files,where){
+async function importStickerFiles(files,where,grp){
  const imgs=files.filter(f=>f.type.startsWith('image/')||/\.(png|jpe?g|webp|gif|bmp|avif|heic|heif)$/i.test(f.name));
  if(!imgs.length)return toast('没有识别到图片文件，请确认选择的是图片而不是文档或压缩包');
- let added=0,failed=[];const group=(S.stickerGroups||['默认'])[0]||'默认';
+ let added=0,failed=[];const group=grp||(S.stickerGroups||['默认'])[0]||'默认';
  for(const f of imgs){
    try{
      let src=await new Promise((resolve,reject)=>{const rd=new FileReader();rd.onload=()=>resolve(rd.result);rd.onerror=()=>reject(new Error('读取失败'));rd.readAsDataURL(f)});
@@ -1514,7 +1575,7 @@ async function importStickerFiles(files,where){
  save();
  if(where==='profile')renderStickerManager('profile');else if(where==='chat')rSP();else rProfileStickers();
  if(added)toast('已导入 '+added+' 张表情包');
- if(failed.length)alert('以下图片导入失败：\n'+failed.slice(0,8).join('\n'));
+ if(failed.length)toast('部分内容未能导入：'+failed.slice(0,3).join('；'));
  if(!added&&!failed.length)toast('没有导入图片');
 }
 
@@ -1629,7 +1690,7 @@ function bub(m,i,first,last){
   r.className='r '+(me?'me':'ai')+(first?' first':'');if(i>=0)r.dataset.i=i;
   r.innerHTML=`<div class="av" ${!me&&i>=0?'data-thought-i="'+i+'" title="查看角色内心想法"':''}>${av(u)}</div><div class="col">${first&&!me?`<div class="nm">${esc(u.name)}</div>`:''}<div class="bw"><div class="m"></div>${last&&m.t?`<span class="tm">${hm(m.t)}</span>`:''}</div></div>`;
   const el=r.querySelector('.m'),sk=m.stk&&S.stickers.find(x=>x.id===m.stk);
-  if(m.image){el.classList.add('image-msg');el.innerHTML=`${m.content?`<div>${esc(m.content)}</div>`:''}<img src="${m.image}" alt="聊天图片" style="display:block;max-width:min(240px,62vw);max-height:320px;object-fit:contain;border-radius:12px;margin-top:${m.content?'6px':'0'}">`}else if(sk){el.classList.add('stk');el.innerHTML=`<img src="${sk.src}" alt="">`}else if(m.audio){el.classList.add('voice-msg');el.innerHTML=`<button type="button" class="voice-play" data-play-audio="${i}" aria-label="展开或收起语音文字"><span class="voice-arrow" aria-hidden="true"></span><span class="voice-wave" aria-hidden="true">${'<i></i>'.repeat(9)}</span></button><span class="voice-transcript">${esc(m.content||'语音消息')}</span>`;el.addEventListener('click',ev=>{ev.preventDefault();ev.stopPropagation();el.classList.toggle('show-text')})}else {el.textContent=m.content}if(CC(cur).trOn&&m.trOpen&&m.role==='assistant'&&!m.image&&!m.audio&&!sk)r.querySelector('.col').insertAdjacentHTML('beforeend',trBoxHTML(m));$('#msgs').appendChild(r);$('#msgs').scrollTop=1e9;return el;
+  if(m.transfer){el.classList.add('tf-msg');el.innerHTML=trfCardHTML(m)}else if(m.image){el.classList.add('image-msg');el.innerHTML=`${m.content?`<div>${esc(m.content)}</div>`:''}<img src="${m.image}" alt="聊天图片" style="display:block;max-width:min(240px,62vw);max-height:320px;object-fit:contain;border-radius:12px;margin-top:${m.content?'6px':'0'}">`}else if(sk){el.classList.add('stk');el.innerHTML=`<img src="${sk.src}" alt="">`}else if(m.audio){el.classList.add('voice-msg');el.innerHTML=`<button type="button" class="voice-play" data-play-audio="${i}" aria-label="展开或收起语音文字"><span class="voice-arrow" aria-hidden="true"></span><span class="voice-wave" aria-hidden="true">${'<i></i>'.repeat(9)}</span></button><span class="voice-transcript">${esc(m.content||'语音消息')}</span>`;el.addEventListener('click',ev=>{ev.preventDefault();ev.stopPropagation();el.classList.toggle('show-text')})}else {el.textContent=m.content}if(CC(cur).trOn&&m.trOpen&&m.role==='assistant'&&!m.image&&!m.audio&&!sk)r.querySelector('.col').insertAdjacentHTML('beforeend',trBoxHTML(m));$('#msgs').appendChild(r);$('#msgs').scrollTop=1e9;return el;
 }
 function applyChatFont(){const box=$('#msgs');if(box)box.style.setProperty('--chat-font-size',(Number(CC(cur).fontSize)||14)+'px')}
 let multiSelectMode=false;let selectedMsgIndices=new Set();
@@ -1744,9 +1805,9 @@ async function maybeAutoSummarize(chatId){const cc=CC(chatId),h=S.chats[chatId]|
 async function gen(){
   const p=P(cur),h=S.chats[cur];setBusy(1);const el=bub({role:'assistant',content:'···'},-1,1,0);
   try{
-    const basePrompt=build(p,h);if((S.cfg.memoryMode||'traditional')==='vector'){try{const vm=await vectorMemoryPrompt(p,h);if(vm)basePrompt.push({role:'system',content:vm})}catch(memErr){toast('向量记忆检索失败，本次继续普通聊天：'+memErr.message)}}const prompt=basePrompt.concat([{role:'system',content:'在保持角色人设和自然对话的前提下，请一次性输出严格 JSON，不要 Markdown 代码块，格式为 {"messages":["第一条独立聊天消息","第二条独立聊天消息"],"reply":"兼容字段","thought":"角色此刻未说出口的内心想法","image_prompt":""}。messages 是角色按真实聊天节奏连续发送的消息数组：结合语境，适合分开发的内容就拆成 2-5 条短消息，每条只放一个自然聊天气泡；不要把几句话用换行或一大段塞进同一个气泡。只有确实一句就能说清时才只输出一条。不要机械地每次都拆成多条。reply 可作为 messages 的兼容备用字段。thought 是简短内心活动。若用户明确要求生成/发图片，image_prompt 填画面描述，否则留空。'}]);
+    const basePrompt=build(p,h);if((S.cfg.memoryMode||'traditional')==='vector'){try{const vm=await vectorMemoryPrompt(p,h);if(vm)basePrompt.push({role:'system',content:vm})}catch(memErr){toast('向量记忆检索失败，本次继续普通聊天：'+memErr.message)}}const prompt=basePrompt.concat([{role:'system',content:'在保持角色人设和自然对话的前提下，请一次性输出严格 JSON，不要 Markdown 代码块，格式为 {"messages":["第一条独立聊天消息","第二条独立聊天消息"],"reply":"兼容字段","thought":"角色此刻未说出口的内心想法","image_prompt":""}。messages 是角色按真实聊天节奏连续发送的消息数组：结合语境，适合分开发的内容就拆成 2-5 条短消息，每条只放一个自然聊天气泡；不要把几句话用换行或一大段塞进同一个气泡。只有确实一句就能说清时才只输出一条。不要机械地每次都拆成多条。reply 可作为 messages 的兼容备用字段。thought 是简短内心活动。若用户明确要求生成/发图片，image_prompt 填画面描述，否则留空。'},{role:'system',content:TRF_PROMPT()}]);
     const raw=await ask(prompt,null);let data;try{const clean=raw.replace(/^```(?:json)?\s*/i,'').replace(/\s*```$/,'');data=JSON.parse(clean)}catch(_){data={reply:raw,thought:''}}
-    let replies=Array.isArray(data.messages)?data.messages.map(x=>String(x||'').trim()).filter(Boolean):[];if(!replies.length){const out=String(data.reply||raw).trim();replies=out.split(/\n{2,}/).map(x=>x.trim()).filter(Boolean);if(replies.length===1&&out.length>180){const parts=out.match(/[^。！？!?]+[。！？!?]?/g)||[out];if(parts.length>=3)replies=parts.map(x=>x.trim()).filter(Boolean)}}if(!replies.length)replies=[String(data.reply||raw).trim()];if(el&&el.parentNode)el.remove();const replyChatId=cur;for(let idx=0;idx<replies.length;idx++){if(cur!==replyChatId)break;if(idx>0){await new Promise(resolve=>setTimeout(resolve,520+Math.floor(Math.random()*420)));}h.push({role:'assistant',content:replies[idx],thought:idx===0?String(data.thought||'').trim():'',t:Date.now()});save();draw();}if(S.cfg.imageEnabled&&String(data.image_prompt||'').trim()){try{const im=await generateImage(String(data.image_prompt).trim());h.push({role:'assistant',content:'',image:im,thought:'我把刚才描述的画面生成出来了。',t:Date.now()})}catch(imgErr){h.push({role:'assistant',content:'图片生成失败：'+imgErr.message,t:Date.now()})}}save();try{await maybeAutoSummarize(cur)}catch(_){}
+    let replies=Array.isArray(data.messages)?data.messages.map(x=>String(x||'').trim()).filter(Boolean):[];if(!replies.length){const out=String(data.reply||raw).trim();replies=out.split(/\n{2,}/).map(x=>x.trim()).filter(Boolean);if(replies.length===1&&out.length>180){const parts=out.match(/[^。！？!?]+[。！？!?]?/g)||[out];if(parts.length>=3)replies=parts.map(x=>x.trim()).filter(Boolean)}}if(!replies.length)replies=[String(data.reply||raw).trim()];if(el&&el.parentNode)el.remove();const replyChatId=cur;for(let idx=0;idx<replies.length;idx++){if(cur!==replyChatId)break;if(idx>0){await new Promise(resolve=>setTimeout(resolve,520+Math.floor(Math.random()*420)));}h.push({role:'assistant',content:replies[idx],thought:idx===0?String(data.thought||'').trim():'',t:Date.now()});save();draw();}trfApplyAI(h,data);if(S.cfg.imageEnabled&&String(data.image_prompt||'').trim()){try{const im=await generateImage(String(data.image_prompt).trim());h.push({role:'assistant',content:'',image:im,thought:'我把刚才描述的画面生成出来了。',t:Date.now()})}catch(imgErr){h.push({role:'assistant',content:'图片生成失败：'+imgErr.message,t:Date.now()})}}save();try{await maybeAutoSummarize(cur)}catch(_){}
   }catch(e){el.textContent='请求失败：'+e.message;el.classList.add('err');setBusy(0);return}
   setBusy(0);draw();
 }
@@ -1755,11 +1816,11 @@ async function gen(){
 let mg=0;
 function rSP(){
   const groups=['全部',...(S.stickerGroups||['默认'])];const chosen=window.stickerChatGroup||'全部';const all=stkList().filter(s=>chosen==='全部'||(s.group||'默认')===chosen);
-  $('#sp').innerHTML=`<div class="sph"><span>表情包</span><div><button id="stup">导入</button><button id="stmg">${mg?'完成':'管理'}</button></div></div><div style="display:flex;gap:6px;overflow:auto;padding:5px 0">${groups.map(g=>`<button data-sticker-chat-group="${esc(g)}" style="white-space:nowrap;padding:5px 9px;border-radius:14px;background:${chosen===g?'var(--me)':'var(--bg)'};color:var(--ink)">${esc(g)}</button>`).join('')}</div><div class="sg">${all.map(s=>`<button class="st${mg?' mg':''}" data-stk="${s.id}"><img src="${s.src}" alt=""></button>`).join('')||'<div class="empty" style="grid-column:1/-1;padding:20px">这个分组还没有表情包</div>'}</div>`;$$('[data-sticker-chat-group]').forEach(b=>b.onclick=()=>{window.stickerChatGroup=b.dataset.stickerChatGroup;rSP()})}
+  $('#sp').innerHTML=`<div class="sph"><span>表情包</span><div><button id="stup">导入</button><button id="stmg">${mg?'完成':'管理'}</button></div></div><div style="display:flex;gap:6px;overflow:auto;padding:5px 0">${groups.map(g=>`<button data-sticker-chat-group="${esc(g)}" style="white-space:nowrap;padding:5px 9px;border-radius:14px;background:${chosen===g?'var(--me)':'var(--bg)'};color:var(--ink)">${esc(g)}</button>`).join('')}</div><div class="sg">${all.map(s=>`<div class="stw"><button class="st${mg?' mg':''}" data-stk="${s.id}"><img src="${s.src}" alt=""></button><small>${esc(s.description||s.name||'')}</small></div>`).join('')||'<div class="empty" style="grid-column:1/-1;padding:20px">这个分组还没有表情包</div>'}</div>`;$$('[data-sticker-chat-group]').forEach(b=>b.onclick=()=>{window.stickerChatGroup=b.dataset.stickerChatGroup;rSP()})}
 function addStk(){chooseStickerFiles(false,'chat')}
 
 function sIcon(){/* 图标使用固定贴图，输入状态不替换图标 */}
-function stkList(){const b=CC(cur).stk;return b.length?S.stickers.filter(s=>b.includes(s.id)):S.stickers}
+function stkList(){const g=CC(cur).stkGroups||[];return g.length?S.stickers.filter(s=>g.includes(s.group||'默认')):S.stickers}
 
 /* chat search */
 function srch(on){$('#sbar').style.display=on?'flex':'none';$('#sres').style.display=on?'block':'none';$('#msgs').style.display=on?'none':'flex';
@@ -1812,9 +1873,9 @@ function rCset(){
   <div class="is-h">绑定世界书</div>
   <div class="is-g">${S.worlds.map(w=>`<div class="is-c"><span class="is-t"><b>${esc(w.title||(w.content||'').slice(0,14)||'未命名')}</b></span><span class="is-sw"><input type="checkbox" data-wb="${w.id}" ${cc.wb.includes(w.id)?'checked':''}><i></i></span></div>`).join('')||'<div class="is-c"><span class="is-t"><small>还没有世界书条目，先去桌面「世界书」添加</small></span></div>'}</div>
   <div class="is-f">不勾选＝使用全部已启用条目。</div>
-  <div class="is-h">绑定表情包</div>
-  <div class="is-g"><div class="is-c is-col">${S.stickers.length?`<div class="sg">${S.stickers.map(s=>`<button class="st${cc.stk.includes(s.id)?' on':''}" data-bs="${s.id}"><img src="${s.src}" alt=""></button>`).join('')}</div>`:'<small style="color:#8e8e93">还没有表情包，在聊天输入框的笑脸里上传</small>'}</div></div>
-  <div class="is-f">不选＝全部可用；选中后这个聊天只显示选中的。</div>
+  <div class="is-h">绑定表情包分组</div>
+  <div class="is-g">${(S.stickerGroups||['默认']).map(g=>`<div class="is-c"><span class="is-t"><b>${esc(g)}</b><small>${S.stickers.filter(x=>(x.group||'默认')===g).length} 个表情包</small></span><span class="is-sw"><input type="checkbox" data-sgb="${esc(g)}" ${(cc.stkGroups||[]).includes(g)?'checked':''}><i></i></span></div>`).join('')}</div>
+  <div class="is-f">整个分组一起挂给角色；不选＝所有分组都可用。</div>
   <div class="is-h">美化</div>
   <div class="is-g">
     <div class="is-c"><span class="is-i" style="background:#ff2d55">${rpSvg('br')}</span><span class="is-t"><b>当前美化</b></span><select id="cs-css" class="is-sel"><option value="">默认</option>${S.themes.map(t=>`<option value="${t.id}"${cc.css===t.id?' selected':''}>${esc(t.name)}</option>`).join('')}</select></div>
@@ -1829,7 +1890,7 @@ function rCset(){
   $('#cs-font-size').oninput=e=>{cc.fontSize=Number(e.target.value);$('#cs-font-value').textContent=cc.fontSize+'px';applyChatFont();save()};
   $('#cs-sys').oninput=e=>{cc.sys=e.target.value;save()};
   $$('#cbody [data-wb]').forEach(c=>c.onchange=()=>{const id=c.dataset.wb;cc.wb=c.checked?[...cc.wb,id]:cc.wb.filter(x=>x!==id);save()});
-  $$('#cbody [data-bs]').forEach(b=>b.onclick=()=>{const id=b.dataset.bs;cc.stk=cc.stk.includes(id)?cc.stk.filter(x=>x!==id):[...cc.stk,id];save();rCset()});
+  $$('#cbody [data-sgb]').forEach(c=>c.onchange=()=>{const g=c.dataset.sgb;cc.stkGroups=c.checked?[...(cc.stkGroups||[]),g]:(cc.stkGroups||[]).filter(x=>x!==g);save()});
   $('#cs-css').onchange=e=>{cc.css=e.target.value;save()};
   $('#cs-bl').onchange=e=>{p.blocked=e.target.checked;save()};
   $('#cs-tr-on').onchange=e=>{cc.trOn=e.target.checked;save();['#cs-tr-out','#cs-tr-to'].forEach(s=>$(s).classList.toggle('is-dim',!cc.trOn));draw()};
@@ -1879,7 +1940,7 @@ function editWorld(w){
  document.body.appendChild(overlay);const q=x=>overlay.querySelector(x);q('.ew-cancel').onclick=()=>overlay.remove();overlay.onclick=e=>{if(e.target===overlay)overlay.remove()};q('.ew-scope').onchange=()=>q('.ew-contacts').style.display=q('.ew-scope').value==='contact'?'block':'none';q('.ew-trigger').onchange=()=>q('.ew-keybox').style.display=q('.ew-trigger').value==='keyword'?'block':'none';q('.ew-save').onclick=()=>{w.title=q('.ew-title').value.trim()||'未命名世界书';w.keys=q('.ew-keys').value.trim();w.content=q('.ew-content').value;w.on=q('.ew-on').checked;w.scope=q('.ew-scope').value;w.trigger=q('.ew-trigger').value;w.position=q('.ew-position').value;w.contacts=[...overlay.querySelectorAll('.ew-contact:checked')].map(x=>x.value);if(w.trigger==='keyword'&&!w.keys) return toast('关键词触发需要填写至少一个关键词');if(w.scope==='contact'&&!w.contacts.length)return toast('请选择至少一个联系人');save();overlay.remove();rWorlds();toast('世界书已保存')};q('.ew-delete').onclick=()=>{if(confirm('确定删除这条世界书吗？')){S.worlds=S.worlds.filter(x=>x.id!==w.id);save();overlay.remove();rWorlds()}};
 }
 $('#addw').onclick=()=>{const w={id:uid(),title:'',keys:'',content:'',on:true,scope:'global',trigger:'global',position:'after',contacts:[]};S.worlds.push(w);save();editWorld(w)};
-$('#import-worlds').onclick=()=>importTextFile((t,n)=>{let parsed=null;try{parsed=JSON.parse(t)}catch(e){};if(Array.isArray(parsed)){const rows=parsed;rows.forEach(w=>S.worlds.push({id:uid(),title:w.title||w.name||n.replace(/\.[^.]+$/,''),keys:w.keys||w.keywords||'',content:w.content||w.text||'',on:w.on!==false}));}else if(parsed&&Array.isArray(parsed.worlds)){parsed.worlds.forEach(w=>S.worlds.push({id:uid(),title:w.title||w.name||n,keys:w.keys||w.keywords||'',content:w.content||w.text||'',on:w.on!==false}));}else{S.worlds.push({id:uid(),title:n.replace(/\.[^.]+$/,''),keys:'',content:t,on:true})}save();rWorlds();toast('世界书文件已导入')});
+$('#import-worlds').onclick=()=>importTextFile((t,n)=>{let parsed=null;try{parsed=JSON.parse(t)}catch(e){};if(Array.isArray(parsed)){const rows=parsed;rows.forEach(w=>S.worlds.push({id:uid(),title:w.title||w.name||n.replace(/\.[^.]+$/,''),keys:w.keys||w.keywords||'',content:w.content||w.text||'',on:w.on!==false}));}else if(parsed&&Array.isArray(parsed.worlds)){parsed.worlds.forEach(w=>S.worlds.push({id:uid(),title:w.title||w.name||n,keys:w.keys||w.keywords||'',content:w.content||w.text||'',on:w.on!==false}));}else if(parsed&&typeof parsed==='object'&&(parsed.entries||(parsed.character_book&&parsed.character_book.entries))){const ents=parsed.entries||parsed.character_book.entries,arr=Array.isArray(ents)?ents:Object.values(ents);arr.forEach((w,i)=>S.worlds.push({id:uid(),title:w.comment||w.name||w.title||('条目'+(i+1)),keys:[].concat(w.key||w.keys||[]).join(','),content:w.content||w.text||'',on:w.enabled!==false&&w.disable!==true}))}else{S.worlds.push({id:uid(),title:n.replace(/\.[^.]+$/,''),keys:'',content:t,on:true})}save();rWorlds();toast('世界书文件已导入')});
 
 /* settings */
 const FS=[['#c-base','cfg','base'],['#c-key','cfg','key'],['#c-model','cfg','model'],['#c-temp','cfg','temp'],['#c-hist','cfg','hist'],['#m-name','me','name'],['#m-handle','me','handle'],['#m-bio','me','bio']];
@@ -1894,7 +1955,7 @@ function rSettings(){
   $('#add-voice-world').onclick=()=>{const w={id:uid(),title:'语音表现设定',keys:'',content:`【语音表现】
 请保持角色固定的说话习惯、音色氛围与情绪表达。语音内容应像自然聊天，不要朗读系统提示或动作描写；根据情绪使用自然停顿，避免夸张播音腔。`,on:true,scope:'global',trigger:'global',position:'after',contacts:[]};S.worlds.push(w);save();editWorld(w)};
   $('#manage-voice-worlds').onclick=()=>{$('[data-go=worlds]')?.click();};
-  FS.forEach(([s,o,k])=>{const e=$(s);e.value=S[o][k]??'';e.oninput=()=>{S[o][k]=e.type==='number'?Number(e.value):e.value;if(o==='me'&&S.activeUserProfile){const up=S.userProfiles.find(x=>x.id===S.activeUserProfile);if(up)up[k]=S.me[k]}save();if(o==='me'&&k==='name')$('#ios-name').textContent=S.me.name||'我的资料'}});[['c-secondary-base','secondaryBase'],['c-secondary-key','secondaryKey'],['c-secondary-model','secondaryModel']].forEach(([id,k])=>{const e=$('#'+id);if(e){e.value=S.cfg[k]||'';e.oninput=()=>{S.cfg[k]=e.value.trim();save()}}});secApiInit();sysInit();fontUi();
+  FS.forEach(([s,o,k])=>{const e=$(s);e.value=S[o][k]??'';e.oninput=()=>{S[o][k]=e.type==='number'?Number(e.value):e.value;if(o==='me'&&S.activeUserProfile){const up=S.userProfiles.find(x=>x.id===S.activeUserProfile);if(up)up[k]=S.me[k]}save();if(o==='me'&&k==='name')$('#ios-name').textContent=S.me.name||'我的资料'}});[['c-secondary-base','secondaryBase'],['c-secondary-key','secondaryKey'],['c-secondary-model','secondaryModel']].forEach(([id,k])=>{const e=$('#'+id);if(e){e.value=S.cfg[k]||'';e.oninput=()=>{S.cfg[k]=e.value.trim();save()}}});secApiInit();sysInit();fontUi();pzInitAll();
   $('#c-stream').checked=!!S.cfg.stream;$('#c-stream').onchange=e=>{S.cfg.stream=e.target.checked;save()};const imageToggle=$('#c-image-enabled');if(imageToggle){imageToggle.checked=!!S.cfg.imageEnabled;imageToggle.onchange=()=>{S.cfg.imageEnabled=imageToggle.checked;save();toast(imageToggle.checked?'已开启对方生图':'已关闭对方生图')}};
   const ip=$('#c-image-provider');if(ip){ip.value=S.cfg.imageProvider||'gpt';const syncImageProvider=()=>{S.cfg.imageProvider=ip.value;$('#image-gpt-fields').style.display=ip.value==='gpt'?'block':'none';$('#image-nai-fields').style.display=ip.value==='novelai'?'block':'none'};syncImageProvider();ip.onchange=syncImageProvider;
     const fields={ 'c-image-base':['imageBase','https://api.openai.com/v1'],'c-image-key':['imageKey',''],'c-image-model':['imageModel','gpt-image-1'],'c-gpt-positive':['gptPositive',''],'c-gpt-negative':['gptNegative',''],'c-gpt-detail':['gptDetail',''],'c-gpt-size':['gptSize','1024x1024'],'c-gpt-quality':['gptQuality','auto'],'c-gpt-style':['gptStyle',''],'c-gpt-n':['gptN',1],'c-nai-base':['naiBase','https://image.novelai.net'],'c-nai-key':['naiKey',''],'c-nai-model':['naiModel','nai-diffusion-4-full'],'c-nai-positive':['naiPositive',''],'c-nai-negative':['naiNegative',''],'c-nai-detail':['naiDetail',''],'c-nai-width':['naiWidth',832],'c-nai-height':['naiHeight',1216],'c-nai-scale':['naiScale',5],'c-nai-steps':['naiSteps',28],'c-nai-sampler':['naiSampler','k_euler_ancestral'],'c-nai-cfgrescale':['naiCfgRescale',0],'c-nai-seed':['naiSeed','']};
@@ -2252,7 +2313,7 @@ function fontUi(){
  const sel=$('#font-select');if(!sel)return;
  const all=()=>[...FONT_BUILTIN.map(x=>({id:x.id,name:x.name})),...S.fonts.map(x=>({id:x.id,name:x.name+'（自定义）'}))];
  const fill=()=>{sel.innerHTML=all().map(x=>'<option value="'+esc(x.id)+'">'+esc(x.name)+'</option>').join('');sel.value=S.fontActive;$('#font-preview').style.fontFamily=fontStack(S.fontActive);$('#font-scale').value=S.fontScale;$('#font-scale-v').textContent=S.fontScale+'%';
-  const ps=$('#font-preset-select');ps.innerHTML='<option value="">选择已保存预设</option>'+S.fontPresets.map(x=>'<option value="'+esc(x.id)+'">'+esc(x.name)+'</option>').join('')};
+  pzMount('#pz-font',pzFont)};
  fill();
  const use=async id=>{const f=S.fonts.find(x=>x.id===id);if(f&&!(await fontLoad(f)))return false;S.fontActive=id;applyFont();save();fill();return true};
  sel.onchange=()=>use(sel.value);
@@ -2274,9 +2335,6 @@ function fontUi(){
  $('#font-scale').oninput=e=>{S.fontScale=Number(e.target.value);$('#font-scale-v').textContent=S.fontScale+'%';applyFont()};
  $('#font-scale').onchange=()=>save();
  $('#font-scale-reset').onclick=()=>{S.fontScale=100;applyFont();save();fill()};
- $('#font-preset-save').onclick=()=>{const n=$('#font-preset-name').value.trim();if(!n)return toast('先给预设起个名字');const d={font:S.fontActive,scale:S.fontScale},o=S.fontPresets.find(x=>x.name===n);if(o)Object.assign(o,d);else S.fontPresets.push(Object.assign({id:uid(),name:n},d));save();fill();toast('字体预设已保存')};
- $('#font-preset-use').onclick=async()=>{const p=S.fontPresets.find(x=>x.id===$('#font-preset-select').value);if(!p)return toast('请先选择一个预设');S.fontScale=p.scale||100;if(!(await use(p.font||'sys')))return;applyFont();save();fill();toast('已使用预设')};
- $('#font-preset-del').onclick=()=>{const p=S.fontPresets.find(x=>x.id===$('#font-preset-select').value);if(!p)return toast('请先选择要删除的预设');if(confirm('删除字体预设「'+p.name+'」？')){S.fontPresets=S.fontPresets.filter(x=>x.id!==p.id);save();fill()}};
 }
 /* desktop images: pick directly from the phone */
 function desktopFile(cb){const i=document.createElement('input');i.type='file';i.accept='image/*';
@@ -2317,6 +2375,314 @@ async function trToggle(i){
  m.trLoading=0;save();if(cur===pid)trRender(i);
 }
 fontBoot();
+/* ===== universal document import (never throws) ===== */
+function decodeEntities(t){return t.replace(/&#x([0-9a-f]+);/gi,(m,h)=>String.fromCodePoint(parseInt(h,16))).replace(/&#(\d+);/g,(m,d)=>String.fromCodePoint(+d)).replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&apos;/g,"'").replace(/&amp;/g,'&')}
+function docxXmlText(xml){return decodeEntities(xml.replace(/<w:instrText[^>]*>[\s\S]*?<\/w:instrText>/g,'').replace(/<w:delText[^>]*>[\s\S]*?<\/w:delText>/g,'').replace(/<w:tab\b[^>]*\/>/g,'\t').replace(/<w:(br|cr)\b[^>]*\/>/g,'\n').replace(/<\/w:p>(\s*<\/w:tc>)/g,'$1').replace(/<\/w:tc>/g,'\t').replace(/<\/w:tr>/g,'\n').replace(/<\/w:p>/g,'\n').replace(/<[^>]+>/g,''))}
+const odtXmlText=xml=>decodeEntities(xml.replace(/<text:tab\s*\/>/g,'\t').replace(/<text:line-break\s*\/>/g,'\n').replace(/<\/text:(p|h)>/g,'\n').replace(/<[^>]+>/g,''));
+function tinyInflate(src){
+ let pos=0,bb=0,bc=0;const out=[];
+ const bits=n=>{if(!n)return 0;while(bc<n){if(pos>=src.length)throw new Error('eof');bb|=src[pos++]<<bc;bc+=8}const v=bb&((1<<n)-1);bb>>>=n;bc-=n;return v};
+ const mk=lens=>{const count=new Uint16Array(16),symbol=new Uint16Array(lens.length),offs=new Uint16Array(16);for(const l of lens)count[l]++;count[0]=0;for(let i=1;i<16;i++)offs[i]=offs[i-1]+count[i-1];for(let s=0;s<lens.length;s++)if(lens[s])symbol[offs[lens[s]]++]=s;return{count,symbol}};
+ const dec=h=>{let code=0,first=0,index=0;for(let len=1;len<16;len++){code|=bits(1);const c=h.count[len];if(code-c<first)return h.symbol[index+(code-first)];index+=c;first+=c;first<<=1;code<<=1}throw new Error('bad code')};
+ const LB=[3,4,5,6,7,8,9,10,11,13,15,17,19,23,27,31,35,43,51,59,67,83,99,115,131,163,195,227,258],LE=[0,0,0,0,0,0,0,0,1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,0],DB=[1,2,3,4,5,7,9,13,17,25,33,49,65,97,129,193,257,385,513,769,1025,1537,2049,3073,4097,6145,8193,12289,16385,24577],DE=[0,0,0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11,12,12,13,13];
+ let fL=null,fD=null;
+ for(let last=0;!last;){
+  last=bits(1);const t=bits(2);
+  if(t===0){bb=0;bc=0;const len=src[pos]|(src[pos+1]<<8);pos+=4;for(let i=0;i<len;i++)out.push(src[pos++])}
+  else{let L,D;
+   if(t===1){if(!fL){const l=new Uint8Array(288);for(let i=0;i<144;i++)l[i]=8;for(let i=144;i<256;i++)l[i]=9;for(let i=256;i<280;i++)l[i]=7;for(let i=280;i<288;i++)l[i]=8;fL=mk(l);fD=mk(new Uint8Array(30).fill(5))}L=fL;D=fD}
+   else if(t===2){const nl=bits(5)+257,nd=bits(5)+1,nc=bits(4)+4,ord=[16,17,18,0,8,7,9,6,10,5,11,4,12,3,13,2,14,1,15],cl=new Uint8Array(19);for(let i=0;i<nc;i++)cl[ord[i]]=bits(3);const ch=mk(cl),lens=new Uint8Array(nl+nd);
+    for(let i=0;i<nl+nd;){const s=dec(ch);if(s<16)lens[i++]=s;else{let p=0,r;if(s===16){p=lens[i-1];r=3+bits(2)}else if(s===17)r=3+bits(3);else r=11+bits(7);while(r--)lens[i++]=p}}
+    L=mk(lens.subarray(0,nl));D=mk(lens.subarray(nl))}
+   else throw new Error('bad block');
+   for(;;){const s=dec(L);if(s<256)out.push(s);else if(s===256)break;else{const i=s-257,len=LB[i]+bits(LE[i]),ds=dec(D),dist=DB[ds]+bits(DE[ds]);for(let k=0;k<len;k++)out.push(out[out.length-dist])}}}
+ }
+ return Uint8Array.from(out);
+}
+async function inflateRaw(u8){
+ if('DecompressionStream' in window){try{return new Uint8Array(await new Response(new Blob([u8]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).arrayBuffer())}catch(e){}}
+ return tinyInflate(u8);
+}
+function zipEntries(ab){
+ const v=new DataView(ab),u8=new Uint8Array(ab);let e=-1;
+ for(let i=ab.byteLength-22;i>=Math.max(0,ab.byteLength-65557);i--){if(v.getUint32(i,true)===0x06054b50){e=i;break}}
+ if(e<0)throw new Error('zip');
+ const n=v.getUint16(e+10,true);let off=v.getUint32(e+16,true);const out=[];
+ for(let k=0;k<n&&off+46<=ab.byteLength;k++){
+  if(v.getUint32(off,true)!==0x02014b50)break;
+  const method=v.getUint16(off+10,true),cs=v.getUint32(off+20,true),nl=v.getUint16(off+28,true),el=v.getUint16(off+30,true),cl=v.getUint16(off+32,true),lo=v.getUint32(off+42,true);
+  out.push({name:new TextDecoder('utf-8').decode(u8.subarray(off+46,off+46+nl)),method,cs,lo});off+=46+nl+el+cl}
+ return out;
+}
+async function zipRead(ab,ent){
+ const v=new DataView(ab);if(v.getUint32(ent.lo,true)!==0x04034b50)throw new Error('zip');
+ const start=ent.lo+30+v.getUint16(ent.lo+26,true)+v.getUint16(ent.lo+28,true),data=new Uint8Array(ab,start,ent.cs);
+ if(ent.method===0)return data;if(ent.method===8)return await inflateRaw(data);throw new Error('zip method');
+}
+async function zipDocText(ab){
+ const ents=zipEntries(ab),by=n=>ents.find(e=>e.name===n),rd=async n=>{const e=by(n);return e?new TextDecoder('utf-8').decode(await zipRead(ab,e)):''};
+ const main=await rd('word/document.xml');
+ if(main){const rels=docxRels(await rd('word/_rels/document.xml.rels'));const parts=[docxLinks(main,rels)];for(const n of ['word/footnotes.xml','word/endnotes.xml']){const x=await rd(n);if(x)parts.push(x)}return parts.map(docxXmlText).join('\n').replace(/\n{3,}/g,'\n\n').trim()}
+ const odt=await rd('content.xml');if(odt)return odtXmlText(odt);
+ const slides=ents.filter(e=>/^ppt\/slides\/slide\d+\.xml$/.test(e.name)).sort((a,b)=>a.name.localeCompare(b.name,undefined,{numeric:true}));
+ if(slides.length){const o=[];for(const e of slides)o.push(decodeEntities(new TextDecoder().decode(await zipRead(ab,e)).replace(/<\/a:p>/g,'\n').replace(/<[^>]+>/g,'')));return o.join('\n')}
+ const t=ents.find(e=>/\.(txt|md|json)$/i.test(e.name));if(t)return new TextDecoder().decode(await zipRead(ab,t));
+ const m=ents.find(e=>/^word\/[^/]+\.xml$/.test(e.name)&&!/(styles|settings|numbering|fontTable|theme|webSettings|comments|header|footer)/i.test(e.name));
+ return m?docxXmlText(new TextDecoder().decode(await zipRead(ab,m))):'';
+}
+function decodeBytes(u){
+ if(u[0]===0xFF&&u[1]===0xFE)return new TextDecoder('utf-16le').decode(u.subarray(2));
+ if(u[0]===0xFE&&u[1]===0xFF)return new TextDecoder('utf-16be').decode(u.subarray(2));
+ try{return new TextDecoder('utf-8',{fatal:true}).decode(u).replace(/^\uFEFF/,'')}catch(e){}
+ for(const enc of ['gb18030','big5','shift_jis']){try{return new TextDecoder(enc).decode(u)}catch(e){}}
+ return new TextDecoder('utf-8').decode(u);
+}
+function rtfText(r){
+ r=r.replace(/\\u(-?\d+)\??/g,(m,n)=>String.fromCharCode(n<0?+n+65536:+n));
+ r=r.replace(/(?:\\'[0-9a-fA-F]{2})+/g,m=>{const b=[...m.matchAll(/\\'([0-9a-fA-F]{2})/g)].map(x=>parseInt(x[1],16));try{return new TextDecoder('gb18030').decode(new Uint8Array(b))}catch(e){return ''}});
+ return r.replace(/\\pard?/g,'\n').replace(/\\tab/g,'\t').replace(/\{\\\*[^{}]*\}/g,'').replace(/\\[a-zA-Z]+-?\d* ?/g,'').replace(/[{}]/g,'').replace(/\n{3,}/g,'\n\n').trim();
+}
+function htmlText(h){h=h.replace(/<(script|style)[\s\S]*?<\/\1>/gi,'').replace(/<(br|\/p|\/div|\/li|\/h\d|\/tr)[^>]*>/gi,'\n');return decodeEntities(h.replace(/<[^>]+>/g,'')).replace(/\n{3,}/g,'\n\n').trim()}
+function oleDocText(u){
+ let best='';
+ for(const o of [0,1]){const runs=[];let cur=[];const flush=()=>{if(cur.length>=6)runs.push(cur.map(c=>String.fromCharCode(c)).join(''));cur=[]};
+  for(let i=o;i+1<u.length;i+=2){const c=u[i]|(u[i+1]<<8),ok=(c>=0x20&&c<0x7f)||(c>=0x4e00&&c<=0x9fff)||(c>=0x3000&&c<=0x303f)||(c>=0xff00&&c<=0xffef)||c===13||c===10||c===9||c===7;if(ok)cur.push(c);else flush()}flush();
+  const t=runs.join('\n').replace(/\r/g,'\n').replace(/\x07/g,'\t');if(t.length>best.length)best=t}
+ return best.length>20?best:'';
+}
+async function inflateZlib(u8){
+ if('DecompressionStream' in window){try{return new Uint8Array(await new Response(new Blob([u8]).stream().pipeThrough(new DecompressionStream('deflate'))).arrayBuffer())}catch(e){}}
+ return tinyInflate(u8.subarray(2));
+}
+async function pdfText(u){
+ const bin=new TextDecoder('latin1').decode(u),out=[];
+ for(const p of bin.split('endstream')){
+  const si=p.search(/stream\r?\n/);if(si<0)continue;const dict=p.slice(Math.max(0,si-300),si),body=p.slice(si).replace(/^stream\r?\n/,''),bytes=new Uint8Array(body.length);
+  for(let i=0;i<body.length;i++)bytes[i]=body.charCodeAt(i)&255;
+  let data=bytes;if(/FlateDecode/.test(dict)){try{data=await inflateZlib(bytes)}catch(e){continue}}
+  const txt=new TextDecoder('latin1').decode(data);if(!/BT[\s\S]*ET/.test(txt))continue;
+  const un=s=>s.replace(/\\([nrtbf()\\])/g,(m,c)=>({n:'\n',r:'\r',t:'\t',b:'\b',f:'\f','(':'(',')':')','\\':'\\'})[c]).replace(/\\(\d{1,3})/g,(m,o)=>String.fromCharCode(parseInt(o,8)));
+  const lines=[];txt.replace(/\[((?:[^\]\\]|\\.)*)\]\s*TJ|\(((?:[^()\\]|\\.)*)\)\s*Tj/g,(m,a,b)=>{lines.push(un(a!==undefined?(a.match(/\((?:[^()\\]|\\.)*\)/g)||[]).map(x=>x.slice(1,-1)).join(''):b));return m});
+  out.push(lines.join('\n'))}
+ const t=out.join('\n').trim();return t.length>10?t:'';
+}
+function pngCardText(ab){
+ const v=new DataView(ab),u=new Uint8Array(ab);let p=8;
+ while(p+8<=u.length){const len=v.getUint32(p),type=String.fromCharCode(u[p+4],u[p+5],u[p+6],u[p+7]);
+  if(type==='tEXt'){const body=u.subarray(p+8,p+8+len),z=body.indexOf(0),key=new TextDecoder('latin1').decode(body.subarray(0,z));
+   if(key==='chara'||key==='ccv3'){try{const j=JSON.parse(new TextDecoder('utf-8').decode(Uint8Array.from(atob(new TextDecoder('latin1').decode(body.subarray(z+1))),c=>c.charCodeAt(0)))),d=j.data||j;
+    return JSON.stringify({name:d.name||'',prompt:[d.description,d.personality&&'性格：'+d.personality,d.scenario&&'场景：'+d.scenario,d.mes_example&&'对话示例：\n'+d.mes_example].filter(Boolean).join('\n\n'),greet:d.first_mes||''})}catch(e){}}}
+  p+=12+len;if(type==='IEND')break}
+ return '';
+}
+async function readDocText(file){
+ let ab;try{ab=await file.arrayBuffer()}catch(e){return ''}
+ const u=new Uint8Array(ab),name=file.name||'',isZip=u[0]===0x50&&u[1]===0x4B,isPng=u[0]===0x89&&u[1]===0x50&&u[2]===0x4E&&u[3]===0x47,isPdf=u[0]===0x25&&u[1]===0x50&&u[2]===0x44&&u[3]===0x46,isOle=u[0]===0xD0&&u[1]===0xCF&&u[2]===0x11&&u[3]===0xE0;
+ try{
+  if(isPng)return pngCardText(ab);
+  if(isZip){const t=await zipDocText(ab);if(t&&t.trim())return t}
+  if(isPdf){const t=await pdfText(u);if(!t)toast('这个 PDF 里没有读到可提取的文字，可能是扫描件');return t}
+  if(isOle){const t=oleDocText(u);if(t)toast('旧版 .doc 已尽力提取文字，建议另存为 docx');return t}
+ }catch(e){}
+ if(isZip||isOle)return '';
+ let t=decodeBytes(u);
+ if(/^\s*\{\\rtf/.test(t))t=rtfText(t);else if(/^\s*(<!doctype html|<html|<\?xml)/i.test(t)||/\.html?$/i.test(name))t=htmlText(t);
+ return t.replace(/\r\n?/g,'\n');
+}
+function importTextFile(cb){
+ const i=document.createElement('input');i.type='file';
+ i.accept='.txt,.md,.markdown,.json,.text,.docx,.doc,.rtf,.html,.htm,.odt,.csv,.pdf,.srt,.log,.xml,.yaml,.yml,.png,text/*,application/json,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+ i.onchange=async()=>{const f=i.files&&i.files[0];if(!f)return;toast('正在读取文件…');let text='';try{text=await readDocText(f)}catch(e){text=''}
+  if(!String(text||'').trim()){toast('这个文件里没有读到文字，可以换成 txt、docx、md 或 json 再试');return}
+  cb(String(text),f.name)};
+ i.click();
+}
+/* ===== presets ===== */
+const hostOf=u=>{try{return new URL(u).host}catch(e){return u||'未设置地址'}};
+function pzMount(sel,spec){
+ const el=$(sel);if(!el)return;
+ const draw=()=>{const list=spec.list();
+  el.innerHTML='<div class="pz"><div class="pz-list">'+(list.map(p=>{const on=spec.active&&spec.active(p);return '<div class="pz-row" data-pz-use="'+esc(p.id)+'"><div class="pz-t"><b>'+esc(p.name)+'</b><small>'+esc(spec.sub(p))+'</small></div>'+(on?'<span class="pz-ck">'+rpSvg('ck')+'</span>':'')+'<button type="button" class="pz-del" data-pz-del="'+esc(p.id)+'">删除</button></div>'}).join('')||'<div class="pz-empty">还没有预设</div>')+'</div><div class="pz-add"><input class="pz-name" placeholder="新预设名称" autocomplete="off"><button type="button" class="pz-save">保存当前设置</button></div></div>';
+  el.querySelectorAll('[data-pz-use]').forEach(r=>r.onclick=async e=>{if(e.target.closest('[data-pz-del]'))return;const p=list.find(x=>x.id===r.dataset.pzUse);if(!p)return;await spec.apply(p);draw();toast('已使用：'+p.name)});
+  el.querySelectorAll('[data-pz-del]').forEach(b=>b.onclick=e=>{e.stopPropagation();const p=list.find(x=>x.id===b.dataset.pzDel);if(p&&confirm('删除预设「'+p.name+'」？')){spec.remove(p);save();draw()}});
+  el.querySelector('.pz-save').onclick=()=>{const n=el.querySelector('.pz-name').value.trim();if(!n)return toast('先给预设起个名字');const d=spec.capture(),old=list.find(x=>x.name===n);if(old)Object.assign(old,d);else spec.add(Object.assign({id:uid(),name:n},d));save();draw();toast('预设已保存')}};
+ draw();
+}
+const pzApi={list:()=>S.apiPresets,sub:p=>(p.model||'未设置模型')+' · '+hostOf(p.base),active:p=>S.cfg.base===p.base&&S.cfg.model===p.model&&S.cfg.key===p.key,
+ apply:p=>{['base','key','model','temp','hist','stream'].forEach(k=>{const e=$('#c-'+k);if(k==='stream'){if(e)e.checked=!!p[k]}else if(e)e.value=p[k]??'';S.cfg[k]=p[k]});save()},
+ capture:()=>({base:$('#c-base').value.trim(),key:$('#c-key').value,model:$('#c-model').value.trim(),temp:Number($('#c-temp').value||.8),hist:Number($('#c-hist').value||30),stream:$('#c-stream').checked}),
+ add:p=>S.apiPresets.push(p),remove:p=>{S.apiPresets=S.apiPresets.filter(x=>x.id!==p.id)}};
+const pzSec={list:()=>S.secondaryPresets,sub:p=>(p.model||'沿用主模型')+' · '+hostOf(p.base||S.cfg.base),active:p=>(S.cfg.secondaryBase||'')===(p.base||'')&&(S.cfg.secondaryModel||'')===(p.model||'')&&(S.cfg.secondaryKey||'')===(p.key||''),
+ apply:p=>{[['base','c-secondary-base','secondaryBase'],['key','c-secondary-key','secondaryKey'],['model','c-secondary-model','secondaryModel']].forEach(([k,id,ck])=>{const e=$('#'+id);if(e)e.value=p[k]||'';S.cfg[ck]=p[k]||''});save()},
+ capture:()=>({base:$('#c-secondary-base').value.trim(),key:$('#c-secondary-key').value,model:$('#c-secondary-model').value.trim()}),
+ add:p=>S.secondaryPresets.push(p),remove:p=>{S.secondaryPresets=S.secondaryPresets.filter(x=>x.id!==p.id)}};
+const pzFont={list:()=>S.fontPresets,sub:p=>{const f=[...FONT_BUILTIN,...S.fonts].find(x=>x.id===p.font);return (f?f.name:'系统默认')+' · '+(p.scale||100)+'%'},active:p=>(p.font||'sys')===S.fontActive&&(p.scale||100)===S.fontScale,
+ apply:async p=>{const f=S.fonts.find(x=>x.id===p.font);if(f&&!(await fontLoad(f)))return;S.fontActive=p.font||'sys';S.fontScale=p.scale||100;applyFont();save();fontUi()},
+ capture:()=>({font:S.fontActive,scale:S.fontScale}),add:p=>S.fontPresets.push(p),remove:p=>{S.fontPresets=S.fontPresets.filter(x=>x.id!==p.id)}};
+function pzInitAll(){pzMount('#pz-api',pzApi);pzMount('#pz-sec',pzSec)}
+/* ===== sticker groups ===== */
+const SGS={manage:'',sel:new Set(),lp:false};
+function sgPrompt(title,val='',ph=''){return new Promise(res=>{
+ let el=document.getElementById('sgprompt');if(!el){el=document.createElement('div');el.id='sgprompt';document.body.appendChild(el)}
+ el.innerHTML='<div class="sgp-box"><b>'+esc(title)+'</b><input id="sgp-in" value="'+esc(val)+'" placeholder="'+esc(ph)+'" autocomplete="off"><div class="sgp-b"><button type="button" data-sgp="0">取消</button><button type="button" data-sgp="1">好</button></div></div>';el.classList.add('on');
+ const inp=el.querySelector('#sgp-in');setTimeout(()=>inp.focus(),30);const done=v=>{el.classList.remove('on');res(v)};
+ el.onclick=e=>{const b=e.target.closest('[data-sgp]');if(b)done(b.dataset.sgp==='1'?inp.value:null);else if(e.target===el)done(null)};
+ inp.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();done(inp.value)}}})}
+function bindStickerManager(){}
+(()=>{let t=0,sx=0,sy=0;
+ document.addEventListener('pointerdown',e=>{const c=e.target.closest('[data-sg-card]');if(!c)return;sx=e.clientX;sy=e.clientY;clearTimeout(t);
+  t=setTimeout(async()=>{SGS.lp=true;const x=S.stickers.find(s=>s.id===c.dataset.sgCard);if(x){const v=await sgPrompt('编辑描述词',x.description||x.name||'','输入描述词');if(v!==null){x.description=v.trim();if(!x.name)x.name=v.trim();save();sgRefresh()}}setTimeout(()=>{SGS.lp=false},80)},520)});
+ document.addEventListener('pointermove',e=>{if(Math.abs(e.clientX-sx)>10||Math.abs(e.clientY-sy)>10)clearTimeout(t)});
+ ['pointerup','pointercancel','pointerleave'].forEach(n=>document.addEventListener(n,()=>clearTimeout(t)));
+ document.addEventListener('contextmenu',e=>{if(e.target.closest('[data-sg-card]'))e.preventDefault()});
+})();
+/* ===== sticker link parsing, docx links/images ===== */
+Object.assign(RPI,{tfr:'<path d="M5 9h13l-3-3M19 15H6l3 3"/>',wlt:'<path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18v3"/><rect x="3" y="7.5" width="18" height="12" rx="2.5"/><circle cx="16.5" cy="13.5" r="1.2" fill="currentColor"/>'});
+function docxRels(x){const r={};(x||'').replace(/<Relationship\b[^>]*>/g,m=>{const id=(m.match(/\bId="([^"]+)"/)||[])[1],tg=(m.match(/\bTarget="([^"]+)"/)||[])[1];if(id&&tg&&/hyperlink/i.test(m))r[id]=decodeEntities(tg);return m});return r}
+function docxLinks(xml,rels){
+ xml=xml.replace(/<w:hyperlink\b([^>]*)>([\s\S]*?)<\/w:hyperlink>/g,(m,attrs,inner)=>{const id=(attrs.match(/r:id="([^"]+)"/)||[])[1],u=id&&rels[id];if(!u)return inner;return docxXmlText(inner).includes(u)?inner:inner+'<w:r><w:t xml:space="preserve"> '+u+' </w:t></w:r>'});
+ xml=xml.replace(/<w:fldSimple\b[^>]*w:instr="[^"]*HYPERLINK\s+&quot;([^&]+)&quot;[^"]*"[^>]*>([\s\S]*?)<\/w:fldSimple>/g,(m,u,inner)=>docxXmlText(inner).includes(u)?inner:inner+'<w:r><w:t xml:space="preserve"> '+decodeEntities(u)+' </w:t></w:r>');
+ const stack=[],re=/<w:instrText[^>]*>([\s\S]*?)<\/w:instrText>|<w:fldChar\b[^>]*w:fldCharType="(begin|end)"[^>]*\/>/g;let out='',last=0,m;
+ while((m=re.exec(xml))){out+=xml.slice(last,m.index);last=re.lastIndex;
+  if(m[1]!==undefined){const u=(m[1].match(/HYPERLINK\s+"([^"]+)"/)||[])[1];if(u&&stack.length)stack[stack.length-1]=u;out+=m[0]}
+  else if(m[2]==='begin'){stack.push('');out+=m[0]}
+  else{const u=stack.pop();out+=m[0]+(u?'<w:r><w:t xml:space="preserve"> '+u+' </w:t></w:r>':'')}}
+ return out+xml.slice(last);
+}
+function parseStickerLinkText(raw){
+ const t=String(raw||'').replace(/[\u200b\ufeff]/g,'').replace(/\r\n?/g,'\n').replace(/(https?)\s*[:：]\s*\/\//gi,'$1://'),trimmed=t.trim();if(!trimmed)return [];
+ try{const j=JSON.parse(trimmed);let arr=Array.isArray(j)?j:(j.stickers||j.items||j.emojis||j.data||null);
+  if(arr&&Array.isArray(arr))return arr.map(x=>({description:String(x.description||x.desc||x.prompt||x.name||x.keyword||''),url:String(x.url||x.src||x.image||x.imageUrl||x.image_url||'')})).filter(x=>/^https?:\/\//i.test(x.url));
+  if(j&&typeof j==='object'){const o=[];for(const [d,u] of Object.entries(j)){if(typeof u==='string'&&/^https?:\/\//i.test(u))o.push({description:d,url:u})}if(o.length)return o}}catch(_){}
+ const URLRE=/(?:https?:)?\/\/[^\s"'<>，。；、）】》\]]+|(?:[a-z0-9-]+\.)+[a-z]{2,}\/[^\s"'<>，。；、）】》\]]*\.(?:png|jpe?g|gif|webp|bmp|avif)(?:\?[^\s"'<>]*)?/gi;
+ const clean=s=>s.replace(/^[\s>*•·\-–—#]+/,'').replace(/^\d+[.、)）]\s*/,'').replace(/^(表情包名称|描述词|描述|关键词|关键字|名称|description|desc|keyword|prompt)\s*[:：]\s*/i,'').replace(/\s*(图片链接|图片URL|图片地址|链接|URL|image(?:_url)?|src)?\s*[:：=\-–—→>|｜]*\s*$/i,'').trim();
+ const out=[];let pending='';
+ for(const line of t.split('\n')){
+  const L=line.trim();if(!L)continue;const ms=[...L.matchAll(URLRE)];
+  if(!ms.length){pending=clean(L)||pending;continue}
+  let last=0;
+  for(const m of ms){
+   const before=L.slice(last,m.index);last=m.index+m[0].length;
+   const md=before.match(/!?\[([^\]]*)\]\(\s*$/);let desc=md?md[1].trim():clean(before.replace(/!?\[|\]\(\s*$/g,''));
+   if(!desc)desc=pending;pending='';
+   let url=m[0].replace(/[)\].,;:!?'"]+$/,'');if(url.startsWith('//'))url='https:'+url;else if(!/^https?:/i.test(url))url='https://'+url;
+   out.push({description:desc||'表情包',url})}
+ }
+ return out;
+}
+function sgBlobSrc(blob,isGif){return new Promise((resolve,reject)=>{const rd=new FileReader();rd.onload=()=>{const src=rd.result;if(isGif)return resolve(src);const im=new Image();
+ im.onload=()=>{try{const k=Math.min(1,160/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.max(1,Math.round(im.width*k));c.height=Math.max(1,Math.round(im.height*k));c.getContext('2d').drawImage(im,0,0,c.width,c.height);resolve(c.toDataURL('image/webp',.7))}catch(e){resolve(src)}};im.onerror=()=>resolve(src);im.src=src};
+ rd.onerror=()=>reject(new Error('读取失败'));rd.readAsDataURL(blob)})}
+async function docxStickerEntries(file){
+ const ab=await file.arrayBuffer(),u=new Uint8Array(ab);if(!(u[0]===0x50&&u[1]===0x4B))return [];
+ const ents=zipEntries(ab),by=n=>ents.find(e=>e.name===n),rd=async n=>{const e=by(n);return e?new TextDecoder('utf-8').decode(await zipRead(ab,e)):''};
+ const xml=await rd('word/document.xml');if(!xml)return [];
+ const rels={};(await rd('word/_rels/document.xml.rels')).replace(/<Relationship\b[^>]*>/g,m=>{const id=(m.match(/\bId="([^"]+)"/)||[])[1],tg=(m.match(/\bTarget="([^"]+)"/)||[])[1];if(id&&tg)rels[id]=tg;return m});
+ const out=[],MIME={png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',gif:'image/gif',webp:'image/webp',bmp:'image/bmp'};let pending='',lastE=null;
+ for(const pm of xml.match(/<w:p\b[\s\S]*?<\/w:p>/g)||[]){
+  const text=docxXmlText(pm).replace(/\s+/g,' ').trim(),ids=[...pm.matchAll(/r:embed="([^"]+)"/g)].map(x=>x[1]);
+  if(ids.length){for(const id of ids){const tg=rels[id];if(!tg)continue;const path=tg.startsWith('/')?tg.slice(1):'word/'+tg.replace(/^\.\//,''),e=by(path),ext=(path.split('.').pop()||'').toLowerCase();if(!e||!MIME[ext])continue;
+    const ent={description:text||pending,blob:new Blob([await zipRead(ab,e)],{type:MIME[ext]}),ext};out.push(ent);lastE=ent.description?null:ent;pending=''}}
+  else if(text){if(lastE&&!lastE.description){lastE.description=text;lastE=null}else pending=text}
+ }
+ return out;
+}
+async function importStickerLinkFiles(files,where,grp){
+ let added=0;const notes=[],seen=new Set(),group=grp||(S.stickerGroups||['默认'])[0]||'默认';
+ for(const f of files){
+  try{
+   if(/^image\//.test(f.type)||/\.(png|jpe?g|webp|gif|bmp|avif)$/i.test(f.name)){await importStickerFiles([f],where,group);continue}
+   let entries=parseStickerLinkText(await readDocText(f));
+   if(!entries.length){const emb=await docxStickerEntries(f).catch(()=>[]);for(const e of emb)entries.push({description:e.description||'',src:await sgBlobSrc(e.blob,e.ext==='gif')})}
+   if(!entries.length){notes.push(f.name+'：没有识别到「描述词:链接」');continue}
+   for(const it of entries){const src=it.src||it.url;if(!src||seen.has(src))continue;seen.add(src);S.stickers.push({id:uid(),name:(it.description||'表情包').slice(0,80),description:it.description||'',src,group});added++}
+  }catch(e){notes.push(f.name+'：'+(e.message||'读取失败'))}
+ }
+ save();if(where==='profile')renderStickerManager('profile');else if(where==='chat')rSP();else rProfileStickers();sgRefresh();
+ if(added)toast('已导入 '+added+' 个表情包'+(notes.length?'（'+notes.length+' 个文件没识别到）':''));else if(notes.length)toast(notes[0]+'，可以改成每行一条：描述词:链接');
+}
+/* ===== transfers & wallet ===== */
+const TRF_ST={pending:'待收款',accepted:'已收款',refunded:'已退还'};
+const wl=()=>S.wallet||(S.wallet={balance:1000,records:[]});
+const fmtAmt=n=>String(Math.round(Number(n)*100)/100);
+const fmtMoney=n=>(n<0?'-':'')+'¥ '+Math.abs(n).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,',');
+function wlMove(type,amount,pid,note){const w=wl(),sg={send:-1,out:-1,recv:1,refund:1,topup:1}[type]||0;w.balance=Math.round((w.balance+sg*amount)*100)/100;w.records.unshift({id:uid(),t:Date.now(),type,amount,pid:pid||'',note:note||''});w.records=w.records.slice(0,300)}
+function trfContent(m){const t=m.transfer,a='¥'+fmtAmt(t.amount)+(t.note?'，备注：'+t.note:'')+'（'+TRF_ST[t.status]+'）';return m.role==='user'?'[用户向你转账 '+a+']':'[你向用户转账 '+a+']'}
+function trfCardHTML(m){const t=m.transfer;return '<div class="tf-card '+t.status+'"><div class="tf-main"><span class="tf-ico">'+rpSvg('tfr')+'</span><div class="tf-txt"><b>¥ '+esc(fmtAmt(t.amount))+'</b><small>'+esc(t.note||'转账')+'</small></div></div><div class="tf-foot">转账 · '+TRF_ST[t.status]+'</div></div>'}
+function trfSetStatus(m,st){
+ const t=m.transfer;if(!t||t.status!=='pending')return;t.status=st;const pid=m.role==='user'?cur:(t.from||cur);
+ if(m.role==='user'){if(st==='refunded')wlMove('refund',t.amount,pid,t.note)}else if(st==='accepted')wlMove('recv',t.amount,pid,t.note);
+ m.content=trfContent(m);save();
+}
+function trfApplyAI(h,data){
+ const act=String(data.transfer_action||'').toLowerCase();
+ if(act==='accept'||act==='refund'){const m=[...h].reverse().find(x=>x.transfer&&x.role==='user'&&x.transfer.status==='pending');if(m)trfSetStatus(m,act==='accept'?'accepted':'refunded')}
+ const t=data.transfer;
+ if(t&&Number(t.amount)>0){const amt=Math.round(Number(t.amount)*100)/100;if(amt>0&&amt<1e7){const m={role:'assistant',content:'',transfer:{id:uid(),amount:amt,note:String(t.note||'').slice(0,60),status:'pending',from:cur},t:Date.now()};m.content=trfContent(m);h.push(m)}}
+}
+function TRF_PROMPT(){
+ const h=S.chats[cur]||[],pend=[...h].reverse().find(x=>x.transfer&&x.role==='user'&&x.transfer.status==='pending');
+ return '【转账（模拟）】聊天里可以模拟转账。JSON 里额外有两个可选字段：transfer 和 transfer_action。transfer 默认为 null；只有在符合角色性格和当前剧情、确实想给用户转钱时，才填 {"amount":数字,"note":"转账备注"}，不要频繁使用，金额要合理。transfer_action 只用于处理用户发来的转账：填 "accept" 表示收款，填 "refund" 表示退还，其余情况留空。'+(pend?'用户有一笔待处理的转账：¥'+fmtAmt(pend.transfer.amount)+(pend.transfer.note?'，备注「'+pend.transfer.note+'」':'')+'。请结合人设自然地回应，并用 transfer_action 决定收款还是退还。':'');
+}
+function trfKeepScroll(){const b=$('#msgs'),y=b.scrollTop;draw();b.scrollTop=y}
+function trfTap(m){
+ const t=m.transfer,amt='¥'+fmtAmt(t.amount);
+ if(t.status!=='pending')return toast('这笔转账'+TRF_ST[t.status]);
+ if(m.role==='assistant')msSheet([{label:'收款 '+amt,run:()=>{trfSetStatus(m,'accepted');trfKeepScroll();toast('已收款 '+amt)}},{label:'退还',run:()=>{trfSetStatus(m,'refunded');trfKeepScroll()}},{label:'取消'}]);
+ else msSheet([{label:'对方已收款（模拟）',run:()=>{trfSetStatus(m,'accepted');trfKeepScroll()}},{label:'对方已退还（模拟）',run:()=>{trfSetStatus(m,'refunded');trfKeepScroll();toast('已退还到钱包')}},{label:'取消'}]);
+}
+document.addEventListener('click',e=>{const c=e.target.closest('.tf-card');if(!c)return;e.stopPropagation();e.preventDefault();const row=c.closest('.r'),m=row&&S.chats[cur]&&S.chats[cur][+row.dataset.i];if(m&&m.transfer)trfTap(m)},true);
+function trfOpen(){
+ const p=P(cur);if(!p)return;if(p.blocked)return toast('已拉黑，请先解除拉黑');
+ let el=$('#trsheet');if(!el){el=document.createElement('div');el.id='trsheet';document.body.appendChild(el)}
+ el.innerHTML='<div class="trs-box"><div class="trs-top"><button type="button" data-trs="x">取消</button><b>转账给 '+esc(p.name)+'</b><span style="min-width:44px"></span></div><div class="trs-amt"><span>¥</span><input id="trs-amt" inputmode="decimal" placeholder="0.00" autocomplete="off"></div><input class="trs-note" id="trs-note" placeholder="转账备注（可选）" maxlength="40" autocomplete="off"><small class="trs-bal">钱包余额 '+fmtMoney(wl().balance)+'</small><button type="button" class="trs-ok" data-trs="ok">确认转账</button></div>';
+ el.classList.add('on');setTimeout(()=>{const i=$('#trs-amt');if(i)i.focus()},60);
+ el.onclick=e=>{const b=e.target.closest('[data-trs]');if(e.target===el||(b&&b.dataset.trs==='x')){el.classList.remove('on');return}
+  if(b&&b.dataset.trs==='ok'){const a=Math.round(parseFloat($('#trs-amt').value)*100)/100;if(!(a>0))return toast('请输入转账金额');if(a>wl().balance)return toast('钱包余额不足，请先在钱包里充值');
+   const note=$('#trs-note').value.trim(),m={role:'user',content:'',transfer:{id:uid(),amount:a,note,status:'pending',from:'me'},t:Date.now()};m.content=trfContent(m);
+   S.chats[cur].push(m);S.last=cur;wlMove('send',a,cur,note);save();el.classList.remove('on');draw();toast('已转账 ¥'+fmtAmt(a))}};
+}
+$('#pm-transfer').onclick=()=>{$('#pm').classList.remove('on');trfOpen()};
+const WL_META={send:['tfr','转账给 ',-1],recv:['dl','收到 ',1],refund:['tfr','转账退还 · ',1],topup:['pl','充值',1],out:['dots','提现',-1]};
+function wlRender(){
+ const w=wl(),box=$('#wl-body');if(!box)return;
+ box.innerHTML='<div class="wl-card"><small>可用余额</small><b>'+fmtMoney(w.balance)+'</b><div class="wl-act"><button type="button" data-wl="topup">充值</button><button type="button" data-wl="out">提现</button></div></div><div class="wl-h">账单</div><div class="wl-list">'+(w.records.map(r=>{const mt=WL_META[r.type]||WL_META.send,p=P(r.pid),nm=p?p.name:'角色',title=r.type==='recv'?'收到 '+nm+' 的转账':(r.type==='topup'||r.type==='out'?mt[1]:mt[1]+nm),sg=mt[2],d=new Date(r.t);
+  return '<div class="wl-r"><span class="wl-i">'+rpSvg(mt[0])+'</span><div class="wl-t"><b>'+esc(title)+'</b><small>'+esc((r.note?r.note+' · ':'')+(d.getMonth()+1)+'月'+d.getDate()+'日 '+hm(r.t))+'</small></div><span class="wl-a'+(sg>0?' p':'')+'">'+(sg>0?'+':'-')+fmtAmt(r.amount)+'</span></div>'}).join('')||'<div class="wl-e">还没有账单</div>')+'</div>';
+}
+$('#v-wallet').addEventListener('click',async e=>{const b=e.target.closest('[data-wl]');if(!b)return;const out=b.dataset.wl==='out',v=await sgPrompt(out?'提现金额':'充值金额','','输入金额');if(v===null)return;const a=Math.round(parseFloat(v)*100)/100;if(!(a>0))return toast('请输入有效金额');if(out&&a>wl().balance)return toast('余额不足');wlMove(out?'out':'topup',a,'',out?'提现到银行卡（模拟）':'充值（模拟）');save();wlRender();toast((out?'已提现 ¥':'已充值 ¥')+fmtAmt(a))});
+/* ===== sticker manager: compact list + manage page ===== */
+function stickerManagerHTML(where='page'){
+ if(!S.stickerGroups||!S.stickerGroups.length)S.stickerGroups=['默认'];
+ S.stickers.forEach(x=>{const g=x.group||'默认';if(!S.stickerGroups.includes(g))S.stickerGroups.push(g)});
+ return '<div class="skm" data-sg-root="'+where+'"><div class="skm-top"><button class="btn fill" data-sg-new type="button">新建分组</button></div><p class="note">点分组右侧的「管理」进入该分组的管理页；长按表情包可以编辑描述词；在聊天设置里可以把整个分组挂给角色。</p>'+S.stickerGroups.map(g=>{
+  const items=S.stickers.filter(x=>(x.group||'默认')===g),eg=esc(g),show=items.slice(0,8);
+  return '<section class="skm-g"><div class="skm-h"><b>'+eg+'</b><small>'+items.length+'</small><button type="button" data-sg-manage="'+eg+'">管理</button><button type="button" class="rd" data-sg-del="'+eg+'">删除</button></div>'
+  +(items.length?'<div class="skm-strip">'+show.map(x=>'<div class="skm-c" data-sg-card="'+x.id+'"><div class="skm-img"><img src="'+esc(x.src)+'" alt=""></div><small>'+esc(x.description||x.name||'未命名')+'</small></div>').join('')+(items.length>show.length?'<div class="skm-more">+'+(items.length-show.length)+'</div>':'')+'</div>':'<div class="skm-e" style="padding:14px 0;text-align:left">这个分组还没有表情包</div>')+'</section>'}).join('')+'</div>';
+}
+function skRender(){
+ let el=$('#skpage');if(!el){el=document.createElement('div');el.id='skpage';document.body.appendChild(el)}
+ const g=SGS.page;if(!g){el.classList.remove('on');return}
+ const items=S.stickers.filter(x=>(x.group||'默认')===g),eg=esc(g),n=[...SGS.sel].filter(id=>items.some(x=>x.id===id)).length;
+ const keep=el.querySelector('.skp-sc'),y=keep?keep.scrollTop:0;
+ el.innerHTML='<div class="skp-bar"><button type="button" class="bk" data-skp-close aria-label="返回">‹</button><b>'+eg+'</b><button type="button" data-skp-close>完成</button></div><div class="skp-sc"><div class="skm-grid">'+(items.map(x=>'<div class="skm-c'+(SGS.sel.has(x.id)?' on':'')+'" data-sg-card="'+x.id+'"><div class="skm-img"><img src="'+esc(x.src)+'" alt=""></div><small>'+esc(x.description||x.name||'未命名')+'</small><span class="ck">'+rpSvg('ck')+'</span></div>').join('')||'<div class="skm-e">这个分组还没有表情包，用下方按钮添加</div>')+'</div></div><div class="skp-tool"><button type="button" data-sg-add="'+eg+'">添加图片</button><button type="button" data-sg-addlink="'+eg+'">导入链接文件</button><button type="button" data-sg-move="'+eg+'">移动所选</button><button type="button" class="rd" data-sg-rm="'+eg+'">删除所选（<span class="skm-n">'+n+'</span>）</button></div>';
+ el.classList.add('on');el.querySelector('.skp-sc').scrollTop=y;
+}
+function sgRefresh(){const ws=new Set([...document.querySelectorAll('[data-sg-root]')].map(r=>r.dataset.sgRoot));ws.forEach(w=>{if(w==='profile')renderStickerManager('profile');else rProfileStickers()});if(SGS.page)skRender()}
+function sgPickLinks(grp,where){const i=document.createElement('input');i.type='file';i.multiple=true;i.accept='.txt,.json,.csv,.md,.docx,.doc,.rtf,.html,.odt,text/*,application/json,image/*';i.onchange=()=>{const fs=[...(i.files||[])];if(fs.length)importStickerLinkFiles(fs,where,grp)};i.click()}
+document.addEventListener('click',async e=>{
+ const q=s=>e.target.closest(s);let x;
+ if(q('[data-sg-new]')){e.preventDefault();const r=q('[data-sg-root]');const v=await sgPrompt('新建分组','','分组名称');if(v===null)return;const n=v.trim();if(!n)return;if(!S.stickerGroups)S.stickerGroups=['默认'];if(S.stickerGroups.includes(n))return toast('这个分组已存在');S.stickerGroups.push(n);save();sgRefresh();toast('分组已创建：'+n);return}
+ if(x=q('[data-sg-manage]')){const r=q('[data-sg-root]');SGS.where=r?r.dataset.sgRoot:'page';SGS.page=x.dataset.sgManage;SGS.sel.clear();skRender();return}
+ if(q('[data-skp-close]')){SGS.page='';SGS.sel.clear();skRender();sgRefresh();return}
+ if(x=q('[data-sg-del]')){const g=x.dataset.sgDel,n=S.stickers.filter(s=>(s.group||'默认')===g).length;if(!confirm('删除整个分组「'+g+'」？分组里的 '+n+' 个表情包也会一起删除。'))return;
+  S.stickers=S.stickers.filter(s=>(s.group||'默认')!==g);S.stickerGroups=(S.stickerGroups||[]).filter(v=>v!==g);if(!S.stickerGroups.length)S.stickerGroups=['默认'];
+  Object.values(S.cc||{}).forEach(c=>{if(c&&c.stkGroups)c.stkGroups=c.stkGroups.filter(v=>v!==g)});if(SGS.page===g)SGS.page='';SGS.sel.clear();save();sgRefresh();toast('分组已删除');return}
+ if(x=q('[data-sg-add]')){chooseStickerFiles(false,SGS.where||'page',x.dataset.sgAdd);return}
+ if(x=q('[data-sg-addlink]')){sgPickLinks(x.dataset.sgAddlink,SGS.where||'page');return}
+ if(x=q('[data-sg-rm]')){const ids=[...SGS.sel];if(!ids.length)return toast('先点选要删除的表情包');if(!confirm('删除所选的 '+ids.length+' 个表情包？'))return;S.stickers=S.stickers.filter(s=>!ids.includes(s.id));SGS.sel.clear();save();sgRefresh();return}
+ if(x=q('[data-sg-move]')){const ids=[...SGS.sel];if(!ids.length)return toast('先点选要移动的表情包');msSheet(S.stickerGroups.filter(g=>g!==x.dataset.sgMove).map(g=>({label:'移动到「'+g+'」',run:()=>{S.stickers.forEach(s=>{if(ids.includes(s.id))s.group=g});SGS.sel.clear();save();sgRefresh()}})).concat([{label:'取消'}]));return}
+ if(x=q('[data-sg-card]')){if(SGS.lp)return;const pg=q('#skpage');if(!pg)return;const id=x.dataset.sgCard;if(SGS.sel.has(id))SGS.sel.delete(id);else SGS.sel.add(id);x.classList.toggle('on',SGS.sel.has(id));const nn=pg.querySelector('.skm-n');if(nn)nn.textContent=pg.querySelectorAll('.skm-c.on').length}
+},true);
 })();
 </script>
 </body>
