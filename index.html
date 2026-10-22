@@ -6,9 +6,9 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Mio水汪汪">
+<meta name="apple-mobile-web-app-title" content="小手机">
 <meta name="theme-color" id="theme-color" content="#ffffff">
-<title>Mio水汪汪</title>
+<title>小手机</title>
 <style>
 :root{color-scheme:light;--bg:#fff;--p:#f3f4f5;--ink:#0f1419;--sub:#6b7480;--line:#eaecee;--ai:#eceef0;--me:#111;--me-ink:#fff;--fld:#fff;--av:#e3e5e8;--t2:#333;--err:#d93636;--shade:rgba(0,0,0,.35);
 --sans:-apple-system,"PingFang SC","Noto Sans SC","Hiragino Sans","Microsoft YaHei",sans-serif}
@@ -844,15 +844,15 @@ button.feed-follow-plus{padding:0;cursor:pointer}
 .skp-tool button{font-size:14px;padding:9px 14px;border-radius:14px;background:var(--p);color:var(--ink)}
 .skp-tool .rd{color:var(--err)}
 .tf-msg{padding:0!important;background:none!important;border:0!important;box-shadow:none!important}
-.tf-card{width:min(264px,70vw);border-radius:20px;overflow:hidden;background:#f4f4f5;color:#5a5a60;cursor:pointer;text-align:left}
+.tf-card{width:min(216px,60vw);border-radius:16px;overflow:hidden;background:#f4f4f5;color:#5a5a60;cursor:pointer;text-align:left}
 [data-theme=dark] .tf-card{background:#2a2a2c;color:#c8c8cc}
-.tf-main{display:flex;align-items:center;gap:14px;padding:18px 18px 16px}
-.tf-ico{width:58px;height:58px;border-radius:50%;background:#43434a;color:#fff;display:grid;place-items:center;flex:none}
-.tf-ico svg{width:30px;height:30px}
-.tf-txt{min-width:0;display:flex;flex-direction:column;gap:6px;text-align:left}
-.tf-txt b{font-size:24px;font-weight:700;letter-spacing:.01em}
-.tf-txt small{font-size:14px;line-height:1.35;overflow-wrap:anywhere}
-.tf-foot{background:#61666e;color:#fff;font-size:13px;padding:6px 16px;text-align:left}
+.tf-main{display:flex;align-items:center;gap:11px;padding:12px 14px 11px}
+.tf-ico{width:40px;height:40px;border-radius:50%;background:#43434a;color:#fff;display:grid;place-items:center;flex:none}
+.tf-ico svg{width:26px;height:26px}
+.tf-txt{min-width:0;display:flex;flex-direction:column;gap:1px;text-align:left}
+.tf-txt b{font-size:20px;font-weight:700;line-height:1.15}
+.tf-txt small{font-size:13px;line-height:1.25;overflow-wrap:anywhere}
+.tf-foot{background:#61666e;color:#fff;font-size:12px;line-height:1.2;padding:3px 14px;text-align:left}
 .tf-card.accepted,.tf-card.refunded{opacity:.72}
 #trsheet{position:fixed;inset:0;background:var(--shade);display:none;align-items:flex-end;justify-content:center;z-index:125}
 #trsheet.on{display:flex}
@@ -883,8 +883,230 @@ button.feed-follow-plus{padding:0;cursor:pointer}
 .wl-a{font-weight:600;font-size:16px;flex:none}
 .wl-a.p{color:#34c759}
 .wl-e{padding:28px;text-align:center;color:var(--sub)}
+.wl-who{display:flex;gap:8px;overflow-x:auto;padding:2px 0 12px;scrollbar-width:none}
+.wl-who::-webkit-scrollbar{display:none}
+.wl-chip{display:flex;align-items:center;gap:6px;flex:none;padding:5px 13px 5px 5px;border-radius:20px;background:var(--p);color:var(--ink);font-size:14px}
+.wl-chip.on{background:var(--ink);color:var(--bg)}
+.wl-av{width:26px;height:26px;border-radius:50%;overflow:hidden;background:var(--av);display:grid;place-items:center;font-size:12px;flex:none;color:var(--sub)}
+.wl-av img{width:100%;height:100%;object-fit:cover}
+.wl-sub{opacity:.7;font-size:13px;margin:-8px 0 14px}
+.wl-act button:disabled{opacity:.5}
+.wl-seg{display:flex;background:var(--p);border-radius:12px;padding:3px;margin:0 0 14px}
+.wl-seg button{flex:1;padding:8px 0;border-radius:10px;font-size:14px;color:var(--sub)}
+.wl-seg .on{background:var(--bg);color:var(--ink);font-weight:600;box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.wl-bank{border-radius:16px;padding:16px 18px;color:#fff;margin-bottom:12px;cursor:pointer;aspect-ratio:1.72;max-height:190px;display:flex;flex-direction:column;justify-content:space-between}
+.wl-bt{display:flex;justify-content:space-between;align-items:center}
+.wl-bt b{font-size:16px}
+.wl-bt span{font-size:12px;background:rgba(255,255,255,.2);padding:2px 9px;border-radius:10px}
+.wl-no{font-size:18px;letter-spacing:.12em}
+.wl-bb{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;opacity:.92}
+.wl-bb b{font-size:18px}
+.wl-add{width:100%;padding:13px;border-radius:14px;border:1.5px dashed var(--line);color:var(--sub);font-size:15px;margin-top:2px}
+.wl-asset{display:flex;align-items:center;gap:12px;padding:14px;background:var(--p);border-radius:14px;margin-bottom:10px;cursor:pointer}
+.wl-asset .wl-i{width:42px;height:42px;background:var(--bg)}
+#wlform{position:fixed;inset:0;background:var(--shade);display:none;align-items:flex-end;justify-content:center;z-index:135}
+#wlform.on{display:flex}
+.wlf-box{width:100%;max-width:640px;background:var(--bg);border-radius:18px 18px 0 0;padding:12px 18px calc(18px + env(safe-area-inset-bottom,0px));max-height:86vh;overflow-y:auto}
+.wlf-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.wlf-top b{font-size:17px}
+.wlf-top button{color:#007aff;font-size:17px;min-width:44px;text-align:left}
+.wlf-top .ok{text-align:right;font-weight:600}
+.wlf-box input{background:var(--p);border:0}
+.wlf-del{width:100%;margin-top:16px;padding:13px;border-radius:14px;background:var(--p);color:var(--err);font-size:16px}
+
+/* Page 3: wide calendar across the screen, with iMessage and vertical apps beneath */
+#home-page3 .page3-layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);grid-template-areas:"calendar calendar" "chat apps";gap:18px 16px;padding:20px 18px 20px;align-items:start;box-sizing:border-box}
+#home-page3 .p3-calendar{grid-area:calendar;background:#fff;color:#171719;border-radius:24px;padding:20px 20px 16px;box-shadow:0 8px 24px rgba(0,0,0,.055);box-sizing:border-box;width:calc(100% + 36px);margin-left:-18px;}
+#home-page3 .p3-cal-top{display:flex;justify-content:flex-start;font-size:28px;letter-spacing:-.04em;font-weight:750;color:#171719;line-height:1.1;white-space:nowrap}
+#home-page3 .p3-cal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px 3px;margin-top:14px;text-align:center}
+#home-page3 .p3-cal-weekday{font-size:11px;color:#999ba0;padding-bottom:6px}
+#home-page3 .p3-cal-date{display:grid;place-items:center;aspect-ratio:1;min-width:0;font-size:13px;color:#25262a;border-radius:50%;line-height:1}
+#home-page3 .p3-cal-date.weekend{color:#92949a}
+#home-page3 .p3-cal-date.today{background:#111;color:#fff;font-weight:700}
+#home-page3 .p3-cal-event{display:flex;gap:9px;align-items:flex-start;font-size:12px;line-height:1.45;margin-top:14px;padding-top:12px;border-top:1px solid #ededee}
+#home-page3 .p3-cal-event i{width:5px;height:30px;background:#b5c2ba;border-radius:4px;flex:none}
+#home-page3 .p3-cal-event small{color:#898b90;font-size:10px}
+#home-page3 .page3-left{grid-area:chat;min-width:0;padding-top:0}
+#home-page3 .page3-chat{display:block;position:relative;width:100%;box-sizing:border-box;background:#fff;border-radius:22px;padding:12px 11px 10px;box-shadow:0 8px 24px rgba(0,0,0,.055);color:#171719;cursor:pointer;min-width:0;border:0;text-align:left}
+#home-page3 .p3-chat-head{display:flex;align-items:center;gap:8px;padding:1px 1px 12px;border-bottom:1px solid rgba(0,0,0,.07);font-size:12px;min-width:0}
+#home-page3 .p3-chat-head>span:nth-child(2){min-width:0;flex:1}
+#home-page3 .p3-chat-head b{display:block;font-size:12px;line-height:1.35}
+#home-page3 .p3-chat-head small{display:block;color:#8b8b90;font-size:9px;line-height:1.4;margin-top:3px;font-weight:400;overflow-wrap:anywhere}
+#home-page3 .p3-avatar{width:34px;height:34px;flex:none;border-radius:50%;background:#eef0f1;display:grid;place-items:center;font-size:17px;overflow:hidden;color:#25272a}
+#home-page3 .p3-avatar img{width:100%;height:100%;object-fit:cover}
+#home-page3 .p3-dots{flex:none;color:#8b8b90;letter-spacing:1px;font-size:12px}
+#home-page3 .p3-bubbles{display:flex;flex-direction:column;gap:8px;padding:12px 0 10px;min-width:0}
+#home-page3 .p3-bubble{font-size:11px;line-height:1.45;padding:8px 10px;border-radius:14px;max-width:88%;overflow-wrap:anywhere;white-space:pre-wrap}
+#home-page3 .p3-bubble.incoming{align-self:flex-start;background:#e9e9ed;border-bottom-left-radius:4px;color:#171719}
+#home-page3 .p3-bubble.outgoing{align-self:flex-end;background:#3982f6;border-bottom-right-radius:4px;color:white}
+#home-page3 .p3-compose{display:flex;align-items:center;gap:7px;border:1px solid #e5e5e8;border-radius:18px;padding:6px 8px;font-size:10px;color:#9a9aa0}
+#home-page3 .p3-compose span:last-child{margin-left:auto;background:#3982f6;color:white;border-radius:50%;width:19px;height:19px;display:grid;place-items:center}
+#home-page3 .page3-right{grid-area:apps;min-width:0;display:flex;flex-direction:column;align-items:stretch}
+#home-page3 .page3-apps{padding:0;display:flex!important;flex-direction:column!important;gap:14px;align-items:stretch;width:100%;box-sizing:border-box}
+#home-page3 .page3-apps .home-app{display:flex!important;position:relative!important;flex-direction:column!important;align-items:center!important;justify-content:flex-start!important;gap:6px;text-align:center;background:transparent;border:0;color:var(--ink);min-width:0;width:100%;max-width:100%;padding:0!important;margin:0!important;box-sizing:border-box;transform:none!important}
+#home-page3 .page3-apps .home-app i{width:44px;height:44px;flex:none;border-radius:14px;background:#fff;display:grid;place-items:center;box-shadow:0 5px 16px rgba(0,0,0,.07);margin:0!important}
+#home-page3 .page3-apps .home-app i svg{width:22px;height:22px}
+#home-page3 .page3-apps .home-app span{font-size:10px;line-height:1.3;overflow-wrap:anywhere;min-width:0}
+[data-theme=dark] #home-page3 .page3-chat,[data-theme=dark] #home-page3 .p3-calendar{background:#242428;color:#f5f5f7;box-shadow:0 8px 24px rgba(0,0,0,.2)}
+[data-theme=dark] #home-page3 .p3-cal-top{color:#f5f5f7}
+[data-theme=dark] #home-page3 .p3-cal-date{color:#e7e7eb}
+[data-theme=dark] #home-page3 .p3-cal-date.weekend{color:#888991}
+[data-theme=dark] #home-page3 .p3-cal-date.today{background:#fff;color:#171719}
+[data-theme=dark] #home-page3 .p3-cal-event{border-color:#3b3b41}
+[data-theme=dark] #home-page3 .p3-bubble.incoming{background:#3a3a40;color:#f5f5f7}
+[data-theme=dark] #home-page3 .p3-compose{border-color:#44444a}
+[data-theme=dark] #home-page3 .page3-apps .home-app i{background:#fff;color:#171719}
+@media(max-width:360px){#home-page3 .page3-layout{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:14px 12px;padding-left:12px;padding-right:12px}#home-page3 .p3-calendar{width:calc(100% + 24px);margin-left:-12px;padding:16px 14px 13px}#home-page3 .p3-cal-top{font-size:25px}#home-page3 .p3-cal-date{font-size:11px}#home-page3 .page3-apps .home-app i{width:40px;height:40px}}
 </style>
 <style id="ucss"></style>
+
+<style id="desktop-widget-solid-colors">
+/* 桌面三个非时钟组件：统一圆角、无描边，只保留轻柔自然的阴影 */
+#v-home .wrap > #tw,
+#v-home .wrap > #memo-image-card,
+#v-home .wrap > .recent-glass {
+  background:#fff !important;
+  color:#111;
+  border:0 !important;
+  border-radius:22px !important;
+  box-shadow:0 5px 18px rgba(25,30,40,.075), 0 1px 3px rgba(25,30,40,.035) !important;
+  -webkit-backdrop-filter:none !important;
+  backdrop-filter:none !important;
+  overflow:hidden;
+}
+/* 备忘录图片组件只把上方标题输入区设为白底；图片区域保持原样 */
+#v-home #memo-image-title {
+  background:#fff !important;
+  color:#111 !important;
+  border:0 !important;
+  box-shadow:none !important;
+}
+#v-home #memo-image-title::placeholder { color:#8b8b92; }
+[data-theme="dark"] #v-home .wrap > #tw,
+[data-theme="dark"] #v-home .wrap > #memo-image-card,
+[data-theme="dark"] #v-home .wrap > .recent-glass {
+  background:#242428 !important;
+  color:#f5f5f7;
+  border:0 !important;
+  box-shadow:0 5px 18px rgba(0,0,0,.16), 0 1px 3px rgba(0,0,0,.08) !important;
+}
+[data-theme="dark"] #v-home #memo-image-title {
+  background:#fff !important;
+  color:#111 !important;
+}
+[data-theme="dark"] #v-home #memo-image-title::placeholder { color:#777780; }
+[data-theme="dark"] #v-home .wrap > #tw .wl,
+[data-theme="dark"] #v-home .wrap > #memo-image-card .wl,
+[data-theme="dark"] #v-home .wrap > .recent-glass .wl { color:#a1a1aa; }
+</style>
+
+<style id="desktop-widget-comfort-padding">
+/* 增加组件内边距，让内容与白底边缘留出更舒服的呼吸空间 */
+#v-home .wrap > #tw,
+#v-home .wrap > .recent-glass {
+  padding:14px !important;
+}
+/* 缩小文字组件的内容比例，避免视觉上顶到边缘 */
+#v-home #tw .po.big p { font-size:14px !important; line-height:1.45 !important; }
+#v-home #tw .po { gap:6px; }
+#v-home .wrap > .recent-glass .wl { font-size:11px !important; margin-bottom:7px !important; }
+#v-home #rc { gap:5px; }
+#v-home #rc small { font-size:12px !important; line-height:1.4; }
+/* 图片备忘录：扩大白色标题区域的内边距；图片本身的样式与尺寸规则不改 */
+#v-home #memo-image-card { padding:10px !important; }
+#v-home #memo-image-title {
+  background:#fff !important;
+  color:#111 !important;
+  border-radius:12px !important;
+  padding:9px 11px !important;
+  margin:0 0 9px !important;
+  min-height:34px;
+  font-size:11px !important;
+  line-height:1.4 !important;
+}
+[data-theme="dark"] #v-home #memo-image-title { background:#fff !important; color:#111 !important; }
+</style>
+
+
+<style id="desktop-widget-flatter-layout">
+/* 备忘录图片与最近对话组件整体压扁，保留已有圆角、阴影和颜色 */
+#v-home #memo-image-box {
+  height:82px !important;
+  min-height:68px !important;
+  border-radius:12px !important;
+}
+#v-home #memo-image-card {
+  padding:8px !important;
+}
+#v-home #memo-image-title {
+  padding:6px 10px !important;
+  min-height:28px !important;
+  margin-bottom:6px !important;
+}
+#v-home .wrap > .recent-glass {
+  padding:10px 12px !important;
+}
+#v-home #rc {
+  min-height:0 !important;
+  gap:4px !important;
+}
+#v-home .wrap > .recent-glass .wl {
+  margin-bottom:5px !important;
+}
+#v-home #rc small {
+  -webkit-line-clamp:2 !important;
+  line-height:1.3 !important;
+  font-size:11px !important;
+}
+</style>
+
+
+<style id="home-page-layout-redesign">
+#home-page2 .page2-layout{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);grid-template-rows:auto auto;gap:14px;width:100%;padding:8px 12px 16px;box-sizing:border-box;align-items:stretch}
+#home-page2 .page2-left{min-width:0}
+#home-page2 #desktop-widgets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-flow:row;align-content:start;gap:24px 8px;min-width:0}
+#home-page2 #desktop-widgets>.home-app{width:100%;min-width:0}
+#home-page2 .music-widget{transform:translateY(68px);border:0;text-align:left;color:var(--ink,#171719);background:var(--fld,#f4f5f6);border-radius:24px;padding:12px 13px;min-width:0;min-height:238px;display:flex;flex-direction:column;box-shadow:0 10px 28px rgba(0,0,0,.07);cursor:pointer}
+#home-page2 .mw-top{display:flex;align-items:center;gap:5px;font-size:8px;letter-spacing:.09em;opacity:.62;white-space:nowrap}#home-page2 .mw-dot{width:6px;height:6px;border-radius:50%;background:#8a9c8b}#home-page2 .mw-more{margin-left:auto;letter-spacing:1px}
+#home-page2 .mw-art{position:relative;aspect-ratio:1.28/1;width:100%;margin:12px auto 9px;display:grid;place-items:center;border-radius:17px;background:linear-gradient(145deg,#d9dedb,#aeb9b5);overflow:hidden;cursor:pointer}#home-page2 .mw-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2}#home-page2 .mw-art .mw-change{position:absolute;z-index:3;right:6px;bottom:6px;background:rgba(0,0,0,.58);color:#fff;font-size:9px;padding:4px 6px;border-radius:8px;opacity:0;transition:opacity .18s}#home-page2 .mw-art:active .mw-change,#home-page2 .mw-art:focus-within .mw-change{opacity:1}
+#home-page2 .mw-art svg{width:78%;height:78%;fill:none;stroke:rgba(38,49,46,.55);stroke-width:1.4}#home-page2 .mw-art:before{content:"";position:absolute;width:120%;height:38%;background:rgba(255,255,255,.28);transform:rotate(-35deg)}#home-page2 .mw-note{position:absolute;font-size:35px;color:#34413c}
+#home-page2 .mw-song{font-size:12px;font-weight:650;line-height:1.4;overflow-wrap:anywhere}#home-page2 .mw-sub{font-size:10px;opacity:.58;margin-top:3px}
+#home-page2 .mw-progress{height:3px;background:rgba(100,110,110,.2);border-radius:5px;margin:12px 0 8px;overflow:hidden}#home-page2 .mw-progress i{display:block;width:36%;height:100%;background:currentColor;border-radius:5px;opacity:.65}
+#home-page2 .mw-open-area{display:flex;flex-direction:column;flex:1;cursor:pointer;min-height:0}#home-page2 .mw-controls{display:flex;align-items:center;justify-content:space-around;font-size:16px;opacity:.8}#home-page2 .mw-play{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--ink,#171719);color:var(--bg,#fff);font-size:11px}
+#home-page2 .quote-widget{grid-column:1/-1;transform:translateY(92px);background:var(--fld,#f4f5f6);border-radius:22px;padding:19px 20px;min-height:112px;box-sizing:border-box;box-shadow:0 10px 28px rgba(0,0,0,.06);color:var(--ink,#171719);cursor:pointer}#home-page2 .qw-label{font-family:Georgia,'Times New Roman',serif;font-size:15px;font-weight:700;letter-spacing:.12em;color:var(--ink,#171719);opacity:.92;display:flex;justify-content:space-between}#home-page2 .qw-label span{font-size:13px}#home-page2 .qw-quote{font-family:Georgia,'Times New Roman',serif;font-size:14px;line-height:1.55;margin:10px 0 7px;letter-spacing:0;overflow-wrap:anywhere}#home-page2 .qw-foot{font-size:11px;opacity:.72;text-align:right;font-family:Georgia,'Times New Roman',serif}
+#home-page3 .page3-apps{padding:24px 22px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px 10px}#home-page3 .home-app{display:flex;flex-direction:column;align-items:center;gap:7px;background:transparent;border:0;color:var(--ink);min-width:0}#home-page3 .home-app i{width:58px;height:58px;border-radius:18px;background:var(--fld);display:grid;place-items:center}#home-page3 .home-app i svg{width:26px;height:26px}#home-page3 .home-app span{font-size:12px}
+[data-theme=dark] #home-page2 .music-widget,[data-theme=dark] #home-page2 .quote-widget{background:#242428;color:#f5f5f7;box-shadow:0 10px 28px rgba(0,0,0,.2)}
+@media(max-width:360px){#home-page2 .page2-layout{grid-template-columns:minmax(0,1fr) minmax(0,.95fr)}#home-page2 .music-widget{transform:translateY(58px)}#home-page2 .quote-widget{transform:translateY(82px)}#home-page2 .page2-layout{gap:10px;padding-left:8px;padding-right:8px}#home-page2 .music-widget{padding:10px 9px;min-height:220px}#home-page2 .mw-art{margin-top:13px}#home-page2 .qw-quote{font-size:14px}}
+</style>
+
+<style id="p3-calendar-compact-fit">
+/* 第三页紧凑日历：保留全宽，但减少日历高度，避免挤出屏幕 */
+#home-page3 .page3-layout{row-gap:12px!important;padding-top:12px!important;padding-bottom:8px!important}
+#home-page3 .p3-calendar{padding:13px 16px 11px!important;border-radius:22px!important;width:calc(100% + 36px)!important;margin-left:-18px!important}
+#home-page3 .p3-cal-top{font-size:23px!important;line-height:1.08!important;white-space:nowrap!important}
+#home-page3 .p3-cal-grid{gap:3px 2px!important;margin-top:8px!important}
+#home-page3 .p3-cal-weekday{font-size:10px!important;padding-bottom:2px!important;line-height:16px!important}
+#home-page3 .p3-cal-date{aspect-ratio:auto!important;height:27px!important;min-height:27px!important;font-size:12px!important;line-height:1!important}
+#home-page3 .p3-cal-date.today{width:27px!important;height:27px!important;min-height:27px!important;justify-self:center;align-self:center}
+#home-page3 .p3-cal-event{margin-top:8px!important;padding-top:8px!important;gap:8px!important;font-size:11px!important;line-height:1.35!important}
+#home-page3 .p3-cal-event i{height:26px!important;width:4px!important}
+#home-page3 .p3-cal-event small{font-size:10px!important}
+@media(max-width:400px){#home-page3 .p3-calendar{padding:12px 13px 10px!important}#home-page3 .p3-cal-top{font-size:22px!important}#home-page3 .p3-cal-date{height:25px!important;min-height:25px!important;font-size:11px!important}#home-page3 .p3-cal-date.today{width:25px!important;height:25px!important;min-height:25px!important}}
+</style>
+
+<style id="p3-hide-imessage-leave-blank">
+/* 第三页：移除 iMessage 卡片，日历和四个横排 App 保留，下面留白 */
+#home-page3 .page3-layout{
+  grid-template-columns:minmax(0,1fr)!important;
+  grid-template-areas:"calendar" "apps"!important;
+  row-gap:14px!important;
+}
+#home-page3 .page3-chat,
+#home-page3 .page3-left{display:none!important;}
+#home-page3 .page3-right{grid-area:apps!important;width:100%!important;}
+#home-page3 .page3-apps{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:8px!important;width:100%!important;}
+#home-page3 .page3-apps .app{min-width:0!important;}
+</style>
 </head>
 <body>
 
@@ -895,7 +1117,25 @@ button.feed-follow-plus{padding:0;cursor:pointer}
     <div id="memo-image-card" class="w"><input id="memo-image-title" type="text" maxlength="60" placeholder="自定义标题" aria-label="自定义图片标题"><input id="memo-image-file" type="file" accept="image/*" hidden><div id="memo-image-box" role="button" tabindex="0" aria-label="点击选择图片"></div></div>
     <div class="w recent-glass"><div class="wl">最近的对话</div><div id="rc"></div></div>
   </div>
-  <div id="home-page2" style="display:none;flex:1;width:100%;max-width:560px;padding:20px 0;overflow:auto"><div class="clock"><b style="font-size:30px;font-weight:500;letter-spacing:.02em">人と人の漣</b></div><div class="home-app-grid" id="desktop-widgets"><button class="app home-app" data-go="diary"><i class="diary-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.5h9l3 3V20a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 5 20V5a1.5 1.5 0 0 1 1-1.5Z"/><path d="M14.5 3.8V7H18M8 11h7M8 14.5h7M8 18h4"/></svg></i><span>日记</span></button><button class="app home-app" data-go="rolephones"><i class="diary-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><path d="M9 5.5h6M10 18.5h4"/><circle cx="12" cy="11" r="3.2"/><path d="m10.8 11 1 1 1.8-2"/></svg></i><span>iPhone</span></button><button class="app home-app" data-go="desktopcustom"><i class="diary-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M3 9h18M9 9v12"/><circle cx="6" cy="6" r=".6" fill="currentColor"/></svg></i><span>桌面美化</span></button><button class="app home-app" data-go="music"><i class="diary-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 17V6l10-2v11"/><circle cx="7" cy="17" r="2.5"/><circle cx="17" cy="15" r="2.5"/></svg></i><span>音乐</span></button><button class="app home-app" data-go="wallet"><i class="diary-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18v3"/><rect x="3" y="7.5" width="18" height="12" rx="2.5"/><circle cx="16.5" cy="13.5" r="1.2" fill="currentColor"/></svg></i><span>钱包</span></button></div></div>
+  <div id="home-page2" style="display:none;flex:1;width:100%;max-width:560px;padding:20px 0;overflow:auto;box-sizing:border-box"><div class="clock"><b style="font-size:30px;font-weight:500;letter-spacing:.02em">人と人の漣</b></div><div class="page2-layout"><div class="page2-left"><div class="home-app-grid" id="desktop-widgets"><button class="app home-app" data-go="diary"><i class="diary-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.5h9l3 3V20a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 5 20V5a1.5 1.5 0 0 1 1-1.5Z"/><path d="M14.5 3.8V7H18M8 11h7M8 14.5h7M8 18h4"/></svg></i><span>日记</span></button><button class="app home-app" data-go="rolephones"><i class="diary-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><path d="M9 5.5h6M10 18.5h4"/><circle cx="12" cy="11" r="3.2"/><path d="m10.8 11 1 1 1.8-2"/></svg></i><span>iPhone</span></button><button class="app home-app" data-go="desktopcustom"><i class="diary-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M3 9h18M9 9v12"/><circle cx="6" cy="6" r=".6" fill="currentColor"/></svg></i><span>桌面美化</span></button><button class="app home-app" data-go="music"><i class="diary-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 17V6l10-2v11"/><circle cx="7" cy="17" r="2.5"/><circle cx="17" cy="15" r="2.5"/></svg></i><span>音乐</span></button></div></div><div class="music-widget" aria-label="音乐播放器"><div class="mw-top"><span class="mw-dot"></span><span>NOW PLAYING</span><span class="mw-more">•••</span></div><div class="mw-art" id="mw-art-picker" role="button" tabindex="0" aria-label="更换播放器封面"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="39"/><circle cx="50" cy="50" r="24"/><circle cx="50" cy="50" r="5"/></svg><span class="mw-note">♫</span><span class="mw-change">更换封面</span></div><input id="mw-cover-file" type="file" accept="image/*" hidden><div class="mw-open-area" data-go="music" role="button" tabindex="0" aria-label="进入音乐 App"><div class="mw-song">听一首喜欢的歌</div><div class="mw-sub">音乐 · 放松一下</div><div class="mw-progress"><i></i></div><div class="mw-controls"><span>↶</span><span class="mw-play" aria-hidden="true">▶</span><span>↻</span></div></div></div><div class="quote-widget" id="desktop-quote-widget" role="button" tabindex="0" aria-label="点击编辑书摘"><div class="qw-label"><span id="desktop-quote-label-text">BOOK NOTE</span> <span>✦</span></div><div class="qw-quote" id="desktop-quote-text">Heaven knows we need never be ashamed of our tears,for they are rain upon the blinding dust of earth, overlying our hard hearts.</div><div class="qw-foot" id="desktop-quote-author">——Charles Dickens</div></div></div></div>
+  <div id="home-page3" style="display:none;flex:1;width:100%;max-width:560px;padding:20px 0;overflow:auto;box-sizing:border-box"><div class="page3-layout">
+  <div class="p3-calendar" id="p3-calendar"><div class="p3-cal-top" id="p3-cal-yearmonth">10月</div><div class="p3-cal-grid" id="p3-cal-grid"></div><div class="p3-cal-event"><i></i><span>今天<br><small>留一点时间给自己</small></span></div></div>
+  <div class="page3-left">
+    <div class="page3-chat" id="page3-chat" role="button" tabindex="0" aria-label="点击编辑 iMessage 对话">
+      <div class="p3-chat-head"><span class="p3-avatar" id="p3-avatar">♡</span><span><b id="p3-chat-title">iMessage</b><small id="p3-chat-subtitle">对话预览 · 点击编辑</small></span><span class="p3-dots">•••</span></div>
+      <div class="p3-bubbles" id="p3-bubbles"><div class="p3-bubble incoming" data-bubble="0">到家了吗？</div><div class="p3-bubble outgoing" data-bubble="1">刚到，放心。</div><div class="p3-bubble incoming" data-bubble="2">那就好，早点休息。</div><div class="p3-bubble outgoing" data-bubble="3">好，晚安。</div></div>
+      <div class="p3-compose"><span>＋</span><span>iMessage</span><span>↑</span></div>
+    </div>
+  </div>
+  <div class="page3-right">
+    <div class="page3-apps">
+      <button class="app home-app" data-go="music"><i class="diary-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 17V6l10-2v11"/><circle cx="7" cy="17" r="2.5"/><circle cx="17" cy="15" r="2.5"/></svg></i><span>音乐</span></button>
+      <button class="app home-app p3-decor-app" data-p3-decor="情侣空间"><i class="diary-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 8.8c0 5.2-8.8 10-8.8 10S3.2 14 3.2 8.8A4.3 4.3 0 0 1 12 6.9a4.3 4.3 0 0 1 8.8 1.9Z"/></svg></i><span>情侣空间</span></button>
+      <button class="app home-app p3-decor-app" data-p3-decor="论坛"><i class="diary-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h16v11H9l-5 3v-14Z"/><path d="M8 9h8M8 12.5h5"/></svg></i><span>论坛</span></button>
+      <button class="app home-app p3-decor-app" data-p3-decor="MCP"><i class="diary-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8 15V9l4 4 4-4v6"/></svg></i><span>MCP</span></button>
+    </div>
+  </div>
+</div></div>
   <div id="home-dots" style="display:flex;justify-content:center;gap:8px;padding:0 0 4px"><span>●</span><span style="opacity:.3">●</span></div>
   <div class="dock">
     <button class="app" data-go="app"><i data-ic="ch"></i>聊天</button>
@@ -1536,8 +1776,42 @@ const memoTitle=$('#memo-image-title');if(memoTitle){memoTitle.oninput=()=>{S.me
 $('#memo-image-box').onclick=chooseMemoImage;
 $('#memo-image-box').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();chooseMemoImage()}};
 $('#memo-image-file').onchange=e=>{const file=e.target.files&&e.target.files[0];if(!file)return;if(!file.type.startsWith('image/')){toast('请选择图片文件');return}const reader=new FileReader();reader.onload=()=>{S.memoImage=String(reader.result||'');save();renderMemoImage();toast('图片已设置')};reader.onerror=()=>toast('图片读取失败');reader.readAsDataURL(file);e.target.value=''};
-let homePage=0;function setHomePage(n){homePage=n?1:0;$('.wrap').style.display=homePage?'none':'grid';$('#home-page2').style.display=homePage?'flex':'none';$('#home-dots').innerHTML=homePage?'<span class="dot"></span><span class="dot active"></span>':'<span class="dot active"></span><span class="dot"></span>'}setupDesktopGestures();
-let sxHome=0,syHome=0;$('#v-home').addEventListener('touchstart',e=>{sxHome=e.touches[0].clientX;syHome=e.touches[0].clientY},{passive:true});$('#v-home').addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sxHome,dy=e.changedTouches[0].clientY-syHome;if(Math.abs(dx)>48&&Math.abs(dx)>Math.abs(dy)*1.15)setHomePage(dx<0?1:0)},{passive:true});
+function renderMusicWidgetCover(){const art=$('#mw-art-picker');if(!art)return;const old=art.querySelector('img');if(old)old.remove();if(S.desktop&&S.desktop.musicWidgetCover){const im=document.createElement('img');im.src=S.desktop.musicWidgetCover;im.alt='自定义音乐封面';art.prepend(im);const svg=art.querySelector('svg'),note=art.querySelector('.mw-note');if(svg)svg.style.display='none';if(note)note.style.display='none'}else{const svg=art.querySelector('svg'),note=art.querySelector('.mw-note');if(svg)svg.style.display='';if(note)note.style.display=''}}
+function chooseMusicWidgetCover(){const f=$('#mw-cover-file');if(f)f.click()}
+const mwArt=$('#mw-art-picker');if(mwArt){mwArt.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();chooseMusicWidgetCover()});mwArt.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.stopPropagation();chooseMusicWidgetCover()}})}
+const mwOpenArea=$('#home-page2 .mw-open-area');if(mwOpenArea)mwOpenArea.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go('music')}});
+const mwFile=$('#mw-cover-file');if(mwFile)mwFile.onchange=e=>{const file=e.target.files&&e.target.files[0];if(!file)return;if(!file.type.startsWith('image/')){toast('请选择图片文件');return}const reader=new FileReader();reader.onload=()=>{if(!S.desktop)S.desktop={};S.desktop.musicWidgetCover=String(reader.result||'');save();renderMusicWidgetCover();toast('播放器封面已更换')};reader.onerror=()=>toast('图片读取失败');reader.readAsDataURL(file);e.target.value=''};renderMusicWidgetCover();
+function renderDesktopQuote(){const d=S.desktop||{};const label=$('#desktop-quote-label-text'),q=$('#desktop-quote-text'),a=$('#desktop-quote-author');if(label)label.textContent=d.bookQuoteLabel||'BOOK NOTE';if(q)q.textContent=d.bookQuote||'Heaven knows we need never be ashamed of our tears,for they are rain upon the blinding dust of earth, overlying our hard hearts.';if(a)a.textContent=d.bookQuoteAuthor||'——Charles Dickens'}
+function editDesktopQuote(){
+ if(!S.desktop)S.desktop={};
+ const oldLabel=S.desktop.bookQuoteLabel||'BOOK NOTE';
+ const old=S.desktop.bookQuote||'Heaven knows we need never be ashamed of our tears,for they are rain upon the blinding dust of earth, overlying our hard hearts.';
+ const oldAuthor=S.desktop.bookQuoteAuthor||'——Charles Dickens';
+ const previous=document.getElementById('desktop-quote-editor');if(previous)previous.remove();
+ const overlay=document.createElement('div');overlay.id='desktop-quote-editor';
+ overlay.style.cssText='position:fixed;inset:0;z-index:99999;background:rgba(15,18,22,.38);display:flex;align-items:center;justify-content:center;padding:22px;box-sizing:border-box;';
+ overlay.innerHTML=`<div role="dialog" aria-modal="true" aria-label="编辑书摘三行" style="width:min(100%,420px);max-height:85vh;overflow:auto;background:var(--panel,#fff);color:var(--text,#17191c);border-radius:22px;padding:22px;box-sizing:border-box;box-shadow:0 18px 55px rgba(0,0,0,.18)">
+ <div style="font-size:18px;font-weight:650;margin-bottom:18px">编辑书摘</div>
+ <label style="display:block;font-size:13px;opacity:.72;margin-bottom:7px">第一行 · 标题</label><input id="quote-edit-label" type="text" maxlength="80" style="display:block;width:100%;box-sizing:border-box;border:1px solid rgba(120,120,120,.22);border-radius:11px;padding:12px;font:inherit;background:rgba(130,130,130,.07);color:inherit;margin-bottom:15px">
+ <label style="display:block;font-size:13px;opacity:.72;margin-bottom:7px">第二行 · 正文</label><textarea id="quote-edit-body" rows="5" style="display:block;width:100%;resize:vertical;box-sizing:border-box;border:1px solid rgba(120,120,120,.22);border-radius:11px;padding:12px;font:inherit;line-height:1.55;background:rgba(130,130,130,.07);color:inherit;margin-bottom:15px"></textarea>
+ <label style="display:block;font-size:13px;opacity:.72;margin-bottom:7px">第三行 · 署名</label><input id="quote-edit-author" type="text" maxlength="120" style="display:block;width:100%;box-sizing:border-box;border:1px solid rgba(120,120,120,.22);border-radius:11px;padding:12px;font:inherit;background:rgba(130,130,130,.07);color:inherit;margin-bottom:20px">
+ <div style="display:flex;justify-content:flex-end;gap:10px"><button type="button" id="quote-edit-cancel" style="border:0;border-radius:12px;padding:11px 16px;background:rgba(130,130,130,.12);color:inherit;font:inherit">取消</button><button type="button" id="quote-edit-save" style="border:0;border-radius:12px;padding:11px 18px;background:#24262a;color:white;font:inherit">保存修改</button></div></div>`;
+ document.body.appendChild(overlay);
+ const label=overlay.querySelector('#quote-edit-label'),body=overlay.querySelector('#quote-edit-body'),author=overlay.querySelector('#quote-edit-author');label.value=oldLabel;body.value=old;author.value=oldAuthor;
+ overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.remove()});overlay.querySelector('#quote-edit-cancel').onclick=()=>overlay.remove();
+ overlay.querySelector('#quote-edit-save').onclick=()=>{S.desktop.bookQuoteLabel=label.value.trim()||'BOOK NOTE';S.desktop.bookQuote=body.value.trim()||old;S.desktop.bookQuoteAuthor=author.value.trim()||'——Charles Dickens';save();renderDesktopQuote();overlay.remove();toast('书摘三行已更新')};
+ setTimeout(()=>label.focus(),30);
+}
+const desktopQuote=$('#desktop-quote-widget');if(desktopQuote){desktopQuote.addEventListener('click',editDesktopQuote);desktopQuote.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();editDesktopQuote()}})}renderDesktopQuote();
+let homePage=0;function setHomePage(n){homePage=Math.max(0,Math.min(2,Number(n)||0));$('.wrap').style.display=homePage===0?'grid':'none';$('#home-page2').style.display=homePage===1?'flex':'none';$('#home-page3').style.display=homePage===2?'flex':'none';$('#home-dots').innerHTML=[0,1,2].map(i=>`<span class="dot ${homePage===i?'active':''}"></span>`).join('')}setupDesktopGestures();
+function p3UpdateCalendar(){const d=new Date(),grid=$('#p3-cal-grid'),title=$('#p3-cal-yearmonth');if(!grid||!title)return;title.textContent=`${d.getFullYear()}年${d.getMonth()+1}月`;const weekdays=['日','一','二','三','四','五','六'];const first=new Date(d.getFullYear(),d.getMonth(),1).getDay();const count=new Date(d.getFullYear(),d.getMonth()+1,0).getDate();grid.innerHTML=weekdays.map(x=>`<span class="p3-cal-weekday">${x}</span>`).join('');for(let i=0;i<first;i++)grid.insertAdjacentHTML('beforeend','<span class="p3-cal-date empty"></span>');for(let day=1;day<=count;day++){const date=new Date(d.getFullYear(),d.getMonth(),day);const weekend=date.getDay()===0||date.getDay()===6;grid.insertAdjacentHTML('beforeend',`<span class="p3-cal-date ${weekend?'weekend':''} ${day===d.getDate()?'today':''}">${day}</span>`)} }
+function p3RenderChatHead(){const d=S.desktop||{},av=$('#p3-avatar'),title=$('#p3-chat-title'),sub=$('#p3-chat-subtitle');if(title)title.textContent=d.p3ChatTitle||'iMessage';if(sub)sub.textContent=d.p3ChatSubtitle||'对话预览 · 点击编辑';if(av){av.innerHTML='';if(d.p3ChatAvatar){const img=document.createElement('img');img.src=d.p3ChatAvatar;img.alt='对话头像';av.appendChild(img)}else av.textContent=d.p3ChatAvatarEmoji||'♡'}}
+p3UpdateCalendar();p3RenderChatHead();
+function p3EditChat(){if(!S.desktop)S.desktop={};const d=S.desktop,bubbles=[...$('#p3-bubbles').querySelectorAll('.p3-bubble')];const old={title:d.p3ChatTitle||'iMessage',subtitle:d.p3ChatSubtitle||'对话预览 · 点击编辑',avatar:d.p3ChatAvatar||'',emoji:d.p3ChatAvatarEmoji||'♡',texts:bubbles.map(b=>b.textContent)};const prev=document.getElementById('p3-chat-editor');if(prev)prev.remove();const overlay=document.createElement('div');overlay.id='p3-chat-editor';overlay.style.cssText='position:fixed;inset:0;z-index:99999;background:rgba(20,22,26,.38);display:flex;align-items:center;justify-content:center;padding:16px;box-sizing:border-box;';overlay.innerHTML=`<div role="dialog" aria-modal="true" style="width:min(100%,430px);max-height:88vh;overflow:auto;background:var(--panel,#fff);color:var(--text,#17191c);border-radius:24px;padding:20px;box-sizing:border-box;box-shadow:0 18px 55px rgba(0,0,0,.2)"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px"><strong style="font-size:19px">编辑 iMessage 组件</strong><button id="p3-edit-close" type="button" style="border:0;background:rgba(128,128,128,.12);border-radius:50%;width:32px;height:32px;font-size:18px;color:inherit">×</button></div><div style="font-size:12px;color:var(--sub);margin-bottom:16px">自定义头像、顶部文案和每个气泡。</div><div style="display:flex;gap:12px;align-items:center;margin-bottom:16px"><div id="p3-edit-avatar-preview" style="width:54px;height:54px;border-radius:50%;background:#eef0f1;display:grid;place-items:center;overflow:hidden;font-size:23px;flex:none;color:#222">♡</div><div style="flex:1;min-width:0"><button id="p3-edit-avatar-pick" type="button" style="border:0;border-radius:11px;background:rgba(128,128,128,.13);padding:10px 12px;color:inherit;font:inherit;font-size:13px">从相册更换头像</button><button id="p3-edit-avatar-reset" type="button" style="border:0;background:transparent;color:#3982f6;padding:8px;font:inherit;font-size:12px">恢复默认</button><input id="p3-edit-avatar-file" type="file" accept="image/*" hidden></div></div><label style="display:block;font-size:12px;color:var(--sub);margin:12px 0 6px">顶部第一行 · 标题</label><input id="p3-edit-title" maxlength="50" style="width:100%;box-sizing:border-box;border:1px solid rgba(128,128,128,.24);border-radius:12px;padding:11px 12px;background:rgba(128,128,128,.07);color:inherit;font:inherit"><label style="display:block;font-size:12px;color:var(--sub);margin:12px 0 6px">顶部第二行 · 说明</label><input id="p3-edit-subtitle" maxlength="80" style="width:100%;box-sizing:border-box;border:1px solid rgba(128,128,128,.24);border-radius:12px;padding:11px 12px;background:rgba(128,128,128,.07);color:inherit;font:inherit"><div style="font-size:13px;font-weight:650;margin:18px 0 8px">聊天气泡</div><div id="p3-edit-bubble-fields"></div><div style="display:flex;justify-content:flex-end;gap:9px;margin-top:18px"><button id="p3-edit-cancel" type="button" style="border:0;border-radius:12px;padding:11px 15px;background:rgba(128,128,128,.13);color:inherit;font:inherit">取消</button><button id="p3-edit-save" type="button" style="border:0;border-radius:12px;padding:11px 18px;background:#3982f6;color:#fff;font:inherit;font-weight:600">保存修改</button></div></div>`;document.body.appendChild(overlay);const title=overlay.querySelector('#p3-edit-title'),subtitle=overlay.querySelector('#p3-edit-subtitle'),preview=overlay.querySelector('#p3-edit-avatar-preview'),file=overlay.querySelector('#p3-edit-avatar-file');title.value=old.title;subtitle.value=old.subtitle;let avatarData=old.avatar,avatarEmoji=old.emoji;const drawAvatar=()=>{preview.innerHTML='';if(avatarData){const im=document.createElement('img');im.src=avatarData;im.style.cssText='width:100%;height:100%;object-fit:cover';preview.appendChild(im)}else preview.textContent=avatarEmoji||'♡'};drawAvatar();overlay.querySelector('#p3-edit-bubble-fields').innerHTML=old.texts.map((v,i)=>`<label style="display:block;font-size:12px;color:var(--sub);margin:9px 0 5px">${i+1} · ${i%2?'我发出的':'对方发的'}</label><textarea data-p3-edit-bubble="${i}" rows="2" maxlength="240" style="width:100%;box-sizing:border-box;resize:vertical;border:1px solid rgba(128,128,128,.24);border-radius:12px;padding:10px 12px;background:rgba(128,128,128,.07);color:inherit;font:inherit;line-height:1.45">${esc(v)}</textarea>`).join('');overlay.querySelector('#p3-edit-avatar-pick').onclick=()=>file.click();file.onchange=e=>{const f=e.target.files&&e.target.files[0];if(!f)return;if(!f.type.startsWith('image/'))return toast('请选择图片文件');const reader=new FileReader();reader.onload=()=>{avatarData=String(reader.result||'');avatarEmoji='';drawAvatar()};reader.readAsDataURL(f)};overlay.querySelector('#p3-edit-avatar-reset').onclick=()=>{avatarData='';avatarEmoji='♡';drawAvatar()};const close=()=>overlay.remove();overlay.querySelector('#p3-edit-close').onclick=close;overlay.querySelector('#p3-edit-cancel').onclick=close;overlay.addEventListener('click',e=>{if(e.target===overlay)close()});overlay.querySelector('#p3-edit-save').onclick=()=>{d.p3ChatTitle=title.value.trim()||'iMessage';d.p3ChatSubtitle=subtitle.value.trim()||'对话预览 · 点击编辑';d.p3ChatAvatar=avatarData;d.p3ChatAvatarEmoji=avatarEmoji;overlay.querySelectorAll('[data-p3-edit-bubble]').forEach(el=>{const i=Number(el.dataset.p3EditBubble);if(bubbles[i])bubbles[i].textContent=el.value.trim()||' '});save();p3RenderChatHead();close();toast('iMessage 组件已更新')};}
+$('#page3-chat')?.addEventListener('click',p3EditChat);$('#page3-chat')?.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();p3EditChat()}});
+$$('#home-page3 [data-p3-decor]').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();toast(el.dataset.p3Decor+'：装饰性预览图标，功能暂未接入')}));
+
+let sxHome=0,syHome=0;$('#v-home').addEventListener('touchstart',e=>{sxHome=e.touches[0].clientX;syHome=e.touches[0].clientY},{passive:true});$('#v-home').addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sxHome,dy=e.changedTouches[0].clientY-syHome;if(Math.abs(dx)>48&&Math.abs(dx)>Math.abs(dy)*1.15)setHomePage(homePage+(dx<0?1:-1))},{passive:true});
 function rDiary(){const b=$('#diary-body');b.innerHTML=(S.diaries||[]).slice().sort((a,c)=>c.time-a.time).map(d=>`<div class="w" style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;gap:8px"><b>${esc(d.title||'无标题日记')}</b><small>${new Date(d.time).toLocaleDateString()}</small></div><p style="white-space:pre-wrap;margin:10px 0">${esc(d.content)}</p><div class="cap">用户点评</div><textarea data-diary-comment="${d.id}" rows="2" placeholder="写下你的点评">${esc(d.comment||'')}</textarea><button class="btn" data-diary-save="${d.id}">保存点评</button><button class="btn del" data-diary-del="${d.id}">删除日记</button></div>`).join('')||'<div class="empty">还没有日记，点右上角开始写</div>';$$('[data-diary-comment]').forEach(e=>e.oninput=()=>{const d=S.diaries.find(x=>x.id===e.dataset.diaryComment);if(d){d.comment=e.value;save()}});$$('[data-diary-save]').forEach(e=>e.onclick=()=>{save();toast('点评已保存')});$$('[data-diary-del]').forEach(e=>e.onclick=()=>{S.diaries=S.diaries.filter(d=>d.id!==e.dataset.diaryDel);save();rDiary()})}
 $('#diary-add').onclick=()=>modal('',v=>{if(!v.trim())return;S.diaries.push({id:uid(),title:v.trim().split('\n')[0].slice(0,32),content:v.trim(),comment:'',time:Date.now(),pid:cur||''});save();rDiary()});
 $('#diary-ai').onclick=async()=>{const p=P(cur)||S.personas[0];if(!p)return toast('请先新增一个角色');if(!S.cfg.key)return toast('请先在设置里填写 API Key');const b=$('#diary-ai');b.disabled=true;b.textContent='生成中…';try{const content=await ask([{role:'system',content:p.prompt||''},{role:'user',content:'请以你的角色身份写一篇日记，可以是短便签也可以是长篇日记。自然、有具体细节，只输出日记正文。'}],null);S.diaries.push({id:uid(),title:p.name+'的日记',content,time:Date.now(),comment:'',pid:p.id});save();rDiary()}catch(e){toast('生成失败：'+e.message)}finally{b.disabled=false;b.textContent='角色写日记'}};
@@ -2601,28 +2875,41 @@ async function importStickerLinkFiles(files,where,grp){
  save();if(where==='profile')renderStickerManager('profile');else if(where==='chat')rSP();else rProfileStickers();sgRefresh();
  if(added)toast('已导入 '+added+' 个表情包'+(notes.length?'（'+notes.length+' 个文件没识别到）':''));else if(notes.length)toast(notes[0]+'，可以改成每行一条：描述词:链接');
 }
-/* ===== transfers & wallet ===== */
+/* ===== transfers & wallets (mine + characters) ===== */
+Object.assign(RPI,{car:'<path d="M5 15v-3l1.8-4.5A2 2 0 0 1 8.7 6h6.6a2 2 0 0 1 1.9 1.5L19 12v3"/><rect x="3.5" y="12" width="17" height="5" rx="1.5"/><circle cx="7.5" cy="17.5" r="1.4" fill="currentColor"/><circle cx="16.5" cy="17.5" r="1.4" fill="currentColor"/>'});
 const TRF_ST={pending:'待收款',accepted:'已收款',refunded:'已退还'};
-const wl=()=>S.wallet||(S.wallet={balance:1000,records:[]});
+const WLS={owner:'me',tab:'cards'};
+function wlNorm(w){w.balance=Number(w.balance)||0;w.records=w.records||[];w.cards=w.cards||[];w.houses=w.houses||[];w.cars=w.cars||[];return w}
+function wlOf(o){if(o==='me'){if(!S.wallet)S.wallet={balance:1000,records:[],cards:[],houses:[],cars:[]};return wlNorm(S.wallet)}const c=S.cwallets||(S.cwallets={});if(!c[o])c[o]={balance:20000,records:[],cards:[],houses:[],cars:[]};return wlNorm(c[o])}
 const fmtAmt=n=>String(Math.round(Number(n)*100)/100);
 const fmtMoney=n=>(n<0?'-':'')+'¥ '+Math.abs(n).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,',');
-function wlMove(type,amount,pid,note){const w=wl(),sg={send:-1,out:-1,recv:1,refund:1,topup:1}[type]||0;w.balance=Math.round((w.balance+sg*amount)*100)/100;w.records.unshift({id:uid(),t:Date.now(),type,amount,pid:pid||'',note:note||''});w.records=w.records.slice(0,300)}
+const fmtBig=n=>{n=Math.round(n);return '¥ '+(n>=1e8?(n/1e8).toFixed(2)+' 亿':n>=1e4?(n/1e4).toFixed(n>=1e6?0:1)+' 万':String(n))};
+function wlMove(owner,type,amount,other,note){const w=wlOf(owner),sg={send:-1,out:-1,recv:1,refund:1,topup:1}[type]||0;w.balance=Math.round((w.balance+sg*amount)*100)/100;w.records.unshift({id:uid(),t:Date.now(),type,amount,pid:other||'',note:note||''});w.records=w.records.slice(0,300)}
 function trfContent(m){const t=m.transfer,a='¥'+fmtAmt(t.amount)+(t.note?'，备注：'+t.note:'')+'（'+TRF_ST[t.status]+'）';return m.role==='user'?'[用户向你转账 '+a+']':'[你向用户转账 '+a+']'}
-function trfCardHTML(m){const t=m.transfer;return '<div class="tf-card '+t.status+'"><div class="tf-main"><span class="tf-ico">'+rpSvg('tfr')+'</span><div class="tf-txt"><b>¥ '+esc(fmtAmt(t.amount))+'</b><small>'+esc(t.note||'转账')+'</small></div></div><div class="tf-foot">转账 · '+TRF_ST[t.status]+'</div></div>'}
+function trfCardHTML(m){const t=m.transfer;return '<div class="tf-card '+t.status+'"><div class="tf-main"><span class="tf-ico"><svg viewBox="4 4.5 16 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9h13l-3-3M19 15H6l3 3"/></svg></span><div class="tf-txt"><b>¥ '+esc(fmtAmt(t.amount))+'</b><small>'+esc(t.note||'转账')+'</small></div></div><div class="tf-foot">转账 · '+TRF_ST[t.status]+'</div></div>'}
 function trfSetStatus(m,st){
  const t=m.transfer;if(!t||t.status!=='pending')return;t.status=st;const pid=m.role==='user'?cur:(t.from||cur);
- if(m.role==='user'){if(st==='refunded')wlMove('refund',t.amount,pid,t.note)}else if(st==='accepted')wlMove('recv',t.amount,pid,t.note);
+ if(m.role==='user'){if(st==='accepted')wlMove(pid,'recv',t.amount,'me',t.note);else wlMove('me','refund',t.amount,pid,t.note)}
+ else{if(st==='accepted')wlMove('me','recv',t.amount,pid,t.note);else wlMove(pid,'refund',t.amount,'me',t.note)}
  m.content=trfContent(m);save();
 }
 function trfApplyAI(h,data){
  const act=String(data.transfer_action||'').toLowerCase();
  if(act==='accept'||act==='refund'){const m=[...h].reverse().find(x=>x.transfer&&x.role==='user'&&x.transfer.status==='pending');if(m)trfSetStatus(m,act==='accept'?'accepted':'refunded')}
  const t=data.transfer;
- if(t&&Number(t.amount)>0){const amt=Math.round(Number(t.amount)*100)/100;if(amt>0&&amt<1e7){const m={role:'assistant',content:'',transfer:{id:uid(),amount:amt,note:String(t.note||'').slice(0,60),status:'pending',from:cur},t:Date.now()};m.content=trfContent(m);h.push(m)}}
+ if(t&&Number(t.amount)>0){const amt=Math.round(Number(t.amount)*100)/100;
+  if(amt>0&&amt<1e7&&amt<=wlOf(cur).balance){const m={role:'assistant',content:'',transfer:{id:uid(),amount:amt,note:String(t.note||'').slice(0,60),status:'pending',from:cur},t:Date.now()};m.content=trfContent(m);h.push(m);wlMove(cur,'send',amt,'me',m.transfer.note)}}
+}
+function wlSummary(pid){
+ const w=wlOf(pid),bits=[];
+ if(w.cards.length)bits.push('银行卡：'+w.cards.map(c=>c.bank+c.type).join('、'));
+ if(w.houses.length)bits.push('房产：'+w.houses.map(h=>h.name).join('、'));
+ if(w.cars.length)bits.push('车辆：'+w.cars.map(c=>c.name).join('、'));
+ return '你的钱包余额约 ¥'+fmtAmt(w.balance)+'，转账金额不要超过余额。'+(bits.length?'你的资产（模拟）：'+bits.join('；')+'。聊天里涉及时请与之保持一致。':'');
 }
 function TRF_PROMPT(){
  const h=S.chats[cur]||[],pend=[...h].reverse().find(x=>x.transfer&&x.role==='user'&&x.transfer.status==='pending');
- return '【转账（模拟）】聊天里可以模拟转账。JSON 里额外有两个可选字段：transfer 和 transfer_action。transfer 默认为 null；只有在符合角色性格和当前剧情、确实想给用户转钱时，才填 {"amount":数字,"note":"转账备注"}，不要频繁使用，金额要合理。transfer_action 只用于处理用户发来的转账：填 "accept" 表示收款，填 "refund" 表示退还，其余情况留空。'+(pend?'用户有一笔待处理的转账：¥'+fmtAmt(pend.transfer.amount)+(pend.transfer.note?'，备注「'+pend.transfer.note+'」':'')+'。请结合人设自然地回应，并用 transfer_action 决定收款还是退还。':'');
+ return '【转账与钱包（模拟）】聊天里可以模拟转账。JSON 里额外有两个可选字段：transfer 和 transfer_action。transfer 默认为 null；只有在符合角色性格和当前剧情、确实想给用户转钱时，才填 {"amount":数字,"note":"转账备注"}，不要频繁使用，金额要合理。transfer_action 只用于处理用户发来的转账：填 "accept" 表示收款，填 "refund" 表示退还，其余情况留空。'+wlSummary(cur)+(pend?'用户有一笔待处理的转账：¥'+fmtAmt(pend.transfer.amount)+(pend.transfer.note?'，备注「'+pend.transfer.note+'」':'')+'。请结合人设自然地回应，并用 transfer_action 决定收款还是退还。':'');
 }
 function trfKeepScroll(){const b=$('#msgs'),y=b.scrollTop;draw();b.scrollTop=y}
 function trfTap(m){
@@ -2635,21 +2922,74 @@ document.addEventListener('click',e=>{const c=e.target.closest('.tf-card');if(!c
 function trfOpen(){
  const p=P(cur);if(!p)return;if(p.blocked)return toast('已拉黑，请先解除拉黑');
  let el=$('#trsheet');if(!el){el=document.createElement('div');el.id='trsheet';document.body.appendChild(el)}
- el.innerHTML='<div class="trs-box"><div class="trs-top"><button type="button" data-trs="x">取消</button><b>转账给 '+esc(p.name)+'</b><span style="min-width:44px"></span></div><div class="trs-amt"><span>¥</span><input id="trs-amt" inputmode="decimal" placeholder="0.00" autocomplete="off"></div><input class="trs-note" id="trs-note" placeholder="转账备注（可选）" maxlength="40" autocomplete="off"><small class="trs-bal">钱包余额 '+fmtMoney(wl().balance)+'</small><button type="button" class="trs-ok" data-trs="ok">确认转账</button></div>';
+ el.innerHTML='<div class="trs-box"><div class="trs-top"><button type="button" data-trs="x">取消</button><b>转账给 '+esc(p.name)+'</b><span style="min-width:44px"></span></div><div class="trs-amt"><span>¥</span><input id="trs-amt" inputmode="decimal" placeholder="0.00" autocomplete="off"></div><input class="trs-note" id="trs-note" placeholder="转账备注（可选）" maxlength="40" autocomplete="off"><small class="trs-bal">钱包余额 '+fmtMoney(wlOf('me').balance)+'</small><button type="button" class="trs-ok" data-trs="ok">确认转账</button></div>';
  el.classList.add('on');setTimeout(()=>{const i=$('#trs-amt');if(i)i.focus()},60);
  el.onclick=e=>{const b=e.target.closest('[data-trs]');if(e.target===el||(b&&b.dataset.trs==='x')){el.classList.remove('on');return}
-  if(b&&b.dataset.trs==='ok'){const a=Math.round(parseFloat($('#trs-amt').value)*100)/100;if(!(a>0))return toast('请输入转账金额');if(a>wl().balance)return toast('钱包余额不足，请先在钱包里充值');
+  if(b&&b.dataset.trs==='ok'){const a=Math.round(parseFloat($('#trs-amt').value)*100)/100;if(!(a>0))return toast('请输入转账金额');if(a>wlOf('me').balance)return toast('钱包余额不足，请先在钱包里充值');
    const note=$('#trs-note').value.trim(),m={role:'user',content:'',transfer:{id:uid(),amount:a,note,status:'pending',from:'me'},t:Date.now()};m.content=trfContent(m);
-   S.chats[cur].push(m);S.last=cur;wlMove('send',a,cur,note);save();el.classList.remove('on');draw();toast('已转账 ¥'+fmtAmt(a))}};
+   S.chats[cur].push(m);S.last=cur;wlMove('me','send',a,cur,note);save();el.classList.remove('on');draw();toast('已转账 ¥'+fmtAmt(a))}};
 }
 $('#pm-transfer').onclick=()=>{$('#pm').classList.remove('on');trfOpen()};
-const WL_META={send:['tfr','转账给 ',-1],recv:['dl','收到 ',1],refund:['tfr','转账退还 · ',1],topup:['pl','充值',1],out:['dots','提现',-1]};
-function wlRender(){
- const w=wl(),box=$('#wl-body');if(!box)return;
- box.innerHTML='<div class="wl-card"><small>可用余额</small><b>'+fmtMoney(w.balance)+'</b><div class="wl-act"><button type="button" data-wl="topup">充值</button><button type="button" data-wl="out">提现</button></div></div><div class="wl-h">账单</div><div class="wl-list">'+(w.records.map(r=>{const mt=WL_META[r.type]||WL_META.send,p=P(r.pid),nm=p?p.name:'角色',title=r.type==='recv'?'收到 '+nm+' 的转账':(r.type==='topup'||r.type==='out'?mt[1]:mt[1]+nm),sg=mt[2],d=new Date(r.t);
-  return '<div class="wl-r"><span class="wl-i">'+rpSvg(mt[0])+'</span><div class="wl-t"><b>'+esc(title)+'</b><small>'+esc((r.note?r.note+' · ':'')+(d.getMonth()+1)+'月'+d.getDate()+'日 '+hm(r.t))+'</small></div><span class="wl-a'+(sg>0?' p':'')+'">'+(sg>0?'+':'-')+fmtAmt(r.amount)+'</span></div>'}).join('')||'<div class="wl-e">还没有账单</div>')+'</div>';
+/* wallet app */
+const WL_BANK=['linear-gradient(135deg,#1f3a5f,#3b6ea5)','linear-gradient(135deg,#7a1f2b,#c2453a)','linear-gradient(135deg,#1d4d3b,#3f9b73)','linear-gradient(135deg,#3b2a63,#7a5cc2)','linear-gradient(135deg,#2c2c31,#5a5a63)'];
+const WL_META={send:'tfr',recv:'dl',refund:'tfr',topup:'pl',out:'dots'};
+const WL_FIELDS={cards:[['bank','银行','例如：招商银行'],['type','类型','储蓄卡 或 信用卡'],['last4','卡号尾号','4 位数字'],['balance','余额（信用卡填额度）','数字']],houses:[['name','名称 / 位置','例如：滨江公寓 12 栋'],['area','面积（㎡）','数字'],['value','估值（元）','数字'],['note','备注','']],cars:[['name','品牌型号','例如：奥迪 A6L'],['plate','车牌','例如：沪A·12345'],['value','估值（元）','数字'],['note','备注','']]};
+function wlRecTitle(r){const other=r.pid==='me'?(S.me.name||'我'):(P(r.pid)?P(r.pid).name:'对方');return r.type==='recv'?'收到 '+other+' 的转账':r.type==='send'?'转账给 '+other:r.type==='refund'?'转账退还 · '+other:r.type==='topup'?'充值':'提现'}
+function wlPanel(w,own){
+ const tab=WLS.tab;
+ if(tab==='cards')return w.cards.map((c,i)=>'<div class="wl-bank" style="background:'+WL_BANK[msHash(c.bank||'')%WL_BANK.length]+'" data-wl-edit="cards:'+i+'"><div class="wl-bt"><b>'+esc(c.bank||'银行')+'</b><span>'+esc(c.type||'储蓄卡')+'</span></div><div class="wl-no">•••• •••• •••• '+esc(c.last4||'0000')+'</div><div class="wl-bb"><span>'+(c.type==='信用卡'?'额度':'余额')+'</span><b>'+fmtMoney(Number(c.balance)||0)+'</b></div></div>').join('')+'<button type="button" class="wl-add" data-wl-add="cards">添加银行卡</button>';
+ if(tab==='houses'||tab==='cars'){const k=tab,ic=k==='houses'?'hm':'car';return w[k].map((x,i)=>'<div class="wl-asset" data-wl-edit="'+k+':'+i+'"><span class="wl-i">'+rpSvg(ic)+'</span><div class="wl-t"><b>'+esc(x.name||'未命名')+'</b><small>'+esc((k==='houses'?(x.area?x.area+'㎡ · ':''):(x.plate?x.plate+' · ':''))+'估值 '+fmtBig(Number(x.value)||0)+(x.note?' · '+x.note:''))+'</small></div></div>').join('')+'<button type="button" class="wl-add" data-wl-add="'+k+'">'+(k==='houses'?'添加房产':'添加车辆')+'</button>'}
+ return '<div class="wl-list">'+(w.records.map(r=>{const sg=({recv:1,refund:1,topup:1})[r.type]?1:-1,d=new Date(r.t);return '<div class="wl-r"><span class="wl-i">'+rpSvg(WL_META[r.type]||'tfr')+'</span><div class="wl-t"><b>'+esc(wlRecTitle(r))+'</b><small>'+esc((r.note?r.note+' · ':'')+(d.getMonth()+1)+'月'+d.getDate()+'日 '+hm(r.t))+'</small></div><span class="wl-a'+(sg>0?' p':'')+'">'+(sg>0?'+':'-')+fmtAmt(r.amount)+'</span></div>'}).join('')||'<div class="wl-e">还没有账单</div>')+'</div>';
 }
-$('#v-wallet').addEventListener('click',async e=>{const b=e.target.closest('[data-wl]');if(!b)return;const out=b.dataset.wl==='out',v=await sgPrompt(out?'提现金额':'充值金额','','输入金额');if(v===null)return;const a=Math.round(parseFloat(v)*100)/100;if(!(a>0))return toast('请输入有效金额');if(out&&a>wl().balance)return toast('余额不足');wlMove(out?'out':'topup',a,'',out?'提现到银行卡（模拟）':'充值（模拟）');save();wlRender();toast((out?'已提现 ¥':'已充值 ¥')+fmtAmt(a))});
+function wlRender(){
+ const box=$('#wl-body');if(!box)return;
+ const own=(WLS.owner==='me'||!P(WLS.owner))?'me':WLS.owner;WLS.owner=own;
+ const w=wlOf(own),isMe=own==='me',p=isMe?null:P(own);
+ const total=w.balance+w.cards.filter(c=>c.type!=='信用卡').reduce((a,c)=>a+(Number(c.balance)||0),0)+w.houses.reduce((a,c)=>a+(Number(c.value)||0),0)+w.cars.reduce((a,c)=>a+(Number(c.value)||0),0);
+ const chips=[{id:'me',name:'我',a:av(S.me)}].concat(S.personas.filter(x=>!x.blocked).map(x=>({id:x.id,name:x.name,a:av(x)})));
+ box.innerHTML='<div class="wl-who">'+chips.map(c=>'<button type="button" class="wl-chip'+(c.id===own?' on':'')+'" data-wl-owner="'+esc(c.id)+'"><span class="wl-av">'+c.a+'</span>'+esc(c.name)+'</button>').join('')+'</div>'
+ +'<div class="wl-card"><small>'+(isMe?'我的余额':esc(p.name)+' 的余额')+'</small><b>'+fmtMoney(w.balance)+'</b><div class="wl-sub">总资产约 '+fmtBig(total)+'</div><div class="wl-act">'+(isMe?'<button type="button" data-wl="topup">充值</button><button type="button" data-wl="out">提现</button>':'<button type="button" data-wl="edit">修改余额</button><button type="button" data-wl="gen">AI 生成钱包</button>')+'</div></div>'
+ +'<div class="wl-seg">'+[['cards','银行卡'],['houses','房产'],['cars','车辆'],['bills','账单']].map(t=>'<button type="button" class="'+(WLS.tab===t[0]?'on':'')+'" data-wl-tab="'+t[0]+'">'+t[1]+'</button>').join('')+'</div><div class="wl-panel">'+wlPanel(w,own)+'</div>';
+}
+function wlForm(kind,idx){
+ const list=wlOf(WLS.owner)[kind],old=idx>=0?list[idx]:{};
+ let el=$('#wlform');if(!el){el=document.createElement('div');el.id='wlform';document.body.appendChild(el)}
+ el.innerHTML='<div class="wlf-box"><div class="wlf-top"><button type="button" data-wlf="x">取消</button><b>'+({cards:'银行卡',houses:'房产',cars:'车辆'})[kind]+'</b><button type="button" class="ok" data-wlf="ok">保存</button></div>'+WL_FIELDS[kind].map(f=>'<label>'+f[1]+'</label><input data-k="'+f[0]+'" placeholder="'+f[2]+'" value="'+esc(old[f[0]]==null?'':old[f[0]])+'" autocomplete="off">').join('')+(idx>=0?'<button type="button" class="wlf-del" data-wlf="del">删除</button>':'')+'</div>';
+ el.classList.add('on');
+ el.onclick=e=>{const b=e.target.closest('[data-wlf]');if(e.target===el||(b&&b.dataset.wlf==='x')){el.classList.remove('on');return}if(!b)return;
+  if(b.dataset.wlf==='del'){if(!confirm('删除这一项？'))return;list.splice(idx,1);save();el.classList.remove('on');wlRender();return}
+  const o={};el.querySelectorAll('[data-k]').forEach(i=>o[i.dataset.k]=i.value.trim());
+  if(kind==='cards'){o.type=/信用/.test(o.type)?'信用卡':'储蓄卡';o.last4=(o.last4||'').replace(/\D/g,'').slice(-4).padStart(4,'0')}
+  if(idx>=0)Object.assign(list[idx],o);else list.push(Object.assign({id:uid()},o));save();el.classList.remove('on');wlRender()};
+}
+async function wlGenerate(pid){
+ const p=P(pid);if(!p)return;if(!S.cfg.key)return toast('请先在设置里填写 API Key');
+ const w=wlOf(pid);if((w.cards.length||w.houses.length||w.cars.length)&&!confirm('重新生成会覆盖 '+p.name+' 现有的银行卡、房产和车辆，继续吗？'))return;
+ const btn=document.querySelector('[data-wl="gen"]');if(btn){btn.disabled=true;btn.textContent='生成中…'}
+ try{
+  const sec=S.cfg.secondaryKey&&(S.cfg.secondaryBase||S.cfg.base),cfg=sec?{base:S.cfg.secondaryBase||S.cfg.base,key:S.cfg.secondaryKey,model:S.cfg.secondaryModel||S.cfg.model,temp:.8}:Object.assign({},S.cfg,{temp:.8});
+  const raw=await ask([{role:'system',content:(p.prompt||'')+'\n\n你要为这个角色生成一份模拟的钱包与资产，必须符合人设（职业、财力、生活方式）。只输出严格 JSON：{"balance":数字,"cards":[{"bank":"银行名","type":"储蓄卡或信用卡","last4":"4位数字","balance":数字}],"houses":[{"name":"房产名称或位置","area":数字,"value":数字,"note":"备注"}],"cars":[{"name":"品牌型号","plate":"车牌","value":数字,"note":"备注"}]}。cards 1-4 张，houses 和 cars 可以是空数组，金额单位为元，银行和地点用虚构或泛称。'},{role:'user',content:'生成'}],null,{},cfg);
+  const j=JSON.parse(String(raw).replace(/^```(?:json)?\s*/i,'').replace(/\s*```$/,'').trim().replace(/^[^{]*/,'').replace(/[^}]*$/,''));
+  w.balance=Math.max(0,Number(j.balance)||0);
+  w.cards=(j.cards||[]).slice(0,6).map(c=>({id:uid(),bank:String(c.bank||''),type:/信用/.test(c.type)?'信用卡':'储蓄卡',last4:String(c.last4||'0000').replace(/\D/g,'').slice(-4).padStart(4,'0'),balance:Number(c.balance)||0}));
+  w.houses=(j.houses||[]).slice(0,6).map(h=>({id:uid(),name:String(h.name||''),area:h.area||'',value:Number(h.value)||0,note:String(h.note||'')}));
+  w.cars=(j.cars||[]).slice(0,6).map(c=>({id:uid(),name:String(c.name||''),plate:String(c.plate||''),value:Number(c.value)||0,note:String(c.note||'')}));
+  save();toast('已生成 '+p.name+' 的钱包');
+ }catch(e){toast('生成失败：'+(e.message||'返回内容无法解析'))}
+ wlRender();
+}
+$('#v-wallet').addEventListener('click',async e=>{
+ const q=s=>e.target.closest(s);let x;
+ if(x=q('[data-wl-owner]')){WLS.owner=x.dataset.wlOwner;wlRender();return}
+ if(x=q('[data-wl-tab]')){WLS.tab=x.dataset.wlTab;wlRender();return}
+ if(x=q('[data-wl-add]')){wlForm(x.dataset.wlAdd,-1);return}
+ if(x=q('[data-wl-edit]')){const p=x.dataset.wlEdit.split(':');wlForm(p[0],+p[1]);return}
+ if(x=q('[data-wl]')){const k=x.dataset.wl,own=WLS.owner;
+  if(k==='gen'){wlGenerate(own);return}
+  if(k==='edit'){const v=await sgPrompt('修改余额',String(wlOf(own).balance),'输入金额');if(v===null)return;const a=Math.round(parseFloat(v)*100)/100;if(!(a>=0))return toast('请输入有效金额');wlOf(own).balance=a;save();wlRender();return}
+  const out=k==='out',v=await sgPrompt(out?'提现金额':'充值金额','','输入金额');if(v===null)return;const a=Math.round(parseFloat(v)*100)/100;if(!(a>0))return toast('请输入有效金额');if(out&&a>wlOf('me').balance)return toast('余额不足');
+  wlMove('me',out?'out':'topup',a,'',out?'提现到银行卡（模拟）':'充值（模拟）');save();wlRender();toast((out?'已提现 ¥':'已充值 ¥')+fmtAmt(a))}
+});
 /* ===== sticker manager: compact list + manage page ===== */
 function stickerManagerHTML(where='page'){
  if(!S.stickerGroups||!S.stickerGroups.length)S.stickerGroups=['默认'];
@@ -2685,5 +3025,118 @@ document.addEventListener('click',async e=>{
 },true);
 })();
 </script>
+
+<style id="p3-calendar-row-gap-final-fix">
+/* 修复第三页日历首周日期被撑高的问题，并让整组组件稍微上移 */
+#home-page3 .page3-layout{padding-top:5px!important;gap:10px!important}
+#home-page3 .p3-calendar{padding-top:11px!important;padding-bottom:9px!important}
+#home-page3 .p3-cal-grid{grid-template-columns:repeat(7,minmax(0,1fr))!important;grid-auto-rows:27px!important;gap:3px 3px!important;margin-top:7px!important;align-items:center!important}
+#home-page3 .p3-cal-weekday{height:16px!important;min-height:16px!important;box-sizing:border-box!important;padding:0!important;line-height:16px!important;align-self:center!important}
+#home-page3 .p3-cal-date{aspect-ratio:auto!important;width:100%!important;height:27px!important;min-height:27px!important;max-height:27px!important;line-height:27px!important;display:block!important;box-sizing:border-box!important}
+#home-page3 .p3-cal-date.today{width:27px!important;height:27px!important;min-height:27px!important;max-height:27px!important;line-height:27px!important;justify-self:center!important;align-self:center!important;border-radius:50%!important}
+#home-page3 .p3-cal-event{margin-top:7px!important;padding-top:7px!important}
+#home-page3 .page3-apps{padding-top:0!important;padding-bottom:0!important}
+@media(max-width:400px){#home-page3 .p3-cal-grid{grid-auto-rows:25px!important}#home-page3 .p3-cal-date{height:25px!important;min-height:25px!important;max-height:25px!important;line-height:25px!important}#home-page3 .p3-cal-date.today{width:25px!important;height:25px!important;min-height:25px!important;max-height:25px!important;line-height:25px!important}}
+</style>
+
+
+
+<style id="desktop-widget-height-adjustment">
+/* 备忘录和最近对话稍微增加垂直空间，不改回原先偏高的比例 */
+#v-home #memo-image-box {
+  height:96px !important;
+  min-height:88px !important;
+}
+#v-home #memo-image-card {
+  padding:9px !important;
+}
+#v-home #memo-image-title {
+  padding:7px 10px !important;
+  min-height:30px !important;
+  margin-bottom:7px !important;
+}
+#v-home .wrap > .recent-glass {
+  padding:12px 12px 13px !important;
+}
+#v-home .wrap > .recent-glass .wl {
+  margin-bottom:6px !important;
+}
+#v-home #rc {
+  gap:5px !important;
+}
+#v-home #rc small {
+  line-height:1.38 !important;
+}
+</style>
+
+<style id="unified-white-icon-backgrounds">
+/* 所有桌面 App 图标统一白底与轻柔阴影；书摘位置保持不变 */
+#v-home .home-app i,
+#home-page2 .home-app i,
+#home-page3 .home-app i,
+#v-home .dock .app i {
+  background: #fff !important;
+  background-image: none !important;
+  border: 0 !important;
+  box-shadow: 0 4px 16px rgba(20, 24, 30, .075) !important;
+  color: #30343a !important;
+}
+[data-theme="dark"] #v-home .home-app i,
+[data-theme="dark"] #home-page2 .home-app i,
+[data-theme="dark"] #home-page3 .home-app i,
+[data-theme="dark"] #v-home .dock .app i {
+  background: #fff !important;
+  color: #30343a !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, .16) !important;
+}
+</style>
+
+
+<style id="p3-horizontal-apps-fullwidth-chat">
+/* 第三页：日历在上，四个 App 横排，iMessage 全宽放在下方 */
+#home-page3 .page3-layout{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  grid-template-areas:"calendar" "apps" "chat"!important;
+  gap:14px!important;
+  padding:16px 18px 20px!important;
+  align-items:start!important;
+  box-sizing:border-box!important;
+}
+#home-page3 .p3-calendar{
+  grid-area:calendar!important;width:calc(100% + 36px)!important;margin-left:-18px!important;
+  padding:13px 16px 11px!important;border-radius:22px!important;box-sizing:border-box!important;
+}
+#home-page3 .p3-cal-grid{gap:5px 3px!important;margin-top:10px!important}
+#home-page3 .p3-cal-weekday{padding-bottom:3px!important}
+#home-page3 .p3-cal-date{aspect-ratio:1!important;min-height:0!important;font-size:12px!important}
+#home-page3 .p3-cal-event{margin-top:9px!important;padding-top:9px!important}
+#home-page3 .page3-right{grid-area:apps!important;display:block!important;width:100%!important;min-width:0!important}
+#home-page3 .page3-apps{
+  display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  flex-direction:initial!important;align-items:start!important;justify-items:center!important;
+  gap:8px!important;padding:2px 0!important;width:100%!important;box-sizing:border-box!important;
+}
+#home-page3 .page3-apps .home-app{
+  display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:flex-start!important;
+  gap:5px!important;width:100%!important;min-width:0!important;max-width:100%!important;
+  padding:0!important;margin:0!important;text-align:center!important;transform:none!important;
+}
+#home-page3 .page3-apps .home-app i{width:46px!important;height:46px!important;border-radius:15px!important;flex:none!important;margin:0!important}
+#home-page3 .page3-apps .home-app i svg{width:22px!important;height:22px!important}
+#home-page3 .page3-apps .home-app span{font-size:11px!important;line-height:1.3!important;overflow-wrap:anywhere!important;min-width:0!important}
+#home-page3 .page3-left{grid-area:chat!important;width:calc(100% + 0px)!important;min-width:0!important;padding:0!important}
+#home-page3 .page3-chat{width:100%!important;border-radius:22px!important;padding:13px 13px 11px!important;box-sizing:border-box!important}
+#home-page3 .p3-chat-head{gap:9px!important;padding-bottom:11px!important}
+#home-page3 .p3-bubbles{gap:8px!important;padding:11px 0 10px!important}
+@media(max-width:360px){
+ #home-page3 .page3-layout{padding-left:12px!important;padding-right:12px!important;gap:12px!important}
+ #home-page3 .p3-calendar{width:calc(100% + 24px)!important;margin-left:-12px!important;padding:12px 13px 10px!important}
+ #home-page3 .p3-cal-top{font-size:22px!important}
+ #home-page3 .page3-apps .home-app i{width:42px!important;height:42px!important}
+}
+[data-theme=dark] #home-page3 .p3-cal-event{border-color:#3b3b41!important}
+</style>
+
 </body>
 </html>
