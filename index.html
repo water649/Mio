@@ -1208,6 +1208,7 @@ button.feed-follow-plus{padding:0;cursor:pointer}
   <div id="sbar"><input id="sq" placeholder="搜索聊天记录"><button id="sx">取消</button></div>
   <div id="sres"></div>
   <div id="msgs"></div>
+  <div id="qbar"></div>
   <div id="inp">
     <div id="pm"><button id="redo">AI 回复 / 重答</button><button id="clear">清空对话</button><button id="pm-image" type="button">发送图片</button><button id="pm-transfer" type="button">转账</button><button id="pm-voice" type="button">发送语音（模拟）</button><input id="chat-image-file" type="file" accept="image/*" hidden></div>
     <div id="sp"></div>
@@ -1444,7 +1445,7 @@ function build(p,h){
   let sys=p.prompt||'';if((S.cfg.memoryMode||'traditional')==='traditional'&&cc.traditionalMemory)sys+='\n\n【传统记忆】\n'+cc.traditionalMemory;const generatedMem=(cc.memoryEntries||[]).filter(m=>m&&String(m.text||'').trim());if(generatedMem.length)sys+='\n\n【自动总结记忆条目】\n'+generatedMem.map((m,i)=>`${i+1}. ${m.text}`).join('\n');if(S.globalPrompt)sys+='\n\n【全局 AI 扮演提示词】\n'+S.globalPrompt;if(cc.sys)sys+='\n\n'+cc.sys;if(cc.trOn&&(cc.trOut||[]).length)sys+='\n\n【输出语言】请用以下语言回复用户：'+cc.trOut.join('、')+'。'+(cc.trOut.length>1?'可以在同一条消息里自然地混用这些语言。':'')+'不要在回复里自行附带翻译或括号注释。';
   if(S.me.bio)sys+='\n\n【用户设定】'+S.me.name+'：'+S.me.bio;if(S.music&&S.music.together&&S.music.together.pid===p.id&&S.music.together.title)sys+='\n\n【一起听歌】用户正在和你一起听《'+S.music.together.title+'》（'+(S.music.together.artist||'未知艺人')+'）。你知道这件事，可以自然地聊到这首歌，但不要生硬复述歌名。';
   const wbBefore=wb.filter(w=>w.position==='before').map(w=>w.content),wbAfter=wb.filter(w=>w.position!=='before').map(w=>w.content);if(wbBefore.length)sys='【世界书】\n'+wbBefore.join('\n\n')+'\n\n'+sys;if(wbAfter.length)sys+='\n\n【世界书】\n'+wbAfter.join('\n\n');
-  const o=[];h.slice(-(+S.cfg.hist||30)).forEach(m=>{const l=o[o.length-1];if(l&&l.role===m.role)l.content+='\n'+m.content;else o.push({role:m.role,content:m.image?[{type:'text',text:m.content||'用户发送了一张图片，请结合图片内容回复。'},{type:'image_url',image_url:{url:m.image}}]:m.content})});
+  const o=[];h.slice(-(+S.cfg.hist||30)).forEach(m=>{const l=o[o.length-1];if(l&&l.role===m.role)l.content+='\n'+qc(m);else o.push({role:m.role,content:m.image?[{type:'text',text:qc(m)||'用户发送了一张图片，请结合图片内容回复。'},{type:'image_url',image_url:{url:m.image}}]:qc(m)})});
   return[{role:'system',content:sys},...o];
 }
 
@@ -1958,18 +1959,19 @@ async function makeVoice(text){
 function playVoice(src,transcript=''){if(src==='simulated-voice'){if('speechSynthesis' in window){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(transcript||'这是一条模拟语音消息');u.lang='zh-CN';speechSynthesis.speak(u)}catch(e){toast('当前浏览器无法播放模拟语音')}}else toast('这是一条模拟语音消息：'+(transcript||''));return}try{const a=new Audio(src);a.play().catch(()=>toast('浏览器未允许自动播放，请再点一次语音按钮'))}catch(e){toast('无法播放这条语音')}}
 /* chat */
 let busy=0;const setBusy=v=>{busy=v;$('#send').disabled=v};
+let pendingQuote=null;
 function bub(m,i,first,last){
   const me=m.role==='user',u=me?who('me'):P(cur),r=document.createElement('div');
   if(m.recalled){r.className='recalled-row';if(i>=0)r.dataset.i=i;r.innerHTML='<div class="dd">'+(me?'你撤回了一条消息':'对方撤回了一条消息')+'</div>';$('#msgs').appendChild(r);return r;}
   r.className='r '+(me?'me':'ai')+(first?' first':'');if(i>=0)r.dataset.i=i;
-  r.innerHTML=`<div class="av" ${!me&&i>=0?'data-thought-i="'+i+'" title="查看角色内心想法"':''}>${av(u)}</div><div class="col">${first&&!me?`<div class="nm">${esc(u.name)}</div>`:''}<div class="bw"><div class="m"></div>${last&&m.t?`<span class="tm">${hm(m.t)}</span>`:''}</div></div>`;
+  r.innerHTML=`<div class="av" ${!me&&i>=0?'data-thought-i="'+i+'" title="查看角色内心想法"':''}>${av(u)}</div><div class="col">${first&&!me?`<div class="nm">${esc(u.name)}</div>`:''}${quoteHTML(m,me)}<div class="bw"><div class="m"></div>${last&&m.t?`<span class="tm">${hm(m.t)}</span>`:''}</div></div>`;
   const el=r.querySelector('.m'),sk=m.stk&&S.stickers.find(x=>x.id===m.stk);
   if(m.transfer){el.classList.add('tf-msg');el.innerHTML=trfCardHTML(m)}else if(m.image){el.classList.add('image-msg');el.innerHTML=`${m.content?`<div>${esc(m.content)}</div>`:''}<img src="${m.image}" alt="聊天图片" style="display:block;max-width:min(240px,62vw);max-height:320px;object-fit:contain;border-radius:12px;margin-top:${m.content?'6px':'0'}">`}else if(sk){el.classList.add('stk');el.innerHTML=`<img src="${sk.src}" alt="">`}else if(m.audio){el.classList.add('voice-msg');el.innerHTML=`<button type="button" class="voice-play" data-play-audio="${i}" aria-label="展开或收起语音文字"><span class="voice-arrow" aria-hidden="true"></span><span class="voice-wave" aria-hidden="true">${'<i></i>'.repeat(9)}</span></button><span class="voice-transcript">${esc(m.content||'语音消息')}</span>`;el.addEventListener('click',ev=>{ev.preventDefault();ev.stopPropagation();el.classList.toggle('show-text')})}else {el.textContent=m.content}if(CC(cur).trOn&&m.trOpen&&m.role==='assistant'&&!m.image&&!m.audio&&!sk)r.querySelector('.col').insertAdjacentHTML('beforeend',trBoxHTML(m));$('#msgs').appendChild(r);$('#msgs').scrollTop=1e9;return el;
 }
 function applyChatFont(){const box=$('#msgs');if(box)box.style.setProperty('--chat-font-size',(Number(CC(cur).fontSize)||14)+'px')}
 let multiSelectMode=false;let selectedMsgIndices=new Set();
 function draw(){
-  applyChatFont();
+  applyChatFont();renderQBar();
   const p=P(cur),h=S.chats[cur]=S.chats[cur]||[];
   if(!h.length&&p.greet){h.push({role:'assistant',content:p.greet,t:Date.now()});save()}
   $('#ctitle').textContent=(CC(cur).roleNote||'').trim()||p.name;const roleNote=$('#chat-role-note');if(roleNote)roleNote.textContent='';$('#ucss').textContent=(S.themes.find(t=>t.id===CC(cur).css)||{}).css||'';sIcon();srch(0);
@@ -1989,16 +1991,28 @@ function messageMenu(i){const h=S.chats[cur],m=h[i];if(!m)return;const actions=[
  {label:'多选消息',run:()=>{multiSelectMode=true;selectedMsgIndices.add(i);draw()}},
  {label:'编辑消息',run:()=>modal(m.content||'',v=>{m.content=v;delete m.recalled;save();draw()})},
  {label:'撤回消息',run:()=>{if(confirm('确定撤回这条消息吗？')){m.recalled=true;save();draw()}}},
- {label:m.role==='assistant'?'重新生成':'引用到输入框',run:()=>{if(m.role==='assistant'){if(busy)return;h.splice(i);while(h.length&&h[h.length-1].role!=='user')h.pop();save();draw();if(h.length&&h[h.length-1].role==='user')gen();else toast('前面没有可供重新生成的用户消息')}else{$('#ta').value=(m.content||'');$('#ta').focus();sIcon()}}},
- {label:'引用回复',run:()=>{$('#ta').value='“'+(m.content||'')+'”\n'+$('#ta').value;$('#ta').focus();sIcon()}},
+ {label:m.role==='assistant'?'重新生成':'复制到输入框',run:()=>{if(m.role==='assistant'){if(busy)return;h.splice(i);while(h.length&&h[h.length-1].role!=='user')h.pop();save();draw();if(h.length&&h[h.length-1].role==='user')gen();else toast('前面没有可供重新生成的用户消息')}else{$('#ta').value=(m.content||'');$('#ta').focus();sIcon()}}},
+ {label:'引用回复',run:()=>setQuote(m)},
  {label:'删除消息',run:()=>{if(confirm('确定删除这条消息吗？')){h.splice(i,1);save();draw()}}},
  {label:'取消',run:()=>{}}];showFeedSheet(actions)}
-$('#msgs').addEventListener('pointerdown',e=>{const r=e.target.closest('.r');if(!r||r.dataset.i===undefined||e.target.closest('.av')||e.target.closest('button'))return;msgLongPressed=false;const i=+r.dataset.i;msgPressTimer=setTimeout(()=>{msgLongPressed=true;messageMenu(i)},520)});
+
+function quoteText(m){return m.image?'[图片]'+(m.content?' '+m.content:''):m.stk?'[表情包]':m.audio?'[语音] '+(m.content||''):m.transfer?'[转账]':(m.content||'')}
+function quoteHTML(m,me){if(!m.quote||!m.quote.text)return'';const d='<i class="qt-d"></i>',t='<span class="qt-t">'+esc(m.quote.text)+'</span>';return '<div class="qt" data-qt="'+(+m.quote.t||0)+'">'+(me?t+d:d+t)+'</div>'}
+function setQuote(m){pendingQuote={chat:cur,role:m.role,text:quoteText(m).replace(/\s+/g,' ').trim().slice(0,80),t:m.t||0};renderQBar();$('#ta').focus()}
+function takeQuote(){const q=pendingQuote&&pendingQuote.chat===cur?{quote:{role:pendingQuote.role,text:pendingQuote.text,t:pendingQuote.t}}:{};pendingQuote=null;renderQBar();return q}
+function renderQBar(){const b=document.getElementById('qbar');if(!b)return;if(pendingQuote&&pendingQuote.chat!==cur)pendingQuote=null;if(!pendingQuote){b.classList.remove('on');b.innerHTML='';return}b.classList.add('on');b.innerHTML='<span class="qb-t">'+(pendingQuote.role==='user'?'引用我的消息：':'引用 '+esc((P(cur)||{}).name||'')+'：')+esc(pendingQuote.text)+'</span><button type="button" id="qb-x" aria-label="取消引用">×</button>';document.getElementById('qb-x').onclick=()=>{pendingQuote=null;renderQBar()}}
+function findQuote(h,sn){sn=String(sn||'').trim();if(sn.length<2)return{};for(let k=h.length-1;k>=0;k--){const x=h[k],c=(x.content||'').trim();if(x.recalled||!c)continue;if(c.includes(sn)||(c.length>=2&&sn.includes(c)))return{quote:{role:x.role,text:quoteText(x).replace(/\s+/g,' ').trim().slice(0,80),t:x.t||0}}}return{}}
+function qc(m){if(m.quote&&m.quote.text&&m.role==='user')return '[用户引用了'+(m.quote.role==='user'?'用户自己':'你')+'之前的消息：「'+m.quote.text+'」]\n'+(m.content||'');return m.content}
+function showRecalled(m){const me=m.role==='user',old=document.getElementById('rcv');if(old)old.remove();const sk=m.stk&&S.stickers.find(x=>x.id===m.stk);let body;if(sk)body='<img src="'+sk.src+'" alt="">';else if(m.image)body=(m.content?'<div class="rc-body">'+esc(m.content)+'</div>':'')+'<img src="'+m.image+'" alt="">';else body='<div class="rc-body">'+esc(m.content||'（空消息）')+'</div>';const d=document.createElement('div');d.id='rcv';d.innerHTML='<div><small>'+(me?'你':esc((P(cur)||{}).name||'对方'))+' 撤回的消息'+(m.t?' · '+hm(m.t):'')+'</small>'+body+'<button type="button">关闭</button></div>';d.onclick=e=>{if(e.target===d||e.target.tagName==='BUTTON')d.remove()};document.body.appendChild(d)}
+function recalledMenu(i){const h=S.chats[cur],m=h&&h[i];if(!m)return;showFeedSheet([{label:'查看被撤回的内容',run:()=>showRecalled(m)},{label:'删除这条撤回提示',run:()=>{h.splice(i,1);save();draw()}},{label:'取消',run:()=>{}}])}
+$('#msgs').addEventListener('pointerdown',e=>{const r=e.target.closest('.r,.recalled-row');if(!r||r.dataset.i===undefined||e.target.closest('.av')||e.target.closest('button'))return;msgLongPressed=false;const i=+r.dataset.i,isRc=r.classList.contains('recalled-row');msgPressTimer=setTimeout(()=>{msgLongPressed=true;isRc?recalledMenu(i):messageMenu(i)},520)});
 ['pointerup','pointercancel','pointerleave'].forEach(ev=>$('#msgs').addEventListener(ev,()=>{if(msgPressTimer)clearTimeout(msgPressTimer);msgPressTimer=null}));
 $('#msgs').onclick=e=>{
  const ms=e.target.closest('[data-ms-all],[data-ms-forward],[data-ms-delete],[data-ms-cancel]');if(ms){e.preventDefault();e.stopPropagation();if(ms.hasAttribute('data-ms-cancel'))exitMultiSelect();else if(ms.hasAttribute('data-ms-all')){const h=S.chats[cur]||[];selectedMsgIndices=new Set(h.map((m,i)=>m.recalled?-1:i).filter(i=>i>=0));draw()}else if(ms.hasAttribute('data-ms-forward'))forwardSelected();else if(ms.hasAttribute('data-ms-delete'))deleteSelected();return}
  const thought=e.target.closest('[data-thought-i]');if(thought){const m=S.chats[cur][+thought.dataset.thoughtI];if(m){const txt=m.thought||'这条消息没有保存内心想法。';modal('内心想法：\n'+txt,()=>{})}return}
  if(msgLongPressed){msgLongPressed=false;e.preventDefault();return}
+ const qt=e.target.closest('[data-qt]');if(qt){const tt=+qt.dataset.qt,hh=S.chats[cur]||[],k=tt?hh.findIndex(x=>x.t===tt&&!x.recalled):-1,el=k>=0&&$('#msgs').querySelector('.r[data-i="'+k+'"]');if(el){el.scrollIntoView({block:'center',behavior:'smooth'});el.classList.add('hl');setTimeout(()=>el.classList.remove('hl'),1500)}else toast('原消息已不存在');return}
+ const rcRow=e.target.closest('.recalled-row');if(rcRow){if(multiSelectMode)return;const rm=(S.chats[cur]||[])[+rcRow.dataset.i];if(rm)showRecalled(rm);return}
  const r=e.target.closest('.r');if(!r)return;const i=+r.dataset.i;if(!Number.isFinite(i))return;
  if(multiSelectMode){if(selectedMsgIndices.has(i))selectedMsgIndices.delete(i);else selectedMsgIndices.add(i);draw();return}
  const mm=S.chats[cur][i];if(CC(cur).trOn&&mm&&mm.role==='assistant'&&!mm.recalled&&!mm.image&&!mm.stk&&!mm.audio&&mm.content&&e.target.closest('.m')){trToggle(i);return}
@@ -2023,10 +2037,10 @@ $('#chat-image-file').onchange=async e=>{const f=e.target.files&&e.target.files[
 function send(){
   const ta=$('#ta'),t=ta.value.trim();if(!t||busy)return;
   if(P(cur).blocked)return toast('已拉黑，请先解除拉黑');
-  ta.value='';ta.style.height='auto';S.chats[cur].push({role:'user',content:t,t:Date.now()});S.last=cur;save();draw();ta.focus();
+  ta.value='';ta.style.height='auto';S.chats[cur].push({role:'user',content:t,t:Date.now(),...takeQuote()});S.last=cur;save();draw();ta.focus();
 }
 function sendStk(id){const s=S.stickers.find(x=>x.id===id);if(!s||busy)return;if(P(cur).blocked)return toast('已拉黑，请先解除拉黑');
-  S.chats[cur].push({role:'user',content:'[表情包：'+s.name+']',stk:id,t:Date.now()});S.last=cur;save();draw()}
+  S.chats[cur].push({role:'user',content:'[表情包：'+s.name+']',stk:id,t:Date.now(),...takeQuote()});S.last=cur;save();draw()}
 function reply(){
   if(busy)return;const h=S.chats[cur];
   if(P(cur).blocked)return toast('已拉黑，请先解除拉黑');
@@ -2079,9 +2093,9 @@ async function maybeAutoSummarize(chatId){const cc=CC(chatId),h=S.chats[chatId]|
 async function gen(){
   const p=P(cur),h=S.chats[cur];setBusy(1);const el=bub({role:'assistant',content:'···'},-1,1,0);
   try{
-    const basePrompt=build(p,h);if((S.cfg.memoryMode||'traditional')==='vector'){try{const vm=await vectorMemoryPrompt(p,h);if(vm)basePrompt.push({role:'system',content:vm})}catch(memErr){toast('向量记忆检索失败，本次继续普通聊天：'+memErr.message)}}const prompt=basePrompt.concat([{role:'system',content:'在保持角色人设和自然对话的前提下，请一次性输出严格 JSON，不要 Markdown 代码块，格式为 {"messages":["第一条独立聊天消息","第二条独立聊天消息"],"reply":"兼容字段","thought":"角色此刻未说出口的内心想法","image_prompt":""}。messages 是角色按真实聊天节奏连续发送的消息数组：结合语境，适合分开发的内容就拆成 2-5 条短消息，每条只放一个自然聊天气泡；不要把几句话用换行或一大段塞进同一个气泡。只有确实一句就能说清时才只输出一条。不要机械地每次都拆成多条。reply 可作为 messages 的兼容备用字段。thought 是简短内心活动。若用户明确要求生成/发图片，image_prompt 填画面描述，否则留空。'},{role:'system',content:TRF_PROMPT()}]);
+    const basePrompt=build(p,h);if((S.cfg.memoryMode||'traditional')==='vector'){try{const vm=await vectorMemoryPrompt(p,h);if(vm)basePrompt.push({role:'system',content:vm})}catch(memErr){toast('向量记忆检索失败，本次继续普通聊天：'+memErr.message)}}const prompt=basePrompt.concat([{role:'system',content:'在保持角色人设和自然对话的前提下，请一次性输出严格 JSON，不要 Markdown 代码块，格式为 {"messages":["第一条独立聊天消息","第二条独立聊天消息"],"reply":"兼容字段","thought":"角色此刻未说出口的内心想法","image_prompt":""}。messages 是角色按真实聊天节奏连续发送的消息数组：结合语境，适合分开发的内容就拆成 2-5 条短消息，每条只放一个自然聊天气泡；不要把几句话用换行或一大段塞进同一个气泡。只有确实一句就能说清时才只输出一条。不要机械地每次都拆成多条。reply 可作为 messages 的兼容备用字段。thought 是简短内心活动。若用户明确要求生成/发图片，image_prompt 填画面描述，否则留空。如果某条回复是针对对话里某一条具体消息的回应（用户说的或你自己之前说的都可以），可以偶尔（不要每条都用）把这一条写成对象 {"text":"回复内容","quote":"被引用消息的原文片段，原样摘抄，不超过30字"}，其余条目仍写成普通字符串。'},{role:'system',content:TRF_PROMPT()}]);
     const raw=await ask(prompt,null);let data;try{const clean=raw.replace(/^```(?:json)?\s*/i,'').replace(/\s*```$/,'');data=JSON.parse(clean)}catch(_){data={reply:raw,thought:''}}
-    let replies=Array.isArray(data.messages)?data.messages.map(x=>String(x||'').trim()).filter(Boolean):[];if(!replies.length){const out=String(data.reply||raw).trim();replies=out.split(/\n{2,}/).map(x=>x.trim()).filter(Boolean);if(replies.length===1&&out.length>180){const parts=out.match(/[^。！？!?]+[。！？!?]?/g)||[out];if(parts.length>=3)replies=parts.map(x=>x.trim()).filter(Boolean)}}if(!replies.length)replies=[String(data.reply||raw).trim()];if(el&&el.parentNode)el.remove();const replyChatId=cur;for(let idx=0;idx<replies.length;idx++){if(cur!==replyChatId)break;if(idx>0){await new Promise(resolve=>setTimeout(resolve,520+Math.floor(Math.random()*420)));}h.push({role:'assistant',content:replies[idx],thought:idx===0?String(data.thought||'').trim():'',t:Date.now()});save();draw();}trfApplyAI(h,data);if(S.cfg.imageEnabled&&String(data.image_prompt||'').trim()){try{const im=await generateImage(String(data.image_prompt).trim());h.push({role:'assistant',content:'',image:im,thought:'我把刚才描述的画面生成出来了。',t:Date.now()})}catch(imgErr){h.push({role:'assistant',content:'图片生成失败：'+imgErr.message,t:Date.now()})}}save();try{await maybeAutoSummarize(cur)}catch(_){}
+    let replyQuotes=[],replies=[];if(Array.isArray(data.messages)){data.messages.forEach(x=>{const isO=x&&typeof x==='object',tx=String(isO?(x.text||x.content||x.reply||''):(x||'')).trim();if(tx){replies.push(tx);replyQuotes.push(isO?String(x.quote||'').trim():'')}})}if(!replies.length){const out=String(data.reply||raw).trim();replies=out.split(/\n{2,}/).map(x=>x.trim()).filter(Boolean);if(replies.length===1&&out.length>180){const parts=out.match(/[^。！？!?]+[。！？!?]?/g)||[out];if(parts.length>=3)replies=parts.map(x=>x.trim()).filter(Boolean)}}if(!replies.length)replies=[String(data.reply||raw).trim()];if(el&&el.parentNode)el.remove();const replyChatId=cur;for(let idx=0;idx<replies.length;idx++){if(cur!==replyChatId)break;if(idx>0){await new Promise(resolve=>setTimeout(resolve,520+Math.floor(Math.random()*420)));}h.push({role:'assistant',content:replies[idx],thought:idx===0?String(data.thought||'').trim():'',t:Date.now(),...findQuote(h,replyQuotes[idx])});save();draw();}trfApplyAI(h,data);if(S.cfg.imageEnabled&&String(data.image_prompt||'').trim()){try{const im=await generateImage(String(data.image_prompt).trim());h.push({role:'assistant',content:'',image:im,thought:'我把刚才描述的画面生成出来了。',t:Date.now()})}catch(imgErr){h.push({role:'assistant',content:'图片生成失败：'+imgErr.message,t:Date.now()})}}save();try{await maybeAutoSummarize(cur)}catch(_){}
   }catch(e){el.textContent='请求失败：'+e.message;el.classList.add('err');setBusy(0);return}
   setBusy(0);draw();
 }
@@ -2281,11 +2295,13 @@ async function keepAlive(on){
 }
 document.addEventListener('visibilitychange',()=>{if(S.cfg.keepAlive&&!document.hidden)keepAlive(true)});
 document.addEventListener('pointerdown',()=>{if(S.cfg.keepAlive&&!kaC)keepAlive(true)},{passive:true});
+let unreadN=0;
+document.addEventListener('visibilitychange',()=>{if(!document.hidden){unreadN=0;try{navigator.clearAppBadge&&navigator.clearAppBadge()}catch(e){}document.title='小手机'}});
 function notifyMsg(pid,m){
  if(S.cfg.notifyPopup===false)return;const p=P(pid);if(!p)return;
  if(stack[stack.length-1]==='chat'&&cur===pid&&!document.hidden)return;
  const txt=String(m.content||'').replace(/\s+/g,' ').slice(0,80)||'[新消息]';
- if(document.hidden){try{if('Notification' in window&&Notification.permission==='granted'){const n=new Notification(p.name,{body:txt,tag:'msg-'+pid});n.onclick=()=>{window.focus();cur=pid;go('chat');n.close()}}}catch(e){}return}
+ if(document.hidden){unreadN++;try{navigator.setAppBadge&&navigator.setAppBadge(unreadN)}catch(e){}document.title='('+unreadN+') 小手机';try{if('Notification' in window&&Notification.permission==='granted'){const n=new Notification(p.name,{body:txt,tag:'msg-'+pid});n.onclick=()=>{window.focus();cur=pid;go('chat');n.close()}}}catch(e){}return}
  let b=$('#ban');if(!b){b=document.createElement('div');b.id='ban';document.body.appendChild(b)}
  b.innerHTML=`<div class="av">${av(p)}</div><div class="bt"><b>${esc(p.name)}</b><span>${esc(txt)}</span></div>`;
  b.onclick=()=>{b.classList.remove('on');cur=pid;go('chat')};
@@ -3138,5 +3154,58 @@ document.addEventListener('click',async e=>{
 [data-theme=dark] #home-page3 .p3-cal-event{border-color:#3b3b41!important}
 </style>
 
+<style id="v76-style">
+/* v76 quote / recall */
+.recalled-row{cursor:pointer;-webkit-user-select:none;user-select:none}
+.qt{display:flex;align-items:flex-start;gap:6px;max-width:100%;color:var(--sub);font-size:12px;line-height:1.45;cursor:pointer;-webkit-user-select:none;user-select:none}
+.qt-t{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;word-break:break-word;white-space:normal}
+.qt-d{flex:none;width:6px;height:6px;border-radius:50%;background:var(--ink);margin-top:.52em}
+.me .qt{justify-content:flex-end;text-align:right}
+.ai .qt{justify-content:flex-start;text-align:left}
+#qbar{display:none;align-items:center;gap:8px;padding:7px 14px;border-top:1px solid var(--line);background:var(--bg);font-size:12.5px;color:var(--sub);flex:none}
+#qbar.on{display:flex}
+#qbar .qb-t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#qbar button{width:24px;height:24px;border-radius:50%;background:var(--p);color:var(--sub);display:grid;place-items:center;font-size:16px;line-height:1;flex:none}
+#rcv{position:fixed;inset:0;z-index:60;background:var(--shade);display:flex;align-items:center;justify-content:center;padding:24px}
+#rcv>div{background:var(--bg);color:var(--ink);border-radius:18px;padding:18px;width:100%;max-width:420px;box-shadow:0 8px 40px #0003}
+#rcv small{color:var(--sub);font-size:12px}
+#rcv .rc-body{margin:10px 0 14px;max-height:50vh;overflow:auto;white-space:pre-wrap;word-break:break-word;line-height:1.6;font-size:15px}
+#rcv img{display:block;max-width:100%;max-height:40vh;border-radius:12px;margin:10px 0 14px}
+#rcv button{width:100%;padding:11px;border-radius:12px;background:var(--p);color:var(--ink)}
+/* v76 iOS fullscreen */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;overscroll-behavior:none;background:var(--bg)}
+html,body{touch-action:manipulation;overscroll-behavior:none}
+body{position:fixed;inset:0;width:100%;height:100%}
+.view{padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+#msgs{overscroll-behavior-y:contain}
+@supports (-webkit-touch-callout:none){
+ input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=file]),textarea,select{font-size:16px!important}
+}
+html.kb .view,html.kb .wx,html.kb .nt,html.kb .ph,html.kb .mu,html.kb .zy,html.kb .ms{top:var(--app-top,0px);bottom:auto;height:var(--app-h)}
+html.kb #inp,html.kb .wx-in,html.kb .feed-composer,html.kb .pd-composer{padding-bottom:7px}
+</style>
+<script>
+/* v76: keep layout glued to the visual viewport when the iOS keyboard opens */
+(function(){
+ const vv=window.visualViewport,root=document.documentElement;if(!vv)return;
+ let raf=0;
+ function fit(){
+  raf=0;
+  const open=window.innerHeight-vv.height>100;
+  if(open){
+   root.style.setProperty('--app-h',vv.height+'px');root.style.setProperty('--app-top',vv.offsetTop+'px');
+   if(!root.classList.contains('kb')){root.classList.add('kb');const m=document.getElementById('msgs');if(m&&m.offsetParent)m.scrollTop=1e9}
+  }else if(root.classList.contains('kb')){
+   root.classList.remove('kb');root.style.removeProperty('--app-h');root.style.removeProperty('--app-top');
+  }
+  if(window.scrollY||document.body.scrollTop){window.scrollTo(0,0);document.body.scrollTop=0}
+ }
+ const sched=()=>{if(!raf)raf=requestAnimationFrame(fit)};
+ vv.addEventListener('resize',sched);vv.addEventListener('scroll',sched);
+ addEventListener('orientationchange',()=>setTimeout(sched,300));
+ document.addEventListener('focusout',()=>setTimeout(sched,120));
+ fit();
+})();
+</script>
 </body>
 </html>
