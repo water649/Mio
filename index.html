@@ -1180,6 +1180,16 @@ button.feed-follow-plus{padding:0;cursor:pointer}
 #settings-main .ios-icon svg.filled{fill:currentColor;stroke:none}
 [data-theme="dark"] #settings-main .ios-icon{background:linear-gradient(145deg,#38383b,#2b2b2e)!important;color:#e7e7e9!important;border-color:rgba(255,255,255,.07);box-shadow:0 1px 2px rgba(0,0,0,.16),inset 0 1px 0 rgba(255,255,255,.04)!important}
 </style>
+
+<style id="feed-action-comment-icon-fix">
+/* Keep the Instagram-style action row as icons only: like, comment, share, save. */
+#v-app.feed-mode .feed-actions > button.feed-action { font-size:0 !important; line-height:0 !important; text-indent:0 !important; }
+#v-app.feed-mode .feed-actions > button.feed-action::before,
+#v-app.feed-mode .feed-actions > button.feed-action::after { content:none !important; display:none !important; }
+#v-app.feed-mode .feed-actions > button.feed-action > svg { display:block !important; visibility:visible !important; opacity:1 !important; width:28px !important; height:28px !important; flex:0 0 28px !important; overflow:visible !important; }
+#v-app.feed-mode .feed-actions > button[data-feed-comment] { display:inline-flex !important; align-items:center !important; justify-content:center !important; min-width:28px !important; }
+#v-app.feed-mode .feed-actions > button[data-feed-comment] > svg { stroke:currentColor !important; fill:none !important; stroke-width:1.8 !important; stroke-linecap:round !important; stroke-linejoin:round !important; }
+</style>
 </head>
 <body>
 
@@ -1573,7 +1583,7 @@ function rPostDetail(){
   $('#pd-count').textContent=String(replies.length+1);
   const when=new Date(o.time||Date.now()).toLocaleString('zh-CN',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'});
   const replyTo=`回复帖子 @ ${esc(u.name)}：${esc((o.text||'').slice(0,36))}${(o.text||'').length>36?'…':''}`;
-  const replyHTML=replies.map(r=>{const ru=who(r.pid||'me'),parent=r.replyTo?replies.find(x=>x.id===r.replyTo):null,pu=parent?who(parent.pid||'me'):null;return `<div class="pd-comment"><div class="av" style="border-radius:50%;overflow:hidden">${av(ru)}</div><div class="pd-comment-main"><div class="pd-by">${esc(ru.name)} <button type="button" class="pd-reply-action" data-pd-reply="${esc(r.id)}" style="float:right;border:0;background:transparent;color:var(--sub)">回复</button></div>${parent?`<div class="pd-reply-context" style="color:var(--sub);font-size:12px;margin-bottom:5px">回复 @${esc(pu.name)}：${esc((parent.text||'').slice(0,50))}</div>`:''}<div class="pd-commenttext">${esc(r.text)}</div></div></div><hr class="pd-sep">`}).join('');
+  const replyHTML=replies.map(r=>{const ru=r.name?{name:r.name,avatar:r.avatar||''}:who(r.pid||'me'),parent=r.replyTo?replies.find(x=>x.id===r.replyTo):null,pu=parent?(parent.name?{name:parent.name}:who(parent.pid||'me')):null;return `<div class="pd-comment"><div class="av" style="border-radius:50%;overflow:hidden">${av(ru)}</div><div class="pd-comment-main"><div class="pd-by">${esc(ru.name)} <button type="button" class="pd-reply-action" data-pd-reply="${esc(r.id)}" style="float:right;border:0;background:transparent;color:var(--sub)">回复</button></div>${parent?`<div class="pd-reply-context" style="color:var(--sub);font-size:12px;margin-bottom:5px">回复 @${esc(pu.name)}：${esc((parent.text||'').slice(0,50))}</div>`:''}<div class="pd-commenttext">${esc(r.text)}</div></div></div><hr class="pd-sep">`}).join('');
   $('#pd-scroll').innerHTML=`<div class="pd-replyto"><span>${replyTo}</span><span style="font-size:24px;color:var(--sub)">●</span></div>
     <div class="pd-user"><div class="av">${av(u)}</div><div class="pd-user-meta"><b>${esc(u.name)} ${u.id==='me'?'':BADGE}</b><small>${esc(u.bio||('@'+(u.handle||'')))}</small></div><span class="dl" data-pmenu="${o.id}" style="margin-left:auto"></span></div>
     <div class="pd-bodytext">${esc(o.text||'')}</div><hr class="pd-sep">
@@ -2189,7 +2199,7 @@ function rApp(){
   if(T!==2)$('#v-app').classList.remove('feed-mode');
 }
 function feedIcon(name){
-  const paths={back:'<path d="m15 18-6-6 6-6"/>',phone:'<path d="M5 3.8 8.3 3l2.1 4.8-2 1.7a15 15 0 006.1 6.1l1.7-2 4.8 2.1-.8 3.3a2 2 0 01-2 1.5C10.1 20.5 3.5 13.9 3.5 5.8A2 2 0 015 3.8Z"/>',more:'<circle cx="5" cy="12" r="1.7" fill="currentColor"/><circle cx="12" cy="12" r="1.7" fill="currentColor"/><circle cx="19" cy="12" r="1.7" fill="currentColor"/>',user:'<circle cx="12" cy="8" r="4" fill="currentColor" stroke="none"/><path d="M4 21c.5-4.5 3.4-7 8-7s7.5 2.5 8 7" fill="currentColor" stroke="none"/>',comment:'<path d="M4 5h16v12H9l-5 3z"/>'};
+  const paths={back:'<path d="m15 18-6-6 6-6"/>',phone:'<path d="M5 3.8 8.3 3l2.1 4.8-2 1.7a15 15 0 006.1 6.1l1.7-2 4.8 2.1-.8 3.3a2 2 0 01-2 1.5C10.1 20.5 3.5 13.9 3.5 5.8A2 2 0 015 3.8Z"/>',more:'<circle cx="5" cy="12" r="1.7" fill="currentColor"/><circle cx="12" cy="12" r="1.7" fill="currentColor"/><circle cx="19" cy="12" r="1.7" fill="currentColor"/>',user:'<circle cx="12" cy="8" r="4" fill="currentColor" stroke="none"/><path d="M4 21c.5-4.5 3.4-7 8-7s7.5 2.5 8 7" fill="currentColor" stroke="none"/>',comment:'<path d="M4 5h16v12H9l-5 3z"/>',gear:'<path d="M9.65 3.2h4.7l.55 2.2c.65.2 1.25.55 1.8 1l2.1-.7 2.35 4.05-1.65 1.55c.1.65.1 1.3 0 1.95l1.65 1.55-2.35 4.05-2.1-.7c-.55.45-1.15.8-1.8 1l-.55 2.2h-4.7l-.55-2.2c-.65-.2-1.25-.55-1.8-1l-2.1.7-2.35-4.05 1.65-1.55a6.4 6.4 0 0 1 0-1.95L2.85 9.75 5.2 5.7l2.1.7c.55-.45 1.15-.8 1.8-1Z"/><circle cx="12" cy="12.25" r="3.05"/>',sticker:'<rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M8 15c2 2 6 2 8 0"/>'};
   return `<svg viewBox="0 0 24 24" aria-hidden="true" fill="${name==='phone'||name==='user'?'currentColor':'none'}" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${paths[name]||''}</svg>`
 }
 function renderFeedHome(root){
@@ -2203,24 +2213,434 @@ function renderFeedHome(root){
     const replyHTML=replies.map(r=>{const ru=who(r.pid||'me');const parent=r.replyTo?replies.find(x=>x.id===r.replyTo):null;const pu=parent?who(parent.pid||'me'):null;return `<div class="feed-reply" data-feed-reply="${esc(r.id)}" data-feed-reply-post="${esc(o.id)}"><div class="av">${av(ru)}</div><div class="feed-reply-main"><div class="feed-reply-by"><span class="feed-reply-by-name">${esc(ru.name)}</span><button type="button" class="feed-reply-manage" data-reply-manage="${esc(r.id)}" data-reply-post="${esc(o.id)}" aria-label="评论选项" title="编辑或删除评论"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></button></div>${parent?`<div class="feed-reply-context">回复 @${esc(pu.name)}：${esc((parent.text||'').slice(0,60))}</div>`:''}<div class="feed-reply-text" data-reply-to="${esc(r.id)}" data-reply-post="${esc(o.id)}" role="button" tabindex="0" title="点击回复">${esc(r.text)}</div></div></div>`}).join('');
     const dt=new Date(o.time||Date.now()).toLocaleString('zh-CN',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'});
     const customLine=idx===0?`<div class="feed-custom-line" data-feed-quote-edit>${esc(quoteText)}</div>`:'';
-    return `<article class="feed-post" data-feed-post="${o.id}"><div class="feed-author"><div class="feed-author-avatar"><div class="av" data-prof="${esc(u.id)}">${av(u)}</div><button type="button" class="feed-follow-plus" data-feed-menu2="${o.id}" aria-label="帖子选项">+</button></div><div class="feed-author-main"><b>${esc(u.name)}${u.id==='me'?'':BADGE}</b><small><span>@${esc(u.handle||u.id)}</span><span class="feed-published">发布于 iPhone&nbsp; ${dt}</span></small></div><button data-feed-menu="${o.id}" aria-label="帖子选项"></button></div>${customLine}<div class="feed-text">${esc(o.text||'')}</div>${replyHTML}<div class="feed-inline-composer"><input data-feed-input="${o.id}" placeholder="${esc(S.feedCommentPlaceholder||'写下评论…')}" autocomplete="off" aria-label="评论这条帖子" data-reply-target=""><img class="feed-compose-avatar" data-feed-quote-avatar src="${quoteAvatar||defaultQuoteAvatar}" alt="选择评论头像" title="选择评论头像"></div></article>`;
+    const imageSrc=o.image||o.photo||o.media||'';
+    const liked=!!o.liked, likes=Math.max(0,+o.likes||0), commentCount=fcxTotal(o.id)||Math.max(0,+o.rp||0);
+    const heart=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.8a5.4 5.4 0 0 0-7.6 0L12 6l-1.2-1.2a5.4 5.4 0 0 0-7.6 7.6L12 21l8.8-8.6a5.4 5.4 0 0 0 0-7.6Z"/></svg>`;
+    const commentIcon=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 11.5a8.5 8.5 0 0 1-8.5 8.5 9 9 0 0 1-4-.9L3 20l.9-4.3a8.5 8.5 0 1 1 16.6-4.2Z"/></svg>`;
+    const shareIcon=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>`;
+    const saveIcon=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12v18l-6-4-6 4Z"/></svg>`;
+    return `<article class="feed-post" data-feed-post="${o.id}"><div class="feed-author"><div class="feed-author-avatar"><div class="av" data-prof="${esc(u.id)}">${av(u)}</div><button type="button" class="feed-follow-plus" data-feed-menu2="${o.id}" aria-label="帖子选项">+</button></div><div class="feed-author-main"><b>${esc(u.name)}${u.id==='me'?'':BADGE}</b><small><span>@${esc(u.handle||u.id)}</span><span class="feed-published">${dt}</span></small></div><button data-feed-menu="${o.id}" aria-label="帖子选项"></button></div>${imageSrc?`<img class="feed-post-image" src="${esc(imageSrc)}" alt="朋友圈图片" loading="lazy">`:''}<div class="feed-caption"><b>${esc(u.name)}</b>${esc(o.text||'')}</div><div class="feed-actions"><button type="button" class="feed-action${liked?' liked':''}" data-feed-like="${o.id}" aria-label="点赞">${heart}</button><button type="button" class="feed-action" data-feed-comment="${o.id}" aria-label="评论">${commentIcon}</button><button type="button" class="feed-action" data-feed-share="${o.id}" aria-label="分享">${shareIcon}</button><button type="button" class="feed-action save-action" data-feed-save="${o.id}" aria-label="收藏">${saveIcon}</button></div>${likes?`<div class="feed-likes">${likes.toLocaleString('zh-CN')} 次赞</div>`:''}<button type="button" class="feed-view-comments" data-feed-comment="${o.id}">查看评论${commentCount?` · ${commentCount} 条`:''}</button></article>`;
   }).join('');
-  root.innerHTML=`<div class="feed-home"><div class="feed-head"><button data-feed-back aria-label="返回主页">${feedIcon('back')}</button><span class="feed-count">${posts.length}</span><span class="feed-kaomoji">Yume</span><span class="feed-grow"></span><button data-feed-phone aria-label="电话">${feedIcon('phone')}</button><button data-feed-more aria-label="更多">${feedIcon('more')}</button></div><div class="feed-scroll" id="feed-scroll">${postMarkup||'<div class="empty">还没有帖子<br>点击右上角更多按钮发布第一条</div>'}</div></div>`;
+  root.innerHTML=`<div class="feed-home"><div class="feed-head"><button data-feed-back aria-label="返回主页">${feedIcon('back')}</button><span class="feed-kaomoji">Yume</span><span class="feed-grow"></span><button data-feed-more aria-label="朋友圈设置">${feedIcon('gear')}</button></div><div class="feed-scroll" id="feed-scroll">${postMarkup||'<div class="empty">还没有帖子<br>点击右上角更多按钮发布第一条</div>'}</div></div>`;
   root.querySelector('[data-feed-back]').onclick=()=>{T=1;rApp()};
-  root.querySelector('[data-feed-phone]').onclick=()=>toast('这是模拟手机界面，暂不支持真实通话');
-  root.querySelector('[data-feed-more]').onclick=()=>showFeedSheet([{label:'发布帖子',run:createUserPost},{label:'角色发帖',run:newPost},{label:'编辑自定义文案',run:editFeedQuote},{label:'取消',run:()=>{}}]);
+  root.querySelector('[data-feed-more]').onclick=()=>showFeedSheet([{label:'发布朋友圈',run:createUserPost},{label:'角色发帖',run:newPost},{label:'生成路人评论与点赞',run:()=>{const first=S.posts.slice().sort((a,b)=>(b.time||0)-(a.time||0))[0];if(first)generateFeedPasserby(first.id);else toast('先发布一条朋友圈')}} ,{label:'编辑自定义文案',run:editFeedQuote},{label:'取消',run:()=>{}}]);
   root.querySelectorAll('[data-feed-menu],[data-feed-menu2]').forEach(btn=>btn.onclick=e=>{e.stopPropagation();const id=btn.dataset.feedMenu||btn.dataset.feedMenu2,post=S.posts.find(p=>p.id===id);if(!post)return;const actions=[{label:'写评论',run:()=>{const inp=root.querySelector(`[data-feed-input="${id}"]`);if(inp)inp.focus()}},{label:'让角色评论',run:()=>generateFeedCharacterComment(id)}];actions.push({label:'编辑帖子',run:()=>modal(post.text||'',v=>{if(v.trim()){post.text=v.trim();save();rApp()}})});actions.push({label:'删除这条帖子',run:()=>{if(confirm('确定删除这条朋友圈吗？')){S.posts=S.posts.filter(p=>p.id!==id);if(S.postReplies)delete S.postReplies[id];save();rApp();toast('已删除')}}});actions.push({label:'取消',run:()=>{}});showFeedSheet(actions)});
+  root.querySelectorAll('[data-feed-like]').forEach(btn=>btn.onclick=()=>{const post=S.posts.find(x=>x.id===btn.dataset.feedLike);if(!post)return;post.liked=post.liked?0:1;post.likes=Math.max(0,(+post.likes||0)+(post.liked?1:-1));save();renderFeedHome(root)});
+  root.querySelectorAll('[data-feed-comment]').forEach(btn=>btn.onclick=()=>openFeedComments(btn.dataset.feedComment));
+  root.querySelectorAll('[data-feed-save]').forEach(btn=>btn.onclick=()=>{const post=S.posts.find(x=>x.id===btn.dataset.feedSave);if(!post)return;post.saved=!post.saved;save();toast(post.saved?'已收藏':'已取消收藏');btn.style.fill=post.saved?'currentColor':'none'});
+  root.querySelectorAll('[data-feed-share]').forEach(btn=>btn.onclick=()=>{const post=S.posts.find(x=>x.id===btn.dataset.feedShare);if(!post)return;const text=(who(post.pid).name+'：'+(post.text||''));if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(text).then(()=>toast('帖子文字已复制')).catch(()=>toast('暂不支持分享'));else toast('暂不支持分享')});
   root.querySelectorAll('[data-feed-quote-edit]').forEach(el=>el.onclick=editFeedQuote);
   root.querySelectorAll('[data-feed-quote-avatar]').forEach(el=>el.onclick=()=>pickImage(src=>{S.feedQuoteAvatar=src;save();renderFeedHome(root)}));
   root.querySelectorAll('[data-reply-to]').forEach(el=>{const startReply=()=>{const postId=el.dataset.replyPost,replyId=el.dataset.replyTo;const replies=(S.postReplies&&S.postReplies[postId])||[];const target=replies.find(r=>r.id===replyId);const input=root.querySelector(`[data-feed-input="${postId}"]`);if(!target||!input)return;input.dataset.replyTarget=replyId;input.placeholder=`回复 @${who(target.pid||'me').name}…`;input.focus()};el.onclick=startReply;el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();startReply()}}});
   root.querySelectorAll('[data-reply-manage]').forEach(btn=>btn.onclick=()=>{const postId=btn.dataset.replyPost,replyId=btn.dataset.replyManage;const replies=(S.postReplies&&S.postReplies[postId])||[];const reply=replies.find(r=>r.id===replyId);if(!reply)return;showFeedSheet([{label:'编辑评论',run:()=>{const value=prompt('编辑你的评论',reply.text);if(value===null)return;if(!value.trim())return toast('评论内容不能为空');reply.text=value.trim();save();renderFeedHome(root);toast('评论已更新')}},{label:'删除评论',run:()=>{if(!confirm('确定删除这条评论吗？'))return;S.postReplies[postId]=replies.filter(r=>r.id!==replyId);const post=S.posts.find(p=>p.id===postId);if(post)post.rp=Math.max(0,(+post.rp||0)-1);save();renderFeedHome(root);toast('评论已删除')}},{label:'取消',run:()=>{}}])});
   root.querySelectorAll('[data-feed-input]').forEach(input=>input.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();const text=input.value.trim();if(!text)return;const target=input.dataset.feedInput;S.postReplies=S.postReplies||{};S.postReplies[target]=S.postReplies[target]||[];const replyTarget=input.dataset.replyTarget||'';S.postReplies[target].push({id:uid(),pid:'me',text,time:Date.now(),...(replyTarget?{replyTo:replyTarget}:{})});input.dataset.replyTarget='';const po=S.posts.find(x=>x.id===target);if(po)po.rp=(+po.rp||0)+1;save();const scroll=root.querySelector('#feed-scroll'),y=scroll?scroll.scrollTop:0;rApp();const ns=$('#feed-scroll');if(ns)ns.scrollTop=y;toast('评论已发送')}});
 }
+/* ===================== Instagram-style Moments comments (fcx) ===================== */
+let FCX=null;
+const FCX_PAL=['#f09433','#e6683c','#dc2743','#cc2366','#bc1888','#5b51d8','#2f80ed','#0fa3b1','#2e9e6b','#8a8d91'];
+const fcxHash=s=>{let h=0;for(const c of String(s||'?'))h=(h*31+c.charCodeAt(0))>>>0;return h};
+const fcxN=n=>{n=Math.max(0,Math.round(+n||0));if(n>=1e4)return(n/1e4).toFixed(1).replace(/\.0$/,'')+'万';return n.toLocaleString('en-US')};
+function fcxAgo(t){const m=Math.max(0,Math.floor((Date.now()-(+t||Date.now()))/60000));if(m<1)return'刚刚';if(m<60)return m+'分钟';const h=Math.floor(m/60);if(h<24)return h+'小时';const d=Math.floor(h/24);if(d<7)return d+'天';return Math.floor(d/7)+'周'}
+function fcxIdent(r){
+  if(r.name)return{name:r.name,avatar:r.avatar||'',pass:true};
+  const pid=r.pid||'me',u=who(pid);
+  const nm=pid==='me'?(S.me.handle||S.me.name||'我'):(P(pid)?(P(pid).handle||P(pid).name):u.name);
+  return{name:nm,avatar:u.avatar||'',pass:false}
+}
+function fcxAv(idn){
+  if(idn.avatar)return`<img src="${esc(idn.avatar)}" alt="">`;
+  const ch=(idn.name||'?').replace(/^[_.\s]+/,'')[0]||'?';
+  return`<span style="position:absolute;inset:0;display:grid;place-items:center;background:${FCX_PAL[fcxHash(idn.name)%FCX_PAL.length]}">${esc(ch.toUpperCase())}</span>`
+}
+function fcxTotal(pid){const a=(S.postReplies&&S.postReplies[pid])||[];return a.length+a.reduce((s,r)=>s+(+r.more||0),0)}
+function fcxSyncCount(pid){
+  const post=S.posts.find(x=>x.id===pid),t=fcxTotal(pid);if(post)post.rp=t;
+  document.querySelectorAll(`.feed-view-comments[data-feed-comment="${pid}"]`).forEach(b=>b.textContent='查看评论'+(t?` · ${fcxN(t)} 条`:''))
+}
+function fcxTree(postId){
+  const all=(S.postReplies&&S.postReplies[postId])||[],byId=new Map(all.map(r=>[r.id,r]));
+  const rootOf=r=>{let c=r,g=0;while(c.replyTo&&byId.has(c.replyTo)&&g++<40)c=byId.get(c.replyTo);return c};
+  const roots=all.filter(r=>!r.replyTo||!byId.has(r.replyTo));
+  const kids=new Map(roots.map(r=>[r.id,[]]));
+  all.forEach(r=>{if(roots.includes(r))return;const rt=rootOf(r);if(kids.has(rt.id))kids.get(rt.id).push(r)});
+  kids.forEach(a=>a.sort((x,y)=>(x.time||0)-(y.time||0)));
+  return{all,byId,roots,kids,rootOf}
+}
+function fcxDescendants(postId,id){
+  const all=(S.postReplies&&S.postReplies[postId])||[],out=new Set([id]);let grow=true;
+  while(grow){grow=false;all.forEach(r=>{if(r.replyTo&&out.has(r.replyTo)&&!out.has(r.id)){out.add(r.id);grow=true}})}
+  return out
+}
+function fcxShrink(src,max=900){return new Promise(res=>{const im=new Image();im.onload=()=>{try{const k=Math.min(1,max/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);res(c.toDataURL('image/jpeg',.82))}catch(e){res(src)}};im.onerror=()=>res(src);im.src=src})}
+function fcxJSON(raw){
+  const t=String(raw||'').replace(/^```[a-z]*\s*/i,'').replace(/```\s*$/,'').trim();const a=t.search(/[\[{]/);if(a<0)return null;
+  const close=t[a]==='['?']':'}',b=t.lastIndexOf(close);if(b<a)return null;
+  try{return JSON.parse(t.slice(a,b+1))}catch(e){return null}
+}
+async function fcxAsk(sys,user,image){
+  if(!S.cfg.key)throw new Error('请先在设置里填写 API Key');
+  if(image){try{return await ask([{role:'system',content:sys},{role:'user',content:[{type:'text',text:user},{type:'image_url',image_url:{url:image}}]}])}catch(e){}}
+  return ask([{role:'system',content:sys},{role:'user',content:user}])
+}
+
+/* ---------- context builders (keep characters in persona) ---------- */
+function fcxPostCtx(post){
+  const self=post.pid==='me',au=who(post.pid);
+  return`【帖子】\n发帖人：${self?(S.me.name||'用户')+'（用户本人）':au.name}\n发布于：${fcxAgo(post.time)}前\n正文：${post.text||'（无文字）'}${post.image?'\n附带：一张图片':''}`
+}
+function fcxThreadCtx(post,limit){
+  const all=(S.postReplies&&S.postReplies[post.id])||[],byId=new Map(all.map(r=>[r.id,r]));
+  return all.slice(-(limit||14)).map(r=>{const par=r.replyTo&&byId.get(r.replyTo);return`${fcxIdent(r).name}${par?' 回复 '+fcxIdent(par).name:''}：${(r.text||(r.sticker?'[表情包]':r.image?'[图片]':'')).slice(0,100)}`}).join('\n')
+}
+function fcxChain(post,rec){
+  const all=(S.postReplies&&S.postReplies[post.id])||[],byId=new Map(all.map(r=>[r.id,r])),out=[];let c=rec,g=0;
+  while(c&&g++<6){out.unshift(`${fcxIdent(c).name}：${fcxRecText(c)}`);c=c.replyTo&&byId.get(c.replyTo)}
+  return out.join('\n')
+}
+function fcxRecText(r){
+  let t=r.text||'';
+  if(r.sticker){const s=S.stickers.find(x=>x.id===r.sticker);t+=(t?' ':'')+'[表情包'+(s&&(s.description||s.name)?'：'+(s.description||s.name):'')+']'}
+  if(r.image)t+=(t?' ':'')+'[图片]';
+  return t||'（空）'
+}
+function fcxChatCtx(ch){
+  const h=(S.chats&&S.chats[ch.id])||[];
+  const rec=h.filter(m=>m&&!m.recalled&&(m.content||m.stk||m.image)).slice(-10).map(m=>(m.role==='user'?(S.me.name||'用户'):ch.name)+'：'+(m.stk?'[表情包]':m.image?'[图片]'+(m.content||''):String(m.content||'')).slice(0,120));
+  return rec.length?'\n\n【你和用户最近的聊天（仅用于保持关系、称呼与语气一致，不要在评论里复述）】\n'+rec.join('\n'):''
+}
+function fcxLang(ch){
+  const cc=CC(ch.id);
+  if(cc.trOn&&(cc.trOut||[]).length)return`使用「${cc.trOut.join('、')}」写（这是该角色被设定的输出语种），translation 给出自然准确的简体中文译文`;
+  return'使用这个角色按人设最自然的语言：中文角色写中文，translation 留空字符串；外国角色（如英国人、日本人、韩国人）用其母语写，translation 给出自然准确的简体中文译文；不要擅自让角色切换语言'
+}
+async function fcxCharSpeak(ch,post,task,withImage){
+  const sys=build(ch,[])[0].content+fcxChatCtx(ch)+`
+
+【场景】你正在 Instagram 风格的朋友圈评论区里。你就是「${ch.name}」本人，不是旁白，也不是 AI 助手。
+【不可违反的规则】
+1. 说话方式、称呼、情感浓度、用词习惯、是否使用表情/颜文字，全部严格依照上面的人设、世界书、记忆，以及你与用户的聊天关系；人设里没有的习惯不要凭空添加，也不要变得比平时更热情或更冷淡。
+2. 只能依据帖子文字、图片和已有评论作答；不得编造帖子里没有的细节，不得知道在人设中不可能知道的信息。
+3. 像真实社交平台的评论：通常 1-2 句，口语化；不复述原帖，不总结，不套用模板化夸赞，不无缘无故煽情，不写动作描写或旁白。
+4. 如果按人设和当前关系，你此刻不会评论/回复（不认识、赌气中、本来就不会主动搭话等），输出 {"skip":true}。
+5. 语言：${fcxLang(ch)}。
+6. 只输出一个严格 JSON 对象，不要代码块、不要解释：{"text":"","translation":"","like":false}（like 表示你是否顺手给对方的评论点赞）`;
+  const raw=await fcxAsk(sys,fcxPostCtx(post)+task,withImage?post.image:'');
+  let j=fcxJSON(raw);
+  if(!j||typeof j!=='object'||Array.isArray(j)){const t=String(raw||'').trim();if(!t||t.length>240||/^[\[{]/.test(t))return null;j={text:t}}
+  if(j.skip)return null;
+  let text=String(j.text||'').trim().replace(/^["“「]|["”」]$/g,'').trim();if(!text)return null;
+  let tr=String(j.translation||'').trim();if(tr===text)tr='';
+  return{text,translation:tr,like:!!j.like}
+}
+async function fcxCharComment(post,ch){
+  const out=await fcxCharSpeak(ch,post,`\n\n【已有评论】\n${fcxThreadCtx(post)||'（暂无）'}\n\n请以你的身份，给这条帖子写一条评论。`,true);
+  if(!out)return null;
+  return{id:uid(),pid:ch.id,text:out.text,translation:out.translation,time:Date.now(),likes:rnd(12)}
+}
+
+/* ---------- passerby (strangers) ---------- */
+const FCX_NAMES=['_one_life_it_is_','slow.morning','papercloud_','after.rain','bluehour_note','little_days_','mina.0412','jonas_h','noor.ally','tokyo.bluehour','m_e_l_o_n','kai.2201','yuna_ssi','rafa.lopes','east.of.eden_','n0vember_','arnab.chatterjee07','rknongmin1452','lemon.t_','sora.na','ohmy_dani','late.night.cafe'];
+function fcxLocalPasserby(post,n){
+  const img=!!post.image;
+  const zh=img?['这张好有氛围','光线太舒服了','好喜欢这种松弛感','求原图','哈哈哈哈哈哈','前排','这个角度太会了','mark一下']:['哈哈哈哈哈哈','前排','共鸣了','路过，祝你今天顺利','这句话我也想说','mark一下','突然有点想哭'];
+  const fx=[['This is so peaceful.','好安静啊。'],['Not me reading this three times','只有我读了三遍吗'],['Needed this today.','今天正好需要这个。'],['분위기 너무 좋다','氛围太好了'],['なんか落ち着く','莫名让人安心'],['Love this energy','好喜欢这种能量']];
+  const names=FCX_NAMES.slice().sort(()=>Math.random()-.5),out=[];
+  for(let i=0;i<n;i++){
+    const foreign=Math.random()<.3,it={name:names[i%names.length],minutesAgo:3+rnd(600),likes:Math.random()<.15?500+rnd(40000):rnd(60),more:Math.random()<.25?1+rnd(40):0,replies:[]};
+    if(foreign){const f=fx[rnd(fx.length)];it.text=f[0];it.translation=f[1]}else{it.text=zh[rnd(zh.length)];it.translation=''}
+    if(Math.random()<.3){const f=zh[rnd(zh.length)];it.replies.push({name:names[(i+7)%names.length],text:f,translation:'',likes:rnd(20),minutesAgo:2+rnd(120)})}
+    out.push(it)
+  }
+  return out
+}
+async function fcxAIPasserby(post,n){
+  const worlds=S.worlds.filter(w=>w.on!==false&&w.content&&(w.scope||'global')==='global').map(w=>w.content).join('\n').slice(0,1500);
+  const au=post.pid==='me'?`${S.me.name||'用户'}（普通账号）`:(()=>{const p=P(post.pid)||{};return`${p.name||'角色'}：${String(p.prompt||p.bio||'').slice(0,300)}`})();
+  const names=S.personas.map(p=>p.name).filter(Boolean).join('、');
+  const exist=((S.postReplies&&S.postReplies[post.id])||[]).filter(r=>r.name).map(r=>r.text).slice(-8).join(' / ');
+  const sys=`你在模拟 Instagram 评论区里的路人网友。
+${worlds?'【世界观（路人评论必须符合）】\n'+worlds+'\n':''}【发帖人资料（只用来判断他的公开形象；路人不知道其私下的秘密、感情和未公开的事）】${au}
+规则：
+- 为这条帖子生成 ${n} 条顶级评论，真实 Instagram 生态。用户名像真实账号（下划线/点/数字/英文，如 _one_life_it_is_、arnab.chatterjee07），禁止使用这些角色名：${names||'无'}。
+- 约 30% 的评论使用外语（英语/韩语/日语/西语/葡语/印地语等，与发帖语境合理即可），外语评论必须给 translation（简体中文）；中文评论 translation 为空字符串。
+- 内容多样：附和、玩梗、抬杠、提问、一句话、纯表情/颜文字、跑题、开玩笑；长短不一，别全是夸奖。不得出现帖子里没有的信息，不得替发帖人或任何角色发言，不得提及 AI。
+- likes 呈长尾分布（个别很高如 57000，多数个位数到几百）；minutesAgo 为 3 到 ${Math.max(10,Math.min(1500,Math.floor((Date.now()-(post.time||Date.now()))/60000)))} 之间的整数。
+- 约三分之一的评论带 replies（1-2 条网友互动回复，用户名各不相同），并用 more 表示这条评论下还有多少条未展开的回复（多数 0，高赞可到上百）。
+只输出严格 JSON 数组，不要代码块：[{"name":"","text":"","translation":"","likes":0,"minutesAgo":10,"more":0,"replies":[{"name":"","text":"","translation":"","likes":0,"minutesAgo":5}]}]`;
+  const raw=await fcxAsk(sys,fcxPostCtx(post)+(exist?'\n\n已有的路人评论（避免重复）：'+exist:''),post.image);
+  const j=fcxJSON(raw);return Array.isArray(j)?j.filter(x=>x&&x.name&&x.text):null
+}
+async function fcxGenPasserby(post,n){
+  n=n||8;let items=null;
+  if(S.cfg.key){try{items=await fcxAIPasserby(post,n)}catch(e){console.warn('passerby ai',e)}}
+  if(!items||!items.length)items=fcxLocalPasserby(post,n);
+  const list=(S.postReplies[post.id]=S.postReplies[post.id]||[]),used=new Set(list.map(r=>r.name).filter(Boolean)),now=Date.now(),minT=(post.time||now)+30000;
+  const mk=m=>Math.min(now-20000,Math.max(minT,now-Math.max(1,+m||5)*60000));
+  const uniq=nm=>{nm=String(nm).replace(/\s+/g,'').slice(0,30)||'user_'+uid();let k=nm,i=2;while(used.has(k))k=nm+i++;used.add(k);return k};
+  items.forEach(it=>{
+    const root={id:uid(),pid:'',name:uniq(it.name),text:String(it.text).trim(),translation:String(it.translation||'').trim(),time:mk(it.minutesAgo),likes:Math.max(0,Math.round(+it.likes||0)),more:Math.max(0,Math.min(999,Math.round(+it.more||0)))};
+    list.push(root);
+    (Array.isArray(it.replies)?it.replies:[]).slice(0,2).forEach(rp=>{if(!rp||!rp.text)return;list.push({id:uid(),pid:'',name:uniq(rp.name||'user'),text:String(rp.text).trim(),translation:String(rp.translation||'').trim(),time:Math.min(now-5000,Math.max(root.time+60000,mk(rp.minutesAgo))),likes:Math.max(0,Math.round(+rp.likes||0)),replyTo:root.id})})
+  });
+  post.likes=(+post.likes||0)+items.length*(4+rnd(20));post.passerbyGenerated=true;
+  fcxSyncCount(post.id);save();
+}
+async function fcxMoreReplies(post,root){
+  let items=null;
+  if(S.cfg.key){try{
+    const sys=`你在模拟 Instagram 评论区的路人网友。现在要为下面这条评论补充 3 条其他网友的回复，口吻真实随意，可玩梗、附和、抬杠；用户名各不相同且不同于已有用户；与评论语言相呼应，外语必须给简体中文 translation，中文 translation 为空字符串。不要替发帖人或任何角色发言。只输出严格 JSON 数组：[{"name":"","text":"","translation":"","likes":0,"minutesAgo":5}]`;
+    const j=fcxJSON(await fcxAsk(sys,fcxPostCtx(post)+`\n\n被回复的评论（${root.name}）：${root.text}`));if(Array.isArray(j))items=j.filter(x=>x&&x.text)
+  }catch(e){console.warn(e)}}
+  if(!items||!items.length)items=fcxLocalPasserby(post,3).map(x=>({name:x.name,text:x.text,translation:x.translation,likes:x.likes%80,minutesAgo:5+rnd(120)}));
+  const list=S.postReplies[post.id],used=new Set(list.map(r=>r.name).filter(Boolean)),now=Date.now();let added=0;
+  items.slice(0,3).forEach(it=>{let nm=String(it.name||'user').replace(/\s+/g,'').slice(0,30),k=nm,i=2;while(used.has(k))k=nm+i++;used.add(k);list.push({id:uid(),pid:'',name:k,text:String(it.text).trim(),translation:String(it.translation||'').trim(),time:Math.min(now-5000,Math.max((root.time||now)+60000,now-Math.max(1,+it.minutesAgo||5)*60000)),likes:Math.max(0,Math.round(+it.likes||0)),replyTo:root.id});added++});
+  root.more=Math.max(0,(+root.more||0)-added);fcxSyncCount(post.id);save()
+}
+
+/* ---------- responses to the user ---------- */
+async function fcxRespond(post,rec,target,ui){
+  if(!S.cfg.key)return;
+  let ch=null,pass=null,situation='';
+  if(target){
+    if(!target.name&&target.pid&&target.pid!=='me'&&P(target.pid)&&!P(target.pid).blocked){ch=P(target.pid);situation='用户在你的评论下回复了你'}
+    else if(target.name&&Math.random()<.6)pass=target;
+  }else if(post.pid!=='me'&&P(post.pid)&&!P(post.pid).blocked){ch=P(post.pid);situation='用户评论了你发的这条帖子'}
+  if(!ch&&!pass)return;
+  const who2=ch?ch.name:pass.name;ui.typing(who2,rec.id);
+  try{
+    let out=null;
+    if(ch){
+      out=await fcxCharSpeak(ch,post,`\n\n【评论串（旧→新）】\n${fcxChain(post,rec)}\n\n情境：${situation}，他/她说：「${fcxRecText(rec)}」\n请以你的身份回复。仅当人设明确不会理睬时才输出 skip。`,false)
+    }else{
+      const sys=`你是 Instagram 网友「${pass.name}」。你之前在这条帖子下评论：「${pass.text}」。请保持与原评论一致的语气、语言和性格（不要突然变成别人，更不要变成客服或 AI）。现在有人回复了你，请自然回一句（可以很短、玩梗或一个表情，也可以选择不理会）。语言与原评论一致；非中文时 translation 给出简体中文译文，中文则为空字符串。只输出严格 JSON：{"text":"","translation":"","skip":false}`;
+      const j=fcxJSON(await fcxAsk(sys,fcxPostCtx(post)+`\n\n【评论串】\n${fcxChain(post,rec)}`));
+      if(j&&!j.skip&&String(j.text||'').trim())out={text:String(j.text).trim(),translation:String(j.translation||'').trim(),like:false}
+    }
+    if(!out)return;
+    const reply={id:uid(),pid:ch?ch.id:'',...(ch?{}:{name:pass.name}),text:out.text,translation:out.translation,time:Date.now(),likes:0,replyTo:rec.id};
+    (S.postReplies[post.id]=S.postReplies[post.id]||[]).push(reply);
+    if(out.like&&ch&&ch.id===post.pid)rec.authorLiked=true;
+    fcxSyncCount(post.id);save();ui.arrived(reply,who2)
+  }catch(e){toast('回复失败：'+(e&&e.message||'请检查 API 设置'))}
+  finally{ui.typing(null)}
+}
+async function fcxRegen(post,rec,ui){
+  const ch=P(rec.pid);if(!ch)return toast('这不是角色评论');
+  if(!S.cfg.key)return toast('请先在设置里填写 API Key');
+  toast('正在以 '+ch.name+' 的人设重新生成…');
+  try{
+    const all=S.postReplies[post.id]||[],par=rec.replyTo&&all.find(x=>x.id===rec.replyTo);
+    const out=par
+      ?await fcxCharSpeak(ch,post,`\n\n【评论串（旧→新）】\n${fcxChain(post,par)}\n\n情境：对方评论/回复了你，他/她说：「${fcxRecText(par)}」\n请以你的身份回复。`,false)
+      :await fcxCharSpeak(ch,post,`\n\n【已有评论】\n${fcxThreadCtx(post)||'（暂无）'}\n\n请以你的身份，给这条帖子写一条评论。`,true);
+    if(!out)return toast(ch.name+' 这次不想说话');
+    rec.text=out.text;rec.translation=out.translation;rec.time=Date.now();save();ui.draw()
+  }catch(e){toast('重新生成失败：'+(e&&e.message||''))}
+}
+
+/* ---------- the sheet ---------- */
+function openFeedComments(postId,opt){
+  opt=opt||{};
+  const post=S.posts.find(x=>x.id===postId);if(!post)return;
+  S.postReplies=S.postReplies||{};S.postReplies[postId]=S.postReplies[postId]||[];
+  S.postReplies[postId].forEach(r=>{if(r._originalText!==undefined){if(r._showTranslation)r.text=r._originalText;delete r._originalText;delete r._showTranslation}});
+  document.querySelectorAll('.fcx-mask,.feed-comments-mask').forEach(m=>m.remove());
+  const aP=post.pid==='me'?null:P(post.pid),authorName=post.pid==='me'?(S.me.handle||S.me.name||''):(aP?(aP.handle||aP.name):'');
+  const mask=document.createElement('div');mask.className='fcx-mask';
+  const svg=(d,x)=>`<svg viewBox="0 0 24 24" ${x||''}>${d}</svg>`;
+  mask.innerHTML=`<section class="fcx-sheet" role="dialog" aria-modal="true" aria-label="评论">
+<div class="fcx-grab"></div>
+<header class="fcx-head"><button type="button" class="fcx-sort" data-fx="sort"><span data-fx-sortlabel>热门</span>${svg('<path d="m6 9 6 6 6-6"/>','fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"')}</button><strong>评论</strong><button type="button" class="fcx-x" data-fx="close" aria-label="关闭">×</button></header>
+<div class="fcx-list" data-fx-list></div>
+<div class="fcx-compose">
+<div class="fcx-banner" data-fx-banner hidden><span></span><button type="button" data-fx="cancelreply" aria-label="取消回复">×</button></div>
+<div class="fcx-pend" data-fx-pend hidden><img alt=""><button type="button" data-fx="rmimg" aria-label="移除图片">×</button></div>
+<div class="fcx-stkpanel" data-fx-stkpanel hidden></div>
+<div class="fcx-line"><span class="fcx-me" data-fx-me></span>
+<div class="fcx-entry"><input data-fx-input placeholder="${esc(authorName?'为'+authorName+'添加评论…':'添加评论…')}" maxlength="500" enterkeyhint="send" autocomplete="off">
+<button type="button" class="fcx-ib" data-fx="photo" aria-label="添加图片">${svg('<rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M4 17l5-5 4 4 3-3 4 5"/>')}</button>
+<button type="button" class="fcx-ib" data-fx="stk" aria-label="表情包">${svg('<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M8 14c1 2 7 2 8 0"/>')}</button>
+<button type="button" class="fcx-post" data-fx="send" hidden>发布</button></div></div>
+<input type="file" accept="image/*" data-fx-file hidden></div></section>`;
+  document.body.appendChild(mask);
+  const sheet=mask.querySelector('.fcx-sheet'),list=mask.querySelector('[data-fx-list]'),input=mask.querySelector('[data-fx-input]'),file=mask.querySelector('[data-fx-file]');
+  const banner=mask.querySelector('[data-fx-banner]'),pend=mask.querySelector('[data-fx-pend]'),stkPanel=mask.querySelector('[data-fx-stkpanel]'),postBtn=mask.querySelector('[data-fx="send"]'),photoBtn=mask.querySelector('[data-fx="photo"]'),stkBtn=mask.querySelector('[data-fx="stk"]');
+  const st={sort:S.feedSort||'top',exp:new Set(),flip:new Set(),reply:null,img:'',typing:null,loading:false,loadingMore:new Set()};
+  const me=who('me');mask.querySelector('[data-fx-me]').innerHTML=fcxAv({name:me.name||'我',avatar:me.avatar||''});
+  const heart=f=>`<svg viewBox="0 0 24 24" class="fcx-heart"><path d="M20.8 4.8a5.4 5.4 0 0 0-7.6 0L12 6l-1.2-1.2a5.4 5.4 0 0 0-7.6 7.6L12 21l8.8-8.6a5.4 5.4 0 0 0 0-7.6Z" fill="${f?'currentColor':'none'}" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>`;
+  const dots='<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>';
+  const trDefault=()=>S.feedTrDefault!==false;
+
+  function rowHTML(r,isReply,tree){
+    const idn=fcxIdent(r),isAuthor=!r.name&&r.pid===post.pid;
+    const hasTr=!!(r.translation&&r.translation.trim()),flip=st.flip.has(r.id),showTr=hasTr&&(trDefault()?!flip:flip);
+    const par=r.replyTo&&tree.byId.get(r.replyTo),mention=par&&isReply?`<span class="fcx-at">@${esc(fcxIdent(par).name)}</span> `:'';
+    const stk=r.sticker&&S.stickers.find(x=>x.id===r.sticker);
+    const authorLiked=post.pid==='me'?(r.liked&&(r.name||r.pid!=='me')):!!r.authorLiked;
+    const alAv=post.pid==='me'?fcxAv({name:me.name||'我',avatar:me.avatar||''}):fcxAv({name:aP?aP.name:'?',avatar:aP?aP.avatar:''});
+    const cnt=+r.likes||0;
+    return`<div class="fcx-row${isReply?' is-reply':''}" data-rid="${esc(r.id)}">
+<div class="fcx-av">${fcxAv(idn)}</div>
+<div class="fcx-main">${r.pinned&&!isReply?'<div class="fcx-pin">已置顶</div>':''}
+<div class="fcx-name"><span>${esc(idn.name)}</span>${isAuthor?'<span class="fcx-tag">作者</span>':''}<time>${fcxAgo(r.time)}</time></div>
+${(r.text||showTr)?`<div class="fcx-text">${mention}${esc(showTr?r.translation:r.text)}</div>`:(mention?`<div class="fcx-text">${mention}</div>`:'')}
+${stk?`<img class="fcx-stk" src="${esc(stk.src)}" alt="">`:''}${r.image?`<img class="fcx-img" src="${esc(r.image)}" alt="">`:''}
+${authorLiked?`<div class="fcx-al"><span class="mini">${alAv}${svg('<path d="M20.8 4.8a5.4 5.4 0 0 0-7.6 0L12 6l-1.2-1.2a5.4 5.4 0 0 0-7.6 7.6L12 21l8.8-8.6a5.4 5.4 0 0 0 0-7.6Z" fill="#ff3040"/>','class="bd2"')}</span>作者赞过</div>`:''}
+<div class="fcx-acts"><button type="button" data-fx="reply" data-id="${esc(r.id)}">回复</button>${hasTr?`<button type="button" data-fx="tr" data-id="${esc(r.id)}">${showTr?'查看原文':'查看译文'}</button>`:''}<button type="button" class="fcx-dots" data-fx="menu" data-id="${esc(r.id)}" aria-label="更多">${dots}</button></div></div>
+<button type="button" class="fcx-like${r.liked?' liked':''}" data-fx="like" data-id="${esc(r.id)}" aria-label="赞">${heart(r.liked)}<small>${cnt?fcxN(cnt):''}</small></button></div>`
+  }
+  const typingRow=()=>`<div class="fcx-typing is-reply"><span>${esc(st.typing.name)} 正在回复</span><i></i><i></i><i></i></div>`;
+  function threadHTML(root,tree){
+    const kids=tree.kids.get(root.id)||[],more=+root.more||0,total=kids.length+more,typingHere=st.typing&&(st.typing.after===root.id||kids.some(k=>k.id===st.typing.after));
+    if(!total&&!typingHere)return'';
+    if(!st.exp.has(root.id))return(typingHere?typingRow():'')+(total?`<button type="button" class="fcx-thr" data-fx="open" data-id="${esc(root.id)}"><i></i>查看另外${fcxN(total)}条回复</button>`:'');
+    let h=(st.typing&&st.typing.after===root.id?typingRow():'');
+    kids.forEach(k=>{h+=rowHTML(k,true,tree);if(st.typing&&st.typing.after===k.id)h+=typingRow()});
+    if(more>0)h+=`<button type="button" class="fcx-thr" data-fx="more" data-id="${esc(root.id)}"><i></i>${st.loadingMore.has(root.id)?'加载中…':'查看另外'+fcxN(more)+'条回复'}</button>`;
+    return h+`<button type="button" class="fcx-thr" data-fx="hide" data-id="${esc(root.id)}"><i></i>隐藏回复</button>`
+  }
+  function sortRoots(roots){
+    const pri=r=>r.pinned?3:((!r.name)?2:1);
+    return roots.slice().sort((a,b)=>st.sort==='new'?(b.time||0)-(a.time||0):(pri(b)-pri(a))||((+b.likes||0)-(+a.likes||0))||((b.time||0)-(a.time||0)))
+  }
+  function draw(){
+    const tree=fcxTree(postId),keep=list.scrollTop;
+    mask.querySelector('[data-fx-sortlabel]').textContent=st.sort==='new'?'最新':'热门';
+    let h='';
+    if(st.loading)h=Array.from({length:5},()=>`<div class="fcx-row fcx-skel"><div class="fcx-av"></div><div class="fcx-main"><div class="sk w1"></div><div class="sk w2"></div></div></div>`).join('');
+    else if(!tree.roots.length)h=`<div class="fcx-empty"><b>还没有评论</b><span>发表评论，开始对话。</span></div>`;
+    else h=sortRoots(tree.roots).map(r=>rowHTML(r,false,tree)+threadHTML(r,tree)).join('');
+    list.innerHTML=h;list.scrollTop=keep;
+    fcxSyncCount(postId)
+  }
+  const ui={draw,typing(name,after){st.typing=name?{name,after}:null;draw()},arrived(rep,nm){const t=fcxTree(postId);const rt=t.byId.get(rep.id)?t.rootOf(t.byId.get(rep.id)):null;if(rt)st.exp.add(rt.id);if(FCX&&FCX.mask===mask)draw();else toast(nm+' 回复了你的评论')}};
+  FCX={postId,mask,draw,ui,st};
+
+  function close(){mask.remove();if(FCX&&FCX.mask===mask)FCX=null;fcxSyncCount(postId)}
+  function refreshPost(){const has=input.value.trim()||st.img;postBtn.hidden=!has;photoBtn.hidden=!!has;stkBtn.hidden=!!has}
+  function setReply(r){
+    if(!r){st.reply=null;banner.hidden=true;input.placeholder=authorName?'为'+authorName+'添加评论…':'添加评论…';return}
+    const nm=fcxIdent(r).name;st.reply={id:r.id,name:nm};banner.hidden=false;banner.firstElementChild.innerHTML='正在回复 <b>'+esc(nm)+'</b>';input.placeholder='回复 @'+nm+'…';input.value='@'+nm+' ';refreshPost();input.focus()
+  }
+  function setImg(src){st.img=src||'';pend.hidden=!src;if(src)pend.querySelector('img').src=src;refreshPost()}
+  async function send(extra){
+    extra=extra&&typeof extra==='object'&&!extra.target?extra:{};
+    let text=input.value;
+    if(st.reply){const m='@'+st.reply.name;if(text.startsWith(m))text=text.slice(m.length)}
+    text=text.trim();if(!text&&!st.img&&!extra.sticker)return;
+    const all=(S.postReplies[postId]=S.postReplies[postId]||[]),target=st.reply?all.find(x=>x.id===st.reply.id):null;
+    const rec={id:uid(),pid:'me',text,time:Date.now(),likes:0,...(target?{replyTo:target.id}:{}),...(st.img?{image:st.img}:{}),...(extra.sticker?{sticker:extra.sticker}:{})};
+    all.push(rec);fcxSyncCount(postId);
+    const t=fcxTree(postId);st.exp.add(t.rootOf(rec).id);
+    input.value='';setReply(null);setImg('');stkPanel.hidden=true;save();draw();
+    const row=list.querySelector(`[data-rid="${rec.id}"]`);if(row)row.scrollIntoView({block:'nearest',behavior:'smooth'});
+    fcxRespond(post,rec,target,ui)
+  }
+  function menu(id){
+    const all=S.postReplies[postId]||[],r=all.find(x=>x.id===id);if(!r)return;
+    const items=[],mine=!r.name&&(r.pid==='me'||!r.pid),isChar=!r.name&&!mine&&P(r.pid);
+    if(post.pid==='me'&&!r.replyTo)items.push({label:r.pinned?'取消置顶':'置顶评论',run:()=>{all.forEach(x=>{if(x!==r)x.pinned=false});r.pinned=!r.pinned;save();draw()}});
+    items.push({label:isChar?'编辑（修正 OOC）':'编辑',run:()=>modal(r.text||'',v=>{r.text=v.trim();if(r.translation){const t0=r.translation;setTimeout(()=>modal(t0,v2=>{r.translation=v2.trim();save();draw()}),160)}save();draw()})});
+    if(isChar)items.push({label:'让 TA 按人设重新生成',run:()=>fcxRegen(post,r,ui)});
+    items.push({label:'删除评论',run:()=>{if(!confirm('确定删除这条评论吗？'))return;const gone=fcxDescendants(postId,r.id);S.postReplies[postId]=all.filter(x=>!gone.has(x.id));if(st.reply&&gone.has(st.reply.id))setReply(null);save();draw()}});
+    items.push({label:'取消',run:()=>{}});showFeedSheet(items)
+  }
+  mask.addEventListener('click',async e=>{
+    if(e.target===mask)return close();
+    const b=e.target.closest('[data-fx]');if(!b||!mask.contains(b))return;
+    const act=b.dataset.fx,id=b.dataset.id,all=S.postReplies[postId]||[],r=id&&all.find(x=>x.id===id);
+    if(act==='close')close();
+    else if(act==='like'&&r){r.liked=!r.liked;r.likes=Math.max(0,(+r.likes||0)+(r.liked?1:-1));save();draw()}
+    else if(act==='reply'&&r)setReply(r);
+    else if(act==='cancelreply'){input.value='';setReply(null);refreshPost()}
+    else if(act==='tr'&&r){st.flip.has(r.id)?st.flip.delete(r.id):st.flip.add(r.id);draw()}
+    else if(act==='open'&&r){st.exp.add(r.id);draw()}
+    else if(act==='hide'&&r){st.exp.delete(r.id);draw()}
+    else if(act==='more'&&r){if(st.loadingMore.has(r.id))return;st.loadingMore.add(r.id);draw();try{await fcxMoreReplies(post,r)}finally{st.loadingMore.delete(r.id);draw()}}
+    else if(act==='menu')menu(id);
+    else if(act==='sort')showFeedSheet([
+      {label:'热门评论',run:()=>{st.sort='top';S.feedSort='top';save();draw()}},
+      {label:'最新评论',run:()=>{st.sort='new';S.feedSort='new';save();draw()}},
+      {label:trDefault()?'外语评论默认显示原文':'外语评论默认显示译文',run:()=>{S.feedTrDefault=!trDefault();st.flip.clear();save();draw()}},
+      {label:'再生成一批路人评论',run:()=>regen()},
+      {label:'取消',run:()=>{}}]);
+    else if(act==='photo')file.click();
+    else if(act==='rmimg')setImg('');
+    else if(act==='stk'){
+      if(!S.stickers.length)return toast('还没有表情包，请先在设置里导入');
+      if(!stkPanel.hidden){stkPanel.hidden=true;return}
+      stkPanel.innerHTML=S.stickers.slice(0,60).map(s=>`<button type="button" data-fx="pickstk" data-sid="${esc(s.id)}" aria-label="${esc(s.name||'表情包')}"><img src="${esc(s.src)}" alt=""></button>`).join('');stkPanel.hidden=false
+    }
+    else if(act==='pickstk'){stkPanel.hidden=true;send({sticker:b.dataset.sid})}
+    else if(act==='send')send()
+  });
+  file.onchange=async()=>{const f=file.files&&file.files[0];file.value='';if(!f)return;const rd=new FileReader();rd.onload=async()=>setImg(await fcxShrink(String(rd.result||'')));rd.readAsDataURL(f)};
+  input.addEventListener('input',refreshPost);
+  input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.isComposing){e.preventDefault();send()}});
+  /* long-press / right-click for comment menu */
+  let lp=null;
+  list.addEventListener('touchstart',e=>{const row=e.target.closest('.fcx-row');if(!row||e.target.closest('button'))return;lp=setTimeout(()=>{lp=null;menu(row.dataset.rid)},520)},{passive:true});
+  ['touchend','touchmove','touchcancel'].forEach(ev=>list.addEventListener(ev,()=>clearTimeout(lp),{passive:true}));
+  list.addEventListener('contextmenu',e=>{const row=e.target.closest('.fcx-row');if(row&&row.dataset.rid){e.preventDefault();menu(row.dataset.rid)}});
+  /* drag down to dismiss */
+  let y0=null,dy=0;const dragEl=[mask.querySelector('.fcx-grab'),mask.querySelector('.fcx-head')];
+  dragEl.forEach(el=>{
+    el.addEventListener('touchstart',e=>{if(e.target.closest('button'))return;y0=e.touches[0].clientY;dy=0;sheet.style.animation='none';sheet.style.transition='none'},{passive:true});
+    el.addEventListener('touchmove',e=>{if(y0==null)return;dy=Math.max(0,e.touches[0].clientY-y0);sheet.style.transform=`translateY(${dy}px)`},{passive:true});
+    el.addEventListener('touchend',()=>{if(y0==null)return;y0=null;sheet.style.transition='transform .22s ease';if(dy>110){sheet.style.transform='translateY(100%)';setTimeout(close,200)}else sheet.style.transform=''},{passive:true})
+  });
+  /* keep composer above the on-screen keyboard */
+  const vv=window.visualViewport;
+  if(vv){const fit=()=>{if(!document.body.contains(mask)){vv.removeEventListener('resize',fit);return}const gap=Math.max(0,window.innerHeight-vv.height-vv.offsetTop);mask.style.paddingBottom=gap>80?gap+'px':''};vv.addEventListener('resize',fit);vv.addEventListener('scroll',fit)}
+  async function regen(){
+    st.loading=true;draw();
+    try{await fcxGenPasserby(post,6)}catch(e){toast('生成失败：'+(e&&e.message||''))}
+    st.loading=false;draw()
+  }
+  draw();refreshPost();
+  const empty=!S.postReplies[postId].length&&!post.passerbyGenerated;
+  if(opt.gen)regen();
+  else if(empty){
+    if(S.cfg.key)regen();
+    else{fcxGenPasserby(post,6);draw()}
+  }
+}
+function generateFeedPasserby(postId){openFeedComments(postId,{gen:true})}
+async function fcxRunChars(post,chars){
+  S.postReplies=S.postReplies||{};S.postReplies[post.id]=S.postReplies[post.id]||[];
+  openFeedComments(post.id);const skipped=[],failed=[];let done=0;
+  for(const ch of chars){
+    toast(`正在生成 ${ch.name} 的评论…`);
+    try{
+      const rec=await fcxCharComment(post,ch);
+      if(!rec){skipped.push(ch.name);continue}
+      S.postReplies[post.id].push(rec);done++;fcxSyncCount(post.id);save();
+      if(FCX&&FCX.postId===post.id)FCX.draw()
+    }catch(e){failed.push(ch.name)}
+  }
+  toast(`${done?done+' 位角色已评论':'没有角色评论'}${skipped.length?'；'+skipped.join('、')+' 按人设选择不评论':''}${failed.length?'；'+failed.join('、')+' 生成失败':''}`)
+}
+function generateFeedCharacterComment(id){
+  const post=S.posts.find(p=>p.id===id);if(!post)return;
+  const cands=S.personas.filter(p=>!p.blocked&&p.id!==post.pid);
+  if(!cands.length)return toast('请先添加联系人角色');
+  if(!S.cfg.key)return toast('请先在设置里填写 API Key');
+  showFeedSheet([{label:'全部角色（按人设，不会评论的自动跳过）',run:()=>fcxRunChars(post,cands)},...cands.slice(0,14).map(c=>({label:c.name,run:()=>fcxRunChars(post,[c])})),{label:'取消',run:()=>{}}])
+}
+function timeAgo(t){const n=Math.max(0,Date.now()-(+t||Date.now())),m=Math.floor(n/60000);if(m<1)return'刚刚';if(m<60)return m+'分钟';const h=Math.floor(m/60);if(h<24)return h+'小时';return Math.floor(h/24)+'天'}
 function editFeedQuote(){const old=S.feedQuoteText||'回复帖子 @ 水水：女孩';const v=prompt('设置朋友圈顶部文案',old);if(v===null)return;S.feedQuoteText=v.trim()||old;save();rApp()}
 function showFeedSheet(items){const old=document.querySelector('.feed-sheet-mask');if(old)old.remove();const mask=document.createElement('div');mask.className='feed-sheet-mask';mask.innerHTML=`<div class="feed-sheet">${items.map((x,i)=>`<button data-sheet-item="${i}">${esc(x.label)}</button>`).join('')}</div>`;mask.onclick=e=>{if(e.target===mask)mask.remove()};mask.querySelectorAll('[data-sheet-item]').forEach((b,i)=>b.onclick=()=>{mask.remove();items[i].run()});document.body.appendChild(mask)}
-async function generateFeedCharacterComment(id){const post=S.posts.find(p=>p.id===id);if(!post)return;const candidates=S.personas.filter(p=>!p.blocked);if(!candidates.length)return toast('请先添加联系人角色');const character=candidates[Math.floor(Math.random()*candidates.length)];try{if(typeof ask!=='function')return toast('请先配置可用的 AI API');const answer=await ask([{role:'system',content:build(character,[])[0].content+'\n请以角色本人身份自然地评论这条朋友圈，只输出一条简短评论。'},{role:'user',content:post.text||''}]);const text=typeof answer==='string'?answer:(answer?.choices?.[0]?.message?.content||answer?.content||'').trim();if(!text)return toast('角色暂时没有生成评论');S.postReplies=S.postReplies||{};S.postReplies[id]=S.postReplies[id]||[];S.postReplies[id].push({id:uid(),pid:character.id,text:String(text).trim(),time:Date.now()});post.rp=(+post.rp||0)+1;save();rApp();toast(`${character.name}评论了帖子`)}catch(e){toast('角色评论失败，请检查 API 设置')}}
 
-function createUserPost(){modal('',v=>{if(!v.trim())return;S.posts.unshift({id:uid(),pid:'me',uid:S.activeUserProfile,text:v.trim(),time:Date.now(),rp:0,rt:0,likes:0,bm:0,views:0,liked:0});save();rApp()})}
+function createUserPost(){
+  const old=document.querySelector('.feed-compose-mask');if(old)old.remove();
+  const mask=document.createElement('div');mask.className='feed-compose-mask';
+  mask.innerHTML=`<div class="feed-compose-panel" role="dialog" aria-label="发布朋友圈"><div class="feed-compose-top"><button type="button" data-compose-cancel>取消</button><span>新建帖子</span><span style="width:28px"></span></div><textarea data-compose-text placeholder="分享此刻…"></textarea><div class="feed-compose-tools"><button type="button" class="feed-compose-addphoto" data-compose-photo aria-label="添加图片"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></button><img class="feed-compose-photo" data-compose-preview alt="图片预览" style="display:none"><button type="button" data-compose-remove style="display:none;background:transparent;color:var(--sub)">移除图片</button><button type="button" class="feed-compose-publish" data-compose-publish>发布</button></div></div>`;
+  document.body.appendChild(mask);let image='';const ta=mask.querySelector('[data-compose-text]');setTimeout(()=>ta.focus(),60);
+  mask.querySelector('[data-compose-cancel]').onclick=()=>mask.remove();mask.onclick=e=>{if(e.target===mask)mask.remove()};
+  mask.querySelector('[data-compose-photo]').onclick=()=>pickImage(src=>{image=src;const preview=mask.querySelector('[data-compose-preview]');preview.src=src;preview.style.display='block';mask.querySelector('[data-compose-remove]').style.display='block';mask.querySelector('[data-compose-photo]').style.display='none'});
+  mask.querySelector('[data-compose-remove]').onclick=()=>{image='';mask.querySelector('[data-compose-preview]').style.display='none';mask.querySelector('[data-compose-remove]').style.display='none';mask.querySelector('[data-compose-photo]').style.display='grid'};
+  mask.querySelector('[data-compose-publish]').onclick=()=>{const text=ta.value.trim();if(!text&&!image)return toast('写点正文或添加一张图片吧');S.posts.unshift({id:uid(),pid:'me',uid:S.activeUserProfile,text,time:Date.now(),...(image?{image}:{}),rp:0,rt:0,likes:0,bm:0,views:0,liked:0});save();mask.remove();rApp()};
+}
 
 function bindEmbeddedProfile(){
   const root=$('#abody'),box=root.querySelector('#user-edit-box'),edit=root.querySelector('#edit-user-profile');
@@ -3969,6 +4389,172 @@ html.kb #inp,html.kb .wx-in,html.kb .feed-composer,html.kb .pd-composer{padding-
 .cpann{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px;border-bottom:1px solid var(--line);cursor:pointer}.cpann b{font-size:16px;display:block}.cpbig{text-align:right}.cpbig b{font-size:26px;font-weight:300;letter-spacing:-.5px}.cpbig span{display:block;font-size:12px;color:var(--sub)}
 .cpmoods{display:flex;gap:8px}#cp-root .cpmoods button{flex:1;flex-direction:column;gap:4px;padding:10px 0;border:1.5px solid var(--line);border-radius:12px;color:var(--sub);font-size:12px}#cp-root .cpmoods .on{border-color:var(--ink);color:var(--ink)}#cp-root .cpmoods svg{width:26px;height:26px}
 .cpdg{padding:10px 16px 0}.cpdg h5{font-size:13px;color:var(--sub);font-weight:600;padding:6px 0}.cpdi{display:flex;gap:12px;padding:10px 0;border-left:1.5px solid var(--line);margin-left:4px;cursor:pointer;position:relative}.cpdot{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--ink);background:var(--bg);position:relative;left:-5.5px;top:6px;flex:none}.cpdot.u{background:var(--ink)}.cpdh{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--sub)}.cpdh b{color:var(--ink)}#cp-root .cpdh svg{width:18px;height:18px}.cpdi p{margin-top:4px;line-height:1.6;white-space:pre-wrap;word-break:break-word}
+
+/* Instagram-inspired Moments feed refresh */
+#v-app.feed-mode .feed-home{background:var(--bg)}
+#v-app.feed-mode .feed-scroll{padding:0 0 24px}
+#v-app.feed-mode .feed-post{padding:0 0 18px;margin:0 0 18px;border-bottom:1px solid var(--line);background:var(--bg)}
+#v-app.feed-mode .feed-author{padding:8px 14px 10px;margin:0;gap:10px;align-items:center}
+#v-app.feed-mode .feed-author-avatar{width:40px;height:40px}
+#v-app.feed-mode .feed-author .av{width:40px;height:40px;min-width:40px;border-radius:50%;overflow:hidden;background:var(--p)}
+#v-app.feed-mode .feed-author .av img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+#v-app.feed-mode .feed-follow-plus{display:none}
+#v-app.feed-mode .feed-author-main b{font-size:14px;font-weight:650;line-height:1.35}
+#v-app.feed-mode .feed-author-main small{font-size:11px;gap:6px;line-height:1.3}
+#v-app.feed-mode .feed-author-main small span:first-child{display:none}
+#v-app.feed-mode .feed-published{white-space:normal}
+#v-app.feed-mode .feed-author [data-feed-menu]{width:28px;height:28px;align-self:center;margin:0;color:var(--ink)}
+#v-app.feed-mode .feed-author [data-feed-menu]::before{content:'•••';font-size:19px;letter-spacing:2px}
+#v-app.feed-mode .feed-author [data-feed-menu] svg,#v-app.feed-mode .feed-author [data-feed-menu] img{display:none}
+#v-app.feed-mode .feed-custom-line{display:none}
+#v-app.feed-mode .feed-text{font-size:14px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere;margin:12px 14px 8px;color:var(--ink)}
+#v-app.feed-mode .feed-post-image{display:block;width:100%;max-height:520px;object-fit:cover;background:var(--p);margin:0;aspect-ratio:auto}
+#v-app.feed-mode .feed-actions{display:flex;align-items:center;gap:17px;padding:12px 14px 4px;color:var(--ink)}
+#v-app.feed-mode .feed-action{display:inline-flex;align-items:center;gap:6px;min-height:28px;padding:0;background:transparent;color:inherit;font-size:13px}
+#v-app.feed-mode .feed-action svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#v-app.feed-mode .feed-action.liked svg{fill:#ed4956;stroke:#ed4956}
+#v-app.feed-mode .feed-action.save-action{margin-left:auto}
+#v-app.feed-mode .feed-action.save-action svg{width:25px;height:25px}
+#v-app.feed-mode .feed-likes{padding:0 14px;font-size:13px;font-weight:650;color:var(--ink)}
+#v-app.feed-mode .feed-caption{padding:4px 14px 0;font-size:14px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere}
+#v-app.feed-mode .feed-caption b{font-weight:650;margin-right:5px}
+#v-app.feed-mode .feed-view-comments{padding:5px 14px 0;color:var(--sub);font-size:13px;background:transparent}
+#v-app.feed-mode .feed-reply{margin:8px 14px 0;gap:8px}
+#v-app.feed-mode .feed-reply .av{width:25px;height:25px;min-width:25px}
+#v-app.feed-mode .feed-reply-by{font-size:12px;margin-bottom:2px}
+#v-app.feed-mode .feed-reply-text{font-size:13px;line-height:1.45}
+#v-app.feed-mode .feed-inline-composer{margin:10px 14px 0;gap:8px}
+#v-app.feed-mode .feed-inline-composer input{border:0;background:transparent;padding:8px 0;font-size:13px}
+#v-app.feed-mode .feed-compose-avatar{width:25px;height:25px}
+#v-app.feed-mode .feed-compose-avatar{display:none}
+.feed-compose-mask{position:fixed;inset:0;z-index:10050;background:rgba(0,0,0,.38);display:flex;align-items:flex-end;justify-content:center;padding:0}
+.feed-compose-panel{width:100%;max-width:560px;background:var(--bg);color:var(--ink);border-radius:20px 20px 0 0;padding:17px 18px calc(22px + env(safe-area-inset-bottom,0px));box-sizing:border-box;box-shadow:0 -8px 30px #0001}
+.feed-compose-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:15px;font-size:16px;font-weight:650}
+.feed-compose-top button{background:transparent;color:var(--ink);font-size:14px;padding:5px 0}
+.feed-compose-panel textarea{width:100%;min-height:130px;resize:vertical;border:0;outline:0;background:transparent;color:var(--ink);font:inherit;font-size:16px;line-height:1.6;padding:0;box-sizing:border-box}
+.feed-compose-tools{display:flex;align-items:center;gap:12px;margin-top:10px;padding-top:12px;border-top:1px solid var(--line)}
+.feed-compose-photo{width:70px;height:70px;border-radius:8px;object-fit:cover;display:block}
+.feed-compose-addphoto{width:70px;height:70px;border:1px solid var(--line);border-radius:8px;display:grid;place-items:center;background:var(--p);color:var(--sub)}
+.feed-compose-addphoto svg{width:27px;height:27px;stroke:currentColor;fill:none;stroke-width:1.6}
+.feed-compose-publish{margin-left:auto;background:#0095f6;color:white;border-radius:9px;padding:10px 18px;font-size:14px;font-weight:600}
+
+/* Refined Instagram-like comment composer: avatar, single pill with icons, send action */
+.feed-comments-compose{display:flex!important;align-items:center!important;gap:10px!important;padding:12px 18px calc(14px + env(safe-area-inset-bottom,0px))!important;border-top:1px solid var(--line)!important;background:var(--bg)!important}
+.feed-comments-me{width:38px!important;height:38px!important;border-radius:50%!important;object-fit:cover!important;flex:0 0 38px!important}
+.feed-comment-entry{display:flex!important;align-items:center!important;gap:8px!important;min-width:0!important;flex:1 1 auto!important;height:48px!important;min-height:48px!important;padding:0 10px 0 15px!important;border:1px solid #e4e6eb!important;border-radius:28px!important;background:var(--bg)!important;box-sizing:border-box!important}
+.feed-comments-compose input[data-fc-input]{order:0!important;flex:1 1 0!important;width:0!important;min-width:0!important;height:44px!important;padding:0!important;border:0!important;background:transparent!important;font-size:14px!important;outline:none!important}
+.feed-comments-photo{order:1!important;width:28px!important;height:36px!important;flex:0 0 28px!important;padding:3px!important;color:var(--ink)!important}
+.feed-comments-sticker{order:2!important;width:28px!important;height:36px!important;flex:0 0 28px!important;padding:3px!important;color:var(--ink)!important}
+.feed-comments-photo svg,.feed-comments-sticker svg{width:24px!important;height:24px!important;display:block!important;fill:none!important;stroke:currentColor!important;stroke-width:1.8!important;stroke-linecap:round!important;stroke-linejoin:round!important}
+.feed-comments-compose [data-fc-send]{width:30px!important;height:34px!important;flex:0 0 30px!important;display:grid!important;place-items:center!important;background:transparent!important;color:#2587ee!important;padding:3px!important;border:0!important;border-radius:8px!important;white-space:nowrap!important}.feed-comments-compose [data-fc-send] svg{width:24px!important;height:24px!important;display:block!important;fill:none!important;stroke:currentColor!important;stroke-width:1.8!important;stroke-linecap:round!important;stroke-linejoin:round!important}
+.feed-comment-translation{display:block!important;margin-top:5px!important;padding:0!important;background:transparent!important;color:var(--sub)!important;font-size:12px!important;text-align:left!important}
+.feed-comments-sheet{height:min(82dvh,820px)!important;border-radius:28px 28px 0 0!important}
+.feed-comments-header{height:58px!important;font-size:17px!important}
+@media(prefers-color-scheme:dark){.feed-comment-entry{border-color:#45464a!important}}
+/* Instagram comments bottom sheet + working gear header */
+#v-app.feed-mode .feed-head [data-feed-back]{width:48px;height:48px;display:grid;place-items:center;border-radius:50%;background:transparent;color:var(--ink);padding:7px;margin-left:-5px}
+#v-app.feed-mode .feed-head [data-feed-back] svg{width:30px;height:30px;stroke-width:2.5}
+#v-app.feed-mode .feed-head [data-feed-more]{width:44px;height:44px;display:grid;place-items:center;border-radius:8px;background:transparent!important;color:var(--ink);padding:8px;border:0!important;box-shadow:none!important}
+#v-app.feed-mode .feed-head [data-feed-more] svg{width:25px;height:25px;display:block;fill:none;stroke:currentColor;stroke-width:2.15;stroke-linecap:round;stroke-linejoin:round}
+#v-app.feed-mode .feed-head .feed-count{display:none}
+#v-app.feed-mode .feed-author [data-feed-menu]::before{content:'•••';font-size:19px;letter-spacing:2px}
+#v-app.feed-mode .feed-author [data-feed-menu] svg,#v-app.feed-mode .feed-author [data-feed-menu] img{display:none}
+#v-app.feed-mode .feed-caption{padding-top:10px;padding-bottom:2px}
+#v-app.feed-mode .feed-actions{padding-top:7px;padding-bottom:5px}
+#v-app.feed-mode .feed-view-comments{display:block;text-align:left;width:100%;padding:7px 14px 2px;color:var(--sub);font-size:13px;background:transparent;border:0}
+.feed-comments-mask{position:fixed;inset:0;z-index:10080;background:rgba(0,0,0,.48);display:flex;align-items:flex-end;justify-content:center}
+.feed-comments-sheet{width:100%;max-width:560px;height:min(78dvh,760px);background:var(--bg);color:var(--ink);border-radius:25px 25px 0 0;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 -8px 32px #0002}
+.feed-comments-grabber{width:46px;height:4px;border-radius:9px;background:var(--sub);opacity:.65;margin:12px auto 0;flex:none}
+.feed-comments-header{height:52px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;text-align:center;border-bottom:1px solid var(--line);flex:none;font-size:16px}
+.feed-comments-header button{justify-self:end;margin-right:16px;background:transparent;color:var(--sub);font-size:27px;line-height:1;padding:5px 8px;border-radius:50%;width:38px;height:38px;display:grid;place-items:center}
+.feed-comments-list{flex:1;overflow-y:auto;padding:8px 16px 20px;overscroll-behavior:contain}
+.feed-comment-row{display:flex;gap:10px;padding:12px 0;align-items:flex-start}
+.feed-comment-avatar{width:40px;height:40px;border-radius:50%;overflow:hidden;background:var(--p);display:grid;place-items:center;flex:none;font-size:13px;color:var(--sub)}
+.feed-comment-avatar img{width:100%;height:100%;object-fit:cover}
+.feed-comment-body{min-width:0;flex:1}
+.feed-comment-name{font-size:13px;color:var(--sub);line-height:1.5;margin-bottom:3px}
+.feed-comment-name span{margin-left:5px;opacity:.8}
+.feed-comment-text{font-size:14px;line-height:1.5;overflow-wrap:anywhere;white-space:pre-wrap}
+.feed-comment-image{display:block;max-width:150px;max-height:150px;object-fit:cover;border-radius:10px;margin-top:7px}
+.feed-comment-reply{background:transparent;color:var(--sub);font-size:12px;padding:5px 0}
+.feed-comment-like{width:34px;flex:none;display:flex;flex-direction:column;align-items:center;gap:2px;background:transparent;color:var(--sub);font-size:22px;padding:2px}
+.feed-comment-like.liked{color:#ed4956}.feed-comment-like small{font-size:10px}
+.feed-comments-empty{text-align:center;color:var(--sub);padding:38px 12px;font-size:14px}
+.feed-comments-compose{display:flex;align-items:center;gap:9px;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);flex:none;background:var(--bg)}
+.feed-comment-entry{display:flex;align-items:center;gap:7px;min-width:0;flex:1;border:1px solid var(--line);border-radius:28px;padding:0 9px 0 14px;min-height:48px;background:var(--bg)}
+.feed-comments-me{width:36px;height:36px;object-fit:cover;border-radius:50%;background:var(--p);flex:none}
+.feed-comments-compose input[data-fc-input]{flex:1;min-width:0;height:42px;border:0;border-radius:0;background:transparent;color:var(--ink);padding:0 2px;font:inherit;font-size:14px;outline:0}
+.feed-comments-sticker,.feed-comments-photo{width:30px;height:34px;display:grid;place-items:center;background:transparent;color:var(--ink);flex:none;padding:3px;border-radius:8px}
+.feed-comments-sticker svg,.feed-comments-photo svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.feed-comments-compose [data-fc-send]{width:30px;height:34px;display:grid;place-items:center;background:transparent;color:#1687e8;padding:3px;flex:none;border:0;border-radius:8px}.feed-comments-compose [data-fc-send] svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+</style>
+<style id="fcx-style">
+/* Instagram-style comment sheet */
+.fcx-mask{position:fixed;inset:0;z-index:10080;background:rgba(0,0,0,.52);display:flex;align-items:flex-end;justify-content:center;animation:fcx-fade .22s ease both}
+.fcx-mask [hidden]{display:none!important}
+.fcx-sheet{position:relative;width:100%;max-width:560px;height:min(86dvh,880px);background:var(--bg);color:var(--ink);border-radius:28px 28px 0 0;display:flex;flex-direction:column;overflow:hidden;animation:fcx-up .3s cubic-bezier(.2,.85,.25,1) both;will-change:transform}
+@keyframes fcx-fade{from{opacity:0}to{opacity:1}}
+@keyframes fcx-up{from{transform:translateY(100%)}to{transform:none}}
+@keyframes fcx-dot{0%,80%,100%{opacity:.25}40%{opacity:1}}
+@keyframes fcx-pulse{0%,100%{opacity:.55}50%{opacity:1}}
+.fcx-grab{width:44px;height:5px;border-radius:9px;background:var(--sub);opacity:.45;margin:10px auto 0;flex:none;touch-action:none}
+.fcx-head{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:50px;flex:none;border-bottom:1px solid var(--line);padding:0 8px;touch-action:none}
+.fcx-head strong{font-size:16px;font-weight:700}
+.fcx-sort{justify-self:start;display:flex;align-items:center;gap:2px;padding:8px;font-size:13px;color:var(--sub);background:transparent}
+.fcx-sort svg{width:14px;height:14px}
+.fcx-x{justify-self:end;width:36px;height:36px;display:grid;place-items:center;color:var(--sub);background:transparent;font-size:26px;line-height:1;padding:0}
+.fcx-list{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:4px 0 18px;-webkit-overflow-scrolling:touch}
+.fcx-row{display:flex;gap:12px;padding:12px 14px 2px 16px;align-items:flex-start;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.fcx-row.is-reply{padding-left:64px}
+.fcx-av,.fcx-me{position:relative;width:44px;height:44px;border-radius:50%;overflow:hidden;flex:none;color:#fff;font-weight:600;font-size:16px;background:var(--av)}
+.fcx-row.is-reply .fcx-av{width:28px;height:28px;font-size:11px}
+.fcx-av img,.fcx-me img,.fcx-al .mini img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.fcx-main{flex:1;min-width:0}
+.fcx-pin{font-size:11px;color:var(--sub);margin-bottom:2px}
+.fcx-name{font-size:13px;color:var(--ink);font-weight:600;display:flex;gap:6px;align-items:baseline;flex-wrap:wrap;line-height:1.3}
+.fcx-name time{font-weight:400;color:var(--sub)}
+.fcx-tag{font-weight:500;font-size:11px;color:var(--sub)}
+.fcx-text{font-size:15px;line-height:1.42;margin-top:2px;overflow-wrap:anywhere;white-space:pre-wrap}
+.fcx-at{color:#3b7de0}
+.fcx-img{display:block;max-width:170px;max-height:170px;border-radius:12px;margin-top:7px;object-fit:cover}
+.fcx-stk{display:block;max-width:120px;max-height:120px;border-radius:10px;margin-top:7px}
+.fcx-al{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--sub);margin-top:6px}
+.fcx-al .mini{position:relative;width:18px;height:18px;border-radius:50%;overflow:visible;flex:none;display:block}
+.fcx-al .mini>img,.fcx-al .mini>span{border-radius:50%}
+.fcx-al .mini .bd2{position:absolute;right:-5px;bottom:-4px;width:11px;height:11px;background:var(--bg);border-radius:50%;padding:1px}
+.fcx-acts{display:flex;gap:18px;margin-top:5px;align-items:center}
+.fcx-acts button{background:transparent;color:var(--sub);font-size:13px;padding:4px 0}
+.fcx-dots svg{width:16px;height:16px;display:block}
+.fcx-like{flex:none;width:44px;display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--sub);background:transparent;padding:8px 0 0}
+.fcx-like svg{width:24px;height:24px;display:block}
+.fcx-like small{font-size:12px;min-height:14px;line-height:14px}
+.fcx-like.liked{color:#ff3040}
+.fcx-thr{display:flex;align-items:center;gap:12px;padding:8px 16px 4px 64px;font-size:13px;color:var(--sub);background:transparent;width:100%;text-align:left}
+.fcx-thr i{width:26px;height:1px;background:var(--sub);opacity:.55;flex:none}
+.fcx-typing{display:flex;align-items:center;gap:3px;padding:8px 16px 2px 64px;font-size:12px;color:var(--sub)}
+.fcx-typing i{width:4px;height:4px;border-radius:50%;background:var(--sub);animation:fcx-dot 1.2s infinite}
+.fcx-typing i:nth-of-type(2){animation-delay:.2s}.fcx-typing i:nth-of-type(3){animation-delay:.4s}
+.fcx-typing span{margin-right:3px}
+.fcx-empty{display:flex;flex-direction:column;align-items:center;gap:6px;padding:64px 20px;color:var(--sub);font-size:14px}.fcx-empty b{font-size:20px;color:var(--ink)}
+.fcx-skel .fcx-av{background:var(--line);animation:fcx-pulse 1.3s infinite}
+.fcx-skel .sk{height:10px;border-radius:6px;background:var(--line);margin:7px 0;animation:fcx-pulse 1.3s infinite}.fcx-skel .w1{width:34%}.fcx-skel .w2{width:78%}
+.fcx-compose{flex:none;border-top:1px solid var(--line);background:var(--bg);padding:8px 14px calc(10px + env(safe-area-inset-bottom,0px))}
+.fcx-banner{display:flex;align-items:center;justify-content:space-between;background:var(--p);color:var(--sub);font-size:13px;padding:8px 12px;border-radius:10px;margin-bottom:8px}
+.fcx-banner b{color:var(--ink);font-weight:600}.fcx-banner button{background:transparent;color:var(--sub);font-size:20px;line-height:1;padding:0 4px}
+.fcx-pend{position:relative;width:64px;height:64px;margin:0 0 8px 56px}.fcx-pend img{width:100%;height:100%;object-fit:cover;border-radius:10px}
+.fcx-pend button{position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:var(--ink);color:var(--bg);font-size:14px;line-height:1;display:grid;place-items:center;padding:0}
+.fcx-stkpanel{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;max-height:170px;overflow:auto;padding:4px 2px 10px}
+.fcx-stkpanel button{background:transparent;padding:0;aspect-ratio:1}.fcx-stkpanel img{width:100%;height:100%;object-fit:contain;border-radius:8px}
+.fcx-line{display:flex;gap:10px;align-items:center}
+.fcx-entry{flex:1;min-width:0;display:flex;align-items:center;gap:6px;height:48px;border:1px solid var(--line);border-radius:28px;padding:0 10px 0 16px;background:var(--bg);box-sizing:border-box}
+.fcx-entry input{flex:1;min-width:0;width:0;border:0;background:transparent;color:var(--ink);font-size:16px;outline:0;padding:0;height:44px}
+.fcx-ib{width:30px;height:34px;display:grid;place-items:center;background:transparent;color:var(--ink);padding:3px;flex:none}
+.fcx-ib svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.fcx-post{background:transparent;color:#3797f0;font-weight:700;font-size:15px;padding:0 6px;flex:none;white-space:nowrap}
+/* layers: action sheet and modal must sit above the comment sheet */
+.feed-sheet-mask{z-index:10090!important}.feed-sheet{max-height:72dvh;overflow-y:auto}
+#modal{z-index:10095!important}#toast{z-index:10100!important}
 </style>
 <script>
 /* v78: surface the real reason of unhandled promise rejections */
