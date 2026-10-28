@@ -3351,10 +3351,11 @@ function msQQListHTML(){
  if(!d||!(d.allPls||[]).length){if(!MS.discLoading&&!MS.discErr)msLoadDisc();return`<div class="ms-e">${MS.discErr?esc(MS.discErr):'加载中…'}</div>`}
  return`<div class="ms-ls">${d.allPls.map(p=>{const x=(d.pls||[]).find(y=>y.id===p.id),a=x&&x.songs[0];return`<div class="ms-r" data-ms-qqpl="${esc(p.id)}">${msArt({title:p.title,art:(a&&a.art)||p.cover||''},'r')}<div class="mi"><b>${esc(p.title)}</b><small>${fcxN(p.songnum)} 首歌曲</small></div><span class="ms-ch">${rpSvg('chr')}</span></div>`}).join('')}</div>`
 }
+const msPlayBar=()=>`<div class="ms-playbar"><button data-ms-playall>${rpSvg('pp',1)}播放</button><button data-ms-shuffle><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h4v4M4 20 20 4M20 16v4h-4M15 15l5 5M4 4l5 5"/></svg>随机播放</button></div>`;
 function msQQPlHTML(){
  const l=MS.qqSongs||[];MS.subList=l;
  if(MS.qqLoading&&!l.length)return'<div class="ms-e">正在加载歌单…</div>';
- return`<div class="ms-qqbar"><button data-ms-qqplay>播放全部</button><button data-ms-qqimport>全部加入资料库</button></div><div class="ms-ls">${l.map((t,i)=>msRow(t,'g',i)).join('')||'<div class="ms-e">歌单是空的</div>'}</div>`
+ return`${msPlayBar()}<div class="ms-qqbar"><button data-ms-qqimport>全部加入资料库</button></div><div class="ms-ls">${l.map((t,i)=>msRow(t,'g',i)).join('')||'<div class="ms-e">歌单是空的</div>'}</div>`
 }
 async function msOpenQQPl(id){
  const p=((msM().disc||{}).allPls||[]).find(x=>String(x.id)===String(id));
@@ -3389,7 +3390,7 @@ function msLibrary(){
    return `<div class="ms-ls">${Object.keys(g).map(n=>`<div class="ms-r" data-ms-grp="${esc(n)}"><div class="mi"><b>${esc(n)}</b><small>${g[n].length} 首歌曲</small></div><span class="ms-ch">${rpSvg('chr')}</span></div>`).join('')||'<div class="ms-e">资料库是空的</div>'}</div>`}
   if(s.key!=null){const k=s.type==='artist'?'artist':'album';items=lib.filter(t=>(t[k]||'未知')===s.key)}
   MS.subList=items;
-  return `<div class="ms-ls">${items.map((t,i)=>msRow(t,'g',i)).join('')||'<div class="ms-e">这里还没有歌曲<br>点右上角的加号导入文件或链接</div>'}</div>`;
+  return (items.length?msPlayBar():'')+`<div class="ms-ls">${items.map((t,i)=>msRow(t,'g',i)).join('')||'<div class="ms-e">这里还没有歌曲<br>点右上角的加号导入文件或链接</div>'}</div>`;
  }
  const L=[['pl2','全部歌曲','songs'],['mic','艺人','artist'],['al','专辑','album'],['star','已收藏','fav'],['dl','已导入','imported']].concat(qqOn()?[['pl2','QQ 音乐歌单','qq']]:[]);
  return `<div class="ms-ls" style="margin-top:14px">${L.map(r=>`<div class="ms-lr" data-ms-sub="${r[2]}" data-ttl="${r[1]}"><i>${rpSvg(r[0])}</i><div class="lb"><b>${r[1]}</b><span class="ms-ch">${rpSvg('chr')}</span></div></div>`).join('')}</div>`+(lib.length?'':'<p class="ms-note">资料库显示你导入的音乐和收藏的歌曲。点右上角的加号，可以从文件或链接导入。</p>');
@@ -3434,13 +3435,13 @@ async function msPlay(list,i){
    if(!MS.unlocked){MS.unlocked=1;MS.unlocking=true;unlocked=true;MSA.src=MS_SILENT;MSA.play().catch(()=>{})}
    const r=await qqApi('song',{mid:t.mid,mediaMid:t.mediaMid||'',type:t.type||0});
    if(MS.cur!==t)return;
-   url=qqBase()+r.url;msLoadLyric(t)
+   MS.alt={id:t.id,proxy:qqBase()+r.url,tried:!r.direct};url=r.direct||MS.alt.proxy;msLoadLyric(t)
   }
  }catch(e){MS.unlocking=false;toast(e.message);return}
  MS.unlocking=false;
  if(!url)return toast('这首歌没有可播放的音源');
  MSA.src=url;
- try{await MSA.play()}catch(e){toast('无法播放：'+(e.message||'音源不可用'))}
+ try{await MSA.play()}catch(e){if(!(e&&e.name==='NotSupportedError'&&t.src==='qq'))toast('无法播放：'+(e.message||'音源不可用'))}
  const m=msM();m.recent=[t,...m.recent.filter(x=>x.id!==t.id)].slice(0,20);
  if(m.together)Object.assign(m.together,{title:t.title,artist:t.artist});
  save();msRender();msMedia(t);
@@ -3537,7 +3538,18 @@ const msLibMore=()=>msSheet([{label:'QQ 音乐连接',run:msQQSetup},{label:'从
 MSA.addEventListener('play',()=>{MS.playing=true;msRender()});
 MSA.addEventListener('pause',()=>{MS.playing=false;msRender()});
 MSA.addEventListener('ended',()=>{if(MS.unlocking)return;msNext(1)});
-MSA.addEventListener('error',()=>{if(MSA.src)toast('这首歌的音源无法播放')});
+MSA.addEventListener('error',async()=>{
+ if(!MSA.src||MS.unlocking||MSA.src===MS_SILENT)return;
+ if(MS.cur&&MS.alt&&MS.alt.id===MS.cur.id&&!MS.alt.tried&&!/\/api\/music\/stream\//.test(MSA.src)){MS.alt.tried=true;MSA.src=MS.alt.proxy;MSA.play().catch(()=>{});return}
+ let why='';
+ if(MS.cur&&MS.cur.src==='qq'&&/\/api\/music\/stream\//.test(MSA.src)){
+  try{
+   const r=await fetch(MSA.src,{headers:{Range:'bytes=0-1'}});
+   if(!r.ok){let d='';try{const j=await r.json();d=j&&j.detail}catch(e){}why='（后端：'+(d||('HTTP '+r.status))+'）'}
+   else{why='（后端正常，但播放器不接受：'+(r.headers.get('content-type')||'未知格式')+'）';if(r.body)r.body.cancel().catch(()=>{})}
+  }catch(e){why='（连接后端失败）'}
+ }
+ toast('这首歌的音源无法播放'+why)});
 MSA.addEventListener('timeupdate',()=>{msProgress();msLyricTick()});MSA.addEventListener('seeked',msLyricTick);
 document.addEventListener('input',e=>{
  if(e.target.id==='ms-seek'){MS.seeking=true;const d=MSA.duration;if(d){const a=$('#ms-t1');if(a)a.textContent=msFmt(e.target.value/1000*d)}}
@@ -3563,6 +3575,8 @@ $('#v-music').addEventListener('click',e=>{
  if(x=q('[data-ms-hot]')){MS.q=x.dataset.msHot;msRender();msSearch(MS.q);return}
  if(x=q('[data-ms-menu]')){e.stopPropagation();msTrackMenu(x.dataset.msMenu);return}
  if(x=q('[data-ms-play]')){const p=x.dataset.msPlay.split(':');msPlay(msList(p[0]),+p[1]);return}
+ if(q('[data-ms-playall]')){const l=MS.subList||[];if(l.length)msPlay(l,0);return}
+ if(q('[data-ms-shuffle]')){const l=(MS.subList||[]).slice();for(let i=l.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[l[i],l[j]]=[l[j],l[i]]}if(l.length)msPlay(l,0);return}
  if(x=q('[data-ms-pl]')){msPlayPlaylist(x.dataset.msPl);return}
  if(q('[data-ms-qqset]')){msQQSetup();return}
  if(x=q('[data-ms-qqpl]')){msOpenQQPl(x.dataset.msQqpl);return}
@@ -4888,6 +4902,35 @@ html.kb #inp,html.kb .wx-in,html.kb .feed-composer,html.kb .pd-composer{padding-
 .ms-qr .box{background:#fff;color:#111;border-radius:20px;padding:20px;width:min(86vw,320px);text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center}
 .ms-qr img{width:200px;height:200px;image-rendering:pixelated;background:#fff;border-radius:10px;object-fit:contain}
 .ms-qr p{margin:0;font-size:14px;color:#666}.ms-qr button{background:#f0f0f2;color:#111;border-radius:20px;padding:9px 28px;font-size:15px}
+</style>
+<style id="ms-size-style">
+#ms-root .ms-top{padding:2px 20px 0}
+#ms-root .ms-top h1{font-size:30px}
+#ms-root .ms-top h1.sub{font-size:24px}
+#ms-root .ms-h{font-size:18px;margin:20px 20px 8px}
+#ms-root .ms-h svg{width:16px;height:16px}
+#ms-root .ms-r{padding:0;gap:12px;align-items:stretch}
+#ms-root .ms-r .ms-art.r{width:48px;height:48px;border-radius:7px;margin:4px 0;align-self:center}
+#ms-root .ms-nr{display:flex;align-items:stretch;gap:12px;padding:0}
+#ms-root .ms-nr .ms-art.r{width:44px;height:44px;border-radius:6px;margin:4px 0;align-self:center}
+#ms-root .ms-r .mi,#ms-root .ms-nr .mi{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;padding:0;border-bottom:1px solid var(--l)}
+#ms-root .ms-col .ms-nr:last-child .mi,#ms-root .ms-ls .ms-r:last-child .mi{border-bottom:0}
+#ms-root .ms-r .mi b,#ms-root .ms-nr .mi b{font-size:14px;line-height:1.3}
+#ms-root .ms-r .mi small,#ms-root .ms-nr .mi small{font-size:12px;line-height:1.3;margin-top:1px}
+#ms-root .ms-r .ms-dots,#ms-root .ms-nr .ms-dots{align-self:center}
+#ms-root .ms-tile{width:clamp(116px,30vw,158px)}
+#ms-root .ms-tile b{font-size:13px;margin-top:6px}
+#ms-root .ms-tile small{font-size:12px}
+#ms-root .ms-art.tile{border-radius:11px}
+#ms-root .mf small{font-size:11px}
+#ms-root .mf>b{font-size:18px;font-weight:600}
+#ms-root .mf>span{font-size:18px;margin-bottom:8px}
+#ms-root .mc-cap small{font-size:11.5px}
+#ms-root .mc-cap b{font-size:14px}
+#ms-root .amlogo{font-size:15px}#ms-root .amlogo svg{width:15px;height:15px}
+.ms-playbar{display:flex;gap:12px;padding:6px 20px 10px}
+.ms-playbar button{flex:1;height:42px;border-radius:21px;background:var(--c);color:var(--r);font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px}
+.ms-playbar svg{width:15px;height:15px}
 </style>
 <script>
 /* v78: surface the real reason of unhandled promise rejections */
