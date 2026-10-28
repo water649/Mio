@@ -1190,6 +1190,77 @@ button.feed-follow-plus{padding:0;cursor:pointer}
 #v-app.feed-mode .feed-actions > button[data-feed-comment] { display:inline-flex !important; align-items:center !important; justify-content:center !important; min-width:28px !important; }
 #v-app.feed-mode .feed-actions > button[data-feed-comment] > svg { stroke:currentColor !important; fill:none !important; stroke-width:1.8 !important; stroke-linecap:round !important; stroke-linejoin:round !important; }
 </style>
+
+<style id="worldbook-library-redesign">
+#v-worlds{padding-bottom:calc(104px + env(safe-area-inset-bottom,0px));overflow:hidden;align-items:stretch}
+#v-worlds .wb-head{height:86px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:12px 24px 8px;max-width:640px;margin:0 auto}
+#v-worlds .wb-wordmark{font-size:clamp(25px,7vw,36px);font-weight:850;letter-spacing:-1.8px;line-height:1;color:var(--ink);padding:6px 0;}
+#v-worlds .wb-more,#v-worlds .wb-search-btn{width:62px;height:62px;border-radius:50%;display:grid;place-items:center;background:var(--bg);box-shadow:0 12px 34px rgba(20,25,35,.075);color:var(--ink);flex:none}
+#v-worlds .wb-more svg{width:28px;height:28px}
+#v-worlds .wb-body{flex:1;min-height:0;overflow:auto;padding:18px 24px 24px;max-width:640px;margin:0 auto;width:100%}
+#v-worlds .wb-intro{padding:10px 0 26px}
+#v-worlds .wb-kicker{font-size:10px;font-weight:750;letter-spacing:2.3px;color:var(--sub);margin-bottom:8px}
+#v-worlds .wb-intro h2{font-size:32px;line-height:1.15;font-weight:780;letter-spacing:-1.1px;margin:0 0 8px}
+#v-worlds .wb-intro p{font-size:14px;color:var(--sub);margin:0;line-height:1.6}
+#v-worlds #wlist{display:flex;flex-direction:column;gap:12px;padding-bottom:18px}
+#v-worlds .world-row{position:relative;width:100%;text-align:left;padding:17px 16px;margin:0;display:flex;align-items:center;gap:14px;border-radius:21px;background:var(--bg);color:var(--ink);border:0;box-shadow:0 7px 25px rgba(24,30,40,.055);min-height:86px}
+#v-worlds .world-row>span:first-child{width:48px!important;height:58px!important;border-radius:9px 13px 13px 9px!important;background:linear-gradient(145deg,#e4edf6,#b7c9dc)!important;color:#27364b!important;box-shadow:inset 4px 0 0 rgba(255,255,255,.65);font-size:0;position:relative}
+#v-worlds .world-row>span:first-child:before{content:"";position:absolute;left:13px;top:13px;width:22px;height:2px;background:#53647a;box-shadow:0 7px 0 #53647a,0 14px 0 #53647a,0 21px 0 #53647a;opacity:.72}
+#v-worlds .world-row b{font-size:15px;font-weight:700;letter-spacing:-.2px}
+#v-worlds .world-row small{font-size:11px;line-height:1.55;color:var(--sub);white-space:normal}
+#v-worlds .world-row .chev{font-size:25px;color:#a4a4a8;font-weight:300}
+#v-worlds .empty{padding:54px 18px;color:var(--sub);font-size:14px;line-height:1.8}
+#v-worlds .wb-bottom{position:absolute;bottom:0;left:0;right:0;margin:auto;width:100%;max-width:640px;display:flex;align-items:center;gap:16px;padding:14px 24px calc(22px + env(safe-area-inset-bottom,0px));background:linear-gradient(to top,var(--bg) 76%,color-mix(in srgb,var(--bg) 0%,transparent));z-index:4}
+#v-worlds .wb-scope-switch{height:74px;display:flex;align-items:center;gap:4px;padding:6px;border-radius:40px;background:var(--bg);box-shadow:0 12px 38px rgba(20,25,35,.09);flex:1;min-width:0}
+#v-worlds .wb-scope-switch button{height:100%;flex:1;min-width:0;padding:0 8px;border-radius:34px;color:var(--sub);font-size:13px;font-weight:650;white-space:nowrap}
+#v-worlds .wb-scope-switch button.on{background:var(--p);color:var(--ink)}
+#v-worlds .wb-search-btn{width:74px;height:74px}
+#v-worlds .wb-search-btn svg{width:31px;height:31px}
+#v-worlds .wb-searchline{display:none;box-sizing:border-box;align-items:center;gap:10px;width:calc(100% - 48px);max-width:592px;min-width:0;margin:0 auto 8px;padding:0 14px;height:46px;border-radius:16px;background:var(--p);flex:none;overflow:hidden}
+#v-worlds .wb-searchline.on{display:flex}
+#v-worlds .wb-searchline input{box-sizing:border-box;width:0;max-width:100%;min-width:0;flex:1}
+#v-worlds .wb-searchline #wb-search-close{flex:0 0 28px;width:28px;min-width:28px;padding:0;text-align:center}
+@media(max-width:380px){#v-worlds .wb-searchline{width:calc(100% - 40px)}}
+#v-worlds .wb-searchline svg{width:19px;height:19px;color:var(--sub)}
+#v-worlds #wb-search{padding:8px 0;background:transparent;border-radius:0;min-width:0;font-size:14px;flex:1}
+#v-worlds #wb-search-close{font-size:24px;color:var(--sub);width:28px}
+#v-worlds .wb-action-menu{display:none;position:absolute;right:24px;top:78px;z-index:10;width:180px;padding:7px;background:var(--bg);border-radius:18px;box-shadow:0 12px 38px rgba(0,0,0,.15)}
+#v-worlds .wb-action-menu.on{display:flex;flex-direction:column}
+#v-worlds .wb-action-menu button{text-align:left;padding:13px 12px;border-radius:11px;font-size:14px}
+#v-worlds .wb-action-menu button:active{background:var(--p)}
+[data-theme=dark] #v-worlds .wb-more,[data-theme=dark] #v-worlds .wb-search-btn,[data-theme=dark] #v-worlds .wb-scope-switch,[data-theme=dark] #v-worlds .world-row{box-shadow:0 8px 28px rgba(0,0,0,.24)}
+[data-theme=dark] #v-worlds .world-row>span:first-child{background:linear-gradient(145deg,#414b59,#293341)!important;color:#e0e8f2!important}
+[data-theme=dark] #v-worlds .wb-bottom{background:linear-gradient(to top,#000 76%,transparent)}
+/* iOS Reminder-like worldbook editor sheet */
+.worldbook-editor-mask{position:fixed!important;inset:0!important;z-index:10000!important;background:rgba(10,12,18,.48)!important;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex!important;align-items:flex-end!important;justify-content:center!important;padding:0!important}
+.worldbook-editor{width:100%!important;max-width:560px!important;max-height:91dvh!important;overflow:auto!important;background:#f2f2f7!important;color:#111!important;border-radius:32px 32px 0 0!important;padding:22px 18px calc(24px + env(safe-area-inset-bottom,0px))!important;box-shadow:0 -12px 45px rgba(0,0,0,.15)!important}
+.worldbook-editor .ew-head{display:grid;grid-template-columns:52px 1fr 52px;align-items:center;margin-bottom:22px;min-height:52px}
+.worldbook-editor .ew-head h3{font-size:18px!important;font-weight:750;text-align:center;margin:0!important;white-space:nowrap}
+.worldbook-editor .ew-close,.worldbook-editor .ew-save-top{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:#fff;color:#111;font-size:27px;line-height:1;box-shadow:0 2px 7px rgba(0,0,0,.04)}
+.worldbook-editor .ew-save-top{background:#c9c9ce;color:#fff;font-size:26px;font-weight:700}
+.worldbook-editor .ew-save-top.ready{background:#111;color:#fff}
+.worldbook-editor .ew-field-card{background:#fff;border-radius:25px;padding:5px 20px;margin-bottom:22px}
+.worldbook-editor label:not(.chk){display:block;font-size:12px;font-weight:600;color:#929298;margin:12px 0 5px}
+.worldbook-editor input:not([type=checkbox]),.worldbook-editor select,.worldbook-editor textarea{width:100%;background:transparent!important;color:#111!important;border:0!important;border-radius:0!important;padding:10px 0!important;outline:none;font-size:15px;box-shadow:none!important}
+.worldbook-editor textarea{line-height:1.55;min-height:140px;resize:vertical}
+.worldbook-editor .ew-sep{height:1px;background:#e7e7eb;margin:2px 0}
+.worldbook-editor .ew-section-title{font-size:13px;color:#85858b;font-weight:700;margin:20px 4px 9px}
+.worldbook-editor .ew-contacts .card{background:#fff!important;border:0!important;border-radius:18px;padding:10px 14px!important;color:#111;max-height:145px!important}
+.worldbook-editor .ew-contacts .chk,.worldbook-editor label.chk{display:flex;align-items:center;gap:9px;font-size:14px;color:#222;padding:8px 0}
+.worldbook-editor input[type=checkbox]{width:19px;height:19px;accent-color:#111;flex:none}
+.worldbook-editor .ew-footer{display:flex;gap:10px;margin-top:20px}
+.worldbook-editor .ew-delete,.worldbook-editor .ew-save{height:49px;border-radius:16px!important;flex:1;font-size:15px;font-weight:650}
+.worldbook-editor .ew-delete{background:#fff!important;color:#c33!important}
+.worldbook-editor .ew-save{background:#111!important;color:#fff!important}
+[data-theme=dark] .worldbook-editor-mask{background:rgba(0,0,0,.62)!important}
+[data-theme=dark] .worldbook-editor{background:#1c1c1e!important;color:#f5f5f7!important}
+[data-theme=dark] .worldbook-editor .ew-field-card,[data-theme=dark] .worldbook-editor .ew-contacts .card{background:#2c2c2e!important;color:#f5f5f7!important}
+[data-theme=dark] .worldbook-editor input:not([type=checkbox]),[data-theme=dark] .worldbook-editor select,[data-theme=dark] .worldbook-editor textarea{color:#f5f5f7!important}
+[data-theme=dark] .worldbook-editor .ew-close{background:#303033;color:#fff}
+[data-theme=dark] .worldbook-editor .ew-save-top.ready,[data-theme=dark] .worldbook-editor .ew-save{background:#f5f5f7!important;color:#111!important}
+@media(max-width:380px){#v-worlds .wb-head{padding-left:20px;padding-right:20px}#v-worlds .wb-body{padding-left:20px;padding-right:20px}#v-worlds .wb-bottom{padding-left:18px;padding-right:18px;gap:12px}#v-worlds .wb-scope-switch button{font-size:12px}.worldbook-editor{padding-left:14px!important;padding-right:14px!important}}
+</style>
+
 </head>
 <body>
 
@@ -1308,8 +1379,14 @@ button.feed-follow-plus{padding:0;cursor:pointer}
 </section>
 
 <section class="view" id="v-worlds">
-  <div class="bar"><button class="bk" data-back>‹</button><h2>世界书</h2><button id="import-worlds">导入</button><button id="addw">新增</button></div>
-  <div class="body"><p class="note" style="margin:0 0 14px">世界书是独立的背景资料，不会插进角色人设文字中。关键词留空＝常驻；填写关键词后，最近几条消息命中时才注入。</p><div id="wlist"></div></div>
+  <header class="wb-head">
+    <button class="wb-wordmark" type="button" data-back aria-label="返回">WORLDBOOK</button>
+    <button class="wb-more" id="wb-more" type="button" aria-label="更多操作"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></button>
+  </header>
+  <div class="wb-searchline" id="wb-searchline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg><input id="wb-search" type="search" placeholder="搜索已加入的世界书"><button id="wb-search-close" type="button" aria-label="关闭搜索">×</button></div>
+  <div class="wb-body"><div class="wb-intro"><div class="wb-kicker">YOUR LIBRARY</div><h2>世界书</h2><p>收纳世界背景、人物关系与故事规则。</p></div><div id="wlist"></div></div>
+  <div class="wb-bottom"><div class="wb-scope-switch" role="tablist" aria-label="世界书范围"><button type="button" class="on" data-wb-scope="global">全局世界书</button><button type="button" data-wb-scope="contact">局部世界书</button></div><button class="wb-search-btn" id="wb-search-btn" type="button" aria-label="搜索世界书"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg></button></div>
+  <div class="wb-action-menu" id="wb-action-menu"><button type="button" id="import-worlds">导入世界书</button><button type="button" id="addw">新增世界书</button></div>
 </section>
 
 <section class="view" id="v-settings">
@@ -2972,17 +3049,37 @@ $('#addp').onclick=()=>{S.personas.push({id:uid(),name:'新联系人',handle:'',
 document.addEventListener('click',e=>{if(!e.target.closest('#import-user-profile'))return;importTextFile((t,n)=>{let x;try{x=JSON.parse(t)}catch(_){}const active=S.userProfiles.find(v=>v.id===S.activeUserProfile)||S.userProfiles[0];if(x&&typeof x==='object'){Object.assign(active,{name:x.name||active.name,handle:x.handle||active.handle,bio:x.bio||x.description||active.bio,avatar:x.avatar||active.avatar});S.me={name:active.name,handle:active.handle,bio:active.bio,avatar:active.avatar||''};$('#up-name').value=active.name||'';$('#up-handle').value=active.handle||'';$('#up-bio').value=active.bio||''}else{$('#up-bio').value=t;active.bio=t;S.me.bio=t}save();toast('已导入用户人设：'+n)})});
 
 /* worldbook */
+let worldbookScope='global';
 function rWorlds(){
- $('#wlist').innerHTML=S.worlds.map(w=>`<button type="button" class="card world-row" data-id="${w.id}" style="width:100%;text-align:left;padding:13px;margin-bottom:8px;display:flex;align-items:center;gap:12px"><span style="width:42px;height:42px;border-radius:50%;background:var(--p);display:grid;place-items:center;flex:none;color:var(--ink)">▤</span><span style="flex:1;min-width:0"><b style="display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(w.title||'未命名世界书')}</b><small style="display:block;color:var(--sub);margin-top:4px">${w.scope==='contact'?'指定联系人': '全局'} · ${w.trigger==='keyword'?'关键词触发':'全局触发'} · ${w.position==='before'?'人设前':'人设后'} · ${w.on!==false?'已启用':'已停用'}</small></span><span class="chev">›</span></button>`).join('')||'<div class="empty">还没有世界书。点击「新增」创建，已有内容会收在这里。</div>';
+ const list=$('#wlist');if(!list)return;
+ const q=($('#wb-search')?.value||'').trim().toLowerCase();
+ const rows=(S.worlds||[]).filter(w=>((w.scope||'global')==='contact'?'contact':'global')===worldbookScope&&(!q||[w.title,w.content,w.keys].some(v=>String(v||'').toLowerCase().includes(q))));
+ list.innerHTML=rows.map(w=>`<button type="button" class="card world-row" data-id="${w.id}"><span aria-hidden="true">▤</span><span style="flex:1;min-width:0"><b style="display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(w.title||'未命名世界书')}</b><small style="display:block;margin-top:5px">${w.scope==='contact'?'局部 · 指定联系人':'全局'}　·　${w.trigger==='keyword'?'关键词触发':'常驻注入'}　·　${w.on!==false?'已启用':'已停用'}</small></span><span class="chev">›</span></button>`).join('')||`<div class="empty">${q?'没有找到匹配的世界书':'这里还没有'+(worldbookScope==='global'?'全局':'局部')+'世界书'}<br><span style="font-size:12px">点击右上角 ··· 导入或新增</span></div>`;
  $$('#wlist .world-row').forEach(c=>c.onclick=()=>editWorld(S.worlds.find(x=>x.id===c.dataset.id)));
+ $$('#v-worlds [data-wb-scope]').forEach(b=>b.classList.toggle('on',b.dataset.wbScope===worldbookScope));
 }
 function editWorld(w){
- w.keys=w.keys||'';w.contacts=w.contacts||[];w.trigger=w.trigger|| (w.keys.trim()?'keyword':'global');w.scope=w.scope||'global';w.position=w.position||'after';
- const overlay=document.createElement('div');overlay.style.cssText='position:fixed;inset:0;background:var(--shade);z-index:40;display:flex;align-items:center;justify-content:center;padding:16px';
- overlay.innerHTML=`<div style="width:100%;max-width:480px;max-height:90vh;overflow:auto;background:var(--bg);color:var(--ink);border-radius:22px;padding:18px"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px"><h3 style="margin:0">${w.title?'编辑世界书':'新增世界书'}</h3><button type="button" class="ew-cancel">完成</button></div><label>名称</label><input class="ew-title" placeholder="例如：世界背景" value="${esc(w.title)}"><label>注入范围</label><select class="ew-scope"><option value="global" ${w.scope==='global'?'selected':''}>全局（所有联系人）</option><option value="contact" ${w.scope==='contact'?'selected':''}>指定联系人</option></select><div class="ew-contacts" style="display:${w.scope==='contact'?'block':'none'};margin-top:8px"><label>选择联系人</label><div class="card" style="padding:8px;max-height:150px;overflow:auto">${S.personas.map(p=>`<label class="chk"><input type="checkbox" class="ew-contact" value="${p.id}" ${(w.contacts||[]).includes(p.id)?'checked':''}>${esc(p.name)}</label>`).join('')||'<small>请先新增联系人</small>'}</div></div><label>触发方式</label><select class="ew-trigger"><option value="global" ${w.trigger==='global'?'selected':''}>全局触发（每次注入）</option><option value="keyword" ${w.trigger==='keyword'?'selected':''}>关键词触发</option></select><div class="ew-keybox" style="display:${w.trigger==='keyword'?'block':'none'}"><label>关键词（逗号分隔）</label><input class="ew-keys" placeholder="例如：酒吧,奶奶,旧城区" value="${esc(w.keys)}"></div><label>注入位置</label><select class="ew-position"><option value="before" ${w.position==='before'?'selected':''}>角色人设之前</option><option value="after" ${w.position==='after'?'selected':''}>角色人设之后</option></select><label>内容</label><textarea class="ew-content" rows="7" placeholder="填写独立的世界背景、规则或设定">${esc(w.content)}</textarea><label class="chk" style="margin:12px 0"><input class="ew-on" type="checkbox" ${w.on!==false?'checked':''}>启用</label><div style="display:flex;gap:8px;margin-top:14px"><button class="btn ew-delete" style="color:var(--err);flex:1">删除</button><button class="btn fill ew-save" style="flex:1">保存</button></div></div>`;
- document.body.appendChild(overlay);const q=x=>overlay.querySelector(x);q('.ew-cancel').onclick=()=>overlay.remove();overlay.onclick=e=>{if(e.target===overlay)overlay.remove()};q('.ew-scope').onchange=()=>q('.ew-contacts').style.display=q('.ew-scope').value==='contact'?'block':'none';q('.ew-trigger').onchange=()=>q('.ew-keybox').style.display=q('.ew-trigger').value==='keyword'?'block':'none';q('.ew-save').onclick=()=>{w.title=q('.ew-title').value.trim()||'未命名世界书';w.keys=q('.ew-keys').value.trim();w.content=q('.ew-content').value;w.on=q('.ew-on').checked;w.scope=q('.ew-scope').value;w.trigger=q('.ew-trigger').value;w.position=q('.ew-position').value;w.contacts=[...overlay.querySelectorAll('.ew-contact:checked')].map(x=>x.value);if(w.trigger==='keyword'&&!w.keys) return toast('关键词触发需要填写至少一个关键词');if(w.scope==='contact'&&!w.contacts.length)return toast('请选择至少一个联系人');save();overlay.remove();rWorlds();toast('世界书已保存')};q('.ew-delete').onclick=()=>{if(confirm('确定删除这条世界书吗？')){S.worlds=S.worlds.filter(x=>x.id!==w.id);save();overlay.remove();rWorlds()}};
+ w.keys=w.keys||'';w.contacts=w.contacts||[];w.trigger=w.trigger||(w.keys.trim()?'keyword':'global');w.scope=w.scope||'global';w.position=w.position||'after';
+ const overlay=document.createElement('div');overlay.className='worldbook-editor-mask';
+ overlay.innerHTML=`<div class="worldbook-editor" role="dialog" aria-modal="true"><div class="ew-head"><button type="button" class="ew-close" aria-label="关闭">×</button><h3>${w.title?'编辑世界书':'新建世界书'}</h3><button type="button" class="ew-save-top" aria-label="保存">✓</button></div>
+ <div class="ew-field-card"><label>标题</label><input class="ew-title" placeholder="给这本世界书起个名字" value="${esc(w.title||'')}"><div class="ew-sep"></div><label>世界书内容</label><textarea class="ew-content" rows="6" placeholder="写下世界背景、人物关系或故事规则……">${esc(w.content||'')}</textarea></div>
+ <div class="ew-section-title">注入设置</div><div class="ew-field-card"><label>注入范围</label><select class="ew-scope"><option value="global" ${w.scope==='global'?'selected':''}>全局世界书 · 对所有联系人生效</option><option value="contact" ${w.scope==='contact'?'selected':''}>局部世界书 · 指定联系人</option></select><div class="ew-sep"></div><div class="ew-contacts" style="display:${w.scope==='contact'?'block':'none'}"><label>选择联系人</label><div class="card" style="max-height:150px;overflow:auto">${S.personas.map(p=>`<label class="chk"><input type="checkbox" class="ew-contact" value="${p.id}" ${(w.contacts||[]).includes(p.id)?'checked':''}>${esc(p.name)}</label>`).join('')||'<small>请先新增联系人</small>'}</div><div class="ew-sep"></div></div><label>触发方式</label><select class="ew-trigger"><option value="global" ${w.trigger==='global'?'selected':''}>常驻注入 · 每次对话生效</option><option value="keyword" ${w.trigger==='keyword'?'selected':''}>关键词触发 · 命中后注入</option></select><div class="ew-keybox" style="display:${w.trigger==='keyword'?'block':'none'}"><div class="ew-sep"></div><label>触发关键词</label><input class="ew-keys" placeholder="多个关键词用逗号分隔" value="${esc(w.keys)}"></div><div class="ew-sep"></div><label>注入位置</label><select class="ew-position"><option value="before" ${w.position==='before'?'selected':''}>角色人设之前</option><option value="after" ${w.position==='after'?'selected':''}>角色人设之后</option></select><div class="ew-sep"></div><label class="chk"><input class="ew-on" type="checkbox" ${w.on!==false?'checked':''}>启用这本世界书</label></div>
+ <div class="ew-footer"><button class="btn ew-delete" type="button">删除世界书</button><button class="btn ew-save" type="button">保存修改</button></div></div>`;
+ document.body.appendChild(overlay);const q=x=>overlay.querySelector(x);const close=()=>overlay.remove();q('.ew-close').onclick=close;q('.ew-save-top').onclick=()=>q('.ew-save').click();overlay.onclick=e=>{if(e.target===overlay)close()};q('.ew-scope').onchange=()=>q('.ew-contacts').style.display=q('.ew-scope').value==='contact'?'block':'none';q('.ew-trigger').onchange=()=>q('.ew-keybox').style.display=q('.ew-trigger').value==='keyword'?'block':'none';
+ q('.ew-save').onclick=()=>{w.title=q('.ew-title').value.trim()||'未命名世界书';w.keys=q('.ew-keys').value.trim();w.content=q('.ew-content').value;w.on=q('.ew-on').checked;w.scope=q('.ew-scope').value;w.trigger=q('.ew-trigger').value;w.position=q('.ew-position').value;w.contacts=[...overlay.querySelectorAll('.ew-contact:checked')].map(x=>x.value);if(w.trigger==='keyword'&&!w.keys)return toast('关键词触发需要填写至少一个关键词');if(w.scope==='contact'&&!w.contacts.length)return toast('请选择至少一个联系人');save();close();worldbookScope=w.scope==='contact'?'contact':'global';rWorlds();toast('世界书已保存')};
+ q('.ew-delete').onclick=()=>{if(confirm('确定删除这条世界书吗？')){S.worlds=S.worlds.filter(x=>x.id!==w.id);save();close();rWorlds()}};
 }
-$('#addw').onclick=()=>{const w={id:uid(),title:'',keys:'',content:'',on:true,scope:'global',trigger:'global',position:'after',contacts:[]};S.worlds.push(w);save();editWorld(w)};
+function initWorldbookLibrary(){
+ const root=$('#v-worlds');if(!root||root.dataset.wbReady)return;root.dataset.wbReady='1';
+ $('#wb-more').onclick=()=>$('#wb-action-menu').classList.toggle('on');
+ $('#wb-search-btn').onclick=()=>{const line=$('#wb-searchline');line.classList.add('on');$('#wb-search').focus();$('#wb-action-menu').classList.remove('on')};
+ $('#wb-search-close').onclick=()=>{$('#wb-searchline').classList.remove('on');$('#wb-search').value='';rWorlds()};
+ $('#wb-search').oninput=rWorlds;
+ $$('#v-worlds [data-wb-scope]').forEach(b=>b.onclick=()=>{worldbookScope=b.dataset.wbScope;$('#wb-action-menu').classList.remove('on');rWorlds()});
+ document.addEventListener('click',e=>{if(!e.target.closest('#wb-more,#wb-action-menu'))$('#wb-action-menu')?.classList.remove('on')});
+}
+initWorldbookLibrary();
+$('#addw').onclick=()=>{$('#wb-action-menu')?.classList.remove('on');const w={id:uid(),title:'',keys:'',content:'',on:true,scope:worldbookScope,trigger:'global',position:'after',contacts:[]};S.worlds.push(w);save();editWorld(w)};
 $('#import-worlds').onclick=()=>importTextFile((t,n)=>{let parsed=null;try{parsed=JSON.parse(t)}catch(e){};if(Array.isArray(parsed)){const rows=parsed;rows.forEach(w=>S.worlds.push({id:uid(),title:w.title||w.name||n.replace(/\.[^.]+$/,''),keys:w.keys||w.keywords||'',content:w.content||w.text||'',on:w.on!==false}));}else if(parsed&&Array.isArray(parsed.worlds)){parsed.worlds.forEach(w=>S.worlds.push({id:uid(),title:w.title||w.name||n,keys:w.keys||w.keywords||'',content:w.content||w.text||'',on:w.on!==false}));}else if(parsed&&typeof parsed==='object'&&(parsed.entries||(parsed.character_book&&parsed.character_book.entries))){const ents=parsed.entries||parsed.character_book.entries,arr=Array.isArray(ents)?ents:Object.values(ents);arr.forEach((w,i)=>S.worlds.push({id:uid(),title:w.comment||w.name||w.title||('条目'+(i+1)),keys:[].concat(w.key||w.keys||[]).join(','),content:w.content||w.text||'',on:w.enabled!==false&&w.disable!==true}))}else{S.worlds.push({id:uid(),title:n.replace(/\.[^.]+$/,''),keys:'',content:t,on:true})}save();rWorlds();toast('世界书文件已导入')});
 
 /* settings */
