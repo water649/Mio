@@ -723,8 +723,8 @@ button.feed-follow-plus{padding:0;cursor:pointer}
 .ms-pa{width:36px;height:36px;border-radius:50%;overflow:hidden;background:#bbb;display:grid;place-items:center;flex:none;color:#fff}
 .ms-pa img{width:100%;height:100%;object-fit:cover}
 .font-preview{margin-top:12px;padding:12px 14px;border-radius:12px;background:var(--p);font-size:17px;line-height:1.6}
-.tr-box{margin-top:4px;padding:8px 12px;border-radius:12px;background:var(--p);color:var(--sub);font-size:calc(var(--chat-font-size,14px) - 1px);line-height:1.55;white-space:pre-wrap;align-self:flex-start;max-width:100%;overflow-wrap:anywhere}
-.tr-box small{display:block;font-size:11px;opacity:.7;margin-bottom:2px}
+.tr-box{position:relative;z-index:1;margin:-8px 0 0 12px;padding:3px 8px;border-radius:8px;background:#050505;color:#fff;font-weight:800;font-size:calc(var(--chat-font-size,14px) - 3px);line-height:1.4;white-space:pre-wrap;align-self:flex-start;max-width:calc(100% - 12px);overflow-wrap:anywhere}
+[data-theme=dark] .tr-box{background:#fff;color:#111}
 #v-cset,#v-cset .body{background:#f2f2f7}
 [data-theme=dark] #v-cset,[data-theme=dark] #v-cset .body{background:#000}
 .is-wrap{padding:6px 16px 48px}
@@ -1089,6 +1089,10 @@ button.feed-follow-plus{padding:0;cursor:pointer}
 .ip-hint{margin-top:.6em;font-size:.78em;color:#9a9aa0}
 .ip-tr{display:none;position:absolute;left:calc(var(--w)*.025);right:calc(var(--w)*.025);top:calc(var(--w)*.025);max-height:calc(100% - var(--w)*.05);overflow-y:auto;box-sizing:border-box;padding:calc(var(--w)*.025) calc(var(--w)*.035);border-radius:calc(var(--w)*.035);background:#050505;color:#fff;font-weight:800;font-size:calc(var(--w)*.048);line-height:1.5;text-align:left;white-space:pre-wrap;overflow-wrap:anywhere;box-shadow:0 3px 10px rgba(0,0,0,.35)}
 .ip-tr.on{display:block}
+
+#v-chat.has-wall .bar{background:rgba(255,255,255,.62);-webkit-backdrop-filter:blur(18px) saturate(1.6);backdrop-filter:blur(18px) saturate(1.6)}
+[data-theme=dark] #v-chat.has-wall .bar{background:rgba(0,0,0,.5)}
+#v-chat.has-wall #msgs,#v-chat.has-wall #inp,#v-chat.has-wall #qbar{background:transparent}
 </style>
 <style id="ucss"></style>
 
@@ -2951,10 +2955,12 @@ function bub(m,i,first,last){
   const el=r.querySelector('.m'),sk=m.stk&&S.stickers.find(x=>x.id===m.stk);
   if(m.fcard){el.classList.add('fc-msg');el.innerHTML=fmCardHTML(m.fcard)}else if(m.transfer){el.classList.add('tf-msg');el.innerHTML=trfCardHTML(m)}else if(m.image){el.classList.add('image-msg');el.innerHTML=`${m.content?`<div>${esc(m.content)}</div>`:''}<img src="${m.image}" alt="聊天图片" style="display:block;max-width:min(240px,62vw);max-height:320px;object-fit:contain;border-radius:12px;margin-top:${m.content?'6px':'0'}">`}else if(sk){el.classList.add('stk');el.innerHTML=`<img src="${sk.src}" alt="">`}else if(m.audio){el.classList.add('voice-msg');el.innerHTML=`<button type="button" class="voice-play" data-play-audio="${i}" aria-label="展开或收起语音文字"><span class="voice-arrow" aria-hidden="true"></span><span class="voice-wave" aria-hidden="true">${'<i></i>'.repeat(9)}</span></button><span class="voice-transcript">${esc(m.content||'语音消息')}</span>`;el.addEventListener('click',ev=>{ev.preventDefault();ev.stopPropagation();el.classList.toggle('show-text')})}else {el.textContent=m.content}if(CC(cur).trOn&&m.trOpen&&m.role==='assistant'&&!m.image&&!m.audio&&!sk)r.querySelector('.col').insertAdjacentHTML('beforeend',trBoxHTML(m));$('#msgs').appendChild(r);$('#msgs').scrollTop=1e9;return el;
 }
+function applyChatWall(){const v=$('#v-chat');if(!v)return;const u=(CC(cur).wall||S.chatWall||'');v.style.backgroundImage=u?`url("${String(u).replace(/"/g,'%22')}")`:'';v.style.backgroundSize='cover';v.style.backgroundPosition='center';v.classList.toggle('has-wall',!!u)}
+function pickWall(cb){const i=document.createElement('input');i.type='file';i.accept='image/*';i.onchange=()=>{const f=i.files&&i.files[0];if(!f)return;const im=new Image();im.onload=()=>{const k=Math.min(1,1400/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);cb(c.toDataURL('image/jpeg',.82))};im.src=URL.createObjectURL(f)};i.click()}
 function applyChatFont(){const box=$('#msgs');if(box)box.style.setProperty('--chat-font-size',(Number(CC(cur).fontSize)||14)+'px')}
 let multiSelectMode=false;let selectedMsgIndices=new Set();
 function draw(){
-  applyChatFont();renderQBar();{const pn=$('#pm-narr');if(pn)pn.style.display=CC(cur).narrOn?'':'none'}
+  applyChatFont();applyChatWall();renderQBar();{const pn=$('#pm-narr');if(pn)pn.style.display=CC(cur).narrOn?'':'none'}
   const p=P(cur),h=S.chats[cur]=S.chats[cur]||[];
   if(!h.length&&p.greet){h.push({role:'assistant',content:p.greet,t:Date.now()});save()}
   $('#ctitle').textContent=(CC(cur).roleNote||'').trim()||p.name;const roleNote=$('#chat-role-note');if(roleNote)roleNote.textContent='';$('#ucss').textContent=(S.themes.find(t=>t.id===CC(cur).css)||{}).css||'';sIcon();srch(0);
@@ -3161,6 +3167,9 @@ function rCset(){
     <div class="is-c is-tap${cc.trOn?'':' is-dim'}" id="cs-tr-to"><span class="is-i" style="background:#ff9500">${rpSvg('gl')}</span><span class="is-t"><b>翻译成</b></span><span class="is-v">${esc(cc.trTo||'简体中文')}</span><span class="is-chev">${rpSvg('chr')}</span></div>
   </div>
   <div class="is-f">开启后，点一下角色的消息气泡，会在下方展开译文。「角色输出语种」可以多选，角色会按所选语种回复，也可以在一条消息里混用多种语言；「翻译成」是译文使用的语言。</div>
+  <div class="is-h">聊天壁纸</div>
+  <div class="is-g"><div class="is-c is-tap" id="cs-wall"><span class="is-i" style="background:#5ac8fa">${rpSvg('gl')}</span><span class="is-t"><b>更换聊天壁纸</b></span><span class="is-v">${cc.wall?'已设置':(S.chatWall?'使用全局壁纸':'默认')}</span><span class="is-chev">${rpSvg('chr')}</span></div>${cc.wall?`<div class="is-c is-tap" id="cs-wall-all"><span class="is-i" style="background:#34c759">${rpSvg('gl')}</span><span class="is-t"><b>应用到所有聊天</b></span><span class="is-chev">${rpSvg('chr')}</span></div>`:''}${(cc.wall||S.chatWall)?`<div class="is-c is-tap" id="cs-wall-clear"><span class="is-i" style="background:#8e8e93">${rpSvg('gl')}</span><span class="is-t"><b>恢复默认壁纸</b></span><span class="is-chev">${rpSvg('chr')}</span></div>`:''}</div>
+  <div class="is-f">壁纸从手机相册选择，默认只用于当前聊天；也可以一键应用到所有聊天，单独设置过壁纸的聊天不受影响。「恢复默认」会清除当前聊天的壁纸，如果设置过全局壁纸，也会一起清除。</div>
   <div class="is-h">旁白</div>
   <div class="is-g"><div class="is-c"><span class="is-i" style="background:#5856d6">${rpSvg('mm')}</span><span class="is-t"><b>线上旁白</b><small>角色动作、神态、心理、环境</small></span><span class="is-sw"><input type="checkbox" id="cs-narr-on" ${cc.narrOn?'checked':''}><i></i></span></div></div>
   <div class="is-f">开启后，角色回复里会穿插旁白（动作、神态、心理等），以居中的小字显示；聊天的 + 菜单里也会出现「发送旁白」，可以自己写旁白。点一下旁白可以删除。</div>
@@ -3196,6 +3205,9 @@ function rCset(){
   $$('#cbody [data-sgb]').forEach(c=>c.onchange=()=>{const g=c.dataset.sgb;cc.stkGroups=c.checked?[...(cc.stkGroups||[]),g]:(cc.stkGroups||[]).filter(x=>x!==g);save()});
   $('#cs-css').onchange=e=>{cc.css=e.target.value;save()};
   $('#cs-bl').onchange=e=>{p.blocked=e.target.checked;save()};
+  $('#cs-wall').onclick=()=>pickWall(u=>{cc.wall=u;save();applyChatWall();rCset()});
+  {const a=$('#cs-wall-all');if(a)a.onclick=()=>{S.chatWall=cc.wall;save();toast('已应用到所有聊天');rCset()}}
+  {const c=$('#cs-wall-clear');if(c)c.onclick=()=>{cc.wall='';S.chatWall='';save();applyChatWall();rCset();toast('已恢复默认壁纸')}}
   $('#cs-narr-on').onchange=e=>{cc.narrOn=e.target.checked;save();draw()};
   $('#cs-tr-on').onchange=e=>{cc.trOn=e.target.checked;save();['#cs-tr-out','#cs-tr-to'].forEach(s=>$(s).classList.toggle('is-dim',!cc.trOn));draw()};
   $('#cs-tr-out').onclick=()=>langPick({title:'角色输出语种（可多选）',multi:true,selected:cc.trOut||[],onDone:l=>{cc.trOut=l;save();$('#cs-tr-out .is-v').textContent=l.join('、')||'未设置'}});
@@ -4108,7 +4120,7 @@ async function translateMsg(text,lang){
  const sec=S.cfg.secondaryKey&&(S.cfg.secondaryBase||S.cfg.base),cfg=sec?{base:S.cfg.secondaryBase||S.cfg.base,key:S.cfg.secondaryKey,model:S.cfg.secondaryModel||S.cfg.model,temp:.2}:Object.assign({},S.cfg,{temp:.2});
  return await ask([{role:'system',content:'你是一个只输出译文的翻译引擎。把用户给出的文本翻译成「'+lang+'」。保留原有的语气、表情符号和换行；原文里已经是「'+lang+'」的部分保持原样；不要解释，不要添加引号或任何额外内容。'},{role:'user',content:text}],null,{},cfg);
 }
-function trBoxHTML(m){const lang=m.trLang||CC(cur).trTo||'简体中文';return '<div class="tr-box"><small>'+esc(lang)+'</small>'+(m.trLoading?'翻译中…':m.trErr?'翻译失败：'+esc(m.trErr):esc(m.tr||''))+'</div>'}
+function trBoxHTML(m){return '<div class="tr-box">'+(m.trLoading?'翻译中…':m.trErr?'翻译失败：'+esc(m.trErr):esc(m.tr||''))+'</div>'}
 function trRender(i){const m=(S.chats[cur]||[])[i],row=$('#msgs .r[data-i="'+i+'"]');if(!row||!m)return;const old=row.querySelector('.tr-box');if(old)old.remove();if(m.trOpen)row.querySelector('.col').insertAdjacentHTML('beforeend',trBoxHTML(m))}
 async function trToggle(i){
  const cc=CC(cur),m=S.chats[cur][i],lang=cc.trTo||'简体中文',pid=cur;
