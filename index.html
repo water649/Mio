@@ -778,16 +778,6 @@ button.feed-follow-plus{padding:0;cursor:pointer}
 .ls-add input{flex:1;min-width:0;background:#fff;border:0;border-radius:10px;padding:10px 12px;color:var(--ink)}
 [data-theme=dark] .ls-add input{background:#2c2c2e}
 .ls-add button{color:#007aff;font-size:16px;padding:0 6px}
-.pz-list{background:var(--p);border-radius:12px;overflow:hidden}
-.pz-row{display:flex;align-items:center;gap:10px;padding:12px 14px;position:relative;cursor:pointer}
-.pz-row+.pz-row:before{content:"";position:absolute;top:0;left:14px;right:0;height:.5px;background:var(--line)}
-.pz-t{flex:1;min-width:0}
-.pz-t b{display:block;font-weight:500;font-size:16px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-.pz-t small{display:block;color:var(--sub);font-size:13px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-.pz-ck{color:#007aff;display:grid}
-.pz-ck svg{width:20px;height:20px}
-.pz-del{color:#ff3b30;font-size:14px;padding:6px 4px;flex:none}
-.pz-empty{padding:18px;color:var(--sub);text-align:center;font-size:14px}
 .pz-add{display:flex;gap:8px;margin-top:10px;align-items:center}
 .pz-add input{flex:1;min-width:0;border:0;border-radius:12px;background:var(--p);padding:12px 14px}
 .pz-save{background:var(--ink);color:var(--bg);border-radius:12px;padding:0 16px;height:44px;font-weight:600;white-space:nowrap;flex:none}
@@ -1031,6 +1021,74 @@ button.feed-follow-plus{padding:0;cursor:pointer}
 [data-theme=dark] #v-app .tabs button.on{background:rgba(255,255,255,.14)}
 #v-app #abody{padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))}
 #v-app.feed-mode .feed-scroll{padding-bottom:calc(100px + env(safe-area-inset-bottom,0px))}
+
+.narr-row{width:100%;box-sizing:border-box;padding:4px 28px;text-align:center;font-size:12.5px;line-height:1.7;color:var(--sub);font-style:normal;white-space:pre-wrap;overflow-wrap:anywhere;cursor:pointer;flex:none}
+:not(.narr-row)+.narr-row{margin-top:12px}
+
+/* settings: white detail pages */
+#v-settings.detail,#v-settings.detail .bar{background:#fff}
+#v-settings.detail .body input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=file]),#v-settings.detail .body select,#v-settings.detail .body textarea{background:#fff;border:1px solid #dcdce0;border-radius:12px;padding:12px 14px}
+#v-settings.detail .body .btn:not(.fill){background:#fff;border:1px solid #dcdce0}
+[data-theme=dark] #v-settings.detail,[data-theme=dark] #v-settings.detail .bar{background:#000}
+[data-theme=dark] #v-settings.detail .body input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=file]),[data-theme=dark] #v-settings.detail .body select,[data-theme=dark] #v-settings.detail .body textarea{background:#1c1c1e;border-color:#3a3a3c}
+[data-theme=dark] #v-settings.detail .body .btn:not(.fill){background:#1c1c1e;border-color:#3a3a3c}
+/* presets: horizontal swipe cards */
+.pz-list{display:flex;gap:10px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin:0 -18px;padding:2px 18px 10px;background:transparent;border-radius:0}
+.pz-list::-webkit-scrollbar{display:none}
+.pz-row{flex:none;scroll-snap-align:start;scroll-margin-left:18px;width:168px;min-height:96px;box-sizing:border-box;padding:12px 14px;border-radius:16px;background:#fff;border:1px solid #dcdce0;display:flex;flex-direction:column;justify-content:space-between;gap:8px;position:relative;cursor:pointer;transition:border-color .15s,background .15s}
+.pz-row.on{border:1.5px solid var(--ink);padding:11.5px 13.5px}
+[data-theme=dark] .pz-row{background:#1c1c1e;border-color:#3a3a3c}[data-theme=dark] .pz-row.on{border-color:var(--ink)}
+.pz-t{min-width:0}
+.pz-t b{display:block;font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pz-row.on .pz-t b{padding-right:22px}
+.pz-t small{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:3px;font-size:12px;line-height:1.4;color:var(--sub);overflow-wrap:anywhere}
+.pz-ck{position:absolute;right:10px;top:11px;color:#007aff;display:grid}
+.pz-ck svg{width:18px;height:18px}
+.pz-del{align-self:flex-end;color:#ff3b30;font-size:12px;padding:2px 2px;flex:none;background:transparent}
+.pz-empty{width:100%;padding:22px 0;color:var(--sub);text-align:center;font-size:14px}
+
+/* iPod-style thought player */
+#ipod{position:fixed;inset:0;z-index:10200;background:rgba(0,0,0,.72);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:center;animation:iosf .2s ease;font-family:-apple-system,"Helvetica Neue","PingFang SC",sans-serif}
+.ip-dev{--w:min(86vw,340px);width:var(--w);box-sizing:border-box;padding:calc(var(--w)*.06) calc(var(--w)*.05) calc(var(--w)*.09);border-radius:calc(var(--w)*.12);background:linear-gradient(180deg,#3b3b3e,#1b1b1d 30%,#161618);box-shadow:0 24px 60px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.18),inset 0 0 0 1px rgba(255,255,255,.06);display:flex;flex-direction:column;align-items:center}
+.ip-scr{position:relative;width:100%;aspect-ratio:1.2/1;border-radius:calc(var(--w)*.04);border:calc(var(--w)*.014) solid #0a0a0a;box-shadow:0 0 0 1px #2a2a2c;background:#fff;overflow:hidden;color:#111;display:flex;flex-direction:column}
+.ip-hd{height:calc(var(--w)*.115);flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 calc(var(--w)*.035);background:linear-gradient(180deg,#f6f7f9,#b9bcc4);border-bottom:1px solid #9a9da6}
+.ip-hd b{font-size:calc(var(--w)*.05);font-weight:700;color:#2b2d36}
+.ip-st{display:flex;align-items:center;gap:calc(var(--w)*.02);color:#2b2d36}
+.ip-pp svg{display:block;width:calc(var(--w)*.04);height:calc(var(--w)*.045)}
+.ip-bat{display:block;width:calc(var(--w)*.1);height:calc(var(--w)*.045);border-radius:calc(var(--w)*.012);background:linear-gradient(180deg,#8be07c,#4cb83f);position:relative}
+.ip-bat::after{content:"";position:absolute;right:calc(var(--w)*-.01);top:30%;width:calc(var(--w)*.008);height:40%;background:#777;border-radius:1px}
+.ip-bd{flex:1;min-height:0;padding:calc(var(--w)*.04) calc(var(--w)*.045) calc(var(--w)*.03);display:flex;flex-direction:column;justify-content:space-between}
+.ip-main{display:flex;gap:calc(var(--w)*.04);min-height:0;align-items:flex-start}
+.ip-art{flex:none;width:calc(var(--w)*.3);height:calc(var(--w)*.3);-webkit-box-reflect:below 2px linear-gradient(transparent 72%,rgba(255,255,255,.45))}
+.ip-ai{width:100%;height:100%;overflow:hidden;background:linear-gradient(135deg,#a2b1dc,#6a72b0);color:#fff;display:flex;align-items:center;justify-content:center;font-size:calc(var(--w)*.12);font-weight:700}
+.ip-ai img{width:100%;height:100%;object-fit:cover;display:block}
+.ip-txt{flex:1;min-width:0;text-align:left}
+.ip-ti{font-size:calc(var(--w)*.058);font-weight:800;line-height:1.2;color:#111;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ip-ar{margin-top:calc(var(--w)*.02);font-size:calc(var(--w)*.044);color:#555;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ip-ly{margin-top:calc(var(--w)*.025);font-size:calc(var(--w)*.04);line-height:1.35;color:#8a8a8f;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.ip-tag{font-size:calc(var(--w)*.033);color:#6e6e73;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:calc(var(--w)*.03)}
+.ip-pr{display:flex;align-items:center;gap:calc(var(--w)*.02);font-size:calc(var(--w)*.04);color:#333;margin-top:calc(var(--w)*.01)}
+.ip-bar{flex:1;height:calc(var(--w)*.026);border-radius:99px;background:linear-gradient(180deg,#bbb,#e9e9ec);position:relative}
+.ip-bar u{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:linear-gradient(180deg,#111,#444);text-decoration:none}
+.ip-bar i{position:absolute;top:50%;width:calc(var(--w)*.045);height:calc(var(--w)*.045);margin:calc(var(--w)*-.0225) 0 0 calc(var(--w)*-.0225);border-radius:50%;background:radial-gradient(circle at 35% 30%,#555,#111)}
+.ip-pop{display:none;position:absolute;left:4%;right:4%;top:15%;border-radius:calc(var(--w)*.04);border:2px solid #9aa6cf;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.25);overflow:hidden}
+.ip-pop.on{display:block}
+.ip-ph{padding:calc(var(--w)*.018) 0;text-align:center;font-size:calc(var(--w)*.042);font-weight:700;color:#2b2d36;background:linear-gradient(180deg,#f6f7f9,#b9bcc4);border-bottom:1px solid #9a9da6}
+.ip-pb{padding:calc(var(--w)*.04);font-size:calc(var(--w)*.045);line-height:1.6;color:#111;max-height:calc(var(--w)*.4);overflow-y:auto;white-space:pre-wrap;overflow-wrap:anywhere;text-align:left}
+.ip-wheel{position:relative;width:calc(var(--w)*.76);aspect-ratio:1;margin-top:calc(var(--w)*.1);border-radius:50%;background:radial-gradient(circle at 50% 35%,#323235,#252527);box-shadow:inset 0 2px 4px rgba(255,255,255,.07),0 2px 8px rgba(0,0,0,.5)}
+.ip-lb{position:absolute;color:#e8e8ea;background:transparent;display:flex;align-items:center;justify-content:center;padding:calc(var(--w)*.03)}
+.ip-lb svg{display:block;width:calc(var(--w)*.075);height:calc(var(--w)*.065)}
+.ip-menu{top:7%;left:50%;transform:translateX(-50%);font-size:calc(var(--w)*.058);letter-spacing:.5px}
+.ip-prev{left:6%;top:50%;transform:translateY(-50%)}
+.ip-next{right:6%;top:50%;transform:translateY(-50%)}
+.ip-play{bottom:7%;left:50%;transform:translateX(-50%)}
+.ip-ok{position:absolute;left:50%;top:50%;width:35%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle at 50% 30%,#404043,#2a2a2c);box-shadow:inset 0 1px 3px rgba(255,255,255,.12),0 2px 6px rgba(0,0,0,.55)}
+.ip-ok:active{filter:brightness(1.25)}
+
+.ip-pw{position:relative}
+.ip-hint{margin-top:.6em;font-size:.78em;color:#9a9aa0}
+.ip-tr{display:none;position:absolute;left:calc(var(--w)*.025);right:calc(var(--w)*.025);top:calc(var(--w)*.025);max-height:calc(100% - var(--w)*.05);overflow-y:auto;box-sizing:border-box;padding:calc(var(--w)*.025) calc(var(--w)*.035);border-radius:calc(var(--w)*.035);background:#050505;color:#fff;font-weight:800;font-size:calc(var(--w)*.048);line-height:1.5;text-align:left;white-space:pre-wrap;overflow-wrap:anywhere;box-shadow:0 3px 10px rgba(0,0,0,.35)}
+.ip-tr.on{display:block}
 </style>
 <style id="ucss"></style>
 
@@ -1440,7 +1498,7 @@ button.feed-follow-plus{padding:0;cursor:pointer}
   <div id="msgs"></div>
   <div id="qbar"></div>
   <div id="inp">
-    <div id="pm"><button id="redo">AI 回复 / 重答</button><button id="clear">清空对话</button><button id="pm-image" type="button">发送图片</button><button id="pm-transfer" type="button">转账</button><button id="pm-voice" type="button">发送语音（模拟）</button><input id="chat-image-file" type="file" accept="image/*" hidden></div>
+    <div id="pm"><button id="redo">AI 回复 / 重答</button><button id="clear">清空对话</button><button id="pm-image" type="button">发送图片</button><button id="pm-transfer" type="button">转账</button><button id="pm-voice" type="button">发送语音（模拟）</button><button id="pm-narr" type="button" style="display:none">发送旁白</button><input id="chat-image-file" type="file" accept="image/*" hidden></div>
     <div id="sp"></div>
     <button id="plus" data-ic="pl" aria-label="菜单"></button>
     <div class="ib"><textarea id="ta" rows="1" placeholder="输入一条信息"></textarea><button id="smile" type="button" aria-label="表情包"></button><button id="send" type="button" aria-label="发送 / AI 回复"></button></div>
@@ -1504,7 +1562,7 @@ button.feed-follow-plus{padding:0;cursor:pointer}
     <div class="cap">API Settings</div><div class="card">
       <label style="margin-top:0">API Base URL (OpenAI-compatible)</label><input id="c-base" placeholder="https://api.openai.com/v1">
       <label>API Key</label><input id="c-key" type="password" placeholder="sk-...">
-      <label>Model ID</label><div style="display:flex;gap:8px;align-items:center"><input id="c-model" placeholder="Enter a model ID manually" style="flex:1;min-width:0"><button class="btn" id="pull-models" type="button" style="white-space:nowrap">Fetch Models</button></div><label style="margin-top:10px">Available Models (tap to select)</label><select id="c-model-select" style="width:100%;padding:13px;border:1px solid var(--line);border-radius:12px;background:var(--fld);color:var(--text)"><option value="">Fetch models first</option></select><p class="note" id="models-result">Enter the API URL and key, then tap “Fetch Models”. Select a model below when ready.</p>
+      <label>Model ID</label><div style="display:flex;flex-direction:column;gap:8px"><input id="c-model" placeholder="Enter a model ID manually" style="width:100%;min-width:0"><button class="btn" id="pull-models" type="button" style="white-space:nowrap;width:100%;margin:0">Fetch Models</button></div><label style="margin-top:10px">Available Models (tap to select)</label><select id="c-model-select" style="width:100%;padding:13px;border:1px solid var(--line);border-radius:12px;background:var(--fld);color:var(--text)"><option value="">Fetch models first</option></select><p class="note" id="models-result">Enter the API URL and key, then tap “Fetch Models”. Select a model below when ready.</p>
       <div style="display:none"><label>已保存的 API Presets</label><div style="display:flex;gap:8px;align-items:center"><select id="api-preset-select" style="flex:1;min-width:0;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--fld);color:var(--text)"><option value="">选择已保存预设</option></select><button class="btn" id="api-preset-load" type="button">使用</button></div><div style="margin-top:12px;padding:12px;border:1px solid var(--line);border-radius:14px;background:var(--fld)"><label for="api-preset-name" style="display:block;margin:0 0 7px;font-weight:600;color:var(--text)">新预设名称</label><input id="api-preset-name" type="text" autocomplete="off" placeholder="例如：我的主力模型 API" style="display:block;width:100%;box-sizing:border-box;min-width:0;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--text);font-size:16px"><p class="note" style="margin:6px 0 10px">先在这里输入名称，再点下面的保存按钮。保存后下次可直接从上方列表选择。</p><div style="display:flex;gap:8px"><button class="btn fill" id="api-preset-save" type="button" style="flex:1">保存为预设</button><button class="btn" id="api-preset-delete" type="button">删除所选</button></div></div></div><div class="cap" style="margin-top:16px">API Presets</div><div id="pz-api"></div>
       <div class="cap" style="margin-top:18px">Secondary API (optional, for memory summaries)</div><p class="note">Used for automatic or manual chat-memory summaries. Leave blank to use the primary API.</p><label>Secondary API URL</label><input id="c-secondary-base" placeholder="Leave blank to use primary API URL"><label>Secondary API Key</label><input id="c-secondary-key" type="password" placeholder="Leave blank to use primary API key"><label>Secondary API Model ID</label><input id="c-secondary-model" placeholder="Leave blank to use primary model ID">
 <div style="display:flex;gap:8px;margin-top:10px"><button class="btn" id="pull-sec-models" type="button" style="white-space:nowrap;margin:0">Fetch Models</button></div><label style="margin-top:10px">Available Models (tap to select)</label><select id="c-sec-model-select" style="width:100%;padding:13px;border:1px solid var(--line);border-radius:12px;background:var(--fld);color:var(--text)"><option value="">Fetch models first</option></select><p class="note" id="sec-models-result">Blank URL/key fields use the primary API. Fetch models and select one from the list.</p>
@@ -1572,6 +1630,7 @@ button.feed-follow-plus{padding:0;cursor:pointer}
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div><label>宽度</label><input id="c-nai-width" type="number" min="64" max="2048" step="64"></div><div><label>高度</label><input id="c-nai-height" type="number" min="64" max="2048" step="64"></div><div><label>提示词引导强度（Scale）</label><input id="c-nai-scale" type="number" min="0" max="20" step="0.5"></div><div><label>步数（Steps）</label><input id="c-nai-steps" type="number" min="1" max="50"></div></div>
         <label>采样器（Sampler）</label><select id="c-nai-sampler" style="width:100%;padding:13px;border:1px solid var(--line);border-radius:12px;background:var(--fld);color:var(--text)"><option value="k_euler_ancestral">Euler Ancestral</option><option value="k_euler">Euler</option><option value="k_dpmpp_2s_ancestral">DPM++ 2S Ancestral</option><option value="k_dpmpp_2m">DPM++ 2M</option><option value="k_dpmpp_sde">DPM++ SDE</option></select><label>CFG Rescale</label><input id="c-nai-cfgrescale" type="number" min="0" max="1" step="0.05"><label>Seed（留空为随机）</label><input id="c-nai-seed" type="number" min="0" placeholder="随机"><label class="chk"><input type="checkbox" id="c-nai-sm">启用 SM</label><label class="chk"><input type="checkbox" id="c-nai-sm-dyn">启用 SM Dynamic</label><p class="note">NovelAI 参数会发送给兼容的接口；不同模型/中转站对参数支持不完全一致。浏览器直连也可能受 CORS 限制。</p>
       </div>
+      <label style="margin-top:14px">生图 API Presets</label><div id="pz-img"></div>
       <button class="btn fill" id="save-imageapi">保存生图Settings</button>
     </div>
   </div>
@@ -1623,7 +1682,7 @@ function __openStoreDB(){return new Promise((resolve,reject)=>{const req=indexed
 async function __readStoredState(){try{const db=await __openStoreDB();const val=await new Promise((resolve,reject)=>{const tx=db.transaction('state','readonly');const req=tx.objectStore('state').get('xsj');req.onsuccess=()=>resolve(req.result||null);req.onerror=()=>reject(req.error)});db.close();if(val){try{return typeof val==='string'?JSON.parse(val):val}catch(e){console.warn('IndexedDB 中的状态无法解析',e)}}}catch(e){console.warn('读取 IndexedDB 失败，将尝试旧存储',e)}try{return JSON.parse(localStorage.getItem('xsj')||'null')}catch(e){return null}}
 async function __writeStoredState(serialized){const db=await __openStoreDB();await new Promise((resolve,reject)=>{const tx=db.transaction('state','readwrite');tx.objectStore('state').put(serialized,'xsj');tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error||new Error('数据库写入失败'));tx.onabort=()=>reject(tx.error||new Error('数据库写入中断'))});db.close();}
 let S=await __readStoredState();
-S=Object.assign(DEF(),S||{});S.stickerGroups=S.stickerGroups||['默认'];S.stickers=(S.stickers||[]).map(x=>({...x,group:x.group||'默认'}));S.apiPresets=S.apiPresets||[];S.secondaryPresets=S.secondaryPresets||[];S.fonts=S.fonts||[];S.fontPresets=S.fontPresets||[];S.fontActive=S.fontActive||'sys';S.fontScale=S.fontScale||100;S.userProfiles=S.userProfiles||[];S.npcs=S.npcs||[];S.ctcGroups=S.ctcGroups||[];S.diaries=S.diaries||[];S.postDecorations=S.postDecorations||[];if(!S.userProfiles.length){S.userProfiles=[Object.assign({id:'u1'},S.me)];S.activeUserProfile='u1'};S.activeUserProfile=S.activeUserProfile||S.userProfiles[0].id;S.me=Object.assign({},S.userProfiles.find(x=>x.id===S.activeUserProfile)||S.me);
+S=Object.assign(DEF(),S||{});S.stickerGroups=S.stickerGroups||['默认'];S.stickers=(S.stickers||[]).map(x=>({...x,group:x.group||'默认'}));S.apiPresets=S.apiPresets||[];S.imagePresets=S.imagePresets||[];S.secondaryPresets=S.secondaryPresets||[];S.fonts=S.fonts||[];S.fontPresets=S.fontPresets||[];S.fontActive=S.fontActive||'sys';S.fontScale=S.fontScale||100;S.userProfiles=S.userProfiles||[];S.npcs=S.npcs||[];S.ctcGroups=S.ctcGroups||[];S.diaries=S.diaries||[];S.postDecorations=S.postDecorations||[];if(!S.userProfiles.length){S.userProfiles=[Object.assign({id:'u1'},S.me)];S.activeUserProfile='u1'};S.activeUserProfile=S.activeUserProfile||S.userProfiles[0].id;S.me=Object.assign({},S.userProfiles.find(x=>x.id===S.activeUserProfile)||S.me);
 const MEMK=['traditionalMemory','memoryEntries','vectorMemories','lastAutoSummaryCount'];
 S.chatsByUser=S.chatsByUser||{};S.memByUser=S.memByUser||{};S.cc=S.cc||{};
 {const first=S.userProfiles[0].id;
@@ -1732,9 +1791,12 @@ async function newPost(){
   const b=$('#rf');if(b)b.disabled=true;let n=0;
   for(const p of pool){
     if(b)b.textContent='生成中 '+(n+1)+'/'+pool.length;
-    try{const out=await ask([{role:'system',content:p.prompt},{role:'user',content:'以你的身份发一条推特风格的短帖子，80字以内，只输出帖子正文。'}]);
-      const post={id:uid(),pid:p.id,text:out.replace(/^["“]|["”]$/g,''),time:Date.now(),rp:rnd(80),rt:rnd(600),likes:rnd(3000),bm:rnd(500),views:rnd(60000)+1000,liked:0};
-      S.posts.unshift(post);if(feedForeign(post.text)){try{post.translation=await feedTr(post.text)}catch(_){}}save();n++}
+    try{const raw=await ask([{role:'system',content:p.prompt},{role:'user',content:'以你的身份发一条推特风格的短帖子，80字以内。只输出严格 JSON，不要代码块：{"text":"帖子正文","tr":"简体中文译文；如果正文本身就是简体中文，tr 原样重复正文"}'}]);
+      let d;try{d=JSON.parse(String(raw).replace(/^```(?:json)?\s*/i,'').replace(/\s*```$/,''))}catch(_){d={text:raw}}
+      const tx=String(d.text||raw||'').trim().replace(/^["“]|["”]$/g,''),tr=String(d.tr||d.translation||'').trim();
+      const post={id:uid(),pid:p.id,text:tx,time:Date.now(),rp:rnd(80),rt:rnd(600),likes:rnd(3000),bm:rnd(500),views:rnd(60000)+1000,liked:0};
+      if(tr&&tr!==tx)post.translation=tr;
+      S.posts.unshift(post);save();n++}
     catch(e){toast('生成失败：'+e.message);break}
   }
   if(b){b.disabled=false;b.textContent='刷新'}
@@ -2883,6 +2945,7 @@ let pendingQuote=null;
 function bub(m,i,first,last){
   const me=m.role==='user',u=me?who('me'):P(cur),r=document.createElement('div');
   if(m.recalled){r.className='recalled-row';if(i>=0)r.dataset.i=i;r.innerHTML='<div class="dd">'+(me?'你撤回了一条消息':'对方撤回了一条消息')+'</div>';$('#msgs').appendChild(r);return r;}
+  if(m.narr){r.className='narr-row';if(i>=0){r.dataset.i=i;r.onclick=()=>{if(multiSelectMode)return;if(confirm('删除这条旁白？')){S.chats[cur].splice(i,1);save();draw()}}}r.textContent=m.content;$('#msgs').appendChild(r);return r;}
   r.className='r '+(me?'me':'ai')+(first?' first':'');if(i>=0)r.dataset.i=i;
   r.innerHTML=`<div class="av" ${!me&&i>=0?'data-thought-i="'+i+'" title="查看角色内心想法"':''}>${av(u)}</div><div class="col">${first&&!me?`<div class="nm">${esc(u.name)}</div>`:''}${quoteHTML(m,me)}<div class="bw"><div class="m"></div>${last&&m.t?`<span class="tm">${hm(m.t)}</span>`:''}</div></div>`;
   const el=r.querySelector('.m'),sk=m.stk&&S.stickers.find(x=>x.id===m.stk);
@@ -2891,16 +2954,18 @@ function bub(m,i,first,last){
 function applyChatFont(){const box=$('#msgs');if(box)box.style.setProperty('--chat-font-size',(Number(CC(cur).fontSize)||14)+'px')}
 let multiSelectMode=false;let selectedMsgIndices=new Set();
 function draw(){
-  applyChatFont();renderQBar();
+  applyChatFont();renderQBar();{const pn=$('#pm-narr');if(pn)pn.style.display=CC(cur).narrOn?'':'none'}
   const p=P(cur),h=S.chats[cur]=S.chats[cur]||[];
   if(!h.length&&p.greet){h.push({role:'assistant',content:p.greet,t:Date.now()});save()}
   $('#ctitle').textContent=(CC(cur).roleNote||'').trim()||p.name;const roleNote=$('#chat-role-note');if(roleNote)roleNote.textContent='';$('#ucss').textContent=(S.themes.find(t=>t.id===CC(cur).css)||{}).css||'';sIcon();srch(0);
   const box=$('#msgs');box.innerHTML='';
   if(multiSelectMode){const bar=document.createElement('div');bar.className='msg-selectbar';bar.innerHTML=`<span>已选 ${selectedMsgIndices.size} 条</span><button type="button" data-ms-all>全选</button><button type="button" data-ms-forward>转发</button><button type="button" class="danger" data-ms-delete>删除</button><button type="button" data-ms-cancel>取消</button>`;box.appendChild(bar);}
   const day=t=>new Date(t).toDateString();
-  h.forEach((m,i)=>{if(m.recalled){bub(m,i,false,false);return}const visibleBefore=h.slice(0,i).filter(x=>!x.recalled),visibleAfter=h.slice(i+1).filter(x=>!x.recalled),pv=visibleBefore[visibleBefore.length-1],nx=visibleAfter[0],brk=m.t&&(!pv||!pv.t||day(pv.t)!==day(m.t));
+  h.forEach((m,i)=>{if(m.recalled){bub(m,i,false,false);return}const anyBefore=h.slice(0,i).filter(x=>!x.recalled),pa=anyBefore[anyBefore.length-1],na=h.slice(i+1).filter(x=>!x.recalled)[0],brk=m.t&&(!pa||!pa.t||day(pa.t)!==day(m.t));
+    if(m.narr){if(brk)box.insertAdjacentHTML('beforeend',`<div class="dd">${ic('ca')}${new Date(m.t).toLocaleDateString('zh-CN',{year:'numeric',month:'long',day:'numeric',weekday:'long'})} ›</div>`);bub(m,i,false,false);return}
+    const visibleBefore=h.slice(0,i).filter(x=>!x.recalled&&!x.narr),visibleAfter=h.slice(i+1).filter(x=>!x.recalled&&!x.narr),pv=visibleBefore[visibleBefore.length-1],nx=visibleAfter[0];
     if(brk)box.insertAdjacentHTML('beforeend',`<div class="dd">${ic('ca')}${new Date(m.t).toLocaleDateString('zh-CN',{year:'numeric',month:'long',day:'numeric',weekday:'long'})} ›</div>`);
-    bub(m,i,!pv||pv.role!==m.role||brk,!nx||nx.role!==m.role);if(selectedMsgIndices.has(i)){const rr=box.querySelector(`.r[data-i="${i}"]`);if(rr)rr.classList.add('multi-picked')}});
+    bub(m,i,!pv||pv.role!==m.role||brk||!!(pa&&pa.narr),!nx||nx.role!==m.role||!!(na&&na.narr));if(selectedMsgIndices.has(i)){const rr=box.querySelector(`.r[data-i="${i}"]`);if(rr)rr.classList.add('multi-picked')}});
   box.scrollTop=1e9;
 }
 let msgPressTimer=null,msgLongPressed=false;
@@ -2938,14 +3003,14 @@ function setQuote(m){pendingQuote={chat:cur,role:m.role,text:quoteText(m).replac
 function takeQuote(){const q=pendingQuote&&pendingQuote.chat===cur?{quote:{role:pendingQuote.role,text:pendingQuote.text,t:pendingQuote.t}}:{};pendingQuote=null;renderQBar();return q}
 function renderQBar(){const b=document.getElementById('qbar');if(!b)return;if(pendingQuote&&pendingQuote.chat!==cur)pendingQuote=null;if(!pendingQuote){b.classList.remove('on');b.innerHTML='';return}b.classList.add('on');b.innerHTML='<span class="qb-t">'+(pendingQuote.role==='user'?'引用我的消息：':'引用 '+esc((P(cur)||{}).name||'')+'：')+esc(pendingQuote.text)+'</span><button type="button" id="qb-x" aria-label="取消引用">×</button>';document.getElementById('qb-x').onclick=()=>{pendingQuote=null;renderQBar()}}
 function findQuote(h,sn){sn=String(sn||'').trim();if(sn.length<2)return{};for(let k=h.length-1;k>=0;k--){const x=h[k],c=(x.content||'').trim();if(x.recalled||!c)continue;if(c.includes(sn)||(c.length>=2&&sn.includes(c)))return{quote:{role:x.role,text:quoteText(x).replace(/\s+/g,' ').trim().slice(0,80),t:x.t||0}}}return{}}
-function qc(m){if(m.quote&&m.quote.text&&m.role==='user')return '[用户引用了'+(m.quote.role==='user'?'用户自己':'你')+'之前的消息：「'+m.quote.text+'」]\n'+(m.content||'');return m.content}
+function qc(m){if(m.narr)return '[旁白] '+(m.content||'');if(m.quote&&m.quote.text&&m.role==='user')return '[用户引用了'+(m.quote.role==='user'?'用户自己':'你')+'之前的消息：「'+m.quote.text+'」]\n'+(m.content||'');return m.content}
 function showRecalled(m){const me=m.role==='user',old=document.getElementById('rcv');if(old)old.remove();const sk=m.stk&&S.stickers.find(x=>x.id===m.stk);let body;if(sk)body='<img src="'+sk.src+'" alt="">';else if(m.image)body=(m.content?'<div class="rc-body">'+esc(m.content)+'</div>':'')+'<img src="'+m.image+'" alt="">';else body='<div class="rc-body">'+esc(m.content||'（空消息）')+'</div>';const d=document.createElement('div');d.id='rcv';d.innerHTML='<div><small>'+(me?'你':esc((P(cur)||{}).name||'对方'))+' 撤回的消息'+(m.t?' · '+hm(m.t):'')+'</small>'+body+'<button type="button">关闭</button></div>';d.onclick=e=>{if(e.target===d||e.target.tagName==='BUTTON')d.remove()};document.body.appendChild(d)}
 function recalledMenu(i){const h=S.chats[cur],m=h&&h[i];if(!m)return;showMsgMenu([[{label:'查看被撤回的内容',icon:'eye',run:()=>showRecalled(m)}],[{label:'删除这条撤回提示',icon:'trash',danger:1,run:()=>{h.splice(i,1);save();draw()}}]])}
 $('#msgs').addEventListener('pointerdown',e=>{const r=e.target.closest('.r,.recalled-row');if(!r||r.dataset.i===undefined||e.target.closest('.av')||e.target.closest('button'))return;msgLongPressed=false;const i=+r.dataset.i,isRc=r.classList.contains('recalled-row');msgPressTimer=setTimeout(()=>{msgLongPressed=true;isRc?recalledMenu(i):messageMenu(i)},520)});
 ['pointerup','pointercancel','pointerleave'].forEach(ev=>$('#msgs').addEventListener(ev,()=>{if(msgPressTimer)clearTimeout(msgPressTimer);msgPressTimer=null}));
 $('#msgs').onclick=e=>{
  const ms=e.target.closest('[data-ms-all],[data-ms-forward],[data-ms-delete],[data-ms-cancel]');if(ms){e.preventDefault();e.stopPropagation();if(ms.hasAttribute('data-ms-cancel'))exitMultiSelect();else if(ms.hasAttribute('data-ms-all')){const h=S.chats[cur]||[];selectedMsgIndices=new Set(h.map((m,i)=>m.recalled?-1:i).filter(i=>i>=0));draw()}else if(ms.hasAttribute('data-ms-forward'))forwardSelected();else if(ms.hasAttribute('data-ms-delete'))deleteSelected();return}
- const thought=e.target.closest('[data-thought-i]');if(thought){const m=S.chats[cur][+thought.dataset.thoughtI];if(m){const txt=m.thought||'这条消息没有保存内心想法。';modal('内心想法：\n'+txt,()=>{})}return}
+ const thought=e.target.closest('[data-thought-i]');if(thought){const m=S.chats[cur][+thought.dataset.thoughtI];if(m){ipodOpen(+thought.dataset.thoughtI)}return}
  if(msgLongPressed){msgLongPressed=false;e.preventDefault();return}
  const qt=e.target.closest('[data-qt]');if(qt){const tt=+qt.dataset.qt,hh=S.chats[cur]||[],k=tt?hh.findIndex(x=>x.t===tt&&!x.recalled):-1,el=k>=0&&$('#msgs').querySelector('.r[data-i="'+k+'"]');if(el){el.scrollIntoView({block:'center',behavior:'smooth'});el.classList.add('hl');setTimeout(()=>el.classList.remove('hl'),1500)}else toast('原消息已不存在');return}
  const rcRow=e.target.closest('.recalled-row');if(rcRow){if(multiSelectMode)return;const rm=(S.chats[cur]||[])[+rcRow.dataset.i];if(rm)showRecalled(rm);return}
@@ -2959,6 +3024,7 @@ $('#msgs').onclick=e=>{
 $('#plus').onclick=()=>$('#pm').classList.toggle('on');
 $('#pm-voice').onclick=async()=>{ $('#pm').classList.remove('on');const text=await askText('发送模拟语音','输入你想说的话；会合成语音并作为语音消息发送');if(text===null||!text.trim())return;try{const audio=await makeVoice(text.trim());S.chats[cur].push({role:'user',content:text.trim(),audio,t:Date.now()});save();draw();toast('语音消息已发送')}catch(e){toast('语音生成失败：'+e.message)}};
 
+$('#pm-narr').onclick=async()=>{$('#pm').classList.remove('on');const text=await askText('发送旁白','写下你的动作、神态、心理或环境，会以旁白形式显示在聊天里');if(text===null||!text.trim())return;S.chats[cur].push({role:'user',content:text.trim(),narr:1,t:Date.now()});save();draw()};
 $('#clear').onclick=()=>{if(confirm('清空这段对话？')){S.chats[cur]=[];save();draw()}};
 $('#redo').onclick=()=>{
   if(busy)return;if(P(cur).blocked)return toast('已拉黑，请先解除拉黑');const h=S.chats[cur],l=h[h.length-1];
@@ -3026,12 +3092,15 @@ async function summarizeRange(chatId,start,end,automatic){
  if(!summary.trim())throw new Error('模型返回了空总结');cc.memoryEntries=cc.memoryEntries||[];cc.memoryEntries.push({id:uid(),text:summary.trim(),createdAt:Date.now(),rangeStart:start+1,rangeEnd:end});if((S.cfg.memoryMode||'traditional')==='vector'){cc.vectorMemories=cc.vectorMemories||[];cc.vectorMemories.push({id:uid(),text:summary.trim(),embedding:null,createdAt:Date.now()})}if(automatic)cc.lastAutoSummaryCount=end;save();return msgs.length;
 }
 async function maybeAutoSummarize(chatId){const cc=CC(chatId),h=S.chats[chatId]||[],interval=Math.max(20,Math.min(2000,Number(cc.summaryInterval)||200));if(!cc.autoSummary)return;const last=Number(cc.lastAutoSummaryCount)||0;if(h.length-last<interval)return;const end=h.length;try{await summarizeRange(chatId,last,end,true);toast('已自动总结聊天记忆')}catch(e){toast('自动记忆总结失败：'+e.message)}}
+const SONG_PROMPT='【心声歌曲】在输出的 JSON 里再加一个 song 字段：{"title":"歌名","artist":"歌手","lyric":"一小句歌词","tag":"专辑或曲风，可留空"}。song 是你此刻的内心想法让你联想到的一首歌，要贴合 thought 和当前对话的气氛；歌曲不限语言和形式（真实存在的歌、纯音乐、童谣、你自己编的歌都可以）；lyric 只写一小句（不超过一行），也可以是你自己仿写的一句；歌名、歌手、歌词都不要加书名号或引号。另外再加一个 thought_tr 字段：把 thought 翻译成简体中文；如果 thought 本身就是简体中文，thought_tr 留空字符串。';
+const NARR_PROMPT='【线上旁白已开启】messages 数组里，除普通聊天消息外，可以穿插旁白条目，写成对象 {"narr":"旁白内容"}：用第三人称或省略主语，描写你的动作、神态、语气、心理或周围环境（例如：他低头笑了一下，指尖在屏幕上停了很久），每条 10-40 字，不要加括号，不要写成台词。旁白一律使用简体中文书写，不受「输出语言」设置影响，也不需要翻译。旁白要自然穿插，通常 1-2 条，不要每次都出现。用户发来的以 [旁白] 开头的内容是用户的动作或神态描写，请当作剧情自然地回应。';
+const trMsgPrompt=lang=>'【随消息附带译文】翻译已开启：messages 里的每条聊天消息都必须写成对象 {"text":"消息原文","tr":"译成「'+lang+'」的译文"}，不要再写成普通字符串；需要引用时可再加 quote 字段。译文要保留语气和表情符号；如果原文本身已经是「'+lang+'」，tr 原样重复原文。tr 只是给用户点开查看的译文，不要在 text 里夹带翻译或括号注释。旁白条目 {"narr":"…"} 不需要 tr。';
 async function gen(){
   const p=P(cur),h=S.chats[cur];setBusy(1);const el=bub({role:'assistant',content:'···'},-1,1,0);
   try{
-    const basePrompt=build(p,h);if((S.cfg.memoryMode||'traditional')==='vector'){try{const vm=await vectorMemoryPrompt(p,h);if(vm)basePrompt.push({role:'system',content:vm})}catch(memErr){toast('向量记忆检索失败，本次继续普通聊天：'+memErr.message)}}const prompt=basePrompt.concat([{role:'system',content:'在保持角色人设和自然对话的前提下，请一次性输出严格 JSON，不要 Markdown 代码块，格式为 {"messages":["第一条独立聊天消息","第二条独立聊天消息"],"reply":"兼容字段","thought":"角色此刻未说出口的内心想法","image_prompt":""}。messages 是角色按真实聊天节奏连续发送的消息数组：结合语境，适合分开发的内容就拆成 2-5 条短消息，每条只放一个自然聊天气泡；不要把几句话用换行或一大段塞进同一个气泡。只有确实一句就能说清时才只输出一条。不要机械地每次都拆成多条。reply 可作为 messages 的兼容备用字段。thought 是简短内心活动。若用户明确要求生成/发图片，image_prompt 填画面描述，否则留空。如果某条回复是针对对话里某一条具体消息的回应（用户说的或你自己之前说的都可以），可以偶尔（不要每条都用）把这一条写成对象 {"text":"回复内容","quote":"被引用消息的原文片段，原样摘抄，不超过30字"}，其余条目仍写成普通字符串。'},{role:'system',content:TRF_PROMPT()}]);
+    const basePrompt=build(p,h);if((S.cfg.memoryMode||'traditional')==='vector'){try{const vm=await vectorMemoryPrompt(p,h);if(vm)basePrompt.push({role:'system',content:vm})}catch(memErr){toast('向量记忆检索失败，本次继续普通聊天：'+memErr.message)}}const prompt=basePrompt.concat([{role:'system',content:'在保持角色人设和自然对话的前提下，请一次性输出严格 JSON，不要 Markdown 代码块，格式为 {"messages":["第一条独立聊天消息","第二条独立聊天消息"],"reply":"兼容字段","thought":"角色此刻未说出口的内心想法","image_prompt":""}。messages 是角色按真实聊天节奏连续发送的消息数组：结合语境，适合分开发的内容就拆成 2-5 条短消息，每条只放一个自然聊天气泡；不要把几句话用换行或一大段塞进同一个气泡。只有确实一句就能说清时才只输出一条。不要机械地每次都拆成多条。reply 可作为 messages 的兼容备用字段。thought 是简短内心活动。若用户明确要求生成/发图片，image_prompt 填画面描述，否则留空。如果某条回复是针对对话里某一条具体消息的回应（用户说的或你自己之前说的都可以），可以偶尔（不要每条都用）把这一条写成对象 {"text":"回复内容","quote":"被引用消息的原文片段，原样摘抄，不超过30字"}，其余条目仍写成普通字符串。'},{role:'system',content:TRF_PROMPT()}].concat([{role:'system',content:SONG_PROMPT}]).concat(CC(cur).narrOn?[{role:'system',content:NARR_PROMPT}]:[]).concat(CC(cur).trOn?[{role:'system',content:trMsgPrompt(CC(cur).trTo||'简体中文')}]:[]));
     const raw=await ask(prompt,null);let data;try{const clean=raw.replace(/^```(?:json)?\s*/i,'').replace(/\s*```$/,'');data=JSON.parse(clean)}catch(_){data={reply:raw,thought:''}}
-    let replyQuotes=[],replies=[];if(Array.isArray(data.messages)){data.messages.forEach(x=>{const isO=x&&typeof x==='object',tx=String(isO?(x.text||x.content||x.reply||''):(x||'')).trim();if(tx){replies.push(tx);replyQuotes.push(isO?String(x.quote||'').trim():'')}})}if(!replies.length){const out=String(data.reply||raw).trim();replies=out.split(/\n{2,}/).map(x=>x.trim()).filter(Boolean);if(replies.length===1&&out.length>180){const parts=out.match(/[^。！？!?]+[。！？!?]?/g)||[out];if(parts.length>=3)replies=parts.map(x=>x.trim()).filter(Boolean)}}if(!replies.length)replies=[String(data.reply||raw).trim()];if(el&&el.parentNode)el.remove();const replyChatId=cur;for(let idx=0;idx<replies.length;idx++){if(cur!==replyChatId)break;if(idx>0){await new Promise(resolve=>setTimeout(resolve,520+Math.floor(Math.random()*420)));}h.push({role:'assistant',content:replies[idx],thought:idx===0?String(data.thought||'').trim():'',t:Date.now(),...findQuote(h,replyQuotes[idx])});save();draw();}trfApplyAI(h,data);if(S.cfg.imageEnabled&&String(data.image_prompt||'').trim()){try{const im=await generateImage(String(data.image_prompt).trim());h.push({role:'assistant',content:'',image:im,thought:'我把刚才描述的画面生成出来了。',t:Date.now()})}catch(imgErr){h.push({role:'assistant',content:'图片生成失败：'+imgErr.message,t:Date.now()})}}save();try{await maybeAutoSummarize(cur)}catch(_){}
+    let replyQuotes=[],replies=[],replyNarr=[],replyTr=[];if(Array.isArray(data.messages)){data.messages.forEach(x=>{const isO=x&&typeof x==='object',nr=isO&&x.narr?String(x.narr).trim():'',tx=nr||String(isO?(x.text||x.content||x.reply||''):(x||'')).trim();if(tx){replies.push(tx);replyQuotes.push(isO&&!nr?String(x.quote||'').trim():'');replyNarr.push(!!nr);replyTr.push(isO&&!nr?String(x.tr||x.translation||'').trim():'')}})}if(!replies.length){const out=String(data.reply||raw).trim();replies=out.split(/\n{2,}/).map(x=>x.trim()).filter(Boolean);if(replies.length===1&&out.length>180){const parts=out.match(/[^。！？!?]+[。！？!?]?/g)||[out];if(parts.length>=3)replies=parts.map(x=>x.trim()).filter(Boolean)}}if(!replies.length)replies=[String(data.reply||raw).trim()];if(el&&el.parentNode)el.remove();const thoughtTr=String(data.thought_tr||data.thoughtTr||'').trim();const songObj=(()=>{const x=data.song;if(!x||typeof x!=='object')return null;const t=String(x.title||'').trim();return t?{title:t,artist:String(x.artist||'').trim(),lyric:String(x.lyric||'').trim(),tag:String(x.tag||'').trim()}:null})();const replyChatId=cur;let thoughtDone=0;for(let idx=0;idx<replies.length;idx++){if(cur!==replyChatId)break;if(idx>0){await new Promise(resolve=>setTimeout(resolve,520+Math.floor(Math.random()*420)));}const isN=!!replyNarr[idx];h.push({role:'assistant',content:replies[idx],...(isN?{narr:1}:((!thoughtDone&&(thoughtDone=1))?{thought:String(data.thought||'').trim(),...(thoughtTr&&thoughtTr!==String(data.thought||'').trim()?{thoughtTr}:{}),...(songObj?{song:songObj}:{})}:{thought:''})),t:Date.now(),...(isN?{}:findQuote(h,replyQuotes[idx])),...(!isN&&replyTr[idx]?{tr:replyTr[idx],trLang:CC(cur).trTo||'简体中文'}:{})});save();draw();}trfApplyAI(h,data);if(S.cfg.imageEnabled&&String(data.image_prompt||'').trim()){try{const im=await generateImage(String(data.image_prompt).trim());h.push({role:'assistant',content:'',image:im,thought:'我把刚才描述的画面生成出来了。',t:Date.now()})}catch(imgErr){h.push({role:'assistant',content:'图片生成失败：'+imgErr.message,t:Date.now()})}}save();try{await maybeAutoSummarize(cur)}catch(_){}
   }catch(e){el.textContent='请求失败：'+e.message;el.classList.add('err');setBusy(0);return}
   setBusy(0);draw();
 }
@@ -3092,6 +3161,9 @@ function rCset(){
     <div class="is-c is-tap${cc.trOn?'':' is-dim'}" id="cs-tr-to"><span class="is-i" style="background:#ff9500">${rpSvg('gl')}</span><span class="is-t"><b>翻译成</b></span><span class="is-v">${esc(cc.trTo||'简体中文')}</span><span class="is-chev">${rpSvg('chr')}</span></div>
   </div>
   <div class="is-f">开启后，点一下角色的消息气泡，会在下方展开译文。「角色输出语种」可以多选，角色会按所选语种回复，也可以在一条消息里混用多种语言；「翻译成」是译文使用的语言。</div>
+  <div class="is-h">旁白</div>
+  <div class="is-g"><div class="is-c"><span class="is-i" style="background:#5856d6">${rpSvg('mm')}</span><span class="is-t"><b>线上旁白</b><small>角色动作、神态、心理、环境</small></span><span class="is-sw"><input type="checkbox" id="cs-narr-on" ${cc.narrOn?'checked':''}><i></i></span></div></div>
+  <div class="is-f">开启后，角色回复里会穿插旁白（动作、神态、心理等），以居中的小字显示；聊天的 + 菜单里也会出现「发送旁白」，可以自己写旁白。点一下旁白可以删除。</div>
   <div class="is-h">聊天</div>
   <div class="is-g">
     <div class="is-c is-tap" id="open-chat-memory"><span class="is-i" style="background:#af52de">${rpSvg('mm')}</span><span class="is-t"><b>记忆管理</b><small>生成总结条目、编辑删除记忆、自定义总结指令</small></span><span class="is-chev">${rpSvg('chr')}</span></div>
@@ -3124,6 +3196,7 @@ function rCset(){
   $$('#cbody [data-sgb]').forEach(c=>c.onchange=()=>{const g=c.dataset.sgb;cc.stkGroups=c.checked?[...(cc.stkGroups||[]),g]:(cc.stkGroups||[]).filter(x=>x!==g);save()});
   $('#cs-css').onchange=e=>{cc.css=e.target.value;save()};
   $('#cs-bl').onchange=e=>{p.blocked=e.target.checked;save()};
+  $('#cs-narr-on').onchange=e=>{cc.narrOn=e.target.checked;save();draw()};
   $('#cs-tr-on').onchange=e=>{cc.trOn=e.target.checked;save();['#cs-tr-out','#cs-tr-to'].forEach(s=>$(s).classList.toggle('is-dim',!cc.trOn));draw()};
   $('#cs-tr-out').onclick=()=>langPick({title:'角色输出语种（可多选）',multi:true,selected:cc.trOut||[],onDone:l=>{cc.trOut=l;save();$('#cs-tr-out .is-v').textContent=l.join('、')||'未设置'}});
   $('#cs-tr-to').onclick=()=>langPick({title:'翻译成',multi:false,selected:[cc.trTo||'简体中文'],onDone:l=>{cc.trTo=l[0]||'简体中文';save();$('#cs-tr-to .is-v').textContent=cc.trTo}});
@@ -3158,6 +3231,52 @@ function iosSheet(o){const old=document.querySelector('.ios-mask');if(old)old.re
  m.onclick=e=>{if(e.target===m||e.target.closest('[data-c]'))m.remove()};
  m.querySelectorAll('[data-i]').forEach(b=>b.onclick=()=>{m.remove();o.items[+b.dataset.i].run()});
  document.body.appendChild(m)}
+
+/* ===== 心声播放器 (iPod 风) ===== */
+let IPD=null;
+function ipodClose(){if(!IPD)return;clearInterval(IPD.timer);IPD.el.remove();IPD=null}
+function ipodOpen(idx){
+ ipodClose();
+ const el=document.createElement('div');el.id='ipod';
+ IPD={el,idx,playing:true,el_s:0,total:200,timer:0};
+ el.innerHTML=`<div class="ip-dev"><div class="ip-scr"><div class="ip-hd"><b>Now Playing</b><span class="ip-st"><span class="ip-pp"></span><i class="ip-bat"></i></span></div><div class="ip-bd"><div class="ip-main"><div class="ip-art"><div class="ip-ai"></div></div><div class="ip-txt"><div class="ip-ti"></div><div class="ip-ar"></div><div class="ip-ly"></div></div></div><div class="ip-tag"></div><div class="ip-pr"><span class="ip-t1"></span><div class="ip-bar"><u></u><i></i></div><span class="ip-t2"></span></div></div><div class="ip-pop"><div class="ip-ph"></div><div class="ip-pw"><div class="ip-pb"></div><div class="ip-tr"></div></div></div></div>
+ <div class="ip-wheel"><button type="button" class="ip-lb ip-menu" data-ip="menu">MENU</button><button type="button" class="ip-lb ip-prev" data-ip="prev"><svg viewBox="0 0 24 24"><path d="M4 5h2.4v14H4zM21 5v14L8.5 12z" fill="currentColor"/></svg></button><button type="button" class="ip-lb ip-next" data-ip="next"><svg viewBox="0 0 24 24"><path d="M17.6 5H20v14h-2.4zM3 5v14l12.5-7z" fill="currentColor"/></svg></button><button type="button" class="ip-lb ip-play" data-ip="play"><svg viewBox="0 0 28 24"><path d="M2 4v16l11-8zM16 4h3.4v16H16zM22 4h3.4v16H22z" fill="currentColor"/></svg></button><button type="button" class="ip-ok" data-ip="ok" aria-label="查看内心想法"></button></div></div>`;
+ document.body.appendChild(el);
+ const q=x=>el.querySelector(x),mmss=n=>{n=Math.max(0,Math.floor(n));return String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0')};
+ const seed=k=>{let h=2166136261;for(const c of String(k)){h^=c.charCodeAt(0);h=Math.imul(h,16777619)}return h>>>0};
+ const pp=()=>{q('.ip-pp').innerHTML=IPD.playing?'<svg viewBox="0 0 16 18"><path d="M2 1h4v16H2zM10 1h4v16h-4z" fill="currentColor"/></svg>':'<svg viewBox="0 0 16 18"><path d="M3 1v16l11-8z" fill="currentColor"/></svg>'};
+ const tick=()=>{q('.ip-t1').textContent=mmss(IPD.el_s);q('.ip-t2').textContent='-'+mmss(IPD.total-IPD.el_s);const r=Math.min(1,IPD.el_s/IPD.total)*100;q('.ip-bar u').style.width=r+'%';q('.ip-bar i').style.left=r+'%'};
+ const load=()=>{
+  const h=S.chats[cur]||[],m=h[IPD.idx]||{},p=P(cur)||{},nm=p.name||'角色',sg=m.song;
+  q('.ip-ai').innerHTML=av(p);
+  q('.ip-ti').textContent=sg?sg.title:nm+' · 心声';
+  q('.ip-ar').textContent=sg?(sg.artist||'未知歌手'):nm;
+  q('.ip-ly').textContent=sg?(sg.lyric||''):'';
+  q('.ip-tag').textContent=sg?(sg.tag||''):'';q('.ip-tag').style.display=sg&&sg.tag?'':'none';
+  q('.ip-ph').textContent='2am thoughts';{const th=m.thought||'这条消息没有保存内心想法。',can=!!(m.thoughtTr||(m.thought&&feedForeign(m.thought)));q('.ip-pb').innerHTML=esc(th)+(can?'<div class="ip-hint">点一下文字，查看中文翻译</div>':'');q('.ip-tr').classList.remove('on');q('.ip-tr').textContent=''}
+  q('.ip-pop').classList.remove('on');
+  const k=(m.t||0)+'|'+IPD.idx+'|'+(sg?sg.title:'');IPD.total=170+seed(k)%140;IPD.el_s=Math.floor(IPD.total*(0.12+(seed(k+'x')%45)/100));
+  pp();tick()};
+ const showTr=async m=>{const t=q('.ip-tr');if(m.thoughtTr){t.textContent=m.thoughtTr;t.classList.add('on');return}
+  if(!S.cfg.key)return toast('请先在设置里填写 API Key');t.textContent='翻译中…';t.classList.add('on');
+  try{m.thoughtTr=await feedTr(m.thought);save()}catch(err){t.classList.remove('on');return toast('翻译失败：'+err.message)}
+  if(IPD&&(S.chats[cur]||[])[IPD.idx]===m){t.textContent=m.thoughtTr;t.classList.add('on')}};
+ const list=()=>(S.chats[cur]||[]).map((m,i)=>m.role==='assistant'&&!m.narr&&(m.thought||m.song)?i:-1).filter(i=>i>=0);
+ const go=d=>{const L=list(),n=d<0?[...L].reverse().find(i=>i<IPD.idx):L.find(i=>i>IPD.idx);if(n===undefined)return toast(d<0?'前面没有更多心声了':'后面没有更多心声了');IPD.idx=n;load()};
+ IPD.timer=setInterval(()=>{if(!IPD||!IPD.playing)return;IPD.el_s++;if(IPD.el_s>=IPD.total)IPD.el_s=0;tick()},1000);
+ el.onclick=e=>{
+  const b=e.target.closest('[data-ip]');
+  if(b){const a=b.dataset.ip;
+   if(a==='menu')ipodClose();
+   else if(a==='ok')q('.ip-pop').classList.toggle('on');
+   else if(a==='play'){IPD.playing=!IPD.playing;pp()}
+   else go(a==='prev'?-1:1);return}
+  if(e.target.closest('.ip-tr')){q('.ip-tr').classList.remove('on');return}
+  if(e.target.closest('.ip-pb')){const m=(S.chats[cur]||[])[IPD.idx]||{};
+   if(m.thoughtTr||(m.thought&&feedForeign(m.thought))){showTr(m)}else q('.ip-pop').classList.remove('on');return}
+  if(e.target.closest('.ip-pop')){q('.ip-pop').classList.remove('on');return}
+  if(!e.target.closest('.ip-dev'))ipodClose()};
+ load()}
 const CTC={q:'',open:null};
 const ctcCol=new Intl.Collator('zh-CN');
 const CTC_B='阿八嚓咑妸发旮哈讥咔垃妈拿哦啪七呥仨他屲夕丫帀'.split(''),CTC_L='ABCDEFGHJKLMNOPQRSTWXYZ'.split('');
@@ -3314,7 +3433,7 @@ $('#import-worlds').onclick=()=>importTextFile((t,n)=>{let parsed=null;try{parse
 const FS=[['#c-base','cfg','base'],['#c-key','cfg','key'],['#c-model','cfg','model'],['#c-temp','cfg','temp'],['#c-hist','cfg','hist'],['#m-name','me','name'],['#m-handle','me','handle'],['#m-bio','me','bio']];
 let settingsPage='main';
 function rSettings(){
-  const showSetting=k=>{settingsPage=k;$$('#v-settings .body').forEach(e=>e.style.display='none');const target=$('#settings-'+k);if(target)target.style.display='block';if(k==='prompt')rRolePrompt();if(k==='memory'){const mode=S.cfg.memoryMode||'traditional';$('#memory-mode-traditional').checked=mode==='traditional';$('#memory-mode-vector').checked=mode==='vector';$('#c-embedding-base').value=S.cfg.embeddingBase||'';$('#c-embedding-key').value=S.cfg.embeddingKey||'';$('#c-embedding-model').value=S.cfg.embeddingModel||'text-embedding-3-small';$('#c-memory-topk').value=S.cfg.memoryTopK||5;$('#ios-memory-mode').textContent=mode==='vector'?'向量记忆':'传统记忆';$('#vector-connection-card').style.display=mode==='vector'?'block':'none'}$('#v-settings .bar h2').textContent=k==='main'?'设置':({'profile':'我的资料','appearance':'外观','api':'模型与 API','imageapi':'生图 API','data':'数据与备份','prompt':'AI 扮演提示词','memory':'记忆模式','voice':'语音接入（MiniMax）','system':'系统（保活与通知）'}[k]||'设置');if(k==='voice'){const en=$('#c-voice-enabled');if(en)en.checked=!!S.cfg.voiceEnabled;const v=[['c-voice-base','voiceBase','https://api.minimax.io/v1'],['c-voice-key','voiceKey',''],['c-voice-group','voiceGroupId',''],['c-voice-model','voiceModel','speech-02-turbo'],['c-voice-id','voiceId','female-shaonv'],['c-voice-speed','voiceSpeed',1],['c-voice-vol','voiceVol',1],['c-voice-pitch','voicePitch',0]];v.forEach(([id,key,def])=>{const el=$('#'+id);if(el)el.value=S.cfg[key]??def})}};
+  const showSetting=k=>{settingsPage=k;$('#v-settings').classList.toggle('detail',k!=='main');$$('#v-settings .body').forEach(e=>e.style.display='none');const target=$('#settings-'+k);if(target)target.style.display='block';if(k==='prompt')rRolePrompt();if(k==='memory'){const mode=S.cfg.memoryMode||'traditional';$('#memory-mode-traditional').checked=mode==='traditional';$('#memory-mode-vector').checked=mode==='vector';$('#c-embedding-base').value=S.cfg.embeddingBase||'';$('#c-embedding-key').value=S.cfg.embeddingKey||'';$('#c-embedding-model').value=S.cfg.embeddingModel||'text-embedding-3-small';$('#c-memory-topk').value=S.cfg.memoryTopK||5;$('#ios-memory-mode').textContent=mode==='vector'?'向量记忆':'传统记忆';$('#vector-connection-card').style.display=mode==='vector'?'block':'none'}$('#v-settings .bar h2').textContent=k==='main'?'设置':({'profile':'我的资料','appearance':'外观','api':'模型与 API','imageapi':'生图 API','data':'数据与备份','prompt':'AI 扮演提示词','memory':'记忆模式','voice':'语音接入（MiniMax）','system':'系统（保活与通知）'}[k]||'设置');if(k==='voice'){const en=$('#c-voice-enabled');if(en)en.checked=!!S.cfg.voiceEnabled;const v=[['c-voice-base','voiceBase','https://api.minimax.io/v1'],['c-voice-key','voiceKey',''],['c-voice-group','voiceGroupId',''],['c-voice-model','voiceModel','speech-02-turbo'],['c-voice-id','voiceId','female-shaonv'],['c-voice-speed','voiceSpeed',1],['c-voice-vol','voiceVol',1],['c-voice-pitch','voicePitch',0]];v.forEach(([id,key,def])=>{const el=$('#'+id);if(el)el.value=S.cfg[key]??def})}};
   $$('#v-settings [data-setting-section]').forEach(b=>b.onclick=()=>showSetting(b.dataset.settingSection));
   const openProfile=$('#open-settings-profile');if(openProfile)openProfile.onclick=()=>showSetting('profile');
   showSetting(settingsPage||'main');
@@ -3327,6 +3446,13 @@ function rSettings(){
   $('#c-stream').checked=!!S.cfg.stream;$('#c-stream').onchange=e=>{S.cfg.stream=e.target.checked;save()};const imageToggle=$('#c-image-enabled');if(imageToggle){imageToggle.checked=!!S.cfg.imageEnabled;imageToggle.onchange=()=>{S.cfg.imageEnabled=imageToggle.checked;save();toast(imageToggle.checked?'已开启对方生图':'已关闭对方生图')}};
   const ip=$('#c-image-provider');if(ip){ip.value=S.cfg.imageProvider||'gpt';const syncImageProvider=()=>{S.cfg.imageProvider=ip.value;$('#image-gpt-fields').style.display=ip.value==='gpt'?'block':'none';$('#image-nai-fields').style.display=ip.value==='novelai'?'block':'none'};syncImageProvider();ip.onchange=syncImageProvider;
     const fields={ 'c-image-base':['imageBase','https://api.openai.com/v1'],'c-image-key':['imageKey',''],'c-image-model':['imageModel','gpt-image-1'],'c-gpt-positive':['gptPositive',''],'c-gpt-negative':['gptNegative',''],'c-gpt-detail':['gptDetail',''],'c-gpt-size':['gptSize','1024x1024'],'c-gpt-quality':['gptQuality','auto'],'c-gpt-style':['gptStyle',''],'c-gpt-n':['gptN',1],'c-nai-base':['naiBase','https://image.novelai.net'],'c-nai-key':['naiKey',''],'c-nai-model':['naiModel','nai-diffusion-4-full'],'c-nai-positive':['naiPositive',''],'c-nai-negative':['naiNegative',''],'c-nai-detail':['naiDetail',''],'c-nai-width':['naiWidth',832],'c-nai-height':['naiHeight',1216],'c-nai-scale':['naiScale',5],'c-nai-steps':['naiSteps',28],'c-nai-sampler':['naiSampler','k_euler_ancestral'],'c-nai-cfgrescale':['naiCfgRescale',0],'c-nai-seed':['naiSeed','']};
+    const pzImg={list:()=>S.imagePresets,
+     sub:p=>{const nv=(p.imageProvider||'gpt')==='novelai';return (nv?'NovelAI · '+(p.naiModel||''):'GPT · '+(p.imageModel||'gpt-image-1'))+' · '+hostOf(nv?p.naiBase:p.imageBase)},
+     active:p=>Object.keys(p).filter(k=>k!=='id'&&k!=='name').every(k=>String(S.cfg[k]??'')===String(p[k]??'')),
+     apply:p=>{S.cfg.imageProvider=p.imageProvider||'gpt';Object.entries(fields).forEach(([id,[key,def]])=>{const v=p[key]??def;S.cfg[key]=v;const el=$('#'+id);if(el)el.value=v??''});S.cfg.naiSm=!!p.naiSm;S.cfg.naiSmDyn=!!p.naiSmDyn;$('#c-nai-sm').checked=!!p.naiSm;$('#c-nai-sm-dyn').checked=!!p.naiSmDyn;ip.value=S.cfg.imageProvider;syncImageProvider();save()},
+     capture:()=>{const d={imageProvider:ip.value};Object.entries(fields).forEach(([id,[key,def]])=>{const el=$('#'+id);if(el){let v=el.value;if(el.type==='number'&&v!=='')v=Number(v);d[key]=v===''?def:v}});d.naiSm=$('#c-nai-sm').checked;d.naiSmDyn=$('#c-nai-sm-dyn').checked;return d},
+     add:p=>S.imagePresets.push(p),remove:p=>{S.imagePresets=S.imagePresets.filter(x=>x.id!==p.id)}};
+    pzMount('#pz-img',pzImg);
     Object.entries(fields).forEach(([id,[key,def]])=>{const el=$('#'+id);if(el)el.value=S.cfg[key]??def});$('#c-nai-sm').checked=!!S.cfg.naiSm;$('#c-nai-sm-dyn').checked=!!S.cfg.naiSmDyn;
     
   const syncMemoryModeUI=()=>{$('#vector-connection-card').style.display=document.querySelector('input[name="memory-mode"]:checked')?.value==='vector'?'block':'none'};$$('input[name="memory-mode"]').forEach(el=>el.onchange=syncMemoryModeUI);
@@ -4122,7 +4248,7 @@ const hostOf=u=>{try{return new URL(u).host}catch(e){return u||'未设置地址'
 function pzMount(sel,spec){
  const el=$(sel);if(!el)return;
  const draw=()=>{const list=spec.list();
-  el.innerHTML='<div class="pz"><div class="pz-list">'+(list.map(p=>{const on=spec.active&&spec.active(p);return '<div class="pz-row" data-pz-use="'+esc(p.id)+'"><div class="pz-t"><b>'+esc(p.name)+'</b><small>'+esc(spec.sub(p))+'</small></div>'+(on?'<span class="pz-ck">'+rpSvg('ck')+'</span>':'')+'<button type="button" class="pz-del" data-pz-del="'+esc(p.id)+'">删除</button></div>'}).join('')||'<div class="pz-empty">还没有预设</div>')+'</div><div class="pz-add"><input class="pz-name" placeholder="新预设名称" autocomplete="off"><button type="button" class="pz-save">保存当前设置</button></div></div>';
+  el.innerHTML='<div class="pz"><div class="pz-list">'+(list.map(p=>{const on=spec.active&&spec.active(p);return '<div class="pz-row'+(on?' on':'')+'" data-pz-use="'+esc(p.id)+'"><div class="pz-t"><b>'+esc(p.name)+'</b><small>'+esc(spec.sub(p))+'</small></div>'+(on?'<span class="pz-ck">'+rpSvg('ck')+'</span>':'')+'<button type="button" class="pz-del" data-pz-del="'+esc(p.id)+'">删除</button></div>'}).join('')||'<div class="pz-empty">还没有预设</div>')+'</div><div class="pz-add"><input class="pz-name" placeholder="新预设名称" autocomplete="off"><button type="button" class="pz-save">保存当前设置</button></div></div>';
   el.querySelectorAll('[data-pz-use]').forEach(r=>r.onclick=async e=>{if(e.target.closest('[data-pz-del]'))return;const p=list.find(x=>x.id===r.dataset.pzUse);if(!p)return;await spec.apply(p);draw();toast('已使用：'+p.name)});
   el.querySelectorAll('[data-pz-del]').forEach(b=>b.onclick=e=>{e.stopPropagation();const p=list.find(x=>x.id===b.dataset.pzDel);if(p&&confirm('删除预设「'+p.name+'」？')){spec.remove(p);save();draw()}});
   el.querySelector('.pz-save').onclick=()=>{const n=el.querySelector('.pz-name').value.trim();if(!n)return toast('先给预设起个名字');const d=spec.capture(),old=list.find(x=>x.name===n);if(old)Object.assign(old,d);else spec.add(Object.assign({id:uid(),name:n},d));save();draw();toast('预设已保存')}};
