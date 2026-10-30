@@ -1224,6 +1224,9 @@ button.feed-follow-plus{padding:0;cursor:pointer}
 .cr-dock{padding:0 21px;bottom:calc(env(safe-area-inset-bottom,0px)*.35 + 9px)}
 .cr-cap{gap:0;padding:4px}
 .cr-cap button{width:90px;height:53px;border-radius:27px}
+
+/* 状态栏取色条：iOS 主屏幕网页会按页面最顶上的固定元素给状态栏染色 */
+#sbtint{position:fixed;top:0;left:0;right:0;height:max(8px,env(safe-area-inset-top,0px));z-index:2147483000;pointer-events:none;background:#fff}
 </style>
 <style id="ucss"></style>
 
@@ -2395,6 +2398,21 @@ function coreadCtx(p){
  return'\n\n【共读】你和用户正在一起读书：《'+b.title+'》（'+b.author+'），整本书约 '+(b.prog||0)+'%'+(b.ex?'，用户最近读到的片段：「'+b.ex+'」':'')+'。今天你们已共读 '+mins+' 分钟。聊天时你知道你们在一起读这本书，可以自然地提到书里的情节和感受，但不要每次都提。'+(notes.length?'\n你们共读时的记忆：'+notes.join('；'):'')+(h.length?'\n最近的共读对话：'+h.map(m=>(m.role==='user'?'用户':'你')+'：'+m.content).join(' / '):'')}
 setInterval(()=>{const v=$('#v-crread');if(!CRR||!v||!v.classList.contains('on')||document.hidden)return;if(Date.now()-CRR.last>120000)return;const k=crDay();S.coread.daily[k]=(S.coread.daily[k]||0)+1;CRR.acc++;if(CRR.acc%20===0)save();const t=$('#cr-time');if(t)t.textContent='今日共读 '+crFmt(S.coread.daily[k])},1000);
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&CRR)save()});
+/* ===== 状态栏跟随页面顶部颜色（全屏沉浸） ===== */
+(()=>{
+ const bar=document.createElement('div');bar.id='sbtint';document.body.appendChild(bar);
+ const meta=document.getElementById('theme-color');let last='';
+ const parse=c=>{const m=String(c||'').match(/rgba?\(([^)]+)\)/);if(!m)return null;const p=m[1].split(/[ ,\/]+/).filter(Boolean).map(parseFloat);return{r:p[0],g:p[1],b:p[2],a:p.length>3?p[3]:1}};
+ const pick=()=>{
+  let els=[];try{els=document.elementsFromPoint(3,10)}catch(_){}
+  for(const e of els){if(e===bar)continue;const c=parse(getComputedStyle(e).backgroundColor);if(c&&c.a>=.95)return'rgb('+c.r+','+c.g+','+c.b+')'}
+  const b=parse(getComputedStyle(document.body).backgroundColor);return b&&b.a>=.95?'rgb('+b.r+','+b.g+','+b.b+')':'#ffffff'};
+ const sync=()=>{const c=pick();if(c===last)return;last=c;bar.style.backgroundColor=c;if(meta)meta.setAttribute('content',c)};
+ sync();setInterval(sync,500);
+ addEventListener('resize',sync);addEventListener('orientationchange',()=>setTimeout(sync,200));
+ document.addEventListener('click',()=>{setTimeout(sync,60);setTimeout(sync,350)},true);
+})();
+
 
 /* ===== 情侣空间 (cp) ===== */
 const CPP={back:'M7.414 13l5.043 5.04-1.414 1.42L3.586 12l7.457-7.46 1.414 1.42L7.414 11H21v2H7.414z',plus:'M12 5v14M5 12h14',gear:'M12 9a3 3 0 100 6 3 3 0 000-6zM12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2',send:'M3 11l18-8-8 18-2-8z',trash:'M4 7h16M9 7V4h6v3M6 7l1 14h10l1-14',pen:'M4 20h4L19 9l-4-4L4 16zM13.5 6.5l4 4',heart:'M12 20s-8-5-8-10.5a4.5 4.5 0 018-2.5 4.5 4.5 0 018 2.5C20 15 12 20 12 20z',spark:'M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M18 6l-2.5 2.5M8.5 15.5L6 18',chev:'M9 6l6 6-6 6',ask:'M9.5 9a2.5 2.5 0 115 0c0 1.7-2.5 2-2.5 4M12 17v.01',tree:'M12 3a5 5 0 00-4.5 7.2A4 4 0 009 18h6a4 4 0 001.5-7.8A5 5 0 0012 3zM12 18v4M9 22h6',cal:'M4 6h16v14H4zM4 10h16M8 3v4M16 3v4M12 17s-3-1.8-3-3.6a1.7 1.7 0 013-.9 1.7 1.7 0 013 .9c0 1.8-3 3.6-3 3.6z',note:'M5 4h11a3 3 0 013 3v13H8a3 3 0 01-3-3zM9 9h6M9 13h4',smile:'M12 3a9 9 0 100 18 9 9 0 000-18zM9 10v.5M15 10v.5M8.5 14c1 1.5 2.2 2.2 3.5 2.2s2.5-.7 3.5-2.2',calm:'M12 3a9 9 0 100 18 9 9 0 000-18zM9 10v.5M15 10v.5M9 15.5h6',sad:'M12 3a9 9 0 100 18 9 9 0 000-18zM9 10v.5M15 10v.5M8.5 16.5c1-1.5 2.2-2.2 3.5-2.2s2.5.7 3.5 2.2',love:'M12 3a9 9 0 100 18 9 9 0 000-18zM8 10.4s1.5-1.3 1.5-.2c0 1-1.5 1.7-1.5 1.7s-1.5-.7-1.5-1.7c0-1.1 1.5.2 1.5.2zM16 10.4s1.5-1.3 1.5-.2c0 1-1.5 1.7-1.5 1.7s-1.5-.7-1.5-1.7c0-1.1 1.5.2 1.5.2zM9 15c1 1.2 2 1.8 3 1.8s2-.6 3-1.8',tired:'M12 3a9 9 0 100 18 9 9 0 000-18zM8 10h2M14 10h2M10.5 16a1.5 1.5 0 003 0z'};
