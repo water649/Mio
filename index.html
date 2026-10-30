@@ -1528,6 +1528,157 @@ button.feed-follow-plus{padding:0;cursor:pointer}
 @media(max-width:380px){#v-worlds .wb-head{padding-left:20px;padding-right:20px}#v-worlds .wb-body{padding-left:20px;padding-right:20px}#v-worlds .wb-bottom{padding-left:18px;padding-right:18px;gap:12px}#v-worlds .wb-scope-switch button{font-size:12px}.worldbook-editor{padding-left:14px!important;padding-right:14px!important}}
 </style>
 
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap">
+<style id="mg-style">
+#mg-root{width:100%;max-width:560px;flex:1;min-height:0;display:flex}
+.mg{--mg-pix:'DotGothic16','Zpix','PingFang SC',ui-monospace,monospace;width:100%;flex:1;min-height:0;display:flex;flex-direction:column;color:var(--ink)}
+.mg-top{flex:none;display:flex;align-items:center;gap:10px;padding:10px 16px 6px}
+.mg-top h1{flex:1;margin:0;font-size:20px;font-weight:700}
+.mg-bk{border:0;background:none;color:inherit;padding:4px 6px 4px 0;display:grid;place-items:center}
+.mg-cav{width:34px;height:34px;border-radius:50%;overflow:hidden;border:0;background:var(--fld);color:var(--ink);display:grid;place-items:center;padding:0;font-size:15px}
+.mg-cav img{width:100%;height:100%;object-fit:cover}
+.mg-seg{flex:none;display:flex;gap:4px;margin:4px 16px 10px;padding:3px;background:var(--fld);border-radius:12px}
+.mg-seg button{flex:1;border:0;background:none;color:inherit;font-size:13px;padding:7px 0;border-radius:9px;opacity:.55}
+.mg-seg button.on{background:var(--bg);opacity:1;font-weight:650;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+.mg-b{flex:1;min-height:0;overflow-y:auto;padding:2px 16px 14px;-webkit-overflow-scrolling:touch}
+.mg-skin{display:flex;gap:8px;margin-bottom:12px}
+.mg-skin button{border:1px solid rgba(128,128,128,.35);background:none;color:inherit;border-radius:14px;padding:4px 13px;font-size:12px;opacity:.6}
+.mg-skin button.on{background:var(--ink);color:var(--bg);border-color:var(--ink);opacity:1}
+.mg-empty{text-align:center;font-size:13px;opacity:.5;padding:40px 0}
+.mg-bar{flex:none;display:flex;gap:8px;align-items:center;padding:8px 14px calc(10px + env(safe-area-inset-bottom,0px));border-top:1px solid rgba(128,128,128,.16)}
+.mg-bar input{flex:1;min-width:0;border:0;outline:0;background:var(--fld);color:var(--ink);border-radius:18px;padding:9px 14px;font-size:16px}
+.mg-chip{border:1px solid rgba(128,128,128,.4);background:none;color:inherit;border-radius:14px;padding:5px 11px;font-size:12px}
+.mg-bar:not(.qa) .mg-chip{display:none}
+.mg-snd{width:34px;height:34px;flex:none;border:0;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;padding:0}
+.mg-snd:disabled{opacity:.4}
+.mg-cur{animation:xs-mgblink 1s steps(2) infinite}
+@keyframes xs-mgblink{50%{opacity:0}}
+.mg-pg{background:linear-gradient(160deg,#2b2b2b,#111 62%);border-radius:22px 22px 26px 26px;padding:16px 16px 14px;box-shadow:0 12px 28px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.12)}
+.mg-lcd{font-family:var(--mg-pix);color:#2a3110;background-color:#c4cf6e;border:5px solid #0b0b0b;border-radius:6px;min-height:132px;padding:8px 10px 10px;box-shadow:inset 0 6px 14px rgba(60,70,10,.4);background-image:repeating-linear-gradient(0deg,rgba(40,50,0,.08) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,rgba(40,50,0,.05) 0 1px,transparent 1px 3px)}
+.mg-st{display:flex;justify-content:space-between;font-size:10px;letter-spacing:.08em;border-bottom:1px solid rgba(42,49,16,.45);padding-bottom:4px;margin-bottom:7px}
+.mg-tx{font-size:15px;line-height:1.55;letter-spacing:.04em;word-break:break-all;white-space:pre-wrap;text-shadow:1px 1px 0 rgba(42,49,16,.18)}
+.mg-keys{display:flex;justify-content:space-between;align-items:center;margin-top:14px}
+.mg-kl{display:flex;gap:10px}
+.mg-kl button{width:52px;height:20px;border:0;border-radius:6px;background:#242424;box-shadow:inset 0 1px 0 rgba(255,255,255,.14);display:grid;place-items:center;padding:0}
+.mg-kl button:after{content:"";width:22px;height:5px;border-radius:3px}
+.mg-kl .g:after{background:#9fd02c}.mg-kl .r:after{background:#e5484d}
+.mg-dp{display:flex;gap:4px;align-items:center}
+.mg-dp .v{display:flex;flex-direction:column;gap:4px}
+.mg-dp button{border:0;background:#232323;box-shadow:inset 0 1px 0 rgba(255,255,255,.12);display:grid;place-items:center;padding:0}
+.mg-dp>button{width:34px;height:46px;border-radius:18px}
+.mg-dp .v button{width:56px;height:21px;border-radius:7px}
+.mg-dp i{width:0;height:0;border:5px solid transparent}
+.mg-dp .tl{border-right:8px solid #d9b45a;border-left:0}.mg-dp .tr{border-left:8px solid #d9b45a;border-right:0}
+.mg-dp .tu{border-bottom:8px solid #d9b45a;border-top:0}.mg-dp .td{border-top:8px solid #d9b45a;border-bottom:0}
+.mg-brand{margin-top:12px;width:max-content;font:700 11px/1 ui-sans-serif,system-ui,sans-serif;letter-spacing:.16em;color:#c9a456;background:#1c1c1c;border-radius:6px;padding:8px 12px}
+.mg-sm{font-family:var(--mg-pix);background:#050505;color:#fff;border-radius:20px;padding:12px 14px;box-shadow:0 12px 28px rgba(0,0,0,.28)}
+.mg-sr{display:flex;align-items:center;justify-content:space-between;font-size:15px;min-height:22px}
+.mg-sr .cnt{color:#7fd3ea;font-size:14px}
+.mg-stx{margin-top:6px;min-height:156px;padding:8px 10px;background-color:#dcd9ea;color:#111;font-size:16px;line-height:1.5;letter-spacing:.05em;word-break:break-all;white-space:pre-wrap;border-radius:2px;background-image:radial-gradient(rgba(0,0,0,.14) .6px,transparent .7px);background-size:3px 3px}
+.mg-stx small{display:block;font-size:11px;opacity:.6;margin-bottom:4px;letter-spacing:0}
+.mg-soft{display:flex;justify-content:space-between;margin-top:8px}
+.mg-soft button{border:0;background:none;color:#fff;font-family:inherit;font-size:15px;padding:4px 8px}
+.mg-nav{display:flex;justify-content:center;gap:18px;margin-top:10px}
+.mg-nav button{border:0;background:var(--fld);color:inherit;border-radius:14px;padding:5px 16px;font-size:12px}
+.mg-pass{width:100%;border:1.5px dashed rgba(128,128,128,.5);background:none;color:inherit;border-radius:12px;padding:10px;font-size:13px;margin-bottom:12px}
+.mg-pass:disabled{opacity:.5}
+.mg-qa{font-family:var(--mg-pix);background:#dcd9ea;color:#111;border:2px solid #050505;border-radius:4px;box-shadow:3px 3px 0 #050505;padding:9px 11px;margin:0 3px 12px 0}
+.mg-qh{display:flex;align-items:center;gap:8px;font-size:11px;opacity:.7}
+.mg-qh em{margin-left:auto;font-style:normal}
+.mg-qh button{border:0;background:none;color:inherit;font-size:15px;padding:0 2px;line-height:1}
+.mg-q{margin:6px 0;font-size:15px;line-height:1.55;word-break:break-all}
+.mg-a{border-top:1px dashed rgba(0,0,0,.4);padding-top:6px;font-size:14px;line-height:1.55;word-break:break-all}
+.mg-a b{display:block;font-size:11px;font-weight:400;opacity:.65}
+.mg-a i{font-size:12px;opacity:.6}
+.mg-a button{margin-left:8px;border:1px solid #111;background:none;font-family:inherit;font-size:12px;padding:1px 8px;border-radius:3px}
+.mg-ttl{flex:1;min-width:0;border:0;background:none;color:inherit;text-align:left;font-size:19px;font-weight:700;padding:4px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mg-stx.hl{max-height:300px;overflow-y:auto;padding:2px 10px}
+.mg-hi{padding:7px 0;border-bottom:1px dotted rgba(0,0,0,.45);font-size:15px;line-height:1.45;white-space:normal;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.mg-hi small{margin-bottom:2px}
+.mg-bar:not(.qa){display:none}
+.mg-ph{filter:drop-shadow(0 14px 26px rgba(40,50,70,.32))}
+.mg-up{position:relative;background:linear-gradient(150deg,#fdfdff 0%,#e3e6ec 34%,#c4c9d2 64%,#f1f3f7 100%);border-radius:30px 30px 8px 8px;padding:24px 14px 18px;box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.55),0 0 0 1px rgba(110,118,132,.5)}
+.mg-up:before{content:"";position:absolute;top:10px;left:50%;width:54px;height:5px;margin-left:-27px;border-radius:3px;background:linear-gradient(#8e95a2,#c9cdd5);box-shadow:inset 0 1px 1px rgba(0,0,0,.35)}
+.mg-up .mg-sm{border-radius:10px;box-shadow:inset 0 0 0 2px #23252a,0 0 0 3px #aeb4be,0 1px 0 4px rgba(255,255,255,.75);padding:10px 12px}
+.mg-lo{position:relative;margin-top:4px;background:linear-gradient(160deg,#f8f9fc 0%,#dde0e7 40%,#c0c5ce 70%,#eceef3 100%);border-radius:8px 8px 34px 34px;padding:14px 14px 22px;box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.5),0 0 0 1px rgba(110,118,132,.5);overflow:hidden;user-select:none;-webkit-user-select:none}
+.mg-lo:after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 28%,rgba(255,255,255,.5) 44%,transparent 58%);pointer-events:none}
+.mg-lo>*{position:relative;z-index:1}
+.mg-io,.mg-nr,.mg-pad{background:linear-gradient(#b9bec8,#d6dae1);box-shadow:inset 0 2px 5px rgba(60,70,90,.33),0 1px 0 rgba(255,255,255,.85)}
+.mg-io{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:18px}
+.mg-io input{flex:1;min-width:0;border:0;outline:0;border-radius:8px;padding:10px 12px;font:16px var(--mg-pix);color:#111;background-color:#dcd9ea;background-image:radial-gradient(rgba(0,0,0,.14) .6px,transparent .7px);background-size:3px 3px;box-shadow:inset 0 0 0 2px #23252a;-webkit-user-select:text;user-select:text;-webkit-appearance:none}
+.mg-io input::placeholder{color:rgba(0,0,0,.42)}
+.mg-go{width:46px;height:40px;flex:none;border:0;border-radius:12px;color:#3b404b;display:grid;place-items:center;padding:0;background:linear-gradient(#fff,#d3d7de);box-shadow:inset 0 1px 0 #fff,0 1px 0 #848b98,0 0 0 1px rgba(90,98,112,.3)}
+.mg-go:active{transform:translateY(1px)}
+.mg-nr{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px;padding:8px;border-radius:14px}
+.mg-dk{height:28px;border-radius:9px;display:grid;place-items:center;color:#3b404b;font:700 14px/1 ui-sans-serif,system-ui,sans-serif;background:linear-gradient(#fff,#d3d7de);box-shadow:inset 0 1px 0 #fff,0 1px 0 #848b98,0 0 0 1px rgba(90,98,112,.3)}
+.mg-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:12px;padding:9px;border-radius:22px}
+.mg-nk{height:38px;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:#2f333d;background:linear-gradient(#fff,#d3d7de);box-shadow:inset 0 1px 0 #fff,0 1px 0 #848b98,0 0 0 1px rgba(90,98,112,.3)}
+.mg-nk b{font:500 17px/1 ui-sans-serif,system-ui,sans-serif}.mg-nk small{font-size:8px;line-height:1;color:#7a8190}
+.mg-bar.qa{display:block;padding:2px 14px calc(8px + env(safe-area-inset-bottom,0px));border-top:0}
+.mg-tw{position:relative;max-width:420px;margin:0 auto}
+.mg-paper{position:relative;z-index:1;width:80%;margin:0 auto -7px;min-height:58px;display:flex;align-items:flex-end;background-color:#f7f1dd;background-image:repeating-linear-gradient(transparent 0 23px,rgba(70,60,40,.1) 23px 24px);border-radius:3px 3px 0 0;box-shadow:0 -1px 0 rgba(0,0,0,.12),0 -4px 10px rgba(0,0,0,.14)}
+.mg-bar .mg-paper input{flex:1;width:100%;min-width:0;border:0;outline:0;background:transparent;color:#2a2520;font:16px/24px 'Courier New',Courier,monospace;letter-spacing:.03em;padding:0 14px 6px;border-radius:0;caret-color:#7a1f1f;-webkit-appearance:none}
+.mg-paper input::placeholder{color:rgba(60,50,35,.4)}
+.mg-platen{position:relative;z-index:2;height:15px;margin:0 6px;border-radius:8px;background:linear-gradient(#111,#5d5d63 42%,#17171a);box-shadow:0 2px 3px rgba(0,0,0,.35)}
+.mg-platen:before,.mg-platen:after{content:"";position:absolute;top:-4px;width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#c5c9d0 45%,#6d7380);box-shadow:0 1px 3px rgba(0,0,0,.4)}
+.mg-platen:before{left:-10px}.mg-platen:after{right:-10px}
+.mg-tbody{position:relative;z-index:1;margin-top:-4px;padding:14px 14px 12px;border-radius:6px 6px 20px 20px;background:linear-gradient(#35353b,#18181b);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 0 0 1px #000;display:flex;align-items:center;gap:10px}
+.mg-bar .mg-chip{flex:none;min-width:48px;border:0;border-radius:6px;background:#efe7cf;color:#2a2520;font:700 13px/1 var(--mg-pix);padding:9px 8px;box-shadow:inset 0 -2px 0 rgba(0,0,0,.18),0 1px 0 #000}
+.mg-tks{flex:1;display:grid;gap:8px;justify-items:center;pointer-events:none}
+.mg-tks>div{display:grid;grid-template-columns:repeat(6,24px);gap:7px}
+.mg-tk{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font:700 11px/1 'Courier New',monospace;font-style:normal;color:#f1ead4;background:radial-gradient(circle at 50% 35%,#3a3a3f,#0d0d0f);box-shadow:0 0 0 2px #b9bec7,0 0 0 3px #5d626b,0 2px 0 3px #000}
+.mg-tk.hit{animation:xs-mgkey .14s}
+@keyframes xs-mgkey{50%{transform:translateY(2px)}}
+.mg-bar .mg-snd{flex:none;width:56px;height:40px;border-radius:12px;border:0;background:linear-gradient(#f4efe0,#cfc8b2);color:#2a2520;box-shadow:inset 0 1px 0 #fff,0 0 0 2px #b9bec7,0 0 0 3px #5d626b,0 2px 0 3px #000;margin-right:3px}
+.mg-bar .mg-snd:active{transform:translateY(2px)}
+.mg-qa{border-color:#23252a;border-radius:8px;box-shadow:0 0 0 3px #aeb4be,0 1px 0 4px rgba(255,255,255,.75),0 8px 16px rgba(40,50,70,.16);margin:4px 4px 20px}
+.mg-paper{background-color:#efeef6;background-image:repeating-linear-gradient(transparent 0 23px,rgba(110,105,160,.16) 23px 24px);box-shadow:0 -1px 0 rgba(80,90,120,.18),0 -4px 10px rgba(40,50,80,.16)}
+.mg-bar .mg-paper input{color:#26243a;caret-color:#5b4bb7}
+.mg-paper input::placeholder{color:rgba(40,38,70,.4)}
+.mg-platen{background:linear-gradient(#14151a,#5a5e68 42%,#14151a)}
+.mg-tbody{background:linear-gradient(160deg,#f8f9fc 0%,#dde0e7 40%,#c0c5ce 70%,#eceef3 100%);box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.5),0 0 0 1px rgba(110,118,132,.55),0 6px 14px rgba(40,50,70,.18)}
+.mg-tk{color:#3b404b;background:linear-gradient(#fff,#d3d7de);box-shadow:0 0 0 2px #aeb4be,0 0 0 3px #7f8693,0 2px 0 3px #6b7280}
+.mg-bar .mg-chip{width:42px;height:42px;min-width:0;padding:0;border-radius:50%;display:grid;place-items:center;background:linear-gradient(#fff,#d3d7de);color:#3b404b;box-shadow:inset 0 1px 0 #fff,0 0 0 2px #aeb4be,0 0 0 3px #7f8693,0 2px 0 3px #6b7280;margin-left:3px}
+.mg-bar .mg-chip svg{width:22px;height:22px}
+.mg-bar .mg-snd{width:46px;height:46px;border-radius:50%;background:radial-gradient(circle at 50% 30%,#4a4e59,#14151a);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 0 0 2px #aeb4be,0 0 0 3px #7f8693,0 2px 0 3px #6b7280;margin-right:3px}
+.mg-bar .mg-snd svg{margin:0 2px 0 0}
+#v-msgs{background:#fff}
+.mg{--bg:#fff;--ink:#111;--fld:#ececec;color:#111;font-family:"Lucida Grande","Lucida Sans Unicode",Geneva,Verdana,"PingFang SC",sans-serif}
+.mg-top{padding:12px 16px 4px;align-items:flex-start}
+.mg-hd{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.mg-hd .mg-ttl{flex:none;width:100%;font-size:24px;font-weight:300;letter-spacing:-.035em;line-height:1.15;padding:0;color:#111}
+.mg-hd small{font-size:14px;font-weight:300;letter-spacing:-.02em;color:#7d7d7d;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mg-cav{border:1px solid #9a9a9a;box-shadow:0 1px 2px rgba(0,0,0,.3)}
+.mg-seg{gap:3px;margin:10px 16px 0;padding:0;background:none;border-radius:0;align-items:flex-end}
+.mg-seg button{flex:0 0 auto;min-width:104px;border:1px solid #9a9a9a;border-bottom:0;border-radius:8px 8px 0 0;background:linear-gradient(#f6f6f6,#d2d2d2);color:#222;font:13px/1 "Lucida Grande","Lucida Sans Unicode",Geneva,Verdana,"PingFang SC",sans-serif;padding:8px 12px 6px;opacity:1;box-shadow:inset 0 1px 0 #fff;position:relative;top:1px}
+.mg-seg button.on{background:#fff;font-weight:400;padding-bottom:8px;z-index:1;box-shadow:inset 0 1px 0 #fff}
+.mg-sub{display:flex;justify-content:space-between;align-items:center;margin:0 16px;padding:3px 10px;border:1px solid #9a9a9a;border-radius:0 6px 6px 6px;background:repeating-linear-gradient(#fdfdfd 0 2px,#e4e4e4 2px 3px);font:11px/1.6 "Lucida Grande","Lucida Sans Unicode",Geneva,Verdana,"PingFang SC",sans-serif;color:#333}
+.mg-sub button{border:0;background:none;padding:0;font:inherit;color:#0033cc;text-decoration:underline}
+.mg-b{padding-top:6px}
+.mg-date{text-align:right;font:10px "Lucida Grande","Lucida Sans Unicode",Geneva,Verdana,"PingFang SC",sans-serif;color:#9a9a9a;margin:4px 2px 3px}
+.mg-hot{display:flex;align-items:stretch;border:1px solid #8f8f8f;border-radius:5px;overflow:hidden;background:linear-gradient(#f6f6f6,#d8d8d8);box-shadow:inset 0 1px 0 #fff;margin-bottom:14px;font:bold 12px/1 "Lucida Grande","Lucida Sans Unicode",Geneva,Verdana,"PingFang SC",sans-serif;color:#222}
+.mg-hot b{flex:none;padding:7px 12px 7px 18px;background:linear-gradient(#c8d4e7,#8fa4c4 52%,#a9bad4);border-right:1px solid #7889a3;text-shadow:0 1px 0 rgba(255,255,255,.5)}
+.mg-hot span{flex:1;min-width:0;padding:7px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mg-pass{display:block;width:auto;min-width:168px;margin:0 auto 14px;border:1px solid #777;border-radius:6px;background:linear-gradient(#fdfdfd,#d3d3d3);box-shadow:0 1px 2px rgba(0,0,0,.3),inset 0 1px 0 #fff;font:bold 13px "Lucida Grande","Lucida Sans Unicode",Geneva,Verdana,"PingFang SC",sans-serif;color:#111;padding:6px 20px}
+.mg-qa{font-family:"Lucida Grande","Lucida Sans Unicode",Geneva,Verdana,"PingFang SC",sans-serif;background:linear-gradient(#fff,#f1f1f1);color:#111;border:1px solid #a8a8a8;border-radius:7px;box-shadow:0 1px 3px rgba(0,0,0,.28);padding:0;margin:0 2px 14px;overflow:hidden}
+.mg-qh{padding:5px 10px;background:linear-gradient(#e2e9f4,#b7c5dd);border-bottom:1px solid #8fa0bd;font-size:11px;font-weight:700;color:#1d2a40;opacity:1}
+.mg-qh button{color:#1d2a40}
+.mg-q{margin:0;padding:10px 12px 9px;font-size:16px;line-height:1.55}
+.mg-a{border-top:1px solid #d4d4d4;background:#f6f6f6;padding:8px 12px 10px;font-size:14px;color:#222}
+.mg-a b{font-size:11px;color:#555;opacity:1;font-weight:700}
+.mg-a i{opacity:1;color:#777}
+.mg-a button{border:1px solid #777;background:linear-gradient(#fff,#d6d6d6);box-shadow:0 1px 1px rgba(0,0,0,.3);border-radius:5px;font:12px "Lucida Grande","Lucida Sans Unicode",Geneva,Verdana,"PingFang SC",sans-serif;padding:2px 10px;color:#111}
+.mg-paper{background-color:#fff;background-image:repeating-linear-gradient(transparent 0 23px,rgba(143,160,189,.4) 23px 24px);box-shadow:0 -1px 0 rgba(0,0,0,.18),0 -4px 10px rgba(0,0,0,.14)}
+.mg-bar .mg-paper input{color:#1a1a1a;caret-color:#2f66b8}
+.mg-paper input::placeholder{color:rgba(0,0,0,.35)}
+.mg-platen{background:linear-gradient(#222,#6a6a6a 42%,#1c1c1c)}
+.mg-tbody{background:linear-gradient(#f7f7f7,#d0d0d0 55%,#e5e5e5);box-shadow:inset 0 1px 0 #fff,0 0 0 1px #8f8f8f,0 3px 8px rgba(0,0,0,.2)}
+.mg-tk{background:linear-gradient(#fff,#d4d4d4);color:#333;box-shadow:0 0 0 2px #b4b4b4,0 0 0 3px #8a8a8a,0 2px 0 3px #777}
+.mg-bar .mg-chip{background:linear-gradient(#fff,#d4d4d4);color:#333;box-shadow:inset 0 1px 0 #fff,0 0 0 2px #b4b4b4,0 0 0 3px #8a8a8a,0 2px 0 3px #777}
+.mg-bar .mg-snd{position:relative;overflow:hidden;background:linear-gradient(#9cc0ee,#4f84cf 50%,#2f66b8 51%,#5b93dd);color:#fff;box-shadow:inset 0 -1px 1px rgba(255,255,255,.45),0 0 0 2px #b4b4b4,0 0 0 3px #2a4f8a,0 2px 0 3px #1f3c6b}
+.mg-bar .mg-snd:before{content:"";position:absolute;left:7px;right:7px;top:3px;height:45%;border-radius:20px 20px 12px 12px;background:linear-gradient(rgba(255,255,255,.85),rgba(255,255,255,.12));pointer-events:none}
+.mg-bar .mg-snd svg{position:relative;z-index:1}
+</style>
 </head>
 <body>
 
@@ -1553,6 +1704,7 @@ button.feed-follow-plus{padding:0;cursor:pointer}
       <button class="app home-app" data-go="wallet"><i class="diary-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18v3"/><rect x="3" y="7.5" width="18" height="12" rx="2.5"/><circle cx="16.5" cy="13.5" r="1.2" fill="currentColor"/></svg></i><span>钱包</span></button>
       <button class="app home-app p3-decor-app" data-go="couple"><i class="diary-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 8.8c0 5.2-8.8 10-8.8 10S3.2 14 3.2 8.8A4.3 4.3 0 0 1 12 6.9a4.3 4.3 0 0 1 8.8 1.9Z"/></svg></i><span>情侣空间</span></button>
       <button class="app home-app p3-decor-app" data-go="coread"><i class="diary-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.6C10.1 5.1 7.5 4.6 4 4.6v12.8c3.5 0 6.1.5 8 2 1.9-1.5 4.5-2 8-2V4.6c-3.5 0-6.1.5-8 2Z"/><path d="M12 6.6v12.8"/></svg></i><span>共读</span></button>
+      <button class="app home-app" data-go="msgs"><i class="diary-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2.5"/><path d="M6.5 10h8M6.5 13h5"/><circle cx="17.5" cy="14.5" r=".9" fill="currentColor"/></svg></i><span>讯息</span></button>
       <button class="app home-app p3-decor-app" data-p3-decor="MCP"><i class="diary-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8 15V9l4 4 4-4v6"/></svg></i><span>MCP</span></button>
     </div>
   </div>
@@ -1572,6 +1724,7 @@ button.feed-follow-plus{padding:0;cursor:pointer}
 <section class="view" id="v-coread"></section>
   <section class="view" id="v-crread"></section>
 <section class="view" id="v-couple"><div id="cp-root"></div></section>
+<section class="view" id="v-msgs"><div id="mg-root"></div></section>
 
 <section class="view" id="v-app">
   <div class="bar"><button class="bk" data-back>‹</button><h2 id="atitle"></h2><span id="aact"></span></div>
@@ -2396,6 +2549,97 @@ function coreadCtx(p){
 setInterval(()=>{const v=$('#v-crread');if(!CRR||!v||!v.classList.contains('on')||document.hidden)return;if(Date.now()-CRR.last>120000)return;const k=crDay();S.coread.daily[k]=(S.coread.daily[k]||0)+1;CRR.acc++;if(CRR.acc%20===0)save();const t=$('#cr-time');if(t)t.textContent='今日共读 '+crFmt(S.coread.daily[k])},1000);
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&CRR)save()});
 
+/* ===== 讯息 (msg) ===== */
+const MGQ={wait:0,i:0,anon:1};
+const MGS={anon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 11l2-6.5h11l2 6.5M2.5 11h19"/><circle cx="8" cy="16.5" r="2.6"/><circle cx="16" cy="16.5" r="2.6"/><path d="M10.6 16.2h2.8"/></svg>',name:'<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><circle cx="12" cy="8" r="3.7"/><path d="M5 20c0-4 3.1-6.5 7-6.5s7 2.5 7 6.5z"/></svg>',sig:'<svg width="18" height="14" viewBox="0 0 18 14" fill="currentColor"><rect x="0" y="10" width="2.4" height="4"/><rect x="4" y="7" width="2.4" height="7"/><rect x="8" y="4" width="2.4" height="10"/><rect x="12" y="1" width="2.4" height="13"/></svg>',bat:'<svg width="24" height="12" viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x=".75" y=".75" width="20" height="10.5" rx="1"/><path d="M22.2 4v4"/><rect x="3" y="3" width="9" height="6" fill="currentColor" stroke="none"/></svg>',back:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>',send:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>'};
+const mgT=t=>{const d=new Date(t),z=n=>String(n).padStart(2,'0');return z(d.getMonth()+1)+'/'+z(d.getDate())+' '+z(d.getHours())+':'+z(d.getMinutes())};
+function MG(){const m=S.msgApp=S.msgApp||{};m.by=m.by||{};m.tab=m.tab||'box';m.skin='sms';const u=S.activeUserProfile||'_',d=m.by[u]=m.by[u]||{box:[],qa:[]};return{m,d}}
+const mgPool=()=>{const b=momentBound();return b.length?b:S.personas.filter(p=>!p.blocked)};
+function mgChar(){const{m}=MG(),pl=mgPool();let p=pl.find(x=>x.id===m.char);if(!p){p=pl[0];m.char=p?p.id:''}return p}
+function mgList(){const{m,d}=MG(),p=mgChar();return p?d.box.filter(x=>x.cid===p.id&&x.ch===m.skin).sort((a,b)=>b.t-a.t):[]}
+const mgSys=(p,x)=>build(p,S.chats[p.id]||[])[0].content+'\n\n'+x;
+function mgJ(raw){const t=String(raw||'').trim().replace(/^```(?:json)?\s*/i,'').replace(/\s*```$/,''),a=t.indexOf('{'),z=t.lastIndexOf('}');if(a>=0&&z>a){try{return JSON.parse(t.slice(a,z+1))}catch(_){}}return{text:t}}
+const mgOk=()=>{if(!mgChar()){toast('先在联系人设定里添加角色');return 0}if(!S.cfg.key){toast('请先在设置里填写 API Key');return 0}return!MGQ.wait};
+async function mgGen(note){
+ if(!mgOk())return;const p=mgChar(),{m,d}=MG(),ch='sms',pg=false;MGQ.wait=1;mgDraw();
+ try{
+  const sys=mgSys(p,'【讯息App】你现在用'+(pg?'老式传呼机（BP机），只能发很短的文字寻呼':'很老的功能机短信')+'，主动给用户「'+S.me.name+'」发一条你自己想说的话——可以是想念、碎碎念、突然想到的事、约定、关心，或没来得及当面说的话，要符合你的人设和你们的关系。'+(pg?'不超过40字，像传呼台留言，简短克制。':'不超过80字，像老手机短信，可有落款。')+'不要emoji、颜文字、markdown，不要出戏。只输出JSON：{"text":"正文"}');
+  const r=mgJ(await ask([{role:'system',content:sys},{role:'user',content:note?'（用户用同一台设备回了你：'+note+'。请回一条。）':'（请发出一条你此刻想说的话。）'}],null)),tx=String(r.text||r.reply||'').trim();
+  if(!tx)throw new Error('没有收到内容');
+  d.box.push({id:'mg'+Date.now().toString(36),cid:p.id,ch,text:tx,re:note||'',t:Date.now()});if(d.box.length>200)d.box.splice(0,d.box.length-200);MGQ.i=0;MGQ.hist=0;
+ }catch(e){toast('发送失败：'+(e&&e.message||'未知错误'))}
+ MGQ.wait=0;save();mgDraw()}
+async function mgAnswer(e){
+ const p=P(e.cid);if(!p||MGQ.wait)return;if(!S.cfg.key)return toast('请先在设置里填写 API Key');MGQ.wait=1;mgDraw();
+ try{
+  const sys=mgSys(p,'【匿名问答】你有一个匿名提问箱，别人可以往里投问题，你公开回答。'+(e.kind==='name'?'这条提问署了真名，提问者是用户「'+e.who+'」，你认识TA，按你们的关系回答。':'这条提问是匿名的，你不知道是谁问的，把对方当作陌生人回答，不要猜测或点破身份。')+'用你的人设口吻回答，1-3句话，不要emoji，不要出戏，不要复述问题。只输出回答正文。');
+  e.a=String(await ask([{role:'system',content:sys},{role:'user',content:e.q}],null)).trim().replace(/^["“]|["”]$/g,'');
+ }catch(x){toast('回答失败：'+(x&&x.message||'未知错误'))}
+ MGQ.wait=0;save();mgDraw()}
+async function mgAsk(q,kind){
+ if(!mgOk())return;const p=mgChar(),{d}=MG(),e={id:'mq'+Date.now().toString(36),cid:p.id,kind,who:kind==='name'?(S.me.name||'我'):'',q,a:'',t:Date.now()};
+ d.qa.push(e);await mgAnswer(e)}
+async function mgPass(){
+ if(!mgOk())return;const p=mgChar(),{d}=MG();MGQ.wait=1;mgDraw();
+ try{
+  const sys=mgSys(p,'【匿名问答】你有一个匿名提问箱。请模拟3位互不相识的路人（语气各异：好奇、调侃、真诚、略带冒犯但不过分……）分别匿名投来的问题，问题要贴合你的身份、经历和近况；路人不认识用户。然后以你的人设口吻回答其中你愿意回答的，不想回答的 a 留空。回答1-3句话，不要emoji，不要出戏。只输出JSON：{"items":[{"q":"问题","a":"回答"}]}');
+  const r=mgJ(await ask([{role:'system',content:sys},{role:'user',content:'（请生成这一批提问和回答。）'}],null)),it=(r.items||[]).filter(x=>x&&x.q).slice(0,5);
+  if(!it.length)throw new Error('没有收到内容');
+  it.forEach((x,i)=>d.qa.push({id:'mq'+Date.now().toString(36)+i,cid:p.id,kind:'pass',who:String(1000+Math.floor(Math.random()*9000)),q:String(x.q).trim(),a:String(x.a||'').trim(),t:Date.now()+i}));
+ }catch(e){toast('收取失败：'+(e&&e.message||'未知错误'))}
+ MGQ.wait=0;save();mgDraw()}
+function mgSms(l){
+ const e=l[MGQ.i]||null,hs=!!(MGQ.hist&&l.length),
+ tx=MGQ.wait?'接收中<span class="mg-cur">…</span>':hs?l.map((x,i)=>`<div class="mg-hi" data-a="hopen" data-i="${i}"><small>${mgT(x.t)}</small>${esc(x.text)}</div>`).join(''):e?(e.re?'<small>回：'+esc(e.re)+'</small>':'')+esc(e.text):'暂无短信',
+ lt={2:'abc',3:'def',4:'ghi',5:'jkl',6:'mno',7:'pqrs',8:'tuv',9:'wxyz'},
+ ks=['1','2','3','4','5','6','7','8','9','*','0','#'].map(k=>`<div class="mg-nk"><b>${k}</b><small>${lt[k]||'&nbsp;'}</small></div>`).join(''),
+ sg=d=>`<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="${d}"/></svg>`;
+ return`<div class="mg-ph"><div class="mg-up"><div class="mg-sm"><div class="mg-sr">${MGS.sig}${MGS.bat}</div><div class="mg-sr"><span>pinyin</span><span class="cnt">${hs?'共'+l.length+'条':(e?e.text.length:0)+'/900'}</span></div><div class="mg-stx${hs?' hl':''}">${tx}</div><div class="mg-soft"><button data-a="${hs?'hback':'opt'}" type="button">${hs?'返回':'选项'}</button>${hs?'<span></span>':'<button data-a="del" type="button">清除</button>'}</div></div></div><div class="mg-lo"><div class="mg-io"><input id="mg-in2" type="text" enterkeyhint="send" autocomplete="off" placeholder="给TA回一句，留空则让TA自己发"><button class="mg-go" data-a="send" type="button" aria-label="发送">${MGS.send}</button></div><div class="mg-nr" aria-hidden="true"><div class="mg-dk">${sg('M5 8h14M5 12h14M5 16h14')}</div><div class="mg-dk">${sg('M7 12a5 5 0 1010 0 5 5 0 10-10 0')}</div><div class="mg-dk">${sg('M12 5l7 7-7 7-7-7z')}</div><div class="mg-dk">C</div></div><div class="mg-pad" aria-hidden="true">${ks}</div></div></div>`}
+function mgHot(p){
+ const{m,d}=MG(),n=new Date(),z=x=>String(x).padStart(2,'0'),ds=n.getFullYear()+'年'+(n.getMonth()+1)+'月'+n.getDate()+'日 '+z(n.getHours())+':'+z(n.getMinutes());
+ const x=m.tab==='box'?d.box.filter(v=>v.cid===p.id).sort((a,b)=>b.t-a.t)[0]:d.qa.filter(v=>v.cid===p.id&&v.a).sort((a,b)=>b.t-a.t)[0],s=x?(x.text||x.a):'';
+ return`<div class="mg-date">${ds}</div><div class="mg-hot"><b>最新消息</b><span>${s?esc(s):'暂无新消息'}</span></div>`}
+function mgDraw(){
+ const root=$('#mg-root');if(!root||!root.firstChild)return;const{m,d}=MG(),p=mgChar(),box=m.tab==='box';
+ $('#mg-cav').innerHTML=p?av(p):'+';const sb=$('#mg-subt');if(sb)sb.textContent=p?p.name+' · 短信与匿名提问箱':'';const cb2=$('#mg-chb');if(cb2)cb2.textContent=p?'角色：'+p.name:'选择角色';const cn=$('#mg-cnt');if(cn)cn.textContent=p?(box?'短信 '+mgList().length+' 条':'提问 '+d.qa.filter(x=>x.cid===p.id).length+' 条'):'';
+ root.querySelectorAll('.mg-seg [data-a^="tab-"]').forEach(b=>b.classList.toggle('on',b.dataset.a==='tab-'+m.tab));
+ $('#mg-bar').classList.toggle('qa',!box);$('#mg-in').placeholder=box?'给TA回一句（留空则让TA自己发）':'向TA提问…';
+ const cb=$('#mg-chip');cb.innerHTML=MGQ.anon?MGS.anon:MGS.name;cb.setAttribute('aria-label',MGQ.anon?'匿名提问':'实名提问');$('#mg-send').disabled=!!MGQ.wait;
+ const b=$('#mg-b');
+ if(!p){b.innerHTML='<div class="mg-empty">还没有角色，先去联系人设定添加一个</div>';return}
+ if(box){const l=mgList();MGQ.i=Math.max(0,Math.min(MGQ.i,l.length-1));
+  const o=$('#mg-in2'),v=o?o.value:'';b.innerHTML=mgHot(p)+mgSms(l);const nn=$('#mg-in2');if(nn)nn.value=v}
+ else{const l=d.qa.filter(x=>x.cid===p.id).sort((a,c)=>c.t-a.t);
+  b.innerHTML=mgHot(p)+`<button class="mg-pass" data-a="pass" type="button"${MGQ.wait?' disabled':''}>${MGQ.wait?'处理中…':'收取路人提问'}</button>`+(l.length?l.map(e=>`<div class="mg-qa" data-id="${e.id}"><div class="mg-qh"><span>${e.kind==='pass'?'路人 · 匿名 #'+e.who:e.kind==='anon'?'匿名 · 来自你':'实名 · '+esc(e.who)}</span><em>${mgT(e.t)}</em><button data-a="qdel" type="button" aria-label="删除">×</button></div><p class="mg-q">${esc(e.q)}</p><div class="mg-a">${e.a?'<b>'+esc(p.name)+'</b>'+esc(e.a):'<i>暂未回答</i><button data-a="qans" type="button">让TA回答</button>'}</div></div>`).join(''):'<div class="mg-empty">提问箱还是空的</div>')}}
+function mgSend(){const{m}=MG(),i=m.tab==='box'?$('#mg-in2'):$('#mg-in');if(!i||MGQ.wait)return;const t=i.value.trim();
+ if(m.tab==='box'){i.value='';mgGen(t)}else{if(!t)return toast('先写下你的问题');i.value='';mgAsk(t,MGQ.anon?'anon':'name')}}
+const mgTk=r=>r.split('').map(k=>'<i class="mg-tk">'+k+'</i>').join('');
+function msgRender(){
+ const root=$('#mg-root');if(!root)return;
+ if(!root.firstChild){
+  root.innerHTML=`<div class="mg"><div class="mg-top"><div class="mg-hd"><button class="mg-ttl" data-back type="button">没话讲 我们在互相假装…</button><small id="mg-subt"></small></div><button class="mg-cav" id="mg-cav" data-a="char" type="button" aria-label="选择角色"></button></div><div class="mg-seg"><button data-a="tab-box" type="button">传讯</button><button data-a="tab-qa" type="button">匿名问答</button></div><div class="mg-sub"><button id="mg-chb" data-a="char" type="button"></button><span id="mg-cnt"></span></div><div class="mg-b" id="mg-b"></div><div class="mg-bar" id="mg-bar"><div class="mg-tw"><div class="mg-paper"><input id="mg-in" type="text" enterkeyhint="send" autocomplete="off"></div><div class="mg-platen"></div><div class="mg-tbody"><button class="mg-chip" id="mg-chip" data-a="chip" type="button"></button><div class="mg-tks" aria-hidden="true"><div>${mgTk('QWERTY')}</div><div>${mgTk('ASDFGH')}</div></div><button class="mg-snd" id="mg-send" data-a="send" type="button" aria-label="提问"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg></button></div></div></div></div>`;
+  $('#mg-in').onkeydown=e=>{if(e.key==='Enter'&&!e.isComposing)mgSend()};
+  $('#mg-in').addEventListener('input',()=>{const ks=$$('#mg-bar .mg-tk'),k=ks[Math.floor(Math.random()*ks.length)];if(!k)return;k.classList.remove('hit');void k.offsetWidth;k.classList.add('hit')});
+  root.addEventListener('keydown',e=>{if(e.target.id==='mg-in2'&&e.key==='Enter'&&!e.isComposing)mgSend()});
+  root.onclick=e=>{const t=e.target.closest('[data-a]');if(!t)return;const a=t.dataset.a,{m,d}=MG(),w=t.closest('[data-id]');
+   if(a==='char')iosSheet({title:'选择角色',items:mgPool().map(x=>({label:x.name,av:av(x),on:x.id===m.char,run:()=>{m.char=x.id;MGQ.i=0;save();mgDraw()}}))});
+   else if(a.indexOf('tab-')===0){m.tab=a.slice(4);save();mgDraw()}
+   else if(a.indexOf('skin-')===0){m.skin=a.slice(5);MGQ.i=0;save();mgDraw()}
+   else if(a==='send')mgSend();
+   else if(a==='chip'){MGQ.anon=!MGQ.anon;mgDraw();toast(MGQ.anon?'匿名提问：TA不会知道是你':'实名提问：TA知道是你')}
+   else if(a==='prev'){MGQ.i=Math.max(0,MGQ.i-1);mgDraw()}
+   else if(a==='next'){MGQ.i++;mgDraw()}
+   else if(a==='del'){const e=mgList()[MGQ.i];if(e){d.box=d.box.filter(x=>x.id!==e.id);save();mgDraw()}}
+   else if(a==='opt')iosSheet({title:'选项',items:[{label:'让TA发一条',run:()=>mgSend()},{label:'查看历史短信',run:()=>{MGQ.hist=1;mgDraw()}},{label:'清除全部短信',red:1,run:()=>{const p=mgChar();d.box=d.box.filter(x=>!(x.cid===p.id&&x.ch==='sms'));save();mgDraw()}}]});
+   else if(a==='hopen'){MGQ.i=+t.dataset.i;MGQ.hist=0;mgDraw()}
+   else if(a==='hback'){MGQ.hist=0;mgDraw()}
+   else if(a==='exit')back();
+   else if(a==='key'){const i=$('#mg-in');i.value+=t.dataset.k}
+   else if(a==='pass')mgPass();
+   else if(a==='qdel'&&w){d.qa=d.qa.filter(x=>x.id!==w.dataset.id);save();mgDraw()}
+   else if(a==='qans'&&w){const e=d.qa.find(x=>x.id===w.dataset.id);if(e)mgAnswer(e)}}}
+ mgDraw()}
+
 /* ===== 情侣空间 (cp) ===== */
 const CPP={back:'M7.414 13l5.043 5.04-1.414 1.42L3.586 12l7.457-7.46 1.414 1.42L7.414 11H21v2H7.414z',plus:'M12 5v14M5 12h14',gear:'M12 9a3 3 0 100 6 3 3 0 000-6zM12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2',send:'M3 11l18-8-8 18-2-8z',trash:'M4 7h16M9 7V4h6v3M6 7l1 14h10l1-14',pen:'M4 20h4L19 9l-4-4L4 16zM13.5 6.5l4 4',heart:'M12 20s-8-5-8-10.5a4.5 4.5 0 018-2.5 4.5 4.5 0 018 2.5C20 15 12 20 12 20z',spark:'M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M18 6l-2.5 2.5M8.5 15.5L6 18',chev:'M9 6l6 6-6 6',ask:'M9.5 9a2.5 2.5 0 115 0c0 1.7-2.5 2-2.5 4M12 17v.01',tree:'M12 3a5 5 0 00-4.5 7.2A4 4 0 009 18h6a4 4 0 001.5-7.8A5 5 0 0012 3zM12 18v4M9 22h6',cal:'M4 6h16v14H4zM4 10h16M8 3v4M16 3v4M12 17s-3-1.8-3-3.6a1.7 1.7 0 013-.9 1.7 1.7 0 013 .9c0 1.8-3 3.6-3 3.6z',note:'M5 4h11a3 3 0 013 3v13H8a3 3 0 01-3-3zM9 9h6M9 13h4',smile:'M12 3a9 9 0 100 18 9 9 0 000-18zM9 10v.5M15 10v.5M8.5 14c1 1.5 2.2 2.2 3.5 2.2s2.5-.7 3.5-2.2',calm:'M12 3a9 9 0 100 18 9 9 0 000-18zM9 10v.5M15 10v.5M9 15.5h6',sad:'M12 3a9 9 0 100 18 9 9 0 000-18zM9 10v.5M15 10v.5M8.5 16.5c1-1.5 2.2-2.2 3.5-2.2s2.5.7 3.5 2.2',love:'M12 3a9 9 0 100 18 9 9 0 000-18zM8 10.4s1.5-1.3 1.5-.2c0 1-1.5 1.7-1.5 1.7s-1.5-.7-1.5-1.7c0-1.1 1.5.2 1.5.2zM16 10.4s1.5-1.3 1.5-.2c0 1-1.5 1.7-1.5 1.7s-1.5-.7-1.5-1.7c0-1.1 1.5.2 1.5.2zM9 15c1 1.2 2 1.8 3 1.8s2-.6 3-1.8',tired:'M12 3a9 9 0 100 18 9 9 0 000-18zM8 10h2M14 10h2M10.5 16a1.5 1.5 0 003 0z'};
 const cpI=(n,f)=>`<svg viewBox="0 0 24 24" fill="${f||n==='back'?'currentColor':'none'}" stroke="${n==='back'?'none':'currentColor'}" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="${CPP[n]}"/></svg>`;
@@ -2476,7 +2720,7 @@ cpr.addEventListener('click',async e=>{const b=e.target.closest('[data-act]');if
  else if(a==='setsave'){const s=cpN.sp||cpD.partner||(S.personas.find(x=>x.boundUser===cpUser().id)||S.personas[0]||{}).id,d=g('#cpf-s');if(!s||!P(s))return toast('请先选择另一半');cpD.partner=s;cpD.since=d||cpISO(new Date());const f=cpD.ann.find(x=>x.fixed);if(f)f.date=cpD.since;else cpD.ann.unshift({id:'since',name:'在一起',date:cpD.since,rep:true,fixed:true});cpN.sp=null;cpSave();cpN.sub=[];cpR()}
 });
 
-const R={couple:()=>cpRender(),coread:()=>crRender(),crread:()=>crReadRender(),music:()=>msRender(),wallet:()=>wlRender(),home:rHome,app:rApp,prof:rProf,chat:draw,deco:rDeco,cset:rCset,css:rCss,personas:rPersonas,worlds:rWorlds,settings:rSettings,roleprompt:rSettings,diary:rDiary,stickers:rProfileStickers,postdetail:rPostDetail,rolephones:rolePhoneRender,desktopcustom:renderDesktopCustomizer};
+const R={msgs:()=>msgRender(),couple:()=>cpRender(),coread:()=>crRender(),crread:()=>crReadRender(),music:()=>msRender(),wallet:()=>wlRender(),home:rHome,app:rApp,prof:rProf,chat:draw,deco:rDeco,cset:rCset,css:rCss,personas:rPersonas,worlds:rWorlds,settings:rSettings,roleprompt:rSettings,diary:rDiary,stickers:rProfileStickers,postdetail:rPostDetail,rolephones:rolePhoneRender,desktopcustom:renderDesktopCustomizer};
 function go(v,push=true){if(v==='chat'&&!P(cur))return;if(v==='settings'&&stack[stack.length-1]!=='settings')settingsPage='main';if(v!=='chat')$('#ucss').textContent='';
   $$('.view').forEach(e=>e.classList.toggle('on',e.id==='v-'+v));if(push)stack.push(v);R[v]()}
 function back(){if(stack[stack.length-1]==='cset'&&csetPage==='memory'){csetPage='main';rCset();return}if(stack[stack.length-1]==='settings'&&settingsPage!=='main'){settingsPage='main';rSettings();return}stack.pop();go(stack[stack.length-1]||'home',false)}
