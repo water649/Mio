@@ -1093,6 +1093,137 @@ button.feed-follow-plus{padding:0;cursor:pointer}
 #v-chat.has-wall .bar{background:rgba(255,255,255,.62);-webkit-backdrop-filter:blur(18px) saturate(1.6);backdrop-filter:blur(18px) saturate(1.6)}
 [data-theme=dark] #v-chat.has-wall .bar{background:rgba(0,0,0,.5)}
 #v-chat.has-wall #msgs,#v-chat.has-wall #inp,#v-chat.has-wall #qbar{background:transparent}
+
+/* ===== 共读 ===== */
+#v-coread,#v-crread{background:var(--bg)}
+.cr-wrap{position:relative;flex:1;min-height:0;display:flex;flex-direction:column;width:100%}
+.cr-top{display:flex;align-items:center;justify-content:space-between;padding:10px 24px 6px;flex:none;min-height:66px;background:var(--bg)}
+.cr-top h1{display:flex;align-items:center;gap:4px;margin:0;font-size:36px;font-weight:800;letter-spacing:.5px}
+.cr-back{width:34px;height:34px;margin-left:-12px;border-radius:50%;background:transparent;color:var(--ink);display:flex;align-items:center;justify-content:center;padding:0}
+.cr-tr{display:flex;align-items:center}
+.cr-av{width:44px;height:44px;border-radius:50%;overflow:hidden;flex:none;padding:0;border:2px solid var(--bg);background:linear-gradient(180deg,#a2b1dc,#6a72b0);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.cr-av img{width:100%;height:100%;object-fit:cover;display:block}
+.cr-av.empty{background:var(--p);color:var(--sub);font-size:24px;font-weight:400}
+.cr-tr .cr-av+.cr-av{margin-left:-8px}
+.cr-rb{width:46px;height:46px;margin-left:10px;border-radius:50%;background:var(--bg);color:var(--ink);box-shadow:0 2px 12px rgba(0,0,0,.12);display:flex;align-items:center;justify-content:center;padding:0;flex:none}
+[data-theme=dark] .cr-rb{background:var(--p);box-shadow:none}
+.cr-body{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding-bottom:calc(130px + env(safe-area-inset-bottom,0px))}
+.cr-hero{background:linear-gradient(180deg,var(--bg),var(--p));padding-bottom:26px}
+.cr-sh{display:flex;align-items:center;gap:6px;padding:18px 24px 12px;font-size:24px;font-weight:800}
+.cr-sh svg{color:var(--sub)}
+.cr-recent{display:flex;gap:12px;overflow-x:auto;padding:0 24px;scrollbar-width:none;scroll-snap-type:x proximity}
+.cr-recent::-webkit-scrollbar{display:none}
+.cr-card{flex:none;scroll-snap-align:start;width:min(76vw,330px);box-sizing:border-box;display:flex;align-items:center;gap:14px;padding:14px;border-radius:20px;background:var(--bg);box-shadow:0 2px 14px rgba(0,0,0,.06);cursor:pointer}
+[data-theme=dark] .cr-card{background:var(--p);box-shadow:none}
+.cr-card .cr-cv{width:62px;flex:none}
+.cr-card0{min-height:86px}
+.cr-ct{flex:1;min-width:0}
+.cr-ct b{display:block;font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cr-ct span{display:block;margin-top:3px;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cr-ct small{display:block;margin-top:6px;font-size:15px;color:var(--sub)}
+.cr-more{width:34px;height:34px;border-radius:50%;background:transparent;color:var(--sub);display:flex;align-items:center;justify-content:center;flex:none;padding:0}
+.cr-goal{text-align:center;padding:34px 24px 0}
+.cr-goal h2{margin:0;font-size:26px;font-weight:800}
+.cr-goal p{margin:8px 0 0;font-size:14.5px;color:var(--sub)}
+.cr-gauge{position:relative;width:min(92%,420px);margin:26px auto 0}
+.cr-gauge svg{display:block;width:100%;height:auto;aspect-ratio:320/190;overflow:visible}
+.cr-gc{position:absolute;left:0;right:0;top:17%;text-align:center}
+.cr-gc small{display:block;font-size:20px;font-weight:700}
+.cr-gc b{display:block;font-size:min(24vw,104px);line-height:1.05;font-weight:600;letter-spacing:-2px}
+.cr-gc button{background:transparent;color:var(--ink);font-size:17px;padding:2px 6px}
+.cr-go{display:block;width:min(86%,420px);height:62px;margin:36px auto 0;border-radius:31px;background:var(--ink);color:var(--bg);font-size:20px;font-weight:600}
+.cr-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 22px;padding:22px 24px 10px}
+.cr-bk{position:relative}
+.cr-bm{display:flex;align-items:center;justify-content:space-between;margin-top:10px;color:var(--sub);font-size:18px}
+.cr-cv{position:relative;aspect-ratio:2/3;border-radius:3px 8px 8px 3px;overflow:hidden;background:var(--p);box-shadow:0 10px 22px rgba(0,0,0,.2),0 1px 3px rgba(0,0,0,.2)}
+.cr-cv img{width:100%;height:100%;object-fit:cover;display:block}
+.cr-cv::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.28) 0,rgba(0,0,0,.14) 4%,rgba(255,255,255,0) 9%);pointer-events:none}
+.cr-gen{width:100%;height:100%;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;padding:12% 10% 10%;color:#fff;font-family:Georgia,"Songti SC",serif}
+.cr-gen b{font-size:clamp(12px,3.4vw,22px);line-height:1.3;overflow:hidden;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical}
+.cr-gen i{font-style:normal;font-size:clamp(10px,2.5vw,14px);opacity:.85;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cr-card .cr-gen{padding:8%}.cr-card .cr-gen b{font-size:9px}.cr-card .cr-gen i{font-size:7px}
+.cr-count{text-align:center;color:var(--sub);font-size:18px;padding:26px 0 0}
+.cr-empty{padding:90px 30px;text-align:center;color:var(--sub);font-size:17px;line-height:1.9}
+.cr-empty small{font-size:13px}
+.cr-x{position:absolute;left:-8px;top:-8px;z-index:3;width:28px;height:28px;border-radius:50%;background:#ff3b30;color:#fff;font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center;padding:0;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.cr-pen{position:absolute;right:6px;top:6px;z-index:3;padding:3px 9px;border-radius:12px;background:rgba(0,0,0,.6);color:#fff;font-size:12px;pointer-events:none}
+.cr-glass{background:rgba(255,255,255,.74);-webkit-backdrop-filter:blur(24px) saturate(1.8);backdrop-filter:blur(24px) saturate(1.8);box-shadow:0 8px 28px rgba(0,0,0,.14),inset 0 0 0 1px rgba(255,255,255,.75);color:var(--ink)}
+[data-theme=dark] .cr-glass{background:rgba(44,44,46,.7);box-shadow:0 8px 28px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.09)}
+.cr-dock{position:absolute;left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px)*.4 + 12px);padding:0 22px 0 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;z-index:6;pointer-events:none}
+.cr-dock>*{pointer-events:auto}
+.cr-cap{display:flex;gap:4px;padding:5px;border-radius:34px}
+.cr-cap button{width:88px;height:54px;border-radius:27px;background:transparent;color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:0}
+.cr-cap button span{font-size:11px;font-weight:700}
+.cr-cap button.on{background:rgba(120,120,128,.16)}
+.cr-sc{width:62px;height:62px;border-radius:50%;display:flex;align-items:center;justify-content:center;padding:0;flex:none}
+.cr-sbar{flex:1;min-width:0;height:54px;border-radius:27px;display:flex;align-items:center;gap:10px;padding:0 8px 0 18px}
+.cr-sbar input{flex:1;min-width:0;background:transparent;border:0;border-radius:0;padding:0;font-size:17px;-webkit-appearance:none;appearance:none}
+.cr-sx{width:34px;height:34px;border-radius:50%;background:rgba(120,120,128,.2);color:var(--ink);font-size:20px;line-height:1;padding:0;display:flex;align-items:center;justify-content:center}
+.cr-rd{position:relative;flex:1;min-height:0;display:flex;flex-direction:column;width:100%;background:var(--bg);overflow:hidden}
+.cr-rtop{display:flex;align-items:center;gap:8px;padding:8px 14px;flex:none}
+.cr-rtop .cr-rb{margin-left:0}
+.cr-rtt{flex:1;min-width:0;background:transparent;color:var(--ink);font-size:16px;font-weight:700;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:8px}
+.cr-rr{display:flex;align-items:center;gap:8px}
+.cr-aa{height:40px;padding:0 13px;border-radius:20px;background:var(--p);color:var(--ink);font-weight:700}
+.cr-scroll{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:8px 26px 40px}
+.cr-txt p{margin:0 0 .9em;line-height:1.9;text-align:justify;overflow-wrap:anywhere;text-indent:2em}
+.cr-nav{display:flex;gap:12px;margin:26px 0 10px}
+.cr-nav button{flex:1;height:46px;border-radius:23px;border:1px solid var(--line);background:transparent;color:var(--ink);font-weight:600}
+.cr-nav button:disabled{opacity:.35}
+.cr-rbar{flex:none;display:flex;align-items:center;gap:10px;padding:8px 22px calc(10px + env(safe-area-inset-bottom,0px));font-size:12px;color:var(--sub)}
+.cr-pbar{flex:1;height:3px;border-radius:3px;background:var(--line);overflow:hidden}
+.cr-pbar i{display:block;height:100%;background:var(--ink)}
+.cr-chat{position:absolute;left:0;right:0;bottom:0;height:56%;z-index:5;display:flex;flex-direction:column;background:var(--bg);border-radius:22px 22px 0 0;box-shadow:0 -6px 30px rgba(0,0,0,.18);transform:translateY(103%);transition:transform .28s cubic-bezier(.2,.9,.25,1)}
+.cr-chat.on{transform:none}
+.cr-rd.chat-on .cr-scroll{padding-bottom:58%}
+.cr-ch-h{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line);flex:none}
+.cr-ch-h b{flex:1;min-width:0;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cr-msgs{flex:1;min-height:0;overflow-y:auto;padding:12px 16px;display:flex;flex-direction:column;gap:8px}
+.cr-m{max-width:82%;padding:9px 13px;border-radius:18px;font-size:15px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
+.cr-m.u{align-self:flex-end;background:var(--ink);color:var(--bg)}
+.cr-m.a{align-self:flex-start;background:var(--p);color:var(--ink)}
+.cr-hint{margin:auto;text-align:center;color:var(--sub);font-size:14px;line-height:1.8;padding:0 20px}
+.cr-in{display:flex;gap:8px;align-items:center;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));flex:none}
+.cr-in input{flex:1;min-width:0;height:42px;padding:0 16px;border-radius:21px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:16px}
+.cr-in button{height:42px;padding:0 16px;border-radius:21px;font-weight:700;flex:none}
+.cr-in .snd{background:var(--ink);color:var(--bg)}
+.cr-in .ask{background:var(--p);color:var(--ink)}
+
+/* 共读首页：对照参考图的比例 */
+.cr-top{position:relative;height:44px;min-height:0;margin-top:1px;padding:0 20px 0 33px;display:flex;align-items:center;justify-content:space-between;background:var(--bg)}
+.cr-top.lib{padding-right:16px}
+.cr-top h1{font-size:30px;font-weight:800;letter-spacing:.3px;line-height:1}
+.cr-back{position:absolute;left:3px;top:50%;transform:translateY(-50%);width:28px;height:44px;margin:0;border-radius:0}
+.cr-tr{gap:16px}
+.cr-tr .cr-av+.cr-av{margin-left:0}
+.cr-av{width:44px;height:44px;border:0;box-shadow:none}
+.cr-av.empty{background:var(--bg);box-shadow:0 2px 12px rgba(0,0,0,.1)}
+.cr-rb{width:44px;height:44px;margin-left:12px}
+.cr-hero{padding-top:34px;padding-bottom:28px}
+.cr-sh{padding:0 33px 12px;font-size:19px;line-height:26px;gap:4px}
+.cr-recent{padding:0 32px}
+.cr-card{width:62vw;max-width:330px;gap:10px;padding:10px 8px 10px 10px;border-radius:20px;box-shadow:0 2px 12px rgba(0,0,0,.05)}
+.cr-card .cr-cv{width:40px;border-radius:2px 4px 4px 2px;box-shadow:0 3px 8px rgba(0,0,0,.25)}
+.cr-card .cr-cv::after{background:linear-gradient(90deg,rgba(255,255,255,.28) 0,rgba(0,0,0,.14) 6%,rgba(255,255,255,0) 14%)}
+.cr-ct b,.cr-ct span,.cr-ct small{margin:0;font-size:14px;line-height:17px}
+.cr-ct b{font-weight:600}
+.cr-ct small{color:var(--sub)}
+.cr-card .cr-more{width:26px}
+.cr-goal{--g:min(82vw,340px);padding:27px 0 0}
+.cr-goal h2{font-size:19px;line-height:24px;font-weight:800}
+.cr-goal p{margin:1px 0 0;padding:0 20px;font-size:14.5px;line-height:21px}
+.cr-gauge{--crt:#efeff3;width:var(--g);margin:17px auto 0}
+[data-theme=dark] .cr-gauge{--crt:#2c2c2e}
+.cr-gauge svg{width:100%;height:auto;aspect-ratio:320/166}
+.cr-gl,.cr-gt,.cr-gb{position:absolute;left:0;right:0;text-align:center}
+.cr-gl{top:calc(var(--g)*.175);line-height:calc(var(--g)*.09);font-size:calc(var(--g)*.046);font-weight:600}
+.cr-gt{top:calc(var(--g)*.263);line-height:calc(var(--g)*.2);font-size:calc(var(--g)*.212);font-weight:500;letter-spacing:-.02em}
+.cr-gb{top:calc(var(--g)*.455);width:100%;padding:0;background:transparent;color:var(--ink);line-height:calc(var(--g)*.09);font-size:calc(var(--g)*.048)}
+.cr-gb i{font-style:normal;color:var(--sub);margin-left:4px}
+.cr-go{width:calc(var(--g)*.97);height:50px;margin:30px auto 0;border-radius:25px;font-size:16px;font-weight:500}
+.cr-dock{padding:0 21px;bottom:calc(env(safe-area-inset-bottom,0px)*.35 + 9px)}
+.cr-cap{gap:0;padding:4px}
+.cr-cap button{width:90px;height:53px;border-radius:27px}
 </style>
 <style id="ucss"></style>
 
@@ -1421,7 +1552,7 @@ button.feed-follow-plus{padding:0;cursor:pointer}
     <div class="page3-apps">
       <button class="app home-app" data-go="wallet"><i class="diary-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18v3"/><rect x="3" y="7.5" width="18" height="12" rx="2.5"/><circle cx="16.5" cy="13.5" r="1.2" fill="currentColor"/></svg></i><span>钱包</span></button>
       <button class="app home-app p3-decor-app" data-go="couple"><i class="diary-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 8.8c0 5.2-8.8 10-8.8 10S3.2 14 3.2 8.8A4.3 4.3 0 0 1 12 6.9a4.3 4.3 0 0 1 8.8 1.9Z"/></svg></i><span>情侣空间</span></button>
-      <button class="app home-app p3-decor-app" data-go="forum"><i class="diary-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h16v11H9l-5 3v-14Z"/><path d="M8 9h8M8 12.5h5"/></svg></i><span>论坛</span></button>
+      <button class="app home-app p3-decor-app" data-go="coread"><i class="diary-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.6C10.1 5.1 7.5 4.6 4 4.6v12.8c3.5 0 6.1.5 8 2 1.9-1.5 4.5-2 8-2V4.6c-3.5 0-6.1.5-8 2Z"/><path d="M12 6.6v12.8"/></svg></i><span>共读</span></button>
       <button class="app home-app p3-decor-app" data-p3-decor="MCP"><i class="diary-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8 15V9l4 4 4-4v6"/></svg></i><span>MCP</span></button>
     </div>
   </div>
@@ -1438,7 +1569,8 @@ button.feed-follow-plus{padding:0;cursor:pointer}
 <section class="view" id="v-wallet"><div class="bar"><button class="bk" data-back>‹</button><h2>钱包</h2></div><div class="body" id="wl-body"></div></section>
 
 <section class="view" id="v-music"><div class="ms" id="ms-root"></div></section>
-<section class="view" id="v-forum"><div id="fm-root"></div></section>
+<section class="view" id="v-coread"></section>
+  <section class="view" id="v-crread"></section>
 <section class="view" id="v-couple"><div id="cp-root"></div></section>
 
 <section class="view" id="v-app">
@@ -1686,7 +1818,7 @@ function __openStoreDB(){return new Promise((resolve,reject)=>{const req=indexed
 async function __readStoredState(){try{const db=await __openStoreDB();const val=await new Promise((resolve,reject)=>{const tx=db.transaction('state','readonly');const req=tx.objectStore('state').get('xsj');req.onsuccess=()=>resolve(req.result||null);req.onerror=()=>reject(req.error)});db.close();if(val){try{return typeof val==='string'?JSON.parse(val):val}catch(e){console.warn('IndexedDB 中的状态无法解析',e)}}}catch(e){console.warn('读取 IndexedDB 失败，将尝试旧存储',e)}try{return JSON.parse(localStorage.getItem('xsj')||'null')}catch(e){return null}}
 async function __writeStoredState(serialized){const db=await __openStoreDB();await new Promise((resolve,reject)=>{const tx=db.transaction('state','readwrite');tx.objectStore('state').put(serialized,'xsj');tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error||new Error('数据库写入失败'));tx.onabort=()=>reject(tx.error||new Error('数据库写入中断'))});db.close();}
 let S=await __readStoredState();
-S=Object.assign(DEF(),S||{});S.stickerGroups=S.stickerGroups||['默认'];S.stickers=(S.stickers||[]).map(x=>({...x,group:x.group||'默认'}));S.apiPresets=S.apiPresets||[];S.imagePresets=S.imagePresets||[];S.secondaryPresets=S.secondaryPresets||[];S.fonts=S.fonts||[];S.fontPresets=S.fontPresets||[];S.fontActive=S.fontActive||'sys';S.fontScale=S.fontScale||100;S.userProfiles=S.userProfiles||[];S.npcs=S.npcs||[];S.ctcGroups=S.ctcGroups||[];S.diaries=S.diaries||[];S.postDecorations=S.postDecorations||[];if(!S.userProfiles.length){S.userProfiles=[Object.assign({id:'u1'},S.me)];S.activeUserProfile='u1'};S.activeUserProfile=S.activeUserProfile||S.userProfiles[0].id;S.me=Object.assign({},S.userProfiles.find(x=>x.id===S.activeUserProfile)||S.me);
+S=Object.assign(DEF(),S||{});S.stickerGroups=S.stickerGroups||['默认'];S.stickers=(S.stickers||[]).map(x=>({...x,group:x.group||'默认'}));S.apiPresets=S.apiPresets||[];S.imagePresets=S.imagePresets||[];S.secondaryPresets=S.secondaryPresets||[];S.fonts=S.fonts||[];S.fontPresets=S.fontPresets||[];S.fontActive=S.fontActive||'sys';S.fontScale=S.fontScale||100;S.userProfiles=S.userProfiles||[];S.npcs=S.npcs||[];S.coread=Object.assign({books:[],goal:5,daily:{},char:'',notes:{},chats:{},cur:'',fs:18,view:'home'},S.coread||{});S.ctcGroups=S.ctcGroups||[];S.diaries=S.diaries||[];S.postDecorations=S.postDecorations||[];if(!S.userProfiles.length){S.userProfiles=[Object.assign({id:'u1'},S.me)];S.activeUserProfile='u1'};S.activeUserProfile=S.activeUserProfile||S.userProfiles[0].id;S.me=Object.assign({},S.userProfiles.find(x=>x.id===S.activeUserProfile)||S.me);
 const MEMK=['traditionalMemory','memoryEntries','vectorMemories','lastAutoSummaryCount'];
 S.chatsByUser=S.chatsByUser||{};S.memByUser=S.memByUser||{};S.cc=S.cc||{};
 {const first=S.userProfiles[0].id;
@@ -1749,7 +1881,7 @@ function build(p,h){
   const recent=h.slice(-6).map(m=>m.content).join('\n');
   const cc=CC(p.id),wb=S.worlds.filter(w=>w.on!==false&&w.content&&((w.scope||'global')==='global'||(w.scope==='contact'&&(w.contacts||[]).includes(p.id)))&&(!w.keys.trim()||(w.trigger==='keyword'&&w.keys.split(/[,，\s]+/).filter(Boolean).some(k=>recent.includes(k))))).map(w=>({content:w.content,position:w.position||'after'}));
   let sys=p.prompt||'';const manualMem=(cc.traditionalMemories||[]).filter(m=>m&&String(m.text||'').trim()).map((m,i)=>`${i+1}. ${m.text}`);if(!manualMem.length&&cc.traditionalMemory&&String(cc.traditionalMemory).trim())manualMem.push(cc.traditionalMemory);if(manualMem.length)sys+='\n\n【传统记忆】\n'+manualMem.join('\n');const generatedMem=(cc.memoryEntries||[]).filter(m=>m&&String(m.text||'').trim());if(generatedMem.length)sys+='\n\n【自动总结记忆条目】\n'+generatedMem.map((m,i)=>`${i+1}. ${m.text}`).join('\n');if(S.globalPrompt)sys+='\n\n【全局 AI 扮演提示词】\n'+S.globalPrompt;if(cc.sys)sys+='\n\n'+cc.sys;if(cc.trOn&&(cc.trOut||[]).length)sys+='\n\n【输出语言】请用以下语言回复用户：'+cc.trOut.join('、')+'。'+(cc.trOut.length>1?'可以在同一条消息里自然地混用这些语言。':'')+'不要在回复里自行附带翻译或括号注释。';
-  if(S.me.bio)sys+='\n\n【用户设定】'+S.me.name+'：'+S.me.bio;sys+=msTogetherCtx(p);sys+=npcCtx(p);
+  if(S.me.bio)sys+='\n\n【用户设定】'+S.me.name+'：'+S.me.bio;sys+=msTogetherCtx(p);sys+=npcCtx(p);sys+=coreadCtx(p);
   const wbBefore=wb.filter(w=>w.position==='before').map(w=>w.content),wbAfter=wb.filter(w=>w.position!=='before').map(w=>w.content);if(wbBefore.length)sys='【世界书】\n'+wbBefore.join('\n\n')+'\n\n'+sys;if(wbAfter.length)sys+='\n\n【世界书】\n'+wbAfter.join('\n\n');
   const o=[];h.slice(-(+S.cfg.hist||30)).forEach(m=>{const l=o[o.length-1];if(l&&l.role===m.role)l.content+='\n'+qc(m);else o.push({role:m.role,content:m.image?[{type:'text',text:qc(m)||'用户发送了一张图片，请结合图片内容回复。'},{type:'image_url',image_url:{url:m.image}}]:qc(m)})});
   return[{role:'system',content:sys},...o];
@@ -2058,162 +2190,211 @@ function setupDesktopGestures(){const home=$('#v-home');home.addEventListener('p
 /* nav */
 let stack=['home'],cur=null,T=0,PID='me';
 
-/* ===== 论坛 App (fm) ===== */
-const FP={home:'M3 11l9-8 9 8v10h-6v-6H9v6H3z',search:'M11 4a7 7 0 100 14 7 7 0 000-14zM21 21l-5-5',me:'M12 4a4 4 0 100 8 4 4 0 000-8zM4 21c0-4 4-6 8-6s8 2 8 6',bell:'M6 16v-5a6 6 0 0112 0v5l2 2H4zM10 21h4',mail:'M3 5h18v14H3zM3 7l9 7 9-7',heart:'M12 21s-8-5-8-11a4.5 4.5 0 018-2.5A4.5 4.5 0 0120 10c0 6-8 11-8 11z',mark:'M6 3h12v18l-6-4-6 4z',rt:'M17 2l4 4-4 4M3 11V9a3 3 0 013-3h15M7 22l-4-4 4-4M21 13v2a3 3 0 01-3 3H3',cmt:'M21 12a8 8 0 01-11.5 7.2L4 20l1-4.5A8 8 0 1121 12z',plus:'M12 5v14M5 12h14',back:'M7.414 13l5.043 5.04-1.414 1.42L3.586 12l7.457-7.46 1.414 1.42L7.414 11H21v2H7.414z',trash:'M4 7h16M9 7V4h6v3M6 7l1 14h10l1-14',gear:'M12 9a3 3 0 100 6 3 3 0 000-6zM12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2',star:'M12 3l2.6 6 6.4.6-4.8 4.3 1.4 6.3L12 17l-5.6 3.2 1.4-6.3L3 9.6 9.4 9z',x:'M4 4l16 16M20 4L4 20',out:'M9 4H5v16h4M16 8l4 4-4 4M20 12H9',grok:'M12 3a9 9 0 100 18 9 9 0 000-18zM6.5 17.5l11-11',phone:'M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.8.7a2 2 0 011.7 2z',video:'M3 7.5A2.5 2.5 0 015.5 5h8A2.5 2.5 0 0116 7.5v9a2.5 2.5 0 01-2.5 2.5h-8A2.5 2.5 0 013 16.5zM16 10.5l5-3v9l-5-3',mic:'M12 2.5a3.5 3.5 0 013.5 3.5v6a3.5 3.5 0 01-7 0V6A3.5 3.5 0 0112 2.5zM5 11a7 7 0 0014 0M12 18v3.5M8.5 21.5h7',cam:'M4 8h3l2-3h6l2 3h3v11H4zM12 11a3.5 3.5 0 100 7 3.5 3.5 0 000-7z',xl:'M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z',views:'M6 20v-7M12 20V5M18 20v-10',dots:'M3 12c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9 2c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm7 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z',chev:'M6 9l6 6 6-6',newdm:'M3 6.5A2.5 2.5 0 015.5 4h13A2.5 2.5 0 0121 6.5v6M3 6.5v9A2.5 2.5 0 005.5 18H12M3 7l9 6 9-6M18 15v6M15 18h6',plane:'M2.504 21.866l.526-2.108C3.04 19.719 4 15.823 4 12s-.96-7.719-.97-7.757l-.527-2.109L22.236 12 2.504 21.866zM5.981 13c-.072 1.962-.34 3.833-.583 5.183L17.764 12 5.398 5.818c.242 1.349.51 3.221.583 5.183H10v2H5.981z',list:'M5 4h14v16H5zM9 9h6M9 13h6',cal:'M4 6h16v14H4zM4 10h16M9 3v4M15 3v4',up:'M12 15V3m0 0L8 7m4-4l4 4M5 12v8h14v-8'};
-const fI=(n,f)=>`<svg viewBox="0 0 24 24" fill-rule="evenodd" fill="${f||['xl','back','dots','plane'].includes(n)?'currentColor':'none'}" stroke="${['xl','back','dots','plane'].includes(n)?'none':'currentColor'}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="${FP[n]}"/></svg>`;
-const fU=()=>S.userProfiles.find(x=>x.id===S.activeUserProfile)||S.userProfiles[0],fChars=()=>S.personas.filter(p=>!p.blocked);
-const fr=$('#fm-root'),fid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,5);
-let F,fn={tab:'home',sub:[],feed:'follow',pt:0,q:'',dr:0};
-const fWho=a=>a.k==='n'?{name:a.name,handle:a.handle,avatar:'',bio:'',hue:a.hue}:a.k==='u'?(()=>{const u=fU(),p=F.pf||{};return {name:p.name||u.name,handle:p.handle||u.handle||'me',avatar:p.avatar||u.avatar||'',bio:p.bio||'',banner:p.banner||''}})():(P(a.id)?Object.assign({},P(a.id),{handle:P(a.id).handle||a.id}):{name:'已删除',handle:'deleted'});
-const fAv=(w,a)=>`<div class="fav" ${a||''}${w.hue!=null?` style="background:hsl(${w.hue} 42% 80%)"`:''}>${av(w)}</div>`,fMe=()=>({k:'u',id:fU().id});
-function fLoad(){S.fm=S.fm||{worlds:[],by:{}};const k=fU().id;F=S.fm.by[k]=Object.assign({posts:[],follows:[],likes:[],marks:[],notifs:[],unread:0,dms:{},world:'',mode:'daily',posters:null,known:[],rts:[],dmr:{},fol:[],fknown:[],pf:{},gn:2,pcn:6,blocked:[],joined:Date.now()},S.fm.by[k]||{});
- Object.keys(F.dms).forEach(i=>{const a=F.dms[i];if(a.some(x=>/\n/.test(x.t)))F.dms[i]=a.flatMap(x=>fSplit(x.t).map((s,j)=>Object.assign({},x,{t:s,ts:x.ts+j})))});
- fChars().filter(c=>c.boundUser===k).forEach(c=>{if(!F.known.includes(c.id)){F.known.push(c.id);if(!F.follows.includes(c.id))F.follows.push(c.id)}});fChars().filter(c=>c.boundUser===k).forEach(c=>{if(!F.fknown.includes(c.id)){F.fknown.push(c.id);if(!F.fol.includes(c.id))F.fol.push(c.id)}});if(!F.posters)F.posters=[...F.follows]}
-const fSave=()=>save(),fCtx=()=>{const w=S.fm.worlds.find(x=>x.id===F.world);return `【论坛世界观】${w?w.desc:'现实世界的社交平台'}\n【内容向】${F.mode==='adult'?'成人向：可含暧昧与成人话题（所有角色均为成年人）':'日常向：生活、心情、见闻'}`};
-const fJ=t=>{try{return JSON.parse(t.match(/[\[{][\s\S]*[\]}]/)[0])}catch(e){return null}};
-const fSys=c=>build(c,[])[0].content+'\n'+fCtx()+`\n你正在论坛里，用户是「${fU().name}」${fU().bio?'（'+fU().bio+'）':''}。`;
-const fTxt=t=>esc(t).replace(/(#[\p{L}\p{N}_]+|@[A-Za-z0-9_]+)/gu,'<span class="flk">$1</span>');
-const fAgo=t=>{const m=(Date.now()-t)/6e4;if(m<1)return'刚刚';if(m<60)return(m|0)+'分钟';if(m<1440)return(m/60|0)+'小时';const d=new Date(t);return d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate()};
-const fRel=t=>{const m=(Date.now()-t)/6e4;return m<60?Math.max(1,m|0)+' 分':m<1440?(m/60|0)+' 时':m<10080?(m/1440|0)+' 天':(m/10080|0)+' 周'};
-const fV=p=>{let h=0;for(const c of p.id)h=(h*31+c.charCodeAt(0))>>>0;return (p.likes||0)*14+p.cm.length*30+h%400+60};
-const fPost=p=>{const w=fWho(p.a),l=F.likes.includes(p.id),m=F.marks.includes(p.id),r=F.rts.includes(p.id);
- return `<article class="fpost" data-id="${p.id}">${fAv(w,`data-act="prof" data-k="${p.a.k}" data-i="${p.a.id}"`)}<div class="fpb"><div class="fph"><div class="fhn"><b>${esc(w.name)}</b>${BADGE}<span>@${esc(w.handle)}</span><span>· ${fAgo(p.ts)}</span></div><button data-act="pmenu">${fI('dots')}</button></div><div class="fpt" data-act="open">${fTxt(p.t)}</div><div class="fpa"><button data-act="open">${fI('cmt')}<i>${p.cm.length||''}</i></button><button data-act="rpt" class="${r?'rt':''}">${fI('rt')}<i>${(p.rts||0)+(r?1:0)||''}</i></button><button data-act="like" class="${l?'lk':''}">${fI('heart',l)}<i>${fmt((p.likes||0)+(l?1:0))||''}</i></button><button data-act="open">${fI('views')}<i>${fmt(fV(p))}</i></button><span class="fpr"><button data-act="mark" class="${m?'mk':''}">${fI('mark',m)}</button><button data-act="rt">${fI('up')}</button></span></div></div></article>`};
-const fHd=(l,t,r='')=>`<div class="fhd"><span>${l}</span><b>${t}</b><span style="text-align:right">${r}</span></div>`,fBack=`<button data-act="back">${fI('back')}</button>`;
-const fFeed=()=>{const L=F.posts.filter(p=>!(p.a.k==='c'&&F.blocked.includes(p.a.id))).filter(p=>fn.feed==='all'||p.a.k==='u'||F.follows.includes(p.a.id)).sort((a,b)=>b.ts-a.ts);
- return `<div class="fhh"><button data-act="drawer" style="padding:0">${fAv(fWho(fMe()))}</button>${fI('xl',1)}<button data-act="settings">${fI('gear')}</button></div><div class="fht">${[['all','为你推荐'],['follow','正在跟随']].map(([k,t])=>`<button data-act="feed" data-v="${k}" class="${fn.feed===k?'on':''}"><span>${t}</span></button>`).join('')}</div><div class="fmain" id="ffeed">${L.map(fPost).join('')||`<p class="fsec fmu" style="text-align:center;padding:48px 24px">${fn.feed==='follow'?'你关注的角色还没有发帖。切换到“为你推荐”，或在右上角设置里点“生成帖子”。':'这里还没有帖子。点右上角设置里的“生成帖子”，或点右下角发一条。'}</p>`}</div><button class="ffab" data-act="compose">${fI('plus')}</button>`};
-const fComp=s=>new Promise(r=>{const im=new Image();im.onload=()=>{const k=Math.min(1,900/im.width),c=document.createElement('canvas');c.width=im.width*k;c.height=im.height*k;c.getContext('2d').drawImage(im,0,0,c.width,c.height);r(c.toDataURL('image/jpeg',.82))};im.onerror=()=>r(s);im.src=s});
-const fBg=b=>b?`style="background-image:url('${esc(b)}')"`:'';
-const fProf=(k,i)=>{const own=k==='u',w=fWho({k,id:i}),tabs=own?[['帖文','list'],['评论','cmt'],['点赞','heart'],['收藏','mark']]:[['帖文','list']],pt=Math.min(fn.pt,tabs.length-1),banner=own?w.banner:(P(i)||{}).background||'',fo=F.follows.includes(i);
- let L=F.posts.filter(p=>own?p.a.k==='u':p.a.id===i);if(own&&pt===1)L=F.posts.filter(p=>p.cm.some(c=>c.a.k==='u'));if(own&&pt===2)L=F.posts.filter(p=>F.likes.includes(p.id));if(own&&pt===3)L=F.posts.filter(p=>F.marks.includes(p.id));
- const j=new Date(F.joined||Date.now()),sug=fChars().filter(c=>!F.follows.includes(c.id)).slice(0,6);
- const top=fn.sub.length?`<button class="fcir" data-act="back">${fI('back')}</button>`:`<button class="fcir" data-act="tab" data-v="home">${fI('back')}</button>`;
- return `<div class="fmain"><div class="fbanw"><div class="fban" ${fBg(banner)}></div><div class="ftop">${top}<button class="fcir" data-act="tab" data-v="search">${fI('search')}</button></div></div><div class="fpf">${fAv(w)}<div class="fnm"><b>${esc(w.name)}</b>${BADGE}</div><div class="fmu">@${esc(w.handle)}</div>${w.bio?`<p class="fbio">${esc(w.bio)}</p>`:''}${own?`<div class="fmu fjoin">${fI('cal')}于 ${j.getFullYear()}年${j.getMonth()+1}月加入</div><div style="margin:10px 0 14px"><button data-act="list" data-v="following" style="padding:0 16px 0 0"><b>${F.follows.length}</b>&nbsp;<span class="fmu">关注中</span></button><button data-act="list" data-v="followers" style="padding:0"><b>${F.fol.length}</b>&nbsp;<span class="fmu">追踪者</span></button></div><div class="f2"><button class="fbtn" data-act="shareprof">分享个人资料</button><button class="fbtn" data-act="editprof">编辑个人资料</button></div>`:`<div class="f2" style="margin-top:12px"><button class="fbtn" data-act="dm" data-i="${i}">${fI('mail')}私信</button><button class="fbtn ${fo?'':'f'}" data-act="follow" data-i="${i}">${fo?'正在关注':'关注'}</button><button class="fbtn fmo" data-act="pmore" data-i="${i}">${fI('dots')}</button></div>`}</div><div class="ftabs fic">${tabs.map(([t,ic],x)=>`<button data-act="ptab" data-v="${x}" class="${x===pt?'on':''}"><span class="fti">${fI(ic)}${x===pt?t:''}</span></button>`).join('')}</div>${L.sort((a,b)=>b.ts-a.ts).map(fPost).join('')||(own&&pt===0&&sug.length?`<div class="fsec"><h4 style="font-size:19px">关注谁</h4><div class="fsugs">${sug.map(c=>`<div class="fsug"><div class="fsb" ${fBg((c.background||''))}></div><div class="fsa" data-act="prof" data-k="c" data-i="${c.id}">${fAv(c)}</div><button class="fbtn f" data-act="follow" data-i="${c.id}">关注</button><b>${esc(c.name)}</b><div class="fmu">@${esc(c.handle||c.id)}</div><p class="fmu">${esc(c.bio||'')}</p></div>`).join('')}</div></div>`:'<p class="fsec fmu">暂无内容</p>')}</div>`};
-const fEdit=()=>{const d=fn.draft;return fHd(`<button data-act="back" style="font-size:15px">取消</button>`,'编辑个人资料',`<button class="fbtn f" data-act="saveprof">保存</button>`)+`<div class="fmain"><div class="fbanw"><div class="fban" ${fBg(d.banner)}></div><button class="fcam fcir" data-act="ebanner">${fI('cam')}</button></div><div class="fpf"><div style="position:relative;width:80px;height:80px;margin-top:-40px"><style>.fpf>div>.fav{margin-top:0!important}</style>${fAv(d)}<button class="fcam fcir" data-act="eavatar">${fI('cam')}</button></div><label class="fl">名称</label><input class="fin" id="fen" value="${esc(d.name)}"><label class="fl">账号</label><input class="fin" id="feh" value="${esc(d.handle)}"><label class="fl">简介</label><textarea class="fin" id="feb" rows="4" placeholder="这里是论坛简介，不是人物设定">${esc(d.bio)}</textarea></div></div>`};
-const fCap=()=>{const g=s=>(fr.querySelector(s)||{}).value;if(fn.draft&&g('#fen')!==undefined){fn.draft.name=g('#fen');fn.draft.handle=g('#feh');fn.draft.bio=g('#feb')}};
-const fList=t=>{const L=(t==='following'?F.follows:F.fol).map(id=>P(id)).filter(Boolean);return fHd(fBack,t==='following'?'关注中':'追踪者')+`<div class="fmain">${L.map(c=>`<div class="frow" data-act="prof" data-k="c" data-i="${c.id}">${fAv(c)}<div><b>${esc(c.name)}</b><p>@${esc(c.handle||c.id)}</p></div></div>`).join('')||'<p class="fsec fmu">还没有</p>'}</div>`};
-const fSr=(pe,ps)=>pe.map(c=>`<div class="frow" data-act="prof" data-k="c" data-i="${c.id}">${fAv(c)}<div><b>${esc(c.name)}</b><p>@${esc(c.handle||c.id)}</p></div></div>`).join('')+ps.map(fPost).join('');
-const fFind=q=>{q=q.trim().toLowerCase();return q?fSr(fChars().filter(c=>(c.name+(c.handle||'')).toLowerCase().includes(q)),F.posts.filter(p=>p.t.toLowerCase().includes(q))):''};
-const fSearch=()=>fHd('','搜索')+`<input class="fin" id="fq" placeholder="搜索帖子或角色" value="${esc(fn.q)}"><div class="fmain" id="fsr">${fFind(fn.q)}</div>`;
-const fNotif=()=>fHd(`<button data-act="drawer" style="padding:0">${fAv(fWho(fMe()))}</button>`,'通知')+`<div class="fmain">${F.notifs.map(n=>`<div class="frow" data-act="nt" data-id="${n.id}" style="align-items:flex-start"><span class="fstar">${fI('star',1)}</span>${fAv(fWho(n.a))}<div><b>${esc(fWho(n.a).name)}</b> <span class="fmu">· ${fAgo(n.ts)}</span><p style="white-space:normal">${esc(n.t)}</p></div></div>`).join('')||'<p class="fsec fmu">暂无通知</p>'}</div>`;
-const fLast=i=>(F.dms[i]||[]).at(-1),fUnread=i=>{const l=fLast(i);return !!(l&&!l.me&&l.ts>(F.dmr[i]||0))},fUnN=()=>Object.keys(F.dms).filter(i=>P(i)&&fUnread(i)).length;
-const fDmRows=q=>{q=(q||'').trim().toLowerCase();return Object.keys(F.dms).filter(i=>F.dms[i].length&&P(i)).map(i=>({i,l:fLast(i)})).filter(({i,l})=>(fn.dmf!=='unread'||fUnread(i))&&(!q||(P(i).name+l.t).toLowerCase().includes(q))).sort((a,b)=>b.l.ts-a.l.ts).map(({i,l})=>`<div class="fdmr" data-act="dm" data-i="${i}">${fAv(P(i))}<div class="fdmx"><div class="fdmt"><b class="${fUnread(i)?'':'rd'}">${esc(P(i).name)}</b><span>${fRel(l.ts)}</span></div><p>${esc(l.t)}</p></div>${fUnread(i)?'<i class="fdot"></i>':''}</div>`).join('')||`<p class="fsec fmu" style="text-align:center;padding:48px 24px">${q||fn.dmf==='unread'?'没有符合条件的私信':'还没有私信。点右下角发起，或进入角色主页点私信。'}</p>`};
-const fDmList=()=>`<div class="fhd3"><button data-act="drawer" style="padding:0">${fAv(fWho(fMe()))}</button><b>聊天</b><button class="fpill" data-act="dmf">${fn.dmf==='unread'?'未读':'全部'}${fI('chev')}</button></div><div class="fsrch">${fI('search')}<input id="fdq" placeholder="搜索"></div><div class="fmain" id="fdl">${fDmRows('')}</div><button class="ffab" data-act="newdm">${fI('newdm')}</button>`;
-const fNew=()=>fHd(fBack,'新私信')+`<div class="fmain">${fChars().map(c=>`<div class="frow" data-act="dm" data-i="${c.id}">${fAv(c)}<div><b>${esc(c.name)}</b><p>@${esc(c.handle||c.id)}</p></div></div>`).join('')||'<p class="fsec fmu">没有联系人</p>'}</div>`;
-const fSplit=t=>String(t).split(/\n+/).map(s=>s.trim()).filter(Boolean);
-const fStamp=t=>{const d=new Date(t),h=d.getHours();return `${d.getMonth()+1}月${d.getDate()}日周${'日一二三四五六'[d.getDay()]} ${h<12?'上午':'下午'}${h%12||12}:${String(d.getMinutes()).padStart(2,'0')}`};
-const fDm=i=>{const c=P(i)||{name:'',handle:''},h=F.dms[i]||[],bl=F.blocked.includes(i);let o='',pv=null;
- h.forEach((x,idx)=>{const gap=!pv||x.ts-pv.ts>36e5;if(gap)o+=`<div class="fts">${fStamp(x.ts)}</div>`;o+=`<div class="fbub ${x.me?'me':''}${gap||!!pv.me!==!!x.me?' g':''}" data-bi="${idx}" data-i="${i}">${x.q?`<div class="fqb"><b>${esc(x.q.n)}</b>${esc(x.q.t)}</div>`:''}${esc(x.t)}</div>`;pv=x});
- const chip=fn.edit&&fn.edit.i===i?`<div class="fqc"><div><b>编辑消息</b><span>${esc((h[fn.edit.idx]||{}).t||'')}</span></div><button data-act="qx">${fI('x')}</button></div>`:fn.quote&&fn.quote.i===i?`<div class="fqc"><div><b>引用 ${esc(fn.quote.n)}</b><span>${esc(fn.quote.t)}</span></div><button data-act="qx">${fI('x')}</button></div>`:'';
- return `<div class="fhd2 fdh2"><button data-act="back">${fI('back')}</button><div class="fdn" data-act="prof" data-k="c" data-i="${i}">${fAv(c)}<b>${esc(c.name)}</b></div><button data-act="dmcall">${fI('phone')}</button><button data-act="dmcall">${fI('video')}</button></div><div class="fmain" id="fdmb" style="display:flex;flex-direction:column;padding:6px 0 10px">${o}${fn.typing===i?'<div class="fbub g"><span class="fty">• • •</span></div>':''}</div>`+(bl?`<div class="fblk"><span>你已拉黑该用户，无法收发消息</span><button class="fbtn" data-act="unblock" data-i="${i}">解除拉黑</button></div>`:chip+`<div class="fdbar"><button class="fplus" data-act="dmplus">${fI('plus')}</button><div class="fpl2"><input id="fdi" placeholder="消息" autocomplete="off"><button id="fdb" data-act="dmmic" data-i="${i}">${fI('mic')}</button></div></div>`)};
-const fBlkToggle=i=>{F.blocked=F.blocked.includes(i)?F.blocked.filter(x=>x!==i):[...F.blocked,i];fSave();fR();toast(F.blocked.includes(i)?'已拉黑':'已解除拉黑')};
-function fBubMenu(i,idx){const x=(F.dms[i]||[])[idx];if(!x)return;const bl=F.blocked.includes(i),c=P(i)||{name:''};
- showMsgMenu([[{label:'引用',icon:'quote',run:()=>{fn.edit=null;fn.quote={i,n:x.me?fWho(fMe()).name:c.name,t:String(x.t).slice(0,60)};fR();const e=fr.querySelector('#fdi');e&&e.focus()}},{label:'编辑',icon:'edit',run:()=>{fn.quote=null;fn.edit={i,idx};fR();const e=fr.querySelector('#fdi');if(e){e.value=x.t;e.focus();fSyncDm()}}},{label:bl?'解除拉黑':'拉黑',icon:'block',run:()=>fBlkToggle(i)}],[{label:'删除',icon:'trash',danger:1,run:()=>{F.dms[i].splice(idx,1);fSave();fR()}}]])}
-let flp=null,flx=0,fly=0;
-fr.addEventListener('pointerdown',e=>{const b=e.target.closest('.fbub[data-bi]');if(!b)return;clearTimeout(flp);flx=e.clientX;fly=e.clientY;flp=setTimeout(()=>{flp=null;fBubMenu(b.dataset.i,+b.dataset.bi)},450)});
-['pointerup','pointercancel'].forEach(ev=>fr.addEventListener(ev,()=>clearTimeout(flp)));
-fr.addEventListener('pointermove',e=>{if(flp&&Math.hypot(e.clientX-flx,e.clientY-fly)>10)clearTimeout(flp)});
-fr.addEventListener('contextmenu',e=>{const b=e.target.closest('.fbub[data-bi]');if(b){e.preventDefault();clearTimeout(flp);fBubMenu(b.dataset.i,+b.dataset.bi)}});
-function fSyncDm(){const e=fr.querySelector('#fdi'),b=fr.querySelector('#fdb');if(!e||!b)return;const on=!!e.value.trim();b.dataset.act=on?'dmsend':'dmmic';b.innerHTML=on?fI('plane'):fI('mic');b.classList.toggle('snd',on)}
-const fEns=c=>{c.likes=c.likes??rnd(30);c.rts=c.rts??0;c.v=c.v??(c.likes*(12+rnd(20))+rnd(200)+20);return c};
-const fCm=(p,c,x)=>{const w=fWho(c.a);return `<article class="fpost fcm" data-id="${p.id}" data-ci="${x}">${fAv(w,c.a.k==='n'?'':`data-act="prof" data-k="${c.a.k}" data-i="${c.a.id}"`)}<div class="fpb"><div class="fph"><div class="fhn"><b>${esc(w.name)}</b><span>@${esc(w.handle)}</span><span>· ${fAgo(c.ts)}</span></div><span class="fgk">${fI('grok')}</span><button data-act="cmenu">${fI('dots')}</button></div><div class="fpt">${fTxt(c.t)}</div><div class="fpa"><button>${fI('cmt')}</button><button>${fI('rt')}<i>${c.rts||''}</i></button><button data-act="clike" class="${c.lk?'lk':''}">${fI('heart',c.lk)}<i>${(c.likes+(c.lk?1:0))||''}</i></button><button>${fI('views')}<i>${fmt(c.v)}</i></button><span class="fpr"><button data-act="cmark" class="${c.mk?'mk':''}">${fI('mark',c.mk)}</button><button>${fI('up')}</button></span></div></div></article>`};
-const fPostV=id=>{const p=F.posts.find(x=>x.id===id);if(!p)return fHd(fBack,'贴文');
- const w=fWho(p.a),l=F.likes.includes(id),mk=F.marks.includes(id),r=F.rts.includes(id),d=new Date(p.ts),h=d.getHours(),fo=F.follows.includes(p.a.id);
- if(p.mkn==null)p.mkn=Math.floor((p.likes||0)/(5+rnd(10)));
- const L=p.cm.map((c,x)=>({c:fEns(c),x})).sort((a,b)=>fn.csort==='new'?b.c.ts-a.c.ts:(b.c.likes||0)-(a.c.likes||0));
- return `<div class="fhd2 fdhd" data-id="${id}"><button data-act="back">${fI('back')}</button><b>贴文</b><button data-act="pmenu">${fI('dots')}</button></div><div class="fmain" data-id="${id}"><div class="fda"><div class="fdau">${fAv(w,`data-act="prof" data-k="${p.a.k}" data-i="${p.a.id}"`)}<div><div class="fdnm"><b>${esc(w.name)}</b>${BADGE}</div><div class="fmu">@${esc(w.handle)}</div></div></div>${p.a.k==='c'?`<button class="fbtn f" data-act="follow" data-i="${p.a.id}">${fo?'正在跟随':'跟随'}</button>`:''}</div><div class="fdt2">${fTxt(p.t)}</div><div class="fmu fdm">${h<12?'上午':'下午'}${h%12||12}:${String(d.getMinutes()).padStart(2,'0')} · ${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()} · <b>${fmt(fV(p))}</b> 次查看</div><div class="fdcn"><span>${fI('cmt')}${p.cm.length||''}</span><button data-act="rpt" class="${r?'rt':''}">${fI('rt')}${(p.rts||0)+(r?1:0)||''}</button><button data-act="like" class="${l?'lk':''}">${fI('heart',l)}${(p.likes||0)+(l?1:0)||''}</button><button data-act="mark" class="${mk?'mk':''}">${fI('mark',mk)}${(p.mkn||0)+(mk?1:0)||''}</button><button data-act="rt">${fI('up')}</button></div><div class="fdrl"><button data-act="csort">${fn.csort==='new'?'最新':'相关'}${fI('chev')}</button><button data-act="cquote">查看引用 ›</button></div>${fn.pgen===id?'<p class="fsec fmu" style="text-align:center"><i class="fspin" style="border-color:var(--sub);border-top-color:transparent"></i> 正在生成评论…</p>':''}${L.map(({c,x})=>fCm(p,c,x)).join('')}</div><div class="fcrw"><div class="fcr"><input id="fci" placeholder="发布你的回复" autocomplete="off"><button data-act="cmsend" data-id="${id}">${fI('plane')}</button></div></div>`};
-const fOpenPost=p=>{fPush({k:'post',id:p.id});if(!p.pc)fPass(p)};
-async function fPass(p){if(p.pc||fn.pgen)return;p.pc=1;fn.pgen=p.id;fR();const n=F.pcn||6;
- try{const r=await ask([{role:'system',content:fCtx()+`\n你在模拟论坛评论区。为下面这条帖子生成${n}条路人网友评论：口吻像真实社交平台网友，可口语、玩梗、附和、抬杠、跑题，立场与长短各异，符合论坛世界观和内容向。网名name随意（中英文/符号/颜文字均可），账号handle为英文数字下划线。仅输出JSON数组：[{"name":"","handle":"","text":"","minutesAgo":5,"likes":0}]`},{role:'user',content:`发帖人：${fWho(p.a).name}\n帖子：${p.t}`}]);
-  const j=fJ(r);if(!Array.isArray(j)){p.pc=0;toast('评论解析失败，重新打开帖子可重试');return}
-  j.forEach(c=>{if(!c||!c.text)return;const hh=String(c.handle||c.name||fid());let hu=0;for(const ch of hh)hu=(hu*31+ch.charCodeAt(0))%360;const lk=Math.max(0,+c.likes||0);p.cm.push({a:{k:'n',name:String(c.name||'路人').slice(0,20),handle:hh.replace(/[^\w]/g,'').slice(0,16)||'user'+rnd(9999),hue:hu},t:String(c.text),ts:Date.now()-(Math.max(2,+c.minutesAgo||30))*6e4,likes:lk,rts:rnd(Math.floor(lk/12)+1),v:lk*(10+rnd(20))+rnd(300)})});fSave()}
- catch(e){p.pc=0;toast('评论生成失败：'+e.message)}finally{fn.pgen=null;fR()}}
-const fCompose=()=>fHd(fBack,'发帖',`<button class="fbtn f" data-act="post">发布</button>`)+`<textarea class="fin" id="fct" rows="8" placeholder="有什么新鲜事？"></textarea>`;
-const fShare=id=>fHd(fBack,'转发到聊天')+`<div class="fmain">${fChars().map(c=>`<div class="frow" data-act="shsend" data-id="${id}" data-i="${c.id}">${fAv(c)}<b>${esc(c.name)}</b></div>`).join('')||'<p class="fsec fmu">没有联系人</p>'}</div>`;
-const fSeg=(act,cur,o)=>`<div class="fseg">${o.map(([v,t])=>`<button data-act="${act}" data-v="${v}" class="${String(cur)===String(v)?'on':''}">${t}</button>`).join('')}</div>`;
-const fSet=()=>fHd(fBack,'论坛设置')+`<div class="fmain fsetm"><h4 class="fsh">发帖角色</h4>${fChars().map(c=>`<div class="fsrow" data-act="poster" data-i="${c.id}">${fAv(c)}<div><b>${esc(c.name)}</b><p>@${esc(c.handle||c.id)}</p></div><i class="fsw ${F.posters.includes(c.id)?'on':''}"></i></div>`).join('')||'<p class="fsec fmu">还没有联系人</p>'}
-<h4 class="fsh">内容向</h4><div class="fsec">${fSeg('mode',F.mode,[['daily','日常向'],['adult','成人向']])}</div>
-<h4 class="fsh">论坛世界观</h4><div class="fsrow" data-act="world" data-v=""><div><b>现实</b><p>现实世界的社交平台</p></div><i class="frd ${!F.world?'on':''}"></i></div>${S.fm.worlds.map(w=>`<div class="fsrow" data-act="world" data-v="${w.id}"><div><b>${esc(w.name)}</b><p>${esc((w.desc||'').slice(0,40))}</p></div><button class="fdel" data-act="wdel" data-v="${w.id}">删除</button><i class="frd ${F.world===w.id?'on':''}"></i></div>`).join('')}
-${fn.wnew?`<div class="fsec"><input class="fin" id="fwn" placeholder="世界观名称"><textarea class="fin" id="fwd" rows="4" placeholder="背景、论坛氛围、常见话题"></textarea><div class="f2" style="margin-top:10px"><button class="fbtn" data-act="wnewopen">取消</button><button class="fbtn f" data-act="wnew">创建并使用</button></div></div>`:`<div class="fsrow" data-act="wnewopen"><div><b>＋ 新建世界观</b></div></div>`}
-<h4 class="fsh">每个角色发帖</h4><div class="fsec">${fSeg('gn',F.gn||2,[[1,'1 条'],[2,'2 条'],[3,'3 条']])}</div>
-<h4 class="fsh">每帖路人评论</h4><div class="fsec">${fSeg('pcn',F.pcn||6,[[4,'4 条'],[6,'6 条'],[10,'10 条']])}</div><div style="height:90px"></div></div><div class="fgbar"><button class="fbtn f" data-act="gen" ${fn.gening?'disabled':''}>${fn.gening?'<i class="fspin"></i>生成中…':'开始生成'}</button></div>`;
-const fDrawer=()=>{const w=fWho(fMe());return `<div class="fdr"><div>${fAv(w)}<b style="margin-top:8px;font-size:19px">${esc(w.name)}</b><span class="fmu">@${esc(w.handle)}</span><span style="margin:8px 0 18px"><b>${F.follows.length}</b> <span class="fmu">跟随中</span></span><button data-act="myprof">${fI('me')}个人档案</button><button data-act="myprof" data-v="3">${fI('mark')}历史记录</button><button data-act="settings">${fI('gear')}论坛设置</button><button data-act="exit">${fI('out')}返回手机</button></div><i data-act="closedr"></i></div>`};
-function fR(){const sc=[...fr.querySelectorAll('.fmain')].map(e=>e.scrollTop),kv={};['fdi','fci','fct','fwn','fwd'].forEach(d=>{const e=fr.querySelector('#'+d);if(e)kv[d]=e.value});
- const s=fn.sub.at(-1),t=fn.tab,key=t+'|'+fn.feed+'|'+fn.sub.map(x=>x.k+(x.id||'')).join('/');let pg='';
- if(s)pg=`<div class="fpage${s.k==='post'?' nn':''}">${s.k==='prof'?fProf(s.who.k,s.who.id):s.k==='post'?fPostV(s.id):s.k==='dm'?fDm(s.id):s.k==='compose'?fCompose():s.k==='share'?fShare(s.id):s.k==='edit'?fEdit():s.k==='newdm'?fNew():s.k==='list'?fList(s.t):fSet()}</div>`;
- const main=t==='home'?fFeed():t==='search'?fSearch():t==='me'?fProf('u',fU().id):t==='notif'?fNotif():fDmList();
- const un=fUnN();fr.innerHTML=main+`<div class="fnav">${[['home','home'],['search','search'],['me','me'],['notif','bell'],['dm','cmt']].map(([k,i])=>`<button data-act="tab" data-v="${k}" class="${t===k?'on':''}">${fI(i,t===k&&k!=='search')}${k==='notif'&&F.unread?`<span class="fbd">${F.unread}</span>`:''}${k==='dm'&&un?`<span class="fbd">${un}</span>`:''}</button>`).join('')}</div>`+pg+(fn.dr?fDrawer():'');
- if(key===fn.key)[...fr.querySelectorAll('.fmain')].forEach((e,x)=>{if(sc[x]!=null)e.scrollTop=sc[x]});fn.key=key;
- Object.keys(kv).forEach(d=>{const e=fr.querySelector('#'+d);if(e&&kv[d])e.value=kv[d]});const nv=fr.querySelector('.fnav');if(nv)fr.style.setProperty('--fnh',nv.offsetHeight+'px');fSyncDm();const b=$('#fdmb');if(b)b.scrollTop=1e9}
-function fmRender(){fLoad();fn.sub=[];fn.dr=0;fR()}
-const fPush=s=>{fn.sub.push(s);fn.dr=0;fR()};
-async function fGen(){if(fn.gening)return;const ch=fChars().filter(c=>F.posters.includes(c.id)&&!F.blocked.includes(c.id));if(!ch.length)return toast('先选择发帖角色（已拉黑的角色不会发帖）');fn.gening=1;fR();
- try{const r=await ask([{role:'system',content:fCtx()+`\n你在模拟一个论坛，为下列角色各生成${F.gn||2}条符合人设的帖子，并可让其中一个角色给用户发一条私信。仅输出JSON：{"posts":[{"id":"角色id","text":"..."}],"dms":[{"id":"角色id","text":"..."}]}`},{role:'user',content:ch.map(c=>`${c.id}｜${c.name}｜${(c.prompt||'').slice(0,300)}`).join('\n')+`\n用户：${fU().name}｜${fU().bio||''}`}]);
-  const j=fJ(r);if(!j){toast('解析失败，再试一次');return}let n=0;
-  (j.posts||[]).forEach(p=>{if(P(p.id)){F.posts.push({id:fid(),a:{k:'c',id:p.id},t:p.text,ts:Date.now()-rnd(36e5),likes:rnd(300),cm:[]});n++}});
-  (j.dms||[]).forEach(d=>{if(!P(d.id)||F.blocked.includes(d.id))return;fSplit(d.text).forEach((s,j)=>(F.dms[d.id]=F.dms[d.id]||[]).push({t:s,ts:Date.now()+j}));F.notifs.unshift({id:fid(),a:{k:'c',id:d.id},t:'给你发来一条私信：'+d.text,ts:Date.now(),dm:d.id});F.unread++});
-  fSave();fn.sub=[];fn.tab='home';fn.feed='all';toast('已生成 '+n+' 条帖子')}
- catch(e){toast('生成失败：'+e.message)}finally{fn.gening=0;fR()}}
-async function fReact(p){const ch=fChars().filter(c=>F.follows.includes(c.id)&&!F.blocked.includes(c.id)).slice(0,2);if(!ch.length)return;
- try{const r=await ask([{role:'system',content:fCtx()+'\n用户发了一条帖子，请让下列角色各自按人设评论。仅输出JSON数组：[{"id":"角色id","text":"..."}]'},{role:'user',content:ch.map(c=>`${c.id}｜${c.name}｜${(c.prompt||'').slice(0,300)}`).join('\n')+'\n帖子：'+p.t}]);
- const j=fJ(r);if(!Array.isArray(j))return;j.forEach(c=>{if(!P(c.id))return;p.cm.push({a:{k:'c',id:c.id},t:c.text,ts:Date.now()});F.notifs.unshift({id:fid(),a:{k:'c',id:c.id},t:'评论了你的帖子：'+c.text,ts:Date.now(),post:p.id});F.unread++});fSave();fR()}catch(e){}}
+/* ===== 共读 App (cr) ===== */
 function fmCardHTML(c){return `<div class="fcard"><small>论坛帖文</small><div><b>${esc(c.name)}</b> <span>@${esc(c.handle)}</span></div><div class="fct">${esc(c.text)}</div></div>`}
-document.addEventListener('input',e=>{if(e.target.id==='fdi')fSyncDm();if(e.target.id==='fq'){fn.q=e.target.value;$('#fsr').innerHTML=fFind(fn.q)}if(e.target.id==='fdq')$('#fdl').innerHTML=fDmRows(e.target.value)});
-document.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.isComposing&&(e.target.id==='fdi'||e.target.id==='fci')){e.preventDefault();const b=fr.querySelector('[data-act='+(e.target.id==='fdi'?'dmsend':'cmsend')+']');b&&b.click()}});
-let fTx=0,fTy=0;fr.addEventListener('touchstart',e=>{fTx=e.touches[0].clientX;fTy=e.touches[0].clientY},{passive:true});
-fr.addEventListener('touchend',e=>{if(fn.tab!=='home'||fn.sub.length||fn.dr||!e.target.closest('#ffeed'))return;const dx=e.changedTouches[0].clientX-fTx,dy=e.changedTouches[0].clientY-fTy;if(Math.abs(dx)>70&&Math.abs(dy)<45){const f=dx<0?'follow':'all';if(f!==fn.feed){fn.feed=f;fR()}}},{passive:true});
-fr.addEventListener('click',async e=>{const b=e.target.closest('[data-act]');if(!b)return;const a=b.dataset.act,v=b.dataset.v,i=b.dataset.i,pe=b.closest('[data-id]'),id=(pe||b).dataset.id,p=F.posts.find(x=>x.id===id),val=s=>(fr.querySelector(s)||{}).value||'';
- if(a==='tab'){fn.tab=v;fn.sub=[];if(v==='notif'){F.unread=0;fSave()}fR()}
- else if(a==='drawer'){fn.dr=1;fR()}else if(a==='closedr'){fn.dr=0;fR()}else if(a==='exit'){fn.dr=0;back()}
- else if(a==='myprof'){fn.dr=0;fn.pt=+v||0;fn.tab='me';fn.sub=[];fR()}
- else if(a==='feed'){fn.feed=v;fR()}else if(a==='ptab'){fn.pt=+v;fR()}
- else if(a==='settings')fPush({k:'set'});else if(a==='compose')fPush({k:'compose'});
- else if(a==='back'){fn.quote=fn.edit=null;fn.sub.pop();fR()}else if(a==='prof')fPush({k:'prof',who:{k:b.dataset.k,id:i}});
- else if(a==='open'&&p)fOpenPost(p);else if(a==='rt'&&p)fPush({k:'share',id:p.id});
- else if(a==='like'&&p){F.likes=F.likes.includes(id)?F.likes.filter(x=>x!==id):[...F.likes,id];fSave();fR()}
- else if(a==='mark'&&p){F.marks=F.marks.includes(id)?F.marks.filter(x=>x!==id):[...F.marks,id];fSave();fR()}
- else if(a==='del'&&p){if(confirm('删除这条帖子？')){F.posts=F.posts.filter(x=>x.id!==id);fSave();fR()}}
- else if(a==='follow'){F.follows=F.follows.includes(i)?F.follows.filter(x=>x!==i):[...F.follows,i];fSave();fR()}
- else if(a==='post'){const t=val('#fct').trim();if(!t)return;const np={id:fid(),a:fMe(),t,ts:Date.now(),likes:0,cm:[]};F.posts.push(np);fSave();fn.sub=[];fn.tab='home';fR();fReact(np)}
- else if(a==='cmsend'){const t=val('#fci').trim();if(!t||!p)return;fr.querySelector('#fci').value='';p.cm.push({a:fMe(),t,ts:Date.now()});fSave();fR();
-  if(p.a.k==='c'&&P(p.a.id)){try{const r=await ask([{role:'system',content:fSys(P(p.a.id))+'\n只输出你对这条评论的回复。'},{role:'user',content:`你的帖子：${p.t}\n用户评论：${t}`}]);p.cm.push({a:p.a,t:r,ts:Date.now()});fSave();fR()}catch(e){toast(e.message)}}}
- else if(a==='dm'){F.dms[i]=F.dms[i]||[];F.dmr[i]=Date.now();fSave();if(fn.sub.at(-1)&&fn.sub.at(-1).k==='newdm')fn.sub.pop();fPush({k:'dm',id:i})}
- else if(a==='pmenu'&&p)showFeedSheet([{label:'删除帖子',run:()=>{if(confirm('删除这条帖子？')){F.posts=F.posts.filter(x=>x.id!==id);fSave();fR()}}},{label:'取消',run:()=>{}}])
- else if(a==='rpt'&&p){F.rts=F.rts.includes(id)?F.rts.filter(x=>x!==id):[...F.rts,id];fSave();fR()}
- else if(a==='dmf')showFeedSheet([{label:'全部',run:()=>{fn.dmf='';fR()}},{label:'未读',run:()=>{fn.dmf='unread';fR()}},{label:'取消',run:()=>{}}])
- else if(a==='newdm')fPush({k:'newdm'})
- else if(a==='dmsend'){const el=fr.querySelector('#fdi'),t=(el&&el.value||'').trim();if(!t||F.blocked.includes(i))return;el.value='';
-  if(fn.edit&&fn.edit.i===i){const x=F.dms[i][fn.edit.idx];if(x)x.t=t;fn.edit=null;fSave();fR();return}
-  const q=fn.quote&&fn.quote.i===i?{n:fn.quote.n,t:fn.quote.t}:null;fn.quote=null;
-  F.dms[i].push(Object.assign({me:1,t,ts:Date.now()},q?{q}:{}));F.dmr[i]=Date.now();fn.typing=i;fSave();fR();const c=P(i);
-  try{const r=await ask([{role:'system',content:fSys(c)+'\n你在论坛私信里与用户像真人一样聊天：把回复拆成2到5条简短消息，每条单独占一行，不要序号、引号或旁白。'},{role:'user',content:F.dms[i].slice(-16).map(x=>(x.me?'用户：':c.name+'：')+(x.q?`（引用「${x.q.t}」）`:'')+x.t).join('\n')}]);
-   const parts=fSplit(r).slice(0,8);for(let k=0;k<parts.length;k++){if(F.blocked.includes(i))break;if(k)await new Promise(z=>setTimeout(z,450+Math.min(parts[k].length*35,1200)));F.dms[i].push({t:parts[k],ts:Date.now()});F.dmr[i]=Date.now();fn.typing=k<parts.length-1?i:null;fSave();fR()}}
-  catch(e){toast(e.message)}fn.typing=null;fSave();fR()}
- else if(a==='qx'){fn.quote=fn.edit=null;fR()}
- else if(a==='unblock')fBlkToggle(i)
- else if(a==='pmore'){const bl=F.blocked.includes(i);showFeedSheet([{label:bl?'解除拉黑':'拉黑',run:()=>fBlkToggle(i)},{label:'取消',run:()=>{}}])}
- else if(a==='shsend'&&(p||id==='__me')){const w=fWho(p?p.a:fMe()),tx=p?p.t:(w.bio||'论坛个人主页'),h=S.chats[i]=S.chats[i]||[];h.push({role:'user',content:p?`[用户转发了论坛帖子 @${w.handle}：${tx}]`:`[用户分享了自己的论坛个人主页 @${w.handle}：${tx}]`,fcard:{name:w.name,handle:w.handle,text:tx},t:Date.now()});save();fn.sub.pop();fR();toast('已转发到聊天')}
- else if(a==='nt'){const n=F.notifs.find(x=>x.id===id);n.dm?fPush({k:'dm',id:n.dm}):n.post&&F.posts.find(x=>x.id===n.post)&&fOpenPost(F.posts.find(x=>x.id===n.post))}
- else if(a==='poster'){F.posters=F.posters.includes(i)?F.posters.filter(x=>x!==i):[...F.posters,i];fSave();fR()}
- else if(a==='mode'){F.mode=v;fSave();fR()}else if(a==='world'){F.world=v;fSave();fR()}
- else if(a==='wnew'){const n=val('#fwn').trim();if(!n)return;const w={id:fid(),name:n,desc:val('#fwd').trim()};S.fm.worlds.push(w);F.world=w.id;fSave();fR()}
- else if(a==='editprof'){const w=fWho(fMe());fn.draft={name:w.name,handle:w.handle,bio:w.bio,avatar:w.avatar,banner:w.banner};fPush({k:'edit'})}
- else if(a==='eavatar'){fCap();pick(u=>{fn.draft.avatar=u;fR()})}
- else if(a==='ebanner'){fCap();showFeedSheet([{label:'更换背景图',run:()=>pickImage(async s=>{fn.draft.banner=await fComp(s);fR()})},{label:'移除背景图',run:()=>{fn.draft.banner='';fR()}},{label:'取消',run:()=>{}}])}
- else if(a==='saveprof'){fCap();F.pf=Object.assign({},fn.draft);fSave();fn.sub.pop();fR();toast('已保存')}
- else if(a==='list')fPush({k:'list',t:v});else if(a==='shareprof')fPush({k:'share',id:'__me'})
- else if(a==='gen')fGen()
- else if(a==='wnewopen'){fn.wnew=!fn.wnew;fR()}
- else if(a==='wdel'){if(confirm('删除这个世界观？')){S.fm.worlds=S.fm.worlds.filter(x=>x.id!==v);Object.values(S.fm.by).forEach(o=>{if(o.world===v)o.world=''});fSave();fR()}}
- else if(a==='gn'){F.gn=+v;fSave();fR()}else if(a==='pcn'){F.pcn=+v;fSave();fR()}
- else if(a==='csort')showFeedSheet([{label:'相关',run:()=>{fn.csort='rel';fR()}},{label:'最新',run:()=>{fn.csort='new';fR()}},{label:'取消',run:()=>{}}])
- else if(a==='cquote')toast('暂无引用')
- else if(a==='clike'&&p){const c=p.cm[+(pe||b).dataset.ci];if(c){c.lk=!c.lk;fSave();fR()}}
- else if(a==='cmark'&&p){const c=p.cm[+(pe||b).dataset.ci];if(c){c.mk=!c.mk;fSave();fR()}}
- else if(a==='cmenu'&&p){const x=+(pe||b).dataset.ci;showFeedSheet([{label:'删除评论',run:()=>{p.cm.splice(x,1);fSave();fR()}},{label:'取消',run:()=>{}}])}
- else if(a==='dmcall')toast('论坛私信暂不支持通话')
- else if(a==='dmplus')toast('暂不支持发送附件')
- else if(a==='dmmic')toast('暂不支持语音消息')
-});
+const CRQ={q:'',open:0,edit:0};
+let CRR=null;
+const CRC=new Map();
+const CRI={
+ back:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>',
+ chev:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>',
+ home:'<svg width="27" height="27" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.1 3 10.4V20a1 1 0 0 0 1 1h5v-6h6v6h5a1 1 0 0 0 1-1v-9.6z"/></svg>',
+ books:'<svg width="27" height="27" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="4" width="4" height="16" rx="1"/><rect x="8.5" y="4" width="4" height="16" rx="1"/><path d="M15 6.4l3.7-1.2 3.3 13.4-3.7 1z"/></svg>',
+ search:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>',
+ dots:'<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>',
+ lines:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h12M4 17h8"/></svg>',
+ plus:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
+ check:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>'};
+const crDay=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+const crToday=()=>S.coread.daily[crDay()]||0;
+const crFmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+const crBook=id=>S.coread.books.find(x=>x.id===id);
+async function crPut(id,obj){const db=await __openStoreDB();await new Promise((res,rej)=>{const tx=db.transaction('state','readwrite');tx.objectStore('state').put(JSON.stringify(obj),'book:'+id);tx.oncomplete=()=>res();tx.onerror=()=>rej(tx.error||new Error('写入失败'));tx.onabort=()=>rej(tx.error||new Error('写入中断'))});db.close();CRC.set(id,obj)}
+async function crGet(id){if(CRC.has(id))return CRC.get(id);const db=await __openStoreDB();const v=await new Promise((res,rej)=>{const tx=db.transaction('state','readonly');const r=tx.objectStore('state').get('book:'+id);r.onsuccess=()=>res(r.result||null);r.onerror=()=>rej(r.error)});db.close();let o=null;try{o=v?JSON.parse(v):null}catch(_){}if(o)CRC.set(id,o);return o}
+async function crDelData(id){try{const db=await __openStoreDB();await new Promise((res,rej)=>{const tx=db.transaction('state','readwrite');tx.objectStore('state').delete('book:'+id);tx.oncomplete=()=>res();tx.onerror=()=>rej(tx.error);tx.onabort=()=>rej(tx.error)});db.close()}catch(_){}CRC.delete(id)}
+function crThumb(blob,w){return new Promise(res=>{const u=URL.createObjectURL(blob),im=new Image();im.onload=()=>{const k=Math.min(1,(w||420)/im.width),c=document.createElement('canvas');c.width=Math.max(1,Math.round(im.width*k));c.height=Math.max(1,Math.round(im.height*k));c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);res(c.toDataURL('image/jpeg',.82))};im.onerror=()=>{URL.revokeObjectURL(u);res('')};im.src=u})}
+function crCover(b){return`<div class="cr-cv">${b.cover?`<img src="${esc(b.cover)}" alt="">`:`<div class="cr-gen" style="background:linear-gradient(160deg,hsl(${b.color||200},46%,44%),hsl(${((b.color||200)+35)%360},52%,28%))"><b>${esc(b.title)}</b><i>${esc(b.author)}</i></div>`}</div>`}
+const crResolve=(dir,href)=>{const out=[];for(const p of (dir+String(href||'').split('#')[0]).split('/')){if(p==='..')out.pop();else if(p!=='.'&&p!=='')out.push(p)}return out.join('/')};
+function crHtmlChapter(h){
+ const d=new DOMParser().parseFromString(h,'text/html'),b=d.body;if(!b)return{title:'',text:''};
+ b.querySelectorAll('script,style,svg,img,nav').forEach(x=>x.remove());
+ const hd=b.querySelector('h1,h2,h3'),title=hd?hd.textContent.replace(/\s+/g,' ').trim().slice(0,60):((d.title||'').trim().slice(0,60));
+ const w=d.createTreeWalker(b,NodeFilter.SHOW_TEXT),tn=[];while(w.nextNode())tn.push(w.currentNode);tn.forEach(n=>{n.nodeValue=n.nodeValue.replace(/\s+/g,' ')});
+ b.querySelectorAll('br').forEach(x=>x.replaceWith('\n'));
+ b.querySelectorAll('p,div,h1,h2,h3,h4,h5,h6,li,blockquote,tr,section,pre').forEach(x=>x.append('\n'));
+ const text=b.textContent.replace(/[ \u00a0]*\n[ \u00a0]*/g,'\n').replace(/\n+/g,'\n').trim();
+ return{title,text}}
+async function crParseEpub(ab){
+ const ents=zipEntries(ab),by=n=>ents.find(e=>e.name===n),rd=async n=>{const e=by(n);return e?new TextDecoder('utf-8').decode(await zipRead(ab,e)):''};
+ const cont=await rd('META-INF/container.xml'),opfPath=(cont.match(/full-path="([^"]+)"/)||[])[1];if(!opfPath)throw new Error('不是有效的 epub');
+ const opf=await rd(opfPath),dir=opfPath.includes('/')?opfPath.slice(0,opfPath.lastIndexOf('/')+1):'';
+ const man={};[...opf.matchAll(/<item\b[^>]*>/g)].forEach(m=>{const t=m[0],g=k=>(t.match(new RegExp('\\b'+k+'="([^"]*)"'))||[])[1]||'',id=g('id');if(id)man[id]={href:decodeURIComponent(g('href')),mt:g('media-type'),pr:g('properties')}});
+ const spine=[...opf.matchAll(/<itemref\b[^>]*idref="([^"]*)"/g)].map(m=>m[1]);
+ const meta=tag=>{const m=opf.match(new RegExp('<dc:'+tag+'[^>]*>([\\s\\S]*?)</dc:'+tag+'>','i'));return m?decodeEntities(m[1].replace(/<[^>]+>/g,'')).trim():''};
+ let cover='';const cid=(opf.match(/<meta[^>]*name="cover"[^>]*content="([^"]*)"/i)||opf.match(/<meta[^>]*content="([^"]*)"[^>]*name="cover"/i)||[])[1];
+ const cm=Object.values(man).find(x=>/cover-image/.test(x.pr))||(cid&&man[cid]);
+ if(cm&&/^image\//.test(cm.mt||'')){try{const e=by(crResolve(dir,cm.href));if(e)cover=await crThumb(new Blob([await zipRead(ab,e)],{type:cm.mt}))}catch(_){}}
+ const ch=[];
+ for(const id of spine){const it=man[id];if(!it||!/html|xml/.test(it.mt||''))continue;const e=by(crResolve(dir,it.href));if(!e)continue;
+  const r=crHtmlChapter(new TextDecoder('utf-8').decode(await zipRead(ab,e)));if(r.text&&r.text.length>=20)ch.push({t:r.title||'',c:r.text})}
+ return{title:meta('title'),author:meta('creator'),cover,ch}}
+function crSplit(text){
+ text=String(text||'').replace(/\r\n?/g,'\n').replace(/\u3000/g,' ').replace(/[ \t]+\n/g,'\n').trim();
+ const re=/^[ \t]*((?:第[0-9零〇一二三四五六七八九十百千两]+[章节回卷部集篇幕]|[Cc]hapter\s+[0-9IVXLC]+|CHAPTER\s+[0-9IVXLC]+|卷[0-9一二三四五六七八九十]+|序章|楔子|尾声|后记|番外)[^\n]{0,40})[ \t]*$/gm;
+ const hits=[...text.matchAll(re)].map(m=>({i:m.index,t:m[1].trim()}));
+ let ch=[];
+ if(hits.length>=3){if(hits[0].i>200)ch.push({t:'前言',c:text.slice(0,hits[0].i).trim()});hits.forEach((h,k)=>ch.push({t:h.t,c:text.slice(h.i,k+1<hits.length?hits[k+1].i:text.length).trim()}))}
+ else{const ps=text.split(/\n+/);let cur=[],len=0;ps.forEach(p=>{cur.push(p);len+=p.length;if(len>=7000){ch.push({t:'',c:cur.join('\n')});cur=[];len=0}});if(cur.length)ch.push({t:'',c:cur.join('\n')});ch.forEach((c,i)=>{c.t='第 '+(i+1)+' 部分'})}
+ const out=[];
+ ch.forEach(c=>{if(c.c.length<=30000){out.push(c);return}const ps=c.c.split(/\n+/),pieces=[];let cur=[],len=0;ps.forEach(p=>{cur.push(p);len+=p.length;if(len>=12000){pieces.push(cur.join('\n'));cur=[];len=0}});if(cur.length)pieces.push(cur.join('\n'));pieces.forEach((x,k)=>out.push({t:c.t+'（'+(k+1)+'）',c:x}))});
+ return out.filter(c=>c.c.trim())}
+async function crAddBook(o){const id=uid();await crPut(id,{ch:o.ch});S.coread.books.unshift({id,title:o.title||'未命名',author:o.author||'未知作者',cover:o.cover||'',color:Math.floor(Math.random()*360),added:Date.now(),last:0,pos:{ch:0,f:0},prog:0,chars:o.ch.reduce((a,c)=>a+c.c.length,0),n:o.ch.length,fmt:o.fmt||'',ex:''});save();return id}
+async function crAddFile(f){
+ const name=f.name||'未命名',base=name.replace(/\.[^.]+$/,'');
+ if(/\.(mobi|azw3?|kfx|cbz|cbr|djvu)$/i.test(name))return toast('暂不支持 '+name.split('.').pop()+' 格式，可以先用 Calibre 转成 epub 或 txt 再导入');
+ toast('正在导入《'+base+'》…');
+ try{
+  const ab=await f.arrayBuffer(),u=new Uint8Array(ab);let info=null;
+  if(u[0]===0x50&&u[1]===0x4B){try{if(/\.epub$/i.test(name)||zipEntries(ab).some(e=>e.name==='META-INF/container.xml'))info=await crParseEpub(ab)}catch(e){console.warn('epub 解析失败',e)}}
+  if(!info||!info.ch.length){const text=await readDocText(f);if(!text||!text.trim())return toast('没有从《'+base+'》里读到文字，可以换成 epub、txt、docx 或 pdf 再试');info={title:base,author:'',cover:'',ch:crSplit(text)}}
+  if(!info.ch.length)return toast('《'+base+'》里没有可读的内容');
+  await crAddBook({title:info.title||base,author:info.author,cover:info.cover,ch:info.ch,fmt:(name.split('.').pop()||'').toLowerCase()});
+  toast('已导入《'+(info.title||base)+'》，共 '+info.ch.length+' 章');
+ }catch(e){console.error(e);toast('导入失败：'+(e&&e.message||'未知错误'))}
+ crRender()}
+function crImport(){const i=document.createElement('input');i.type='file';i.multiple=true;i.accept='.epub,.txt,.md,.markdown,.html,.htm,.xhtml,.docx,.doc,.rtf,.odt,.pdf,.fb2,.xml,.text,.csv,.log,.mobi,.azw3,text/*,application/epub+zip,application/pdf';i.onchange=async()=>{for(const f of i.files)await crAddFile(f)};i.click()}
+async function crRemove(b){await crDelData(b.id);S.coread.books=S.coread.books.filter(x=>x.id!==b.id);Object.keys(S.coread.notes).concat(Object.keys(S.coread.chats)).forEach(k=>{if(k.startsWith(b.id+'|')){delete S.coread.notes[k];delete S.coread.chats[k]}});if(S.coread.cur===b.id)S.coread.cur='';save();crRender();toast('已删除《'+b.title+'》')}
+function crEditBook(b){
+ const old=document.querySelector('.ctc-mask');if(old)old.remove();let cover=b.cover||'';
+ const m=document.createElement('div');m.className='ctc-mask';
+ m.innerHTML=`<div class="ctc-sheet"><div class="ctc-sh-h"><button class="e-cancel" type="button">取消</button><h3>编辑书籍</h3><button class="e-ok" type="button" style="color:var(--ink);font-weight:700">保存</button></div><label>书名</label><input class="e-t" value="${esc(b.title)}"><label>作者</label><input class="e-a" value="${esc(b.author)}"><label>封面</label><div style="display:flex;gap:10px"><button class="btn e-cv" type="button" style="flex:1">更换封面</button><button class="btn e-cv0" type="button" style="flex:1">恢复默认封面</button></div><div class="ctc-foot"><button class="btn del e-del" type="button">从书库删除</button></div></div>`;
+ document.body.appendChild(m);const q=x=>m.querySelector(x);
+ q('.e-cancel').onclick=()=>m.remove();m.onclick=e=>{if(e.target===m)m.remove()};
+ q('.e-cv').onclick=()=>{const i=document.createElement('input');i.type='file';i.accept='image/*';i.onchange=async()=>{const f=i.files&&i.files[0];if(!f)return;const u=await crThumb(f,420);if(u){cover=u;toast('封面已选好，记得点保存')}};i.click()};
+ q('.e-cv0').onclick=()=>{cover='';toast('保存后恢复默认封面')};
+ q('.e-del').onclick=()=>{if(confirm('从书库删除《'+b.title+'》？阅读进度和共读记忆也会一起删除。')){m.remove();crRemove(b)}};
+ q('.e-ok').onclick=()=>{b.title=q('.e-t').value.trim()||b.title;b.author=q('.e-a').value.trim()||'未知作者';b.cover=cover;save();m.remove();crRender();toast('已保存')}}
+function crBookMenu(b){iosSheet({title:b.title,items:[{label:'继续阅读',run:()=>crOpen(b.id)},{label:'编辑书名和作者',run:()=>crEditBook(b)},{label:'从书库删除',red:true,run:()=>{if(confirm('从书库删除《'+b.title+'》？'))crRemove(b)}}]})}
+function crGoalSheet(){iosSheet({title:'每日阅读目标',items:[5,10,15,20,30,45,60,90,120].map(m=>({label:m+' 分钟'+(S.coread.goal===m?'（当前）':''),run:()=>{S.coread.goal=m;save();crRender()}}))})}
+function crPickChar(){const bound=momentBound();if(!bound.length)return toast('当前用户还没有绑定的联系人');
+ iosSheet({title:'选择一起共读的角色',items:[...bound.map(p=>({label:p.name||'未命名',av:av(p),on:S.coread.char===p.id,run:()=>{S.coread.char=p.id;save();crRender();toast('已选择 '+(p.name||'')+' 一起共读')}})),...(S.coread.char?[{label:'不选择角色',red:true,run:()=>{S.coread.char='';save();crRender()}}]:[])]})}
+function crPickUser(){iosSheet({title:'切换账号',items:S.userProfiles.map(u=>({label:u.name||'未命名',av:av(u),on:u.id===S.activeUserProfile,run:()=>{if(u.id===S.activeUserProfile)return;switchUser(u.id);S.me={name:u.name||'',handle:u.handle||'',bio:u.bio||'',avatar:u.avatar||''};const c=P(S.coread.char);if(!c||c.boundUser!==u.id)S.coread.char='';saveNow();crRender();toast('已切换到 '+(u.name||'未命名'))}}))})}
+function crHome(){
+ const co=S.coread,rec=[...co.books].filter(b=>b.last).sort((a,b)=>b.last-a.last).slice(0,6);
+ const cards=rec.length?rec.map(b=>`<div class="cr-card" data-id="${b.id}" data-a="open">${crCover(b)}<div class="cr-ct"><b>${esc(b.title)}</b><span>${esc(b.author)}</span><small>图书 · ${b.prog||0}%</small></div><button class="cr-more" data-a="menu" type="button">${CRI.dots}</button></div>`).join(''):`<div class="cr-card cr-card0" data-a="lib"><div class="cr-ct"><b>还没有读过的书</b><small>去书库导入一本，开始共读</small></div></div>`;
+ const goal=co.goal||5,tod=crToday(),p=Math.min(1,tod/(goal*60)),arc='M9 160A151 151 0 0 1 311 160';
+ return`<div class="cr-hero"><div class="cr-sh">之前读过 ${CRI.chev}</div><div class="cr-recent">${cards}</div></div><div class="cr-goal"><h2>阅读目标</h2><p>${tod>=goal*60?'今天的目标完成啦！':'找一本好书，设定一个目标，养成每天阅读的习惯。'}</p><div class="cr-gauge"><svg viewBox="0 0 320 166"><path d="${arc}" pathLength="100" fill="none" stroke="var(--crt)" stroke-width="9" stroke-linecap="round"/><path d="${arc}" pathLength="100" fill="none" stroke="#4a98e8" stroke-width="9" stroke-linecap="round" stroke-dasharray="${(p*100).toFixed(2)} 100"${p<=0?' opacity="0"':''}/></svg><div class="cr-gl">今日阅读进度</div><div class="cr-gt">${crFmt(tod)}</div><button class="cr-gb" type="button" data-a="goal">（目标 ${goal} 分钟）<i>›</i></button></div><button class="cr-go" data-a="cont" type="button">继续阅读</button></div>`}
+function crLib(){
+ const q=CRQ.q.trim().toLowerCase(),all=S.coread.books,bs=all.filter(b=>!q||b.title.toLowerCase().includes(q)||b.author.toLowerCase().includes(q));
+ if(!all.length)return'<div class="cr-empty">书库还是空的<br>点右上角的 ＋ 导入书籍<br><small>支持 epub、txt、md、docx、pdf、html 等格式</small></div>';
+ if(!bs.length)return'<div class="cr-empty">没有找到相关的书</div>';
+ return`<div class="cr-grid">${bs.map(b=>`<div class="cr-bk" data-id="${b.id}">${CRQ.edit?'<button class="cr-x" data-a="del" type="button">×</button><span class="cr-pen">编辑</span>':''}<div data-a="open">${crCover(b)}</div><div class="cr-bm"><span>${b.prog||0}%</span><button class="cr-more" data-a="menu" type="button">${CRI.dots}</button></div></div>`).join('')}</div><div class="cr-count">${all.length} 本书</div>`}
+function crDock(){
+ const v=S.coread.view||'home';
+ if(CRQ.open)return`<div class="cr-dock"><div class="cr-sbar cr-glass">${CRI.search}<input id="cr-q" value="${esc(CRQ.q)}" placeholder="搜索书库" autocomplete="off"><button type="button" class="cr-sx" data-a="sclose">×</button></div></div>`;
+ return`<div class="cr-dock"><div class="cr-cap cr-glass"><button type="button" data-a="tab-home" class="${v==='home'?'on':''}">${CRI.home}<span>首页</span></button><button type="button" data-a="tab-lib" class="${v==='lib'?'on':''}">${CRI.books}<span>书库</span></button></div><button type="button" class="cr-sc cr-glass" data-a="search" aria-label="搜索书库">${CRI.search}</button></div>`}
+function crRender(){
+ const root=$('#v-coread');if(!root)return;
+ const co=S.coread,view=co.view==='lib'?'lib':'home',ch=P(co.char);
+ const top=view==='home'
+  ?`<div class="cr-top"><h1><button class="cr-back" data-back type="button" aria-label="返回">${CRI.back}</button>首页</h1><div class="cr-tr"><button class="cr-av${ch?'':' empty'}" data-a="cav" type="button" aria-label="选择共读角色">${ch?av(ch):'+'}</button><button class="cr-av" data-a="uav" type="button" aria-label="切换账号">${av(S.me)}</button></div></div>`
+  :`<div class="cr-top lib"><h1><button class="cr-back" data-back type="button" aria-label="返回">${CRI.back}</button>书库</h1><div class="cr-tr"><button class="cr-rb" data-a="edit" type="button" aria-label="编辑书库">${CRQ.edit?CRI.check:CRI.lines}</button><button class="cr-rb" data-a="imp" type="button" aria-label="导入书籍">${CRI.plus}</button></div></div>`;
+ root.innerHTML=`<div class="cr-wrap">${top}<div class="cr-body" id="cr-body">${view==='home'?crHome():crLib()}</div>${crDock()}</div>`;
+ const qi=$('#cr-q');if(qi){qi.oninput=()=>{CRQ.q=qi.value;$('#cr-body').innerHTML=crLib()}}
+ root.onclick=e=>{
+  const t=e.target.closest('[data-a]');if(!t)return;const a=t.dataset.a,w=t.closest('[data-id]'),b=w?crBook(w.dataset.id):null;
+  if(a==='open'&&b){if(CRQ.edit&&co.view==='lib')crEditBook(b);else crOpen(b.id)}
+  else if(a==='menu'&&b)crBookMenu(b);
+  else if(a==='del'&&b){if(confirm('从书库删除《'+b.title+'》？'))crRemove(b)}
+  else if(a==='goal')crGoalSheet();
+  else if(a==='cont'){const x=crBook(co.cur)||[...co.books].sort((p,q)=>(q.last||0)-(p.last||0))[0];if(x)crOpen(x.id);else toast('书库里还没有书，先去书库导入一本')}
+  else if(a==='lib'||a==='tab-lib'){co.view='lib';CRQ.open=0;CRQ.q='';CRQ.edit=0;crRender()}
+  else if(a==='tab-home'){co.view='home';CRQ.open=0;CRQ.q='';CRQ.edit=0;crRender()}
+  else if(a==='cav')crPickChar();
+  else if(a==='uav')crPickUser();
+  else if(a==='edit'){CRQ.edit=CRQ.edit?0:1;crRender()}
+  else if(a==='imp')crImport();
+  else if(a==='search'){CRQ.open=1;co.view='lib';crRender();const i=$('#cr-q');if(i)i.focus()}
+  else if(a==='sclose'){CRQ.open=0;CRQ.q='';crRender()}};
+}
+async function crOpen(id){
+ const b=crBook(id);if(!b)return;
+ let d=null;try{d=await crGet(id)}catch(_){}
+ if(!d||!d.ch||!d.ch.length)return toast('这本书的内容读取失败，请删除后重新导入');
+ S.coread.cur=id;b.last=Date.now();
+ CRR={id,d,ch:Math.min(Math.max(0,(b.pos&&b.pos.ch)||0),d.ch.length-1),f:(b.pos&&b.pos.f)||0,last:Date.now(),acc:0,sv:0,wait:0};
+ save();go('crread')}
+function crPos(skip){
+ const sc=$('#cr-scroll'),b=CRR&&crBook(CRR.id);if(!sc||!b)return;
+ const mx=Math.max(1,sc.scrollHeight-sc.clientHeight),f=Math.min(1,Math.max(0,sc.scrollTop/mx)),n=CRR.d.ch.length;
+ CRR.f=f;b.pos={ch:CRR.ch,f};b.prog=Math.min(100,Math.round((CRR.ch+f)/n*100));
+ if(!skip)CRR.last=Date.now();
+ const c=CRR.d.ch[CRR.ch],p0=Math.floor(f*c.c.length);b.ex=c.c.slice(p0,p0+500).replace(/\s+/g,' ');
+ const pc=$('#cr-pct');if(pc)pc.textContent=b.prog+'%';const pb=$('#cr-pbar');if(pb)pb.style.width=b.prog+'%';
+ clearTimeout(CRR.sv);CRR.sv=setTimeout(save,900)}
+function crShowChapter(i,f){
+ const sc=$('#cr-scroll'),c=CRR.d.ch[i];if(!c)return;CRR.ch=i;
+ $('#cr-txt').innerHTML=c.c.split('\n').filter(x=>x.trim()).map(p=>'<p>'+esc(p.trim())+'</p>').join('');
+ $('#cr-rt').textContent=c.t||('第 '+(i+1)+' 章');
+ $('#cr-prev').disabled=i<=0;$('#cr-next').disabled=i>=CRR.d.ch.length-1;
+ requestAnimationFrame(()=>{sc.scrollTop=(f||0)*Math.max(0,sc.scrollHeight-sc.clientHeight);crPos(true)})}
+function crReadRender(){
+ const root=$('#v-crread');if(!CRR||!root){back();return}
+ const b=crBook(CRR.id);if(!b){back();return}
+ const ch=P(S.coread.char);
+ root.innerHTML=`<div class="cr-rd" id="cr-rd"><div class="cr-rtop"><button class="cr-rb" data-back type="button" aria-label="返回">${CRI.back}</button><button class="cr-rtt" id="cr-rt" type="button"></button><div class="cr-rr"><button class="cr-aa" id="cr-aa" type="button">Aa</button><button class="cr-av${ch?'':' empty'}" id="cr-rchat" type="button" aria-label="和共读的角色聊聊">${ch?av(ch):'+'}</button></div></div>
+ <div class="cr-scroll" id="cr-scroll"><div class="cr-txt" id="cr-txt" style="font-size:${S.coread.fs||18}px"></div><div class="cr-nav"><button id="cr-prev" type="button">上一章</button><button id="cr-next" type="button">下一章</button></div></div>
+ <div class="cr-rbar"><span id="cr-pct">${b.prog||0}%</span><div class="cr-pbar"><i id="cr-pbar" style="width:${b.prog||0}%"></i></div><span id="cr-time">今日共读 ${crFmt(crToday())}</span></div>
+ <div class="cr-chat" id="cr-chat"><div class="cr-ch-h"><span class="cr-av" style="width:34px;height:34px">${ch?av(ch):''}</span><b>${esc(ch?(ch.name||'角色'):'')} · 共读中</b><button type="button" id="cr-chx" class="cr-more">×</button></div><div class="cr-msgs" id="cr-msgs"></div><div class="cr-in"><input id="cr-inp" placeholder="聊聊这一段…" autocomplete="off"><button type="button" class="ask" id="cr-ask">问问TA</button><button type="button" class="snd" id="cr-snd">发送</button></div></div></div>`;
+ const sc=$('#cr-scroll');
+ sc.addEventListener('scroll',()=>crPos(),{passive:true});
+ ['touchstart','pointerdown','wheel'].forEach(ev=>sc.addEventListener(ev,()=>{CRR.last=Date.now()},{passive:true}));
+ $('#cr-prev').onclick=()=>crShowChapter(CRR.ch-1,0);
+ $('#cr-next').onclick=()=>crShowChapter(CRR.ch+1,0);
+ $('#cr-rt').onclick=()=>iosSheet({title:'目录',items:CRR.d.ch.map((c,i)=>({label:(i+1)+'. '+(c.t||'第 '+(i+1)+' 章')+(i===CRR.ch?'（当前）':''),run:()=>crShowChapter(i,0)}))});
+ $('#cr-aa').onclick=()=>iosSheet({title:'字号',items:[['小',16],['标准',18],['大',20],['特大',23]].map(([n,v])=>({label:n+((S.coread.fs||18)===v?'（当前）':''),run:()=>{S.coread.fs=v;save();$('#cr-txt').style.fontSize=v+'px'}}))});
+ $('#cr-rchat').onclick=crChatToggle;$('#cr-chx').onclick=crChatToggle;
+ $('#cr-snd').onclick=()=>{const i=$('#cr-inp'),t=i.value.trim();if(!t)return;i.value='';crSend(t)};
+ $('#cr-inp').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('#cr-snd').click()}};
+ $('#cr-ask').onclick=()=>crSend('');
+ crShowChapter(CRR.ch,CRR.f)}
+function crChatToggle(){
+ const p=P(S.coread.char);if(!p)return toast('先回共读首页，点右上角的 + 选择一起共读的角色');
+ const el=$('#cr-chat'),on=!el.classList.contains('on');el.classList.toggle('on',on);$('#cr-rd').classList.toggle('chat-on',on);if(on)crChatDraw()}
+function crChatDraw(){
+ const co=S.coread,p=P(co.char),box=$('#cr-msgs'),b=CRR&&crBook(CRR.id);if(!box||!p||!b)return;
+ const h=co.chats[b.id+'|'+p.id]||[];
+ box.innerHTML=h.length?h.map(m=>`<div class="cr-m ${m.role==='user'?'u':'a'}">${esc(m.content)}</div>`).join(''):`<div class="cr-hint">${esc(p.name||'TA')} 正在和你一起读《${esc(b.title)}》。<br>聊聊这一段，或点「问问TA」让TA说说感受。</div>`;
+ if(CRR.wait)box.insertAdjacentHTML('beforeend','<div class="cr-m a">…</div>');
+ box.scrollTop=box.scrollHeight}
+function crParse(raw){let t=String(raw||'').trim().replace(/^```(?:json)?\s*/i,'').replace(/\s*```$/,'');const a=t.indexOf('{'),z=t.lastIndexOf('}');if(a>=0&&z>a){try{const o=JSON.parse(t.slice(a,z+1));return{reply:String(o.reply||o.text||'').trim(),note:String(o.note||'').trim()}}catch(_){}}return{reply:t,note:''}}
+function crPrompt(p,b){
+ const co=S.coread,c=CRR.d.ch[CRR.ch],pos=Math.floor((CRR.f||0)*c.c.length),ex=c.c.slice(Math.max(0,pos-300),pos+1800),n=CRR.d.ch.length,
+  notes=co.notes[b.id+'|'+p.id]||[],mins=Math.floor(crToday()/60),prev=CRR.d.ch.slice(Math.max(0,CRR.ch-4),CRR.ch).map(x=>x.t).filter(Boolean);
+ return build(p,[])[0].content+'\n\n【共读】你正在和用户「'+S.me.name+'」一起读一本书，你们坐在一起，看着同一页。书名《'+b.title+'》，作者 '+b.author+'，共 '+n+' 章；用户现在读到第 '+(CRR.ch+1)+' 章'+(c.t?'「'+c.t+'」':'')+'，全书约 '+(b.prog||0)+'%。今天你们已经共读 '+mins+' 分钟。'
+ +(prev.length?'\n前面刚读过的章节：'+prev.join('、')+'。':'')
+ +'\n用户眼前这一段（你只看到了这一部分，没给你的内容不要假装读过）：\n"""\n'+ex+'\n"""'
+ +(notes.length?'\n\n【你们共读这本书的记忆，按时间顺序】\n'+notes.map(x=>'- '+x).join('\n'):'')
+ +'\n\n聊天方式：像坐在用户旁边一起读书的人，口语化，1-3 句话，可以吐槽、共情、联想、提问，不要复述原文，不要写长篇书评，不要出戏，保持你的人设和你与用户的关系。只输出 JSON，不要代码块：{"reply":"你说的话","note":"用一句话记下这次值得记住的共读内容（用户的想法、你们聊到的情节或情绪），没有就留空"}'}
+async function crSend(text){
+ const co=S.coread,p=P(co.char);if(!p)return toast('先选择一起共读的角色');if(!S.cfg.key)return toast('请先在设置里填写 API Key');if(!CRR||CRR.wait)return;
+ const b=crBook(CRR.id),key=b.id+'|'+p.id,h=co.chats[key]=co.chats[key]||[];
+ if(text)h.push({role:'user',content:text,t:Date.now()});
+ CRR.wait=1;crChatDraw();save();
+ try{
+  const msgs=[{role:'system',content:crPrompt(p,b)},...h.slice(-16).map(m=>({role:m.role,content:m.content}))];
+  if(!text)msgs.push({role:'user',content:'（用户把书往你这边挪了挪，示意你看看刚读到的这一段。请你自然地说说此刻的感受或想法。）'});
+  const r=crParse(await ask(msgs,null));
+  if(r.reply)h.push({role:'assistant',content:r.reply,t:Date.now()});
+  if(r.note){const ns=co.notes[key]=co.notes[key]||[];ns.push(r.note);if(ns.length>40)ns.splice(0,ns.length-40)}
+ }catch(e){toast('发送失败：'+(e&&e.message||'未知错误'))}
+ CRR.wait=0;save();crChatDraw()}
+function coreadCtx(p){
+ const co=S.coread;if(!co||co.char!==p.id)return'';const b=crBook(co.cur);if(!b)return'';
+ const key=b.id+'|'+p.id,notes=(co.notes[key]||[]).slice(-8),h=(co.chats[key]||[]).slice(-4),mins=Math.floor((co.daily[crDay()]||0)/60);
+ return'\n\n【共读】你和用户正在一起读书：《'+b.title+'》（'+b.author+'），整本书约 '+(b.prog||0)+'%'+(b.ex?'，用户最近读到的片段：「'+b.ex+'」':'')+'。今天你们已共读 '+mins+' 分钟。聊天时你知道你们在一起读这本书，可以自然地提到书里的情节和感受，但不要每次都提。'+(notes.length?'\n你们共读时的记忆：'+notes.join('；'):'')+(h.length?'\n最近的共读对话：'+h.map(m=>(m.role==='user'?'用户':'你')+'：'+m.content).join(' / '):'')}
+setInterval(()=>{const v=$('#v-crread');if(!CRR||!v||!v.classList.contains('on')||document.hidden)return;if(Date.now()-CRR.last>120000)return;const k=crDay();S.coread.daily[k]=(S.coread.daily[k]||0)+1;CRR.acc++;if(CRR.acc%20===0)save();const t=$('#cr-time');if(t)t.textContent='今日共读 '+crFmt(S.coread.daily[k])},1000);
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&CRR)save()});
 
 /* ===== 情侣空间 (cp) ===== */
 const CPP={back:'M7.414 13l5.043 5.04-1.414 1.42L3.586 12l7.457-7.46 1.414 1.42L7.414 11H21v2H7.414z',plus:'M12 5v14M5 12h14',gear:'M12 9a3 3 0 100 6 3 3 0 000-6zM12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2',send:'M3 11l18-8-8 18-2-8z',trash:'M4 7h16M9 7V4h6v3M6 7l1 14h10l1-14',pen:'M4 20h4L19 9l-4-4L4 16zM13.5 6.5l4 4',heart:'M12 20s-8-5-8-10.5a4.5 4.5 0 018-2.5 4.5 4.5 0 018 2.5C20 15 12 20 12 20z',spark:'M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M18 6l-2.5 2.5M8.5 15.5L6 18',chev:'M9 6l6 6-6 6',ask:'M9.5 9a2.5 2.5 0 115 0c0 1.7-2.5 2-2.5 4M12 17v.01',tree:'M12 3a5 5 0 00-4.5 7.2A4 4 0 009 18h6a4 4 0 001.5-7.8A5 5 0 0012 3zM12 18v4M9 22h6',cal:'M4 6h16v14H4zM4 10h16M8 3v4M16 3v4M12 17s-3-1.8-3-3.6a1.7 1.7 0 013-.9 1.7 1.7 0 013 .9c0 1.8-3 3.6-3 3.6z',note:'M5 4h11a3 3 0 013 3v13H8a3 3 0 01-3-3zM9 9h6M9 13h4',smile:'M12 3a9 9 0 100 18 9 9 0 000-18zM9 10v.5M15 10v.5M8.5 14c1 1.5 2.2 2.2 3.5 2.2s2.5-.7 3.5-2.2',calm:'M12 3a9 9 0 100 18 9 9 0 000-18zM9 10v.5M15 10v.5M9 15.5h6',sad:'M12 3a9 9 0 100 18 9 9 0 000-18zM9 10v.5M15 10v.5M8.5 16.5c1-1.5 2.2-2.2 3.5-2.2s2.5.7 3.5 2.2',love:'M12 3a9 9 0 100 18 9 9 0 000-18zM8 10.4s1.5-1.3 1.5-.2c0 1-1.5 1.7-1.5 1.7s-1.5-.7-1.5-1.7c0-1.1 1.5.2 1.5.2zM16 10.4s1.5-1.3 1.5-.2c0 1-1.5 1.7-1.5 1.7s-1.5-.7-1.5-1.7c0-1.1 1.5.2 1.5.2zM9 15c1 1.2 2 1.8 3 1.8s2-.6 3-1.8',tired:'M12 3a9 9 0 100 18 9 9 0 000-18zM8 10h2M14 10h2M10.5 16a1.5 1.5 0 003 0z'};
@@ -2295,7 +2476,7 @@ cpr.addEventListener('click',async e=>{const b=e.target.closest('[data-act]');if
  else if(a==='setsave'){const s=cpN.sp||cpD.partner||(S.personas.find(x=>x.boundUser===cpUser().id)||S.personas[0]||{}).id,d=g('#cpf-s');if(!s||!P(s))return toast('请先选择另一半');cpD.partner=s;cpD.since=d||cpISO(new Date());const f=cpD.ann.find(x=>x.fixed);if(f)f.date=cpD.since;else cpD.ann.unshift({id:'since',name:'在一起',date:cpD.since,rep:true,fixed:true});cpN.sp=null;cpSave();cpN.sub=[];cpR()}
 });
 
-const R={couple:()=>cpRender(),forum:()=>fmRender(),music:()=>msRender(),wallet:()=>wlRender(),home:rHome,app:rApp,prof:rProf,chat:draw,deco:rDeco,cset:rCset,css:rCss,personas:rPersonas,worlds:rWorlds,settings:rSettings,roleprompt:rSettings,diary:rDiary,stickers:rProfileStickers,postdetail:rPostDetail,rolephones:rolePhoneRender,desktopcustom:renderDesktopCustomizer};
+const R={couple:()=>cpRender(),coread:()=>crRender(),crread:()=>crReadRender(),music:()=>msRender(),wallet:()=>wlRender(),home:rHome,app:rApp,prof:rProf,chat:draw,deco:rDeco,cset:rCset,css:rCss,personas:rPersonas,worlds:rWorlds,settings:rSettings,roleprompt:rSettings,diary:rDiary,stickers:rProfileStickers,postdetail:rPostDetail,rolephones:rolePhoneRender,desktopcustom:renderDesktopCustomizer};
 function go(v,push=true){if(v==='chat'&&!P(cur))return;if(v==='settings'&&stack[stack.length-1]!=='settings')settingsPage='main';if(v!=='chat')$('#ucss').textContent='';
   $$('.view').forEach(e=>e.classList.toggle('on',e.id==='v-'+v));if(push)stack.push(v);R[v]()}
 function back(){if(stack[stack.length-1]==='cset'&&csetPage==='memory'){csetPage='main';rCset();return}if(stack[stack.length-1]==='settings'&&settingsPage!=='main'){settingsPage='main';rSettings();return}stack.pop();go(stack[stack.length-1]||'home',false)}
@@ -3358,7 +3539,7 @@ function ctcEdit(kind,o,isNew){
  let f=`<div class="ctc-edav"><button class="ctc-av e-av" type="button">${av(d)}</button><span class="note">点击头像更换</span></div><label>名字</label><input class="e-name" value="${esc(d.name||'')}" placeholder="名字">`;
  if(kind!=='n')f+=`<label>账号（@）</label><input class="e-handle" value="${esc(d.handle||'')}" placeholder="账号">`;
  if(kind==='u')f+=`<label>个人简介（显示在聊天 app 个人主页）</label><textarea class="e-sign" rows="3" placeholder="随便写一段文案，比如一句话、签名…">${esc(d.sign||'')}</textarea><label>用户人设（只告诉 AI，不会显示在主页）</label><textarea class="e-bio" rows="8" placeholder="写下你的身份、性格、和角色的关系…">${esc(d.bio||'')}</textarea><button class="btn e-import" type="button" style="margin-top:10px">从文件导入</button>`;
- if(kind==='p')f+=`<label>简介</label><input class="e-bio" value="${esc(d.bio||'')}" placeholder="简介"><label>绑定用户（论坛默认关注）</label><select class="e-bind"><option value="">不绑定</option>${S.userProfiles.map(u=>`<option value="${esc(u.id)}"${d.boundUser===u.id?' selected':''}>${esc(u.name||'未命名')}</option>`).join('')}</select><label>开场白</label><textarea class="e-greet" rows="2">${esc(d.greet||'')}</textarea><label>角色人设</label><textarea class="e-prompt" rows="7" placeholder="填写角色设定与说话方式">${esc(d.prompt||'')}</textarea><button class="btn e-import" type="button" style="margin-top:10px">从文件导入人设</button>`+grp;
+ if(kind==='p')f+=`<label>简介</label><input class="e-bio" value="${esc(d.bio||'')}" placeholder="简介"><label>绑定用户</label><select class="e-bind"><option value="">不绑定</option>${S.userProfiles.map(u=>`<option value="${esc(u.id)}"${d.boundUser===u.id?' selected':''}>${esc(u.name||'未命名')}</option>`).join('')}</select><label>开场白</label><textarea class="e-greet" rows="2">${esc(d.greet||'')}</textarea><label>角色人设</label><textarea class="e-prompt" rows="7" placeholder="填写角色设定与说话方式">${esc(d.prompt||'')}</textarea><button class="btn e-import" type="button" style="margin-top:10px">从文件导入人设</button>`+grp;
  if(kind==='n')f+=`<label>身份简介</label><input class="e-bio" value="${esc(d.bio||'')}" placeholder="如：咖啡店老板、他的同事"><label>NPC 设定</label><textarea class="e-prompt" rows="6" placeholder="外貌、性格、说话方式、与角色或用户的关系…">${esc(d.prompt||'')}</textarea><label>绑定联系人</label><select class="e-bind"><option value="">不绑定</option>${S.personas.map(p=>`<option value="${esc(p.id)}"${d.bind===p.id?' selected':''}>${esc(p.name||'未命名联系人')}</option>`).join('')}</select><div class="ctc-hint">绑定后，与该联系人聊天时 AI 会知道这位 NPC 的存在。</div>`+grp;
  const canDel=!isNew&&!(kind==='u'&&S.userProfiles.length<2);
  mask.innerHTML=`<div class="ctc-sheet"><div class="ctc-sh-h"><button class="e-cancel" type="button">取消</button><h3>${isNew?'新增':'编辑'}${T}</h3><button class="e-ok" type="button" style="color:var(--ink);font-weight:700">保存</button></div>${f}${canDel?`<div class="ctc-foot"><button class="btn del e-del" type="button">删除${T}</button></div>`:''}</div>`;
@@ -4967,99 +5148,7 @@ body{position:fixed;inset:0;width:100%;height:100%}
 html.kb .view,html.kb .wx,html.kb .nt,html.kb .ph,html.kb .mu,html.kb .zy,html.kb .ms{top:var(--app-top,0px);bottom:auto;height:var(--app-h)}
 html.kb #inp,html.kb .wx-in,html.kb .feed-composer,html.kb .pd-composer{padding-bottom:7px}
 
-/* 论坛 */
-#v-forum{background:var(--bg)}
-#fm-root{--mu:var(--sub);position:relative;flex:1;width:100%;max-width:640px;display:flex;flex-direction:column;overflow:hidden;color:var(--ink);background:var(--bg)}
-#fm-root *{box-sizing:border-box}#fm-root button{background:none;border:0;color:inherit;font:inherit;display:inline-flex;align-items:center;gap:4px;padding:6px;cursor:pointer}
-#fm-root svg{width:22px;height:22px;flex:none}#fm-root p,#fm-root h3,#fm-root h4{margin:0}
-.fhd{display:flex;align-items:center;justify-content:space-between;padding:6px 12px;min-height:52px;border-bottom:1px solid var(--line)}.fhd>span{min-width:64px}.fhd b{font-size:17px}
-.fmain{flex:1;overflow:auto;overscroll-behavior:contain}.ftabs{display:flex;border-bottom:1px solid var(--line)}.ftabs button{flex:1;justify-content:center;padding:13px;color:var(--sub);font-weight:600;border-bottom:3px solid transparent}.ftabs .on{color:var(--ink);border-color:var(--ink)}
-.fav{width:40px;height:40px;border-radius:50%;background:var(--av);overflow:hidden;flex:none;display:flex;align-items:center;justify-content:center;font-weight:700}.fav img{width:100%;height:100%;object-fit:cover}
-.fpost{display:flex;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line)}.fpb{flex:1;min-width:0}.fph span,.fmu{color:var(--sub)}.fph span{font-size:13px}
-.fpt{white-space:pre-wrap;word-break:break-word;margin:2px 0 4px}.fpa{display:flex;justify-content:space-between;color:var(--sub);max-width:320px}.fpa svg{width:18px;height:18px}.fpa .on{color:var(--ink);font-weight:700}.fpa .on svg{fill:currentColor}
-#fm-root .ffab{position:absolute;right:18px;bottom:calc(env(safe-area-inset-bottom,0px) + 70px);width:54px;height:54px;border-radius:50%;background:var(--ink);color:var(--bg);justify-content:center;box-shadow:0 2px 10px #0004}
-.fnav{display:flex;justify-content:space-around;border-top:1px solid var(--line);padding:2px 0 env(safe-area-inset-bottom,0px)}.fnav button{color:var(--sub);position:relative;padding:11px 18px}.fnav .on{color:var(--ink)}.fnav .on svg{stroke-width:2.6}
-.fbd{position:absolute;top:4px;right:8px;background:var(--ink);color:var(--bg);font-size:11px;border-radius:9px;padding:0 5px}
-.fpage{position:absolute;inset:0;background:var(--bg);display:flex;flex-direction:column;z-index:5}
-.fdr{position:absolute;inset:0;z-index:9;display:flex}.fdr>div{width:78%;max-width:320px;background:var(--bg);padding:24px 20px;display:flex;flex-direction:column;gap:4px}.fdr>i{flex:1;background:var(--shade)}.fdr button{font-size:19px;font-weight:700;padding:14px 0;gap:16px}
-.fban{height:130px;background:linear-gradient(135deg,#555,#bbb)}.fpf{padding:0 14px 10px}.fpf .fav{width:76px;height:76px;margin-top:-38px;border:3px solid var(--bg);font-size:28px}
-#fm-root #fm-x{display:none}.fbtn{border:1px solid var(--ink)!important;border-radius:20px;padding:6px 16px!important;font-weight:700}.fbtn.f{background:var(--ink)!important;color:var(--bg)!important}
-.fin{display:block;width:100%;border:0;border-bottom:1px solid var(--line);background:none;color:var(--ink);font:inherit;padding:12px 14px;outline:0;resize:none;border-radius:0}
-.frow{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line)}.frow>div:last-child{flex:1;min-width:0}.frow p{color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#fm-root .fchip{border:1px solid var(--line);border-radius:16px;padding:4px 12px;margin:3px}#fm-root .fchip.on{background:var(--ink);color:var(--bg)}
-.fsec{padding:14px}.fsec h4{margin-bottom:8px}.fbub{max-width:78%;padding:9px 13px;border-radius:18px;margin:4px 14px;background:var(--ai);align-self:flex-start;white-space:pre-wrap}.fbub.me{align-self:flex-end;background:var(--me);color:var(--me-ink)}
-.fbar{display:flex;border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
 .fc-msg{background:transparent!important;padding:0!important}.fcard{border:1px solid var(--line);border-radius:14px;padding:10px 12px;min-width:200px;max-width:260px;background:var(--bg);color:var(--ink)}.fcard small{color:var(--sub)}.fcard span{color:var(--sub)}.fct{white-space:pre-wrap;margin-top:4px}
-
-.fbanw{position:relative}.fban{height:150px;background:#8a8f95 center/cover no-repeat}.ftop{position:absolute;left:12px;right:12px;top:10px;display:flex;justify-content:space-between}
-#fm-root .fcir{width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,.5);color:#fff;justify-content:center;padding:0}#fm-root .fcam{position:absolute;left:50%;top:50%;margin:-19px 0 0 -19px}
-.fpf{padding:0 16px 6px}.fpf>.fav,.fpf>div>.fav{width:80px;height:80px;margin-top:-40px;border:4px solid var(--bg);font-size:30px;position:relative}
-.fnm{display:flex;align-items:center;gap:6px;margin-top:8px}.fnm b{font-size:22px}#fm-root svg.bd{width:20px;height:20px}.fbio{margin:8px 0;white-space:pre-wrap}.fjoin{display:flex;align-items:center;gap:6px;margin-top:8px}.fjoin svg{width:18px;height:18px}
-.f2{display:flex;gap:10px}.f2 .fbtn{flex:1;justify-content:center;padding:9px 0!important}
-.fic button{padding:0}.fic .fti{display:inline-flex;align-items:center;gap:8px;padding:14px 4px 11px;border-bottom:3px solid transparent;font-weight:700}.fic .on .fti{border-color:var(--ink)}
-.fsugs{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none}.fsug{flex:none;width:250px;border:1px solid var(--line);border-radius:16px;overflow:hidden;padding:0 12px 14px;position:relative}.fsb{height:84px;margin:0 -12px;background:#8a8f95 center/cover}.fsa{margin-top:-24px}.fsa .fav{width:52px;height:52px;border:3px solid var(--bg)}.fsug>.fbtn{position:absolute;right:12px;top:98px}
-.fl{display:block;padding:12px 14px 0;color:var(--sub);font-size:13px}
-
-#fm-root{--fb:#1d9bf0}
-.fhh{display:flex;align-items:center;justify-content:space-between;padding:8px 16px;min-height:56px}.fhh>svg{width:26px;height:26px}.fhh .fav,.fhd3 .fav{width:34px;height:34px;font-size:14px}
-.fht{display:flex;border-bottom:1px solid var(--line)}.fht button{flex:1;justify-content:center;padding:0;color:var(--sub);font-weight:600;font-size:15px}.fht span{padding:14px 0 12px;border-bottom:4px solid transparent;border-radius:2px}.fht .on{color:var(--ink);font-weight:800}.fht .on span{border-color:var(--ink)}
-.fpost{padding:12px 16px;gap:12px}.fph{display:flex;justify-content:space-between;align-items:center}.fph>button{color:var(--sub);padding:0 0 0 8px}.fph>button svg{width:20px;height:20px;stroke-width:3.2}
-.fhn{display:flex;align-items:center;gap:4px;min-width:0;white-space:nowrap}.fhn b{font-size:16px;overflow:hidden;text-overflow:ellipsis}.fhn span{color:var(--sub);font-size:15px;font-weight:400}.fhn svg.bd{width:16px;height:16px;flex:none}
-.fpt{font-size:16px;line-height:1.35;margin:2px 0 0}.flk{color:var(--fb)}
-.fpa{max-width:none;margin-top:10px;display:flex;justify-content:space-between;align-items:center}#fm-root .fpa button{padding:0;color:var(--sub);font-size:13px;gap:4px}.fpa i{font-style:normal}.fpa svg{width:19px;height:19px}.fpr{display:flex;gap:16px}
-.fpa .lk,.fpa .lk svg{color:#f91880}.fpa .lk svg{fill:#f91880}.fpa .rt{color:#00ba7c}.fpa .mk{color:var(--fb)}
-#fm-root .ffab{background:var(--fb);color:#fff;width:56px;height:56px;box-shadow:0 4px 14px rgba(29,155,240,.4)}#fm-root .ffab svg{width:26px;height:26px}
-.fnav button{flex:1;justify-content:center;padding:12px 0}.fnav svg{width:26px;height:26px}#fm-root .fbd{right:auto;left:50%;margin-left:6px;top:5px;background:var(--fb);color:#fff}
-.fhd3{display:flex;align-items:center;justify-content:space-between;padding:8px 16px;min-height:56px}.fhd3 b{font-size:19px}
-#fm-root .fpill{border:1px solid var(--line);border-radius:20px;padding:7px 12px;font-weight:700;gap:6px}.fpill svg{width:16px;height:16px}
-.fsrch{display:flex;align-items:center;gap:10px;margin:4px 16px 10px;padding:0 14px;height:44px;border-radius:22px;background:var(--p);color:var(--sub)}.fsrch input{flex:1;border:0;background:none;outline:0;color:var(--ink);font:inherit;height:100%}.fsrch svg{width:20px;height:20px}
-.fdmr{display:flex;gap:14px;padding:12px 16px;align-items:center}.fdmr .fav{width:56px;height:56px;font-size:20px}.fdmx{flex:1;min-width:0}.fdmt{display:flex;justify-content:space-between;gap:8px}.fdmt b{font-size:16px;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.fdmt b.rd{font-weight:600}.fdmt span{color:var(--sub);font-size:14px;flex:none}.fdmx p{color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}.fdot{width:10px;height:10px;border-radius:50%;background:var(--fb);flex:none}
-.fdtt{display:inline-flex;align-items:center;gap:8px}.fdtt .fav{width:28px;height:28px;font-size:12px}
-.fdcard{align-self:stretch;text-align:center;padding:24px 16px;border-bottom:1px solid var(--line);margin-bottom:8px}.fdcard .fav{width:64px;height:64px;margin:0 auto 6px;font-size:24px}.fdcard b{font-size:18px}.fdcard p{margin-top:6px}
-.fbub{border-radius:20px 20px 20px 4px}.fbub.me{background:var(--fb);color:#fff;border-radius:20px 20px 4px 20px}.fty{letter-spacing:2px;color:var(--sub)}
-.fcomp{flex:1;display:flex;align-items:center;margin:8px 12px;padding:0 6px 0 16px;border-radius:22px;background:var(--p)}.fcomp input{flex:1;border:0;background:none;outline:0;color:var(--ink);font:inherit;height:42px}.fcomp svg{width:22px;height:22px;color:var(--fb)}
-.fstar{color:#7856ff}
-
-#fm-root .fht button{color:var(--sub);font-weight:600}#fm-root .fht button.on{color:var(--ink);font-weight:800}
-
-#fm-root .fpage.nn{bottom:var(--fnh,56px)}.fdhd{border-bottom:none}.fdhd b{font-size:19px}.fda{display:flex;align-items:center;justify-content:space-between;padding:10px 16px 0}.fdau{display:flex;align-items:center;gap:12px}.fdau .fav{width:48px;height:48px;font-size:19px}.fdau b{font-size:17px;display:inline-flex;align-items:center;gap:4px}.fdau svg.bd{width:17px;height:17px}.fdau .fmu{font-size:15px}
-.fdt2{font-size:23px;line-height:1.5;padding:18px 16px 14px;white-space:pre-wrap;word-break:break-word}.fdm{padding:6px 16px 14px;font-size:15px}.fdm b{color:var(--ink)}
-.fdcn{display:flex;justify-content:space-between;padding:14px 16px;color:var(--sub);font-size:16px;align-items:center}.fdcn>span,#fm-root .fdcn button{display:inline-flex;align-items:center;gap:8px;color:var(--sub);padding:0}.fdcn svg{width:24px;height:24px}#fm-root .fdcn .lk,.fdcn .lk svg{color:#f91880}.fdcn .lk svg{fill:#f91880}#fm-root .fdcn .rt{color:#00ba7c}#fm-root .fdcn .mk{color:var(--fb)}.fdcn .mk svg{fill:currentColor}
-.fdrl{display:flex;justify-content:space-between;padding:12px 16px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-weight:700;color:var(--sub)}#fm-root .fdrl button{padding:0;color:var(--sub);font-weight:700}.fdrl svg{width:18px;height:18px}
-.fgk{color:var(--sub);margin-left:auto;display:flex}.fgk svg{width:20px;height:20px}.fcm .fph{display:flex;align-items:center;gap:8px}.fcm .fhn{flex:1;min-width:0}
-.fcrw{flex:none;padding:4px 0}.fcr{display:flex;align-items:center;margin:6px 14px;background:var(--p);border-radius:24px;padding:0 8px 0 18px;height:46px}.fcr input{flex:1;min-width:0;border:0;background:none;color:var(--ink);font:inherit;font-size:16px;outline:0}.fcr svg{width:22px;height:22px;color:var(--fb)}
-.fdh2{display:flex;align-items:center;gap:6px;padding:8px 12px;min-height:60px;flex:none}.fdn{flex:1;display:flex;align-items:center;gap:12px;min-width:0}.fdn .fav{width:42px;height:42px;font-size:17px}.fdn b{font-size:18px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.fdh2>button:not(:first-child){padding:8px 10px}.fdh2 svg{width:26px;height:26px}
-.fts{align-self:center;color:var(--sub);font-size:15px;margin:18px 0 6px}
-#fm-root .fbub{max-width:76%;padding:12px 20px;border-radius:26px;font-size:17px;line-height:1.4;margin:3px 14px;background:var(--ai);color:var(--ink);align-self:flex-start}#fm-root .fbub.g{margin-top:14px}#fm-root .fbub.me{background:#4a98e8;color:#fff;align-self:flex-end;border-radius:26px}
-.fdbar{display:flex;align-items:center;gap:12px;padding:8px 14px calc(10px + env(safe-area-inset-bottom,0px));flex:none}#fm-root .fplus{width:46px;height:46px;border-radius:50%;background:var(--p);justify-content:center;padding:0;flex:none}.fplus svg{width:26px;height:26px}.fpl2{flex:1;display:flex;align-items:center;background:var(--p);border-radius:26px;padding:0 8px 0 18px;height:46px;min-width:0}.fpl2 input{flex:1;min-width:0;border:0;background:none;color:var(--ink);font:inherit;font-size:17px;outline:0}.fpl2 button{padding:6px}.fpl2 svg{width:24px;height:24px}#fm-root .fpl2 .snd{color:var(--fb)}
-.fsetm{padding-bottom:20px}.fsh{padding:18px 16px 6px;font-size:15px;color:var(--sub);font-weight:700}.fsrow{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);cursor:pointer}.fsrow>div:not(.fav){flex:1;min-width:0}.fsrow p{color:var(--sub);font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.fsw{width:46px;height:28px;border-radius:14px;background:var(--line);position:relative;flex:none;transition:.2s}.fsw:after{content:"";position:absolute;left:3px;top:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 3px #0003;transition:.2s}.fsw.on{background:var(--ink)}.fsw.on:after{left:21px;background:var(--bg)}
-.frd{width:22px;height:22px;border-radius:50%;border:2px solid var(--line);flex:none;position:relative}.frd.on{border-color:var(--ink)}.frd.on:after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--ink)}#fm-root .fdel{color:var(--err);font-size:14px;padding:4px 8px}
-.fseg{display:flex;background:var(--p);border-radius:12px;padding:3px}#fm-root .fseg button{flex:1;justify-content:center;padding:9px 0;border-radius:10px;font-weight:600;color:var(--sub)}#fm-root .fseg button.on{background:var(--bg);color:var(--ink);box-shadow:0 1px 4px #0002}
-.fgbar{flex:none;padding:10px 16px calc(12px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);background:var(--bg)}#fm-root .fgbar .fbtn{width:100%;justify-content:center;padding:13px 0!important;font-size:16px}#fm-root .fgbar .fbtn:disabled{opacity:.6}
-.fspin{display:inline-block;width:16px;height:16px;border:2px solid currentColor;border-top-color:transparent;border-radius:50%;animation:fm-spin .8s linear infinite;vertical-align:-3px;margin-right:6px}@keyframes fm-spin{to{transform:rotate(360deg)}}
-
-#fm-root .fdhd{display:grid;grid-template-columns:1fr auto 1fr;align-items:center}.fdhd>button:last-child{justify-self:end}.fdhd>button:first-child{justify-self:start}
-
-.fdt2{font-size:18px;line-height:1.55;padding:14px 16px 10px}.fdau b{font-size:15px}.fdau .fmu{font-size:14px}.fdau .fav{width:44px;height:44px}.fdm{font-size:13px;padding:4px 16px 12px}.fdcn{font-size:14px;padding:12px 16px}.fdcn svg{width:20px;height:20px}.fdrl{font-size:14px;padding:11px 16px}.fdhd b{font-size:17px}.fdhd svg{width:22px;height:22px}
-.fcm .fpt{font-size:15px;line-height:1.5}.fcm .fhn b{font-size:15px}.fcm .fhn span{font-size:14px}.fcm .fpa{font-size:12px}.fcm .fpa svg{width:17px;height:17px}.fcm .fgk svg,.fcm .fph>button svg{width:18px;height:18px}
-.fmore svg,.fph>button svg{stroke-width:0!important}
-.fht{align-items:stretch}#fm-root .fht button{align-self:stretch;align-items:flex-end;padding:0;position:relative;top:1px}#fm-root .fht span{display:block;padding:15px 0 0;line-height:22px;border-bottom:4px solid transparent;border-radius:0;height:auto}#fm-root .fht .on span{border-color:var(--ink)}
-.fic button{position:relative;top:1px}
-
-.fdnm{display:flex;align-items:center;gap:6px}.fdnm svg.bd{width:16px;height:16px;flex:none;position:relative;top:.5px}.fdau b{display:block;font-size:14px;line-height:1.3}
-#fm-root .fda .fbtn{padding:4px 12px!important;font-size:13px;line-height:1.3;border-radius:15px;font-weight:700}
-.fdau .fmu{font-size:13px}.fdau .fav{width:40px;height:40px;font-size:16px}.fdt2{font-size:16px;line-height:1.55;padding:12px 16px 8px}.fdm{font-size:12px;padding:2px 16px 10px}.fdcn{font-size:13px;padding:10px 16px}.fdcn svg{width:18px;height:18px}.fdrl{font-size:13px;padding:10px 16px}.fdhd b{font-size:16px}.fdhd svg{width:20px;height:20px}
-.fcm .fpt{font-size:14px}.fcm .fhn b{font-size:14px}.fcm .fhn span{font-size:13px}.fcm .fpa{font-size:12px}.fcm .fpa svg{width:16px;height:16px}
-
-#fm-root .fdhd{padding:8px 24px}
-#fm-root .fbub{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
-.fqb{font-size:14px;border-left:3px solid rgba(128,128,128,.55);padding:1px 0 1px 8px;margin-bottom:6px;opacity:.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.fqb b{display:block;font-size:12px}.fbub.me .fqb{border-color:rgba(255,255,255,.75)}
-.fqc{display:flex;align-items:center;gap:8px;padding:8px 16px;border-top:1px solid var(--line);color:var(--sub);flex:none}.fqc>div{flex:1;min-width:0}.fqc b{display:block;color:var(--ink);font-size:13px}.fqc span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:13px}.fqc svg{width:18px;height:18px}.fqc button{padding:4px}
-.fblk{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);color:var(--sub);font-size:14px;flex:none}#fm-root .fblk .fbtn{padding:6px 14px!important;white-space:nowrap;font-size:13px}
-#fm-root .fmo{flex:none;width:40px;flex-grow:0;padding:0!important}.f2 .fmo svg{width:20px;height:20px}
-.fdh2 svg{width:24px;height:24px;stroke-width:1.7}.fplus svg{stroke-width:2}.fpl2 svg{stroke-width:1.7}
-
 /* 情侣空间 */
 #v-couple{background:var(--bg)}
 #cp-root{position:relative;flex:1;width:100%;max-width:640px;display:flex;flex-direction:column;overflow:hidden;color:var(--ink);background:var(--bg);font-size:15px}
