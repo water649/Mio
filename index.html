@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Mio水汪汪">
+<meta name="apple-mobile-web-app-title" content="Mio水汪汪>">
 <meta name="theme-color" id="theme-color" content="#ffffff">
 <title>Mio水汪汪</title>
 <style>
@@ -14,7 +14,7 @@
 --sans:-apple-system,"PingFang SC","Noto Sans SC","Hiragino Sans","Microsoft YaHei",sans-serif}
 [data-theme=dark]{color-scheme:dark;--bg:#000;--p:#303030;--ink:#f2f2f2;--sub:#71767b;--line:#2f3336;--ai:#303030;--me:#fff;--me-ink:#000;--fld:#000;--av:#2a2a2a;--t2:#ddd;--err:#ff7b7b;--shade:rgba(0,0,0,.6)}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{height:100%}
+html,body{height:100vh}
 body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--sans);overflow:hidden}
 button,input,textarea{font:inherit;color:inherit}
 button{background:none;border:0;cursor:pointer}
@@ -984,7 +984,7 @@ button.feed-follow-plus{padding:0;cursor:pointer}
 .ctc-search input{flex:1;min-width:0;background:transparent;border:0;border-radius:0;padding:0;font-size:17px;-webkit-appearance:none;appearance:none}
 .ctc-plus{width:48px;flex:none;display:flex;align-items:center;justify-content:center}
 .ctc-mask{position:fixed;inset:0;background:var(--shade);z-index:10100;display:flex;align-items:flex-end;justify-content:center}
-.ctc-sheet{width:100%;max-width:640px;max-height:92dvh;overflow:auto;background:var(--bg);color:var(--ink);border-radius:22px 22px 0 0;padding:16px 18px calc(18px + env(safe-area-inset-bottom,0px))}
+.ctc-sheet{width:100%;max-width:640px;max-height:92vh;overflow:auto;background:var(--bg);color:var(--ink);border-radius:22px 22px 0 0;padding:16px 18px calc(18px + env(safe-area-inset-bottom,0px))}
 .ctc-sh-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 .ctc-sh-h h3{margin:0;font-size:17px}
 .ctc-sh-h button{font-size:15px;color:var(--sub);padding:6px 4px}
@@ -997,7 +997,7 @@ button.feed-follow-plus{padding:0;cursor:pointer}
 /* iOS action sheet */
 .ios-mask{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:10110;display:flex;align-items:flex-end;justify-content:center;animation:iosf .2s ease}
 .ios-sh{width:100%;max-width:640px;padding:0 8px calc(8px + env(safe-area-inset-bottom,0px));animation:iosu .28s cubic-bezier(.2,.9,.25,1)}
-.ios-card{background:rgba(248,248,250,.94);-webkit-backdrop-filter:blur(30px) saturate(1.8);backdrop-filter:blur(30px) saturate(1.8);border-radius:14px;overflow:hidden;margin-top:8px;max-height:62dvh;overflow-y:auto}
+.ios-card{background:rgba(248,248,250,.94);-webkit-backdrop-filter:blur(30px) saturate(1.8);backdrop-filter:blur(30px) saturate(1.8);border-radius:14px;overflow:hidden;margin-top:8px;max-height:62vh;overflow-y:auto}
 [data-theme=dark] .ios-card{background:rgba(44,44,46,.94)}
 .ios-t{padding:14px 16px 12px;text-align:center;font-size:13px;color:#8e8e93;font-weight:600;border-bottom:.5px solid rgba(60,60,67,.2)}
 .ios-r{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;min-height:57px;padding:0 18px;font-size:20px;color:#007aff;background:transparent;border:0;border-top:.5px solid rgba(60,60,67,.2)}
@@ -1224,6 +1224,25 @@ button.feed-follow-plus{padding:0;cursor:pointer}
 .cr-dock{padding:0 21px;bottom:calc(env(safe-area-inset-bottom,0px)*.35 + 9px)}
 .cr-cap{gap:0;padding:4px}
 .cr-cap button{width:90px;height:53px;border-radius:27px}
+
+/* beautify page: white bg, outlined modules, API-page style */
+#v-css,#v-css .cx-body{background:#fff;color:#111}
+#v-css .bar h2{color:#111}
+#v-css .cx-body .note,#v-css .cap{color:#8a8a90}
+#v-css .pz-row{background:#fff;border:1px solid #dcdce0;color:#111}
+#v-css .pz-row.on{border:1.5px solid #111;padding:11.5px 13.5px}
+#v-css .pz-row .pz-t small{color:#8a8a90}
+#v-css .pz-list{margin:0 -16px;padding:2px 16px 10px}
+.cx-card{margin-top:6px;padding:0}
+.cx-card label{display:block;font-size:14px;color:#8a8a90;margin:18px 0 8px}
+.cx-card .cx-in{width:100%;background:#fff;color:#111;border:1px solid #dcdce0;border-radius:22px;padding:15px 18px;font-size:16px;outline:none}
+.cx-card .cx-in:focus{border-color:#111}
+.cx-card textarea.cx-in{display:block;height:260px;border-radius:18px;font-family:ui-monospace,Menlo,monospace;font-size:13px;line-height:1.55;white-space:pre;overflow:auto;resize:none;-webkit-overflow-scrolling:touch}
+.cx-act{display:flex;gap:10px;margin-top:14px}
+.cx-btn{flex:1;min-width:0;padding:13px 10px;border-radius:22px;border:1px solid #dcdce0;background:#fff;color:#111;font-weight:600;font-size:15px;text-align:center}
+.cx-btn.dark{background:#111;color:#fff;border-color:#111}
+.cx-del{display:block;margin:26px auto 8px;color:#ff3b30;font-size:13px;padding:8px 14px}
+.cx-empty{padding:26px 0;color:#8a8a90;text-align:center;font-size:14px}
 </style>
 <style id="ucss"></style>
 
@@ -1500,7 +1519,7 @@ button.feed-follow-plus{padding:0;cursor:pointer}
 [data-theme=dark] #v-worlds .wb-bottom{background:linear-gradient(to top,#000 76%,transparent)}
 /* iOS Reminder-like worldbook editor sheet */
 .worldbook-editor-mask{position:fixed!important;inset:0!important;z-index:10000!important;background:rgba(10,12,18,.48)!important;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex!important;align-items:flex-end!important;justify-content:center!important;padding:0!important}
-.worldbook-editor{width:100%!important;max-width:560px!important;max-height:91dvh!important;overflow:auto!important;background:#f2f2f7!important;color:#111!important;border-radius:32px 32px 0 0!important;padding:22px 18px calc(24px + env(safe-area-inset-bottom,0px))!important;box-shadow:0 -12px 45px rgba(0,0,0,.15)!important}
+.worldbook-editor{width:100%!important;max-width:560px!important;max-height:91vh!important;overflow:auto!important;background:#f2f2f7!important;color:#111!important;border-radius:32px 32px 0 0!important;padding:22px 18px calc(24px + env(safe-area-inset-bottom,0px))!important;box-shadow:0 -12px 45px rgba(0,0,0,.15)!important}
 .worldbook-editor .ew-head{display:grid;grid-template-columns:52px 1fr 52px;align-items:center;margin-bottom:22px;min-height:52px}
 .worldbook-editor .ew-head h3{font-size:18px!important;font-weight:750;text-align:center;margin:0!important;white-space:nowrap}
 .worldbook-editor .ew-close,.worldbook-editor .ew-save-top{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:#fff;color:#111;font-size:27px;line-height:1;box-shadow:0 2px 7px rgba(0,0,0,.04)}
@@ -1749,8 +1768,8 @@ button.feed-follow-plus{padding:0;cursor:pointer}
 </section>
 
 <section class="view" id="v-css">
-  <div class="bar"><button class="bk" data-back>‹</button><h2>美化</h2><button id="addc">新增</button></div>
-  <div class="body"><p class="note" style="margin:0 0 14px">写好的 CSS 只在聊天界面生效。常用选择器：.r（一行消息）、.m（气泡）、.me / .ai、.av、.nm、.tm、.dd、#inp、#msgs。</p><div id="clist"></div></div>
+  <div class="bar"><button class="bk" data-back>‹</button><h2>美化</h2><button id="impc">导入</button><button id="addc">新增</button><input type="file" id="cssfile" accept=".css,.txt,text/css,text/plain" style="display:none"></div>
+  <div class="body cx-body"><p class="note" style="margin:0 0 6px">写好的 CSS 只在聊天界面生效。常用选择器：.r（一行消息）、.m（气泡）、.me / .ai、.av、.nm、.tm、.dd、#inp、#msgs。</p><div class="cap" style="margin-top:20px">CSS Presets</div><div id="cx-list" class="pz-list"></div><div id="clist"></div></div>
 </section>
 
 <section class="view" id="v-deco">
@@ -3638,14 +3657,26 @@ function rCset(){
   $('#cs-tr-out').onclick=()=>langPick({title:'角色输出语种（可多选）',multi:true,selected:cc.trOut||[],onDone:l=>{cc.trOut=l;save();$('#cs-tr-out .is-v').textContent=l.join('、')||'未设置'}});
   $('#cs-tr-to').onclick=()=>langPick({title:'翻译成',multi:false,selected:[cc.trTo||'简体中文'],onDone:l=>{cc.trTo=l[0]||'简体中文';save();$('#cs-tr-to .is-v').textContent=cc.trTo}});
 }
+let cxSel='';
 function rCss(){
-  $('#clist').innerHTML=S.themes.map(t=>`<div class="card" data-id="${t.id}"><input class="tn" placeholder="美化名称" value="${esc(t.name)}"><label>CSS</label><textarea class="tc" rows="9" spellcheck="false" style="font-family:ui-monospace,Menlo,monospace;font-size:13px">${esc(t.css)}</textarea><button class="btn del">删除</button></div>`).join('')||'<div class="empty">还没有美化</div>';
-  $$('#clist .card').forEach(c=>{const t=S.themes.find(x=>x.id===c.dataset.id);
-    c.querySelector('.tn').oninput=e=>{t.name=e.target.value;save()};
-    c.querySelector('.tc').oninput=e=>{t.css=e.target.value;save()};
-    c.querySelector('.del').onclick=()=>{S.themes=S.themes.filter(x=>x!==t);Object.values(S.cc).forEach(v=>{if(v.css===t.id)v.css=''});save();rCss()}});
+  if(!S.themes.some(t=>t.id===cxSel))cxSel=(S.themes[0]||{}).id||'';
+  const ck='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+  const list=$('#cx-list');
+  list.innerHTML=S.themes.map(t=>`<div class="pz-row${t.id===cxSel?' on':''}" data-id="${t.id}"><div class="pz-t"><b>${esc(t.name||'未命名')}</b><small>${esc((t.css||'').replace(/\/\*[\s\S]*?\*\//g,'').replace(/\s+/g,' ').trim().slice(0,60)||'空')}</small></div>${t.id===cxSel?`<span class="pz-ck">${ck}</span>`:''}</div>`).join('')||'<div class="pz-empty">还没有美化</div>';
+  list.querySelectorAll('.pz-row').forEach(r=>r.onclick=()=>{cxSel=r.dataset.id;rCss()});
+  const t=S.themes.find(x=>x.id===cxSel),box=$('#clist');
+  if(!t){box.innerHTML='<div class="cx-empty">点右上角「新增」或「导入」</div>';return}
+  box.innerHTML=`<div class="cx-card"><label>名称</label><input class="cx-in tn" placeholder="美化名称" value="${esc(t.name)}"><label>CSS</label><textarea class="cx-in tc" spellcheck="false" autocapitalize="off" autocorrect="off" wrap="off">${esc(t.css)}</textarea><div class="cx-act"><button class="cx-btn" id="cx-imp" type="button">导入覆盖</button><button class="cx-btn dark" id="cx-save" type="button">保存</button></div><button class="cx-del" id="cx-del" type="button">删除此美化</button></div>`;
+  const tn=box.querySelector('.tn'),tc=box.querySelector('.tc');
+  tn.oninput=()=>{t.name=tn.value;save();const b=list.querySelector('.pz-row.on b');if(b)b.textContent=tn.value||'未命名'};
+  tc.oninput=()=>{t.css=tc.value;save()};
+  $('#cx-save').onclick=()=>{t.name=tn.value;t.css=tc.value;save();rCss();toast('已保存')};
+  $('#cx-imp').onclick=()=>cxPick(txt=>{t.css=txt;save();rCss();toast('已导入并覆盖')});
+  $('#cx-del').onclick=()=>{if(!confirm('删除「'+(t.name||'未命名')+'」？'))return;S.themes=S.themes.filter(x=>x!==t);Object.values(S.cc).forEach(v=>{if(v.css===t.id)v.css=''});save();cxSel='';rCss()};
 }
-$('#addc').onclick=()=>{S.themes.push({id:uid(),name:'新美化',css:''});save();rCss()};
+function cxPick(cb,nameCb){const f=$('#cssfile');f.value='';f.onchange=()=>{const file=f.files&&f.files[0];if(!file)return;const r=new FileReader();r.onload=()=>cb(String(r.result||''),file.name.replace(/\.[^.]+$/,''));r.onerror=()=>toast('读取失败');r.readAsText(file,'utf-8')};f.click()}
+$('#addc').onclick=()=>{const t={id:uid(),name:'新美化',css:''};S.themes.push(t);cxSel=t.id;save();rCss()};
+$('#impc').onclick=()=>cxPick((txt,nm)=>{const t={id:uid(),name:nm||'导入的美化',css:txt};S.themes.push(t);cxSel=t.id;save();rCss();toast('已导入')});
 
 /* desktop post editor */
 function rDeco(){
@@ -5971,7 +6002,7 @@ html.kb #inp,html.kb .wx-in,html.kb .feed-composer,html.kb .pd-composer{padding-
 .feed-comments-photo svg,.feed-comments-sticker svg{width:24px!important;height:24px!important;display:block!important;fill:none!important;stroke:currentColor!important;stroke-width:1.8!important;stroke-linecap:round!important;stroke-linejoin:round!important}
 .feed-comments-compose [data-fc-send]{width:30px!important;height:34px!important;flex:0 0 30px!important;display:grid!important;place-items:center!important;background:transparent!important;color:#2587ee!important;padding:3px!important;border:0!important;border-radius:8px!important;white-space:nowrap!important}.feed-comments-compose [data-fc-send] svg{width:24px!important;height:24px!important;display:block!important;fill:none!important;stroke:currentColor!important;stroke-width:1.8!important;stroke-linecap:round!important;stroke-linejoin:round!important}
 .feed-comment-translation{display:block!important;margin-top:5px!important;padding:0!important;background:transparent!important;color:var(--sub)!important;font-size:12px!important;text-align:left!important}
-.feed-comments-sheet{height:min(82dvh,820px)!important;border-radius:28px 28px 0 0!important}
+.feed-comments-sheet{height:min(82vh,820px)!important;border-radius:28px 28px 0 0!important}
 .feed-comments-header{height:58px!important;font-size:17px!important}
 @media(prefers-color-scheme:dark){.feed-comment-entry{border-color:#45464a!important}}
 /* Instagram comments bottom sheet + working gear header */
@@ -5986,7 +6017,7 @@ html.kb #inp,html.kb .wx-in,html.kb .feed-composer,html.kb .pd-composer{padding-
 #v-app.feed-mode .feed-actions{padding-top:7px;padding-bottom:5px}
 #v-app.feed-mode .feed-view-comments{display:block;text-align:left;width:100%;padding:7px 14px 2px;color:var(--sub);font-size:13px;background:transparent;border:0}
 .feed-comments-mask{position:fixed;inset:0;z-index:10080;background:rgba(0,0,0,.48);display:flex;align-items:flex-end;justify-content:center}
-.feed-comments-sheet{width:100%;max-width:560px;height:min(78dvh,760px);background:var(--bg);color:var(--ink);border-radius:25px 25px 0 0;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 -8px 32px #0002}
+.feed-comments-sheet{width:100%;max-width:560px;height:min(78vh,760px);background:var(--bg);color:var(--ink);border-radius:25px 25px 0 0;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 -8px 32px #0002}
 .feed-comments-grabber{width:46px;height:4px;border-radius:9px;background:var(--sub);opacity:.65;margin:12px auto 0;flex:none}
 .feed-comments-header{height:52px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;text-align:center;border-bottom:1px solid var(--line);flex:none;font-size:16px}
 .feed-comments-header button{justify-self:end;margin-right:16px;background:transparent;color:var(--sub);font-size:27px;line-height:1;padding:5px 8px;border-radius:50%;width:38px;height:38px;display:grid;place-items:center}
@@ -6016,7 +6047,7 @@ html.kb #inp,html.kb .wx-in,html.kb .feed-composer,html.kb .pd-composer{padding-
 /* Instagram-style comment sheet */
 .fcx-mask{position:fixed;inset:0;z-index:10080;background:rgba(0,0,0,.52);display:flex;align-items:flex-end;justify-content:center;animation:fcx-fade .22s ease both}
 .fcx-mask [hidden]{display:none!important}
-.fcx-sheet{position:relative;width:100%;max-width:560px;height:min(86dvh,880px);background:var(--bg);color:var(--ink);border-radius:28px 28px 0 0;display:flex;flex-direction:column;overflow:hidden;animation:fcx-up .3s cubic-bezier(.2,.85,.25,1) both;will-change:transform}
+.fcx-sheet{position:relative;width:100%;max-width:560px;height:min(86vh,880px);background:var(--bg);color:var(--ink);border-radius:28px 28px 0 0;display:flex;flex-direction:column;overflow:hidden;animation:fcx-up .3s cubic-bezier(.2,.85,.25,1) both;will-change:transform}
 @keyframes fcx-fade{from{opacity:0}to{opacity:1}}
 @keyframes fcx-up{from{transform:translateY(100%)}to{transform:none}}
 @keyframes fcx-dot{0%,80%,100%{opacity:.25}40%{opacity:1}}
@@ -6076,7 +6107,7 @@ html.kb #inp,html.kb .wx-in,html.kb .feed-composer,html.kb .pd-composer{padding-
 .fcx-ib svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .fcx-post{background:transparent;color:#3797f0;font-weight:700;font-size:15px;padding:0 6px;flex:none;white-space:nowrap}
 /* layers: action sheet and modal must sit above the comment sheet */
-.feed-sheet-mask{z-index:10090!important}.feed-sheet{max-height:72dvh;overflow-y:auto}
+.feed-sheet-mask{z-index:10090!important}.feed-sheet{max-height:72vh;overflow-y:auto}
 #modal{z-index:10095!important}#toast{z-index:10100!important}
 </style>
 <style id="ms-apple-style">
