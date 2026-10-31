@@ -4932,37 +4932,56 @@ document.addEventListener('click',async e=>{
  if(x=q('[data-sg-move]')){const ids=[...SGS.sel];if(!ids.length)return toast('先点选要移动的表情包');msSheet(S.stickerGroups.filter(g=>g!==x.dataset.sgMove).map(g=>({label:'移动到「'+g+'」',run:()=>{S.stickers.forEach(s=>{if(ids.includes(s.id))s.group=g});SGS.sel.clear();save();sgRefresh()}})).concat([{label:'取消'}]));return}
  if(x=q('[data-sg-card]')){if(SGS.lp)return;const pg=q('#skpage');if(!pg)return;const id=x.dataset.sgCard;if(SGS.sel.has(id))SGS.sel.delete(id);else SGS.sel.add(id);x.classList.toggle('on',SGS.sel.has(id));const nn=pg.querySelector('.skm-n');if(nn)nn.textContent=pg.querySelectorAll('.skm-c.on').length}
 },true);
-/* ===== v77 日记：长日记 + 小纸条 ===== */
+/* ===== v77 日记：长日记 + 拍立得 + 留言板 ===== */
 const DY_SYS_LONG='你正在以自己的身份写一篇私人日记。第一人称，真实、有具体细节和情绪，可以回忆与对方相处的片段，也可以写自己的日常与心事。这是写给自己看的日记，不是写给对方的信，也不要提及自己是 AI。';
-const DY_SYS_NOTE='你要写一张留给对方的小纸条：很短（60字以内），口语、随手、有温度，像塞进口袋或贴在冰箱上的便签。不要署名。';
-const DYD={font:'',size:15,lh:1.9,paper:'plain',frame:'ring',fx:'rise',noteHide:false,count:1,len:500,sys:DY_SYS_LONG,extra:'',nsys:DY_SYS_NOTE,nextra:'',nauto:0,sched:{},deco:{}};
+const DY_SYS_NOTE='你要在留言板上给对方留一条言：很短（60字以内），口语、随手、有温度，像贴在冰箱上的便签。不要署名。';
+const DY_SYS_NOTE_OLD='你要写一张留给对方的小纸条：很短（60字以内），口语、随手、有温度，像塞进口袋或贴在冰箱上的便签。不要署名。';
+const DYD={font:'',size:15,lh:1.9,paper:'plain',frame:'ring',fx:'rise',noteHide:false,count:1,len:500,sys:DY_SYS_LONG,extra:'',nsys:DY_SYS_NOTE,nextra:'',nauto:0,sched:{},deco:{},devLine:'iPhone18',cmLine:'missing 12 a.m.'};
 const D=()=>{const c=S.dcfg||(S.dcfg={});for(const k in DYD)if(c[k]===undefined)c[k]=typeof DYD[k]==='object'?{}:DYD[k];return c};
+let dySwAt=0;
 const DY={owner:'me',tab:'long',busy:false},DYT=new Set(),dyLast={};
 const NOTE_COLORS=['#fff4a8','#ffd9d9','#d6ebff','#dcf5d4','#ecdcff'];
+const dyPlain=s=>String(s||'').replace(/\[\[(?:红|蓝)[:：](.+?)\]\]/g,'$1');
+const dyBodyOf=d=>{const ls=String(d.content||'').split('\n');let i=0;while(i<ls.length&&!ls[i].trim())i++;const n=s=>String(s).replace(/[\s\p{P}\p{S}]/gu,'').toLowerCase();if(d.title&&i<ls.length&&n(dyPlain(ls[i]))===n(d.title))i++;return ls.slice(i).join('\n')};
 const dyOwn=d=>d.pid==='me'||P(d.pid)?d.pid:'me';
 const dyDate=t=>{const d=new Date(t);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
 const dyList=()=>S.diaries.filter(d=>dyOwn(d)===DY.owner&&(d.type||'long')===DY.tab).sort((a,b)=>b.time-a.time);
 const dyFx=()=>D().fx==='none'?'':'dy-fx-'+D().fx;
 const dyVars=()=>{const c=D();return `--dy-font:${c.font?fontStack(c.font):'inherit'};--dy-size:${c.size}px;--dy-lh:${c.lh}`};
-function dyParse(raw){raw=String(raw||'').trim().replace(/^```[a-z]*\n?|```$/g,'').trim();const ls=raw.split('\n');let title='';const m=ls[0].match(/^\s*(?:#+\s*)?(?:标题|题目)\s*[:：]\s*(.+)$/);if(m){title=m[1].trim().replace(/^[《「"]|[》」"]$/g,'');ls.shift()}return{title:title.slice(0,40),content:ls.join('\n').trim()}}
+function dyParse(raw){
+ raw=String(raw||'').trim().replace(/^```[a-z]*\n?|```$/g,'').trim();
+ const TL=/^\s*[#*>\s\-]*(?:标题|標題|题目|題目|title|タイトル|제목)[\s*]*[:：]\s*[*\s]*(.+?)[*\s]*$/i;
+ const clean=s=>dyPlain(s).trim().replace(/^[《「『"“]+|[》」』"”]+$/g,'').trim();
+ const norm=s=>String(s||'').replace(/[\s\p{P}\p{S}]/gu,'').toLowerCase();
+ let tr='',trTitle='',main=raw;const ix=raw.indexOf('【译文】');
+ if(ix>=0){main=raw.slice(0,ix);const l2=raw.slice(ix+4).trim().split('\n'),m2=l2.length&&l2[0].match(TL);if(m2){trTitle=clean(m2[1]);l2.shift()}tr=l2.join('\n').trim()}
+ const ls=main.split('\n');while(ls.length&&!ls[0].trim())ls.shift();
+ let title='';const m=ls.length&&ls[0].match(TL);
+ if(m){title=clean(m[1]);ls.shift()}
+ else if(ls.length>2&&ls[0].trim().length<=28&&!/[。！？.!?…]$/.test(ls[0].trim())&&!ls[1].trim())title=clean(ls.shift());
+ while(ls.length&&!ls[0].trim())ls.shift();
+ if(title&&ls.length&&norm(dyPlain(ls[0]))===norm(title))ls.shift();
+ while(ls.length&&!ls[0].trim())ls.shift();
+ return{title:title.slice(0,40),content:ls.join('\n').trim(),tr,trTitle:trTitle.slice(0,60)}}
+
 function dyCtx(p,pid,n){const h=S.chats[pid]||[],recent=h.filter(m=>!m.recalled&&m.content).slice(-n).map(m=>(m.role==='user'?(S.me.name||'用户'):p.name)+'：'+String(m.content).slice(0,120)).join('\n');return{base:build(p,h)[0].content,recent:recent||'（暂无聊天记录）',now:new Date().toLocaleString('zh-CN',{year:'numeric',month:'long',day:'numeric',weekday:'long',hour:'2-digit',minute:'2-digit'})}}
 async function dyGenLong(pid){
  const p=P(pid),c=D(),cfg=rolePhoneConfig();if(!p)throw new Error('角色不存在');if(!cfg.key)throw new Error('请先在设置里填写 API Key');
  const N=Math.max(1,Math.min(5,+c.count||1));let n=0;
  for(let k=0;k<N;k++){
   const x=dyCtx(p,pid,16),prev=S.diaries.filter(d=>d.pid===pid&&(d.type||'long')==='long').slice(-4).map(d=>d.title||d.content.slice(0,16)).join('、');
-  const raw=await ask([{role:'system',content:x.base+'\n\n【日记写作】\n'+c.sys+(c.extra?'\n'+c.extra:'')},{role:'user',content:`现在是${x.now}。\n最近的聊天片段：\n${x.recent}\n${prev?'你之前写过的日记标题（避免重复）：'+prev+'\n':''}${k>0?'这是今天的第'+(k+1)+'篇，请换一个角度或话题。\n':''}请写日记，约${c.len}字。格式：第一行写“标题：……”，空一行后写正文，不要其他说明。`}],null,null,cfg);
+  const raw=await ask([{role:'system',content:x.base+'\n\n【日记写作】\n'+c.sys+(c.extra?'\n'+c.extra:'')},{role:'user',content:`现在是${x.now}。\n最近的聊天片段：\n${x.recent}\n${prev?'你之前写过的日记标题（避免重复）：'+prev+'\n':''}${k>0?'这是今天的第'+(k+1)+'篇，请换一个角度或话题。\n':''}请写日记，约${c.len}字。格式：第一行写“标题：……”，空一行后写正文，不要其他说明。\n【重点标记】写完后，请你自己挑 1-3 处最想强调的片段做标记：用 [[红:原句]] 标出（红色下划线，给最扎心、最重要的话），用 [[蓝:原句]] 标出（蓝色荧光笔，给想记住的、甜的或具体的细节）。标记只能包住正文里已有的文字，不能嵌套、不能跨段、不要标在标题上，每处不超过 30 字。\n【格式再强调】标题只写在第一行“标题：……”，正文第一句直接开始写日记，不要在正文里重复标题。\n【译文】如果这篇日记不是用简体中文写的（比如英文、日文、韩文等），请在正文最后另起一行写“【译文】”，其后第一行写“标题：标题的简体中文译文”，再换行给出整篇日记正文的简体中文译文：分段必须与原文逐段一致（原文几段译文就几段，每段单独一行），并且原文里用 [[红:…]]、[[蓝:…]] 标出的片段，其对应的译文也要用同样颜色的 [[红:…]] / [[蓝:…]] 包住；如果日记本来就是简体中文，不要写译文。`}],null,null,cfg);
   const e=dyParse(raw);if(!e.content)continue;
-  S.diaries.push({id:uid(),type:'long',pid,title:e.title||p.name+'的日记',content:e.content,comment:'',time:Date.now()+k});n++;save();
+  S.diaries.push({id:uid(),type:'long',pid,title:e.title||p.name+'的日记',content:e.content,tr:e.tr||'',trTitle:e.trTitle||'',comment:'',time:Date.now()+k});n++;save();
  }
  return n}
 async function dyGenNote(pid,topic){
  const p=P(pid),c=D(),cfg=rolePhoneConfig();if(!p)throw new Error('角色不存在');if(!cfg.key)throw new Error('请先在设置里填写 API Key');
  const x=dyCtx(p,pid,10);
- const raw=await ask([{role:'system',content:x.base+'\n\n【小纸条】\n'+c.nsys+(c.nextra?'\n'+c.nextra:'')},{role:'user',content:`现在是${x.now}。\n最近的聊天片段：\n${x.recent}\n${topic?'请按这个意思写一张小纸条：'+topic:'如果你此刻有话想留给对方，就写一张小纸条；如果没有特别想说的，只输出 NONE。'}\n只输出纸条内容本身，不要引号和署名。`}],null,null,cfg);
+ const raw=await ask([{role:'system',content:x.base+'\n\n【留言板】\n'+c.nsys+(c.nextra?'\n'+c.nextra:'')},{role:'user',content:`现在是${x.now}。\n最近的聊天片段：\n${x.recent}\n${topic?'请按这个意思写一条留言：'+topic:'如果你此刻有话想留给对方，就写一条留言；如果没有特别想说的，只输出 NONE。'}\n只输出纸条内容本身，不要引号和署名。`}],null,null,cfg);
  let t=String(raw||'').trim();if(/^NONE\b/i.test(t))return null;t=t.replace(/^["“「]+|["”」]+$/g,'').trim().slice(0,200);if(!t)return null;
  const d={id:uid(),type:'note',pid,title:'',content:t,comment:'',time:Date.now()};S.diaries.push(d);save();return d}
-function dyAutoNote(pid){const c=D();if(!c.nauto||Math.random()*100>=c.nauto||Date.now()-(dyLast[pid]||0)<20*60000)return;dyLast[pid]=Date.now();dyGenNote(pid,'').then(d=>{if(d){toast((P(pid)||{}).name+' 留了一张小纸条');if(stack[stack.length-1]==='diary')rDiary(1)}}).catch(()=>{})}
+function dyAutoNote(pid){const c=D();if(!c.nauto||Math.random()*100>=c.nauto||Date.now()-(dyLast[pid]||0)<20*60000)return;dyLast[pid]=Date.now();dyGenNote(pid,'').then(d=>{if(d){toast((P(pid)||{}).name+' 留了一条留言');if(stack[stack.length-1]==='diary')rDiary(1)}}).catch(()=>{})}
 async function dyTick(){
  const c=D(),now=new Date(),today=dyDate(now.getTime()),cur_=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
  for(const pid of Object.keys(c.sched)){const sc=c.sched[pid],p=P(pid);
@@ -4974,27 +4993,39 @@ async function dyTick(){
 async function dyRun(fn){if(DY.busy)return;DY.busy=true;rDiary(1);try{await fn()}catch(e){toast('生成失败：'+e.message)}DY.busy=false;if(stack[stack.length-1]==='diary')rDiary(1)}
 function rDiary(still){
  const b=$('#diary-body'),c=D();if(DY.owner!=='me'&&!P(DY.owner))DY.owner='me';
- const o=DY.owner,u=who(o),dc=c.deco[o]||{},list=dyList(),isMe=o==='me',sc=c.sched[o]||{},isN=DY.tab==='note';
- const nL=S.diaries.filter(d=>dyOwn(d)===o&&(d.type||'long')==='long').length,nN=S.diaries.filter(d=>dyOwn(d)===o&&d.type==='note').length;
+ if(c.nsys===DY_SYS_NOTE_OLD)c.nsys=DY_SYS_NOTE;
+ const o=DY.owner,u=who(o),dc=c.deco[o]||{},list=(DY.tab==='pola'?[]:dyList()),isMe=o==='me',sc=c.sched[o]||{},isN=DY.tab==='note',isP=DY.tab==='pola';
+ const nL=S.diaries.filter(d=>dyOwn(d)===o&&(d.type||'long')==='long').length,nN=S.diaries.filter(d=>dyOwn(d)===o&&d.type==='note').length,nP=ppAlbum().length;
  const sl=(b.querySelector('.dy-owners')||{}).scrollLeft||0;
- b.className='body dy dy-p-'+c.paper+' dy-fr-'+c.frame+' '+dyFx()+(still?' dy-still':'');b.style.cssText=dyVars();
+ b.className='body dy dy-clean dy-p-'+(c.paper==='warm'?'plain':c.paper)+' dy-fr-'+c.frame+' '+dyFx()+(still?' dy-still':'');b.style.cssText=dyVars();
  const chips=['me',...S.personas.filter(x=>!x.blocked).map(x=>x.id)].map(id=>{const w=who(id);return `<button class="dy-chip${id===o?' on':''}" data-dy-owner="${id}"><span class="av">${av(w)}</span><em>${esc(id==='me'?(S.me.name||'我'):w.name)}</em></button>`}).join('');
  const sv=(d,f)=>`<svg viewBox="0 0 24 24" fill="${f||'none'}" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`,tsx=dc.ts||Date.now();
- const head=`<div class="dy-post dy-it"${dc.cover?'':''}>${dc.cover?`<div class="dy-pcover" data-dy-head style="background-image:url('${String(dc.cover).replace(/'/g,'%27')}')"></div>`:''}<div class="dy-pbody"><div class="dy-ph"><div class="dy-av"><span class="av">${av(u)}</span></div><div class="dy-pn"><b>${esc(u.name)}</b><small>@${esc(u.handle||o)}</small></div></div><p class="dy-pt${dc.text?'':' empty'}" data-dy-text>${esc(dc.text||'点这里写一句装饰文案')}</p><div class="dy-pd">${sv('<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>')}<span>${dyDate(tsx)} ${hm(tsx)}</span></div></div><div class="dy-pa"><button data-dy-like class="${dc.liked?'on':''}">${sv('<path d="M12 20s-7.5-4.6-9-9.2C1.9 7.3 4 4.5 7 4.5c1.9 0 3.5 1 5 2.8 1.5-1.8 3.1-2.8 5-2.8 3 0 5.1 2.8 4 6.3-1.5 4.6-9 9.2-9 9.2Z"/>',dc.liked?'currentColor':'none')}喜欢</button><i></i><button data-dy-gonote>${sv('<path d="M5 6.5A2.5 2.5 0 0 1 7.5 4H12M5 6.5V20l6-4 6 4v-6"/><path d="M17.5 3v6M14.5 6h6"/>')}小纸条</button><i></i><button data-dy-save>${sv('<path d="M13 5h6v6M19 5l-8 8"/><path d="M11 6H6.5A1.5 1.5 0 0 0 5 7.5v10A1.5 1.5 0 0 0 6.5 19h10a1.5 1.5 0 0 0 1.5-1.5V13"/>')}存为图片</button><i></i><button data-dy-head class="dy-more" aria-label="更多">${sv('<circle cx="5" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="19" cy="12" r="1.2"/>','currentColor')}</button></div></div>`;
- const seg=`<div class="dy-seg dy-it" style="--i:1"><button data-dy-tab="long" class="${isN?'':'on'}">长日记<small>${nL}</small></button><button data-dy-tab="note" class="${isN?'on':''}">小纸条<small>${nN}</small></button></div>`;
+ const head=isP?'':`<div class="dy-post dy-it">${dc.cover?`<div class="dy-pcover" data-dy-head style="background-image:url('${String(dc.cover).replace(/'/g,'%27')}')"></div>`:''}<div class="dy-pbody"><div class="dy-ph"><div class="dy-av"><span class="av">${av(u)}</span></div><div class="dy-pn"><b>${esc(u.name)}</b><small>@${esc(u.handle||o)}</small></div></div><p class="dy-pt${dc.text?'':' empty'}" data-dy-text>${esc(dc.text||'点这里写一句装饰文案')}</p><div class="dy-pd">${sv('<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>')}<span>${dyDate(tsx)} ${hm(tsx)}</span></div></div><div class="dy-pa"><button data-dy-like class="${dc.liked?'on':''}">${sv('<path d="M12 20s-7.5-4.6-9-9.2C1.9 7.3 4 4.5 7 4.5c1.9 0 3.5 1 5 2.8 1.5-1.8 3.1-2.8 5-2.8 3 0 5.1 2.8 4 6.3-1.5 4.6-9 9.2-9 9.2Z"/>',dc.liked?'currentColor':'none')}喜欢</button><i></i><button data-dy-gonote>${sv('<path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H11l-4 3.5V16h-.5A2.5 2.5 0 0 1 4 13.5Z"/>')}留言板</button><i></i><button data-dy-save>${sv('<path d="M13 5h6v6M19 5l-8 8"/><path d="M11 6H6.5A1.5 1.5 0 0 0 5 7.5v10A1.5 1.5 0 0 0 6.5 19h10a1.5 1.5 0 0 0 1.5-1.5V13"/>')}存为图片</button><i></i><button data-dy-head class="dy-more" aria-label="更多">${sv('<circle cx="5" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="19" cy="12" r="1.2"/>','currentColor')}</button></div></div>`;
+ const seg=`<div class="dy-seg dy-it" style="--i:1"><button data-dy-tab="long" class="${!isN&&!isP?'on':''}">长日记<small>${nL}</small></button><button data-dy-tab="pola" class="${isP?'on':''}">拍立得<small>${nP}</small></button><button data-dy-tab="note" class="${isN?'on':''}">留言板<small>${nN}</small></button></div>`;
  const dis=DY.busy?' disabled':'';let act='';
- if(isMe)act=`<button class="dy-btn fill" data-dy-new>${isN?'写纸条':'写日记'}</button>`;
+ if(isP)act='';
+ else if(isMe)act=`<button class="dy-btn fill" data-dy-new>${isN?'写留言':'写日记'}</button>`;
  else if(isN)act=`<button class="dy-btn fill" data-dy-free${dis}>${DY.busy?'生成中…':'随心写'}</button><button class="dy-btn" data-dy-topic${dis}>指定生成</button>`;
  else act=`<button class="dy-btn fill" data-dy-gen${dis}>${DY.busy?'生成中…':'现在生成 · '+(+c.count||1)+'篇'}</button><label class="dy-sched"><input type="checkbox" data-dy-son ${sc.on?'checked':''}>每天<input type="time" data-dy-stime value="${sc.time||'22:00'}">自动写</label>`;
  let body;
- if(!list.length)body=`<div class="empty dy-it" style="--i:3">${isN?'还没有小纸条':'还没有日记'}</div>`;
- else if(isN)body='<div class="dy-notes">'+list.map((d,i)=>{const hs=[...d.id].reduce((a,ch)=>a+ch.charCodeAt(0),0),w=who(dyOwn(d));return `<div class="dy-note dy-it${d.read&&c.noteHide?' dim':''}" style="--i:${i+2};--rot:${((hs%5)-2)*.9}deg;--nc:${NOTE_COLORS[hs%5]}" data-dy-note="${d.id}"><i class="dy-tape"></i><span class="dy-pin"><span class="av">${av(w)}</span></span><p>${esc(d.content)}</p><small>${dyDate(d.time)} ${hm(d.time)}</small><button class="dy-x" data-dy-del="${d.id}" aria-label="删除">×</button></div>`}).join('')+'</div>';
- else body=list.map((d,i)=>{const dt=new Date(d.time);return `<article class="dy-card dy-it" style="--i:${i+2}" data-dy-open="${d.id}"><div class="dy-date"><b>${dt.getDate()}</b><small>${dt.getFullYear()}.${dt.getMonth()+1}</small></div><div class="dy-cb"><h3>${esc(d.title||'无标题')}</h3><p>${esc(d.content)}</p></div></article>`}).join('');
- b.innerHTML=`<div class="dy-owners dy-it">${chips}</div>${head}${seg}<div class="dy-act dy-it" style="--i:2">${act}</div>${body}`;
+ if(isP)body=ppRender();
+ else if(!list.length)body=`<div class="empty dy-it" style="--i:3">${isN?'留言板还是空的':'还没有日记'}</div>`;
+ else if(isN)body='<div class="mb-list">'+list.map((d,i)=>{const w=who(dyOwn(d));return `<div class="mb-item dy-it${d.read&&c.noteHide?' dim':''}" style="--i:${i+2}" data-dy-note="${d.id}"><span class="av">${av(w)}</span><div class="mb-main"><div class="mb-top"><b>${esc(dyOwn(d)==='me'?(S.me.name||'我'):w.name)}</b><time>${dyDate(d.time)} ${hm(d.time)}</time><button class="dy-x" data-dy-del="${d.id}" aria-label="删除">×</button></div><p>${esc(d.content)}</p></div></div>`}).join('')+'</div>';
+ else body=list.map((d,i)=>{const dt=new Date(d.time);return `<div class="dy-sw dy-it" style="--i:${i+2}"><div class="dy-sw-act"><button data-dy-edit="${d.id}">编辑</button><button class="del" data-dy-rm="${d.id}">删除</button></div><article class="dy-card" data-dy-open="${d.id}"><div class="dy-date"><b>${dt.getDate()}</b><small>${dt.getFullYear()}.${dt.getMonth()+1}</small></div><div class="dy-cb"><h3>${esc(d.title||'无标题')}</h3><p>${esc(dyPlain(dyBodyOf(d)))}</p></div></article></div>`}).join('');
+ b.innerHTML=`<div class="dy-owners dy-it">${chips}</div>${head}${seg}${act?`<div class="dy-act dy-it" style="--i:2">${act}</div>`:''}${body}`;
  const ow=b.querySelector('.dy-owners');if(ow)ow.scrollLeft=sl;
- b.onclick=e=>{const t=e.target.closest('[data-dy-owner],[data-dy-tab],[data-dy-head],[data-dy-text],[data-dy-like],[data-dy-gonote],[data-dy-save],[data-dy-new],[data-dy-gen],[data-dy-free],[data-dy-topic],[data-dy-open],[data-dy-note],[data-dy-del]');if(!t||t.disabled)return;const ds=t.dataset;
-  if(ds.dyOwner){DY.owner=ds.dyOwner;rDiary()}
+ const SWW=136;let sw=null;
+ const swClose=o=>b.querySelectorAll('.dy-card.open').forEach(x=>{if(x!==o){x.classList.remove('open');x.style.transform=''}});
+ b.onpointerdown=e=>{if(e.target.closest('.dy-sw-act'))return;const cd=e.target.closest('.dy-card');swClose(cd);if(!cd)return;sw={cd,x:e.clientX,y:e.clientY,base:cd.classList.contains('open')?-SWW:0,lock:null,cur:0}};
+ b.onpointermove=e=>{if(!sw)return;const dx=e.clientX-sw.x,dy=e.clientY-sw.y;
+  if(!sw.lock){if(Math.abs(dx)>8&&Math.abs(dx)>Math.abs(dy)){sw.lock='h';try{b.setPointerCapture(e.pointerId)}catch(_){}}else if(Math.abs(dy)>8)sw.lock='v'}
+  if(sw.lock==='h'){const x=Math.max(-SWW,Math.min(0,sw.base+dx));sw.cur=x;sw.cd.style.transition='none';sw.cd.style.transform='translateX('+x+'px)'}};
+ b.onpointerup=b.onpointercancel=()=>{if(!sw)return;const s=sw;sw=null;if(s.lock==='h'){const open=s.cur<-SWW/2;s.cd.style.transition='';s.cd.style.transform=open?'translateX('+(-SWW)+'px)':'';s.cd.classList.toggle('open',open);dySwAt=Date.now()}};
+ b.onclick=e=>{const t=e.target.closest('[data-dy-owner],[data-dy-tab],[data-dy-head],[data-dy-text],[data-dy-like],[data-dy-gonote],[data-dy-save],[data-dy-new],[data-dy-gen],[data-dy-free],[data-dy-topic],[data-dy-open],[data-dy-note],[data-dy-del],[data-dy-edit],[data-dy-rm],[data-pp-add],[data-pp-view]');if(!t||t.disabled)return;const ds=t.dataset;
+  if(ds.dyOwner){DY.owner=ds.dyOwner;if(ds.dyOwner!=='me')DY.pp=ds.dyOwner;rDiary()}
   else if(ds.dyTab){DY.tab=ds.dyTab;rDiary()}
+  else if(ds.ppAdd){ppAdd(ds.ppAdd)}
+  else if(ds.ppView){ppView(ds.ppView)}
   else if('dyHead' in ds)dyHeadMenu();
   else if('dyText' in ds)dyEditText();
   else if('dyLike' in ds){const dc2=c.deco[DY.owner]||(c.deco[DY.owner]={});dc2.liked=!dc2.liked;save();rDiary(1)}
@@ -5002,16 +5033,20 @@ function rDiary(still){
   else if('dySave' in ds)dySaveCard();
   else if('dyNew' in ds)dyNew();
   else if('dyGen' in ds)dyRun(async()=>{const n=await dyGenLong(DY.owner);toast(n?'写好了 '+n+' 篇日记':'没有生成内容')});
-  else if('dyFree' in ds)dyRun(async()=>{const d=await dyGenNote(DY.owner,'');toast(d?'留了一张小纸条':'ta 现在没有想留的话')});
-  else if('dyTopic' in ds)askText('指定小纸条内容','比如：提醒我早点睡 / 今天想对我说的话').then(v=>{if(v===null)return;dyRun(async()=>{const d=await dyGenNote(DY.owner,v.trim());toast(d?'纸条写好了':'没有生成内容')})}).catch(()=>{});
-  else if(ds.dyOpen)dyOpen(ds.dyOpen);
-  else if(ds.dyDel){const id=ds.dyDel;if(!confirm('删除这张小纸条？'))return;const el=t.closest('.dy-note');el.classList.add('dy-out');setTimeout(()=>{S.diaries=S.diaries.filter(x=>x.id!==id);save();rDiary(1)},400)}
+  else if('dyFree' in ds)dyRun(async()=>{const d=await dyGenNote(DY.owner,'');toast(d?'留了一条留言':'ta 现在没有想留的话')});
+  else if('dyTopic' in ds)askText('指定留言内容','比如：提醒我早点睡 / 今天想对我说的话').then(v=>{if(v===null)return;dyRun(async()=>{const d=await dyGenNote(DY.owner,v.trim());toast(d?'留言写好了':'没有生成内容')})}).catch(()=>{});
+  else if(ds.dyEdit){swClose();dyOpen(ds.dyEdit,true)}
+  else if(ds.dyRm){const id=ds.dyRm;if(!confirm('删除这篇日记？'))return;const el=t.closest('.dy-sw');el.classList.add('dy-out');setTimeout(()=>{S.diaries=S.diaries.filter(x=>x.id!==id);save();rDiary(1)},400)}
+  else if(ds.dyOpen){if(Date.now()-dySwAt<400)return;if(t.classList.contains('open')){t.classList.remove('open');t.style.transform='';return}dyOpen(ds.dyOpen)}
+  else if(ds.dyDel){const id=ds.dyDel;if(!confirm('删除这条留言？'))return;const el=t.closest('.mb-item');el.classList.add('dy-out');setTimeout(()=>{S.diaries=S.diaries.filter(x=>x.id!==id);save();rDiary(1)},400)}
   else if(ds.dyNote){const d=S.diaries.find(x=>x.id===ds.dyNote);if(d&&c.noteHide){d.read=!d.read;save();t.classList.toggle('dim',!!d.read)}}};
  b.onchange=e=>{const t=e.target;if(!t.matches('[data-dy-son],[data-dy-stime]'))return;const s0=c.sched[DY.owner]||(c.sched[DY.owner]={on:false,time:'22:00'});
   if(t.matches('[data-dy-stime]'))s0.time=t.value||'22:00';else{s0.on=t.checked;if(s0.on&&new Date().toTimeString().slice(0,5)>=(s0.time||'22:00'))s0.last=dyDate(Date.now())}
   save();if(s0.on)toast('已设定：每天 '+(s0.time||'22:00')+' 自动写日记（需保持页面打开或开启保活）')};
 }
-function dyNew(){const isN=DY.tab==='note';modal('',v=>{v=v.trim();if(!v)return;S.diaries.push({id:uid(),type:isN?'note':'long',pid:DY.owner,title:isN?'':v.split('\n')[0].slice(0,30),content:v,comment:'',time:Date.now()});save();rDiary()})}
+function dyNew(){
+ if(DY.tab==='note'){modal('',v=>{v=v.trim();if(!v)return;S.diaries.push({id:uid(),type:'note',pid:DY.owner,title:'',content:v,comment:'',time:Date.now()});save();rDiary()});return}
+ dyOpen(null,true,{id:uid(),type:'long',pid:DY.owner,title:'',content:'',comment:'',time:Date.now()})}
 function dyEditText(){const c=D(),o=DY.owner,dc=c.deco[o]||(c.deco[o]={});modal(dc.text||'',v=>{dc.text=v.trim();dc.ts=Date.now();save();rDiary(1)})}
 async function dySaveCard(){
  try{
@@ -5038,18 +5073,153 @@ async function dySaveCard(){
  }catch(e){if(e&&e.name==='AbortError')return;toast('保存图片失败：'+((e&&e.message)||e))}
 }
 function dyHeadMenu(){const c=D(),o=DY.owner,dc=c.deco[o]||(c.deco[o]={});showFeedSheet([{label:'编辑装饰文案',run:dyEditText},{label:'更换封面图',run:()=>pickImage(src=>{dc.cover=src;save();rDiary(1)})},...(dc.cover?[{label:'移除封面图',run:()=>{dc.cover='';save();rDiary(1)}}]:[]),{label:'取消',run:()=>{}}])}
-function dyOpen(id){
- const d=S.diaries.find(x=>x.id===id);if(!d)return;const c=D(),u=who(dyOwn(d)),old=document.getElementById('dy-read');if(old)old.remove();
- const ov=document.createElement('div');ov.id='dy-read';ov.className='dy dy-p-'+c.paper+' dy-fr-'+c.frame+' '+dyFx();ov.style.cssText=dyVars();
- const paras=String(d.content||'').split(/\n+/).filter(Boolean);
- ov.innerHTML=`<div class="dy-rbar"><button data-x>‹ 返回</button><span></span><button data-ed>编辑</button><button data-rm class="del">删除</button></div><div class="dy-rbody"><div class="dy-rmeta dy-it" style="--i:0"><div class="dy-av"><span class="av">${av(u)}</span></div><div><b>${esc(u.name)}</b><small>${dyDate(d.time)} ${hm(d.time)}</small></div></div><h2 class="dy-it" style="--i:1">${esc(d.title||'无标题')}</h2><div class="dy-text">${paras.map((t,i)=>`<p class="dy-it" style="--i:${i+2}">${esc(t)}</p>`).join('')}</div><div class="dy-cm dy-it" style="--i:${paras.length+3}"><label>点评</label><textarea rows="3" placeholder="写下你的点评"></textarea></div></div>`;
- const ta=ov.querySelector('textarea');ta.value=d.comment||'';ta.oninput=()=>{d.comment=ta.value;save()};
- const close=()=>{ov.classList.add('dy-out');setTimeout(()=>ov.remove(),380)};
+/* ===== 重点标记 ===== */
+const dyMark=s=>esc(s).replace(/\[\[(红|蓝)[:：](.+?)\]\]/g,(m,k,x)=>`<span class="mk-${k==='红'?'r':'b'}">${x}</span>`);
+function dyPickAv(cb){pickImage(src=>{const im=new Image();im.onload=()=>{const s=Math.min(im.width,im.height),cv=document.createElement('canvas');cv.width=cv.height=Math.min(200,s);cv.getContext('2d').drawImage(im,(im.width-s)/2,(im.height-s)/2,s,s,0,0,cv.width,cv.height);cb(cv.toDataURL('image/jpeg',.85))};im.onerror=()=>toast('图片读取失败');im.src=src})}
+function dyOpen(id,edit,draft){
+ let isNew=!!draft;const d=draft||S.diaries.find(x=>x.id===id);if(!d)return;
+ const c=D(),o=dyOwn(d),u=who(o),me=who('me'),old=document.getElementById('dy-read');if(old){if(old._cleanup)old._cleanup();old.remove()}
+ if(c.devLine==='Taipei•iPhone18')c.devLine='iPhone18';
+ let ed=!!edit,first=true,paras=[];
+ const ov=document.createElement('div');ov.id='dy-read';ov.className='dy dy-clean '+dyFx();ov.style.cssText=dyVars();
+ const vv=window.visualViewport,fit=()=>{ov.style.top=vv.offsetTop+'px';ov.style.height=vv.height+'px';ov.style.bottom='auto'};
+ if(vv){vv.addEventListener('resize',fit);vv.addEventListener('scroll',fit)}
+ ov._cleanup=()=>{if(vv){vv.removeEventListener('resize',fit);vv.removeEventListener('scroll',fit)}};
+ const grow=ta=>{ta.style.height='auto';ta.style.height=Math.max(ta.scrollHeight,ta.dataset.min|0)+'px'};
+ const IMG_D='https://imgbed.heliar.top/i/5rTFssWniyveHzRV_%E7%84%A1%E6%A8%99%E9%A1%8C583_20261013161257.png',IMG_N='https://imgbed.heliar.top/i/PKcSCqFBmfUqQ2ac_IMG_0484.png';
+ const icon=`<span class="dv-icw"><img class="dv-ic day" src="${IMG_D}" alt="" onerror="this.parentNode.classList.add('bad')"><img class="dv-ic night" src="${IMG_N}" alt="" onerror="this.parentNode.classList.add('bad')"><svg class="dv-fb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4 4v-4h-.5A2.5 2.5 0 0 1 4 13.5Z"/><path d="M8 8h8M8 11.5h5"/></svg></span>`;
+ const badge='<svg class="dv-bd" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4.5" fill="#1d9bf0"/><rect x="4" y="4" width="16" height="16" rx="4.5" fill="#1d9bf0" transform="rotate(45 12 12)"/><path d="m8.3 12.4 2.6 2.6 4.8-5.4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+ const SIL='<svg viewBox="0 0 40 40"><rect width="40" height="40" fill="#1c1c1e"/><circle cx="20" cy="15" r="7" fill="#fff"/><path d="M6 41c0-9 6-14 14-14s14 5 14 14z" fill="#fff"/></svg>';
+ const avt=(w,tag,attr,inner)=>`<${tag} class="dv-av"${attr}><span class="av">${inner||av(w)}</span><i class="dv-plus"></i></${tag}>`;
+ const draw=()=>{
+  const dc=c.deco[o]||{},line=dc.line!==undefined?dc.line:'寫於London·winter:';
+  paras=dyBodyOf(d).split(/\n+/).filter(Boolean);
+  const tm=dyDate(d.time).replace(/-/g,'/')+' '+hm(d.time),sub=(c.devLine?'發佈於'+esc(c.devLine)+'　':'')+tm;
+  const cmSrc=c.cmAv||me.avatar,cmInner=cmSrc?`<img src="${cmSrc}" alt="">`:SIL;
+  ov.classList.toggle('dy-still',!first);
+  const bar=ed?`<div class="dy-rbar"><button data-cancel>取消</button><span>${isNew?'写日记':'编辑'}</span><button data-ok class="ok">完成</button></div>`:'';
+  const inner=ed?`<div class="dv dv-edit"><input class="dy-t-in" maxlength="40" placeholder="标题" value="${esc(d.title||'')}"><div class="dy-tools"><button data-mk="红"><u>红线</u></button><button data-mk="蓝"><i>荧光笔</i></button><button data-mk="x">清除标记</button></div><textarea class="dy-b-in" data-min="320" placeholder="写点什么…">${esc(d.content||'')}</textarea><div class="dv-rl">译文（可选）</div><input class="dy-rt-in" maxlength="60" placeholder="标题译文" value="${esc(d.trTitle||'')}"><textarea class="dy-r-in" data-min="80" placeholder="外语日记的中文译文，点正文时整片显示">${esc(d.tr||'')}</textarea></div>`
+  :`<div class="dv">
+  <div class="dv-head dy-it" style="--i:0">${avt(u,'button',' data-x aria-label="返回"')}<div class="dv-id"><div class="dv-nm"><b>${esc(u.name)}</b><span class="dv-hd">@${esc(u.handle||o)}</span></div><div class="dv-sub" data-dv="dev">${sub}</div></div></div>
+  <p class="dv-copy dy-it${dc.text?'':' empty'}" style="--i:1" data-dv="copy">${esc(dc.text||'点此写一段文案')}</p>
+  <div class="dv-line dy-it" style="--i:2" data-dv="line">${icon}<em>${esc(line)}</em></div>
+  ${d.title?`<h2 class="dv-title dy-it${d.trTitle?' dv-fo':''}" style="--i:3"><span>${esc(d.title)}</span></h2>`:''}
+  ${d.tr||d.trTitle?'<div class="dv-tip dy-it" style="--i:3">点一下文字，查看中文翻译</div>':''}
+  <div class="dv-body${d.tr?' dv-fo':''}">${paras.map((p,i)=>`<p class="dy-it" style="--i:${i+4}">${dyMark(p)}</p>`).join('')}</div>
+  <hr class="dv-hr dy-it" style="--i:${paras.length+4}">
+  ${d.comment?`<div class="dv-cm dy-it" style="--i:${paras.length+5}"><div class="dv-head dv-uh">${avt(me,'div','',cmInner)}<div class="dv-id"><div class="dv-nm"><b>${esc(S.me.name||'我')}</b>${badge}</div><div class="dv-sub" data-dv="cm">${esc(c.cmLine)}</div></div></div><p class="dv-ct" data-dv="cmt">${esc(d.comment)}</p></div>`:''}
+  </div>`;
+  const foot=ed?'':`<div class="dv-bar"><div class="dv-box"><input class="dv-in" type="text" enterkeyhint="send" autocomplete="off" placeholder="回復帖子@ ${esc(u.name)}"><button class="dv-send" data-send>发送</button><button class="dv-bav" data-cmav aria-label="更换头像">${cmInner}</button></div></div>`;
+  ov.innerHTML=`${bar}<div class="dy-rbody">${inner}</div>${foot}`;
+  first=false;
+  if(ed){const b=ov.querySelector('.dy-b-in');grow(b);b.oninput=()=>grow(b);const r=ov.querySelector('.dy-r-in');grow(r);r.oninput=()=>grow(r);setTimeout(()=>(isNew?ov.querySelector('.dy-t-in'):b).focus(),60)}
+  else{const inp=ov.querySelector('.dv-in'),bx=ov.querySelector('.dv-box');
+   inp.oninput=()=>bx.classList.toggle('has',!!inp.value.trim());
+   inp.onkeydown=e=>{if(e.key==='Enter'&&!e.isComposing&&e.keyCode!==229){e.preventDefault();send()}}}
+ };
+ const send=()=>{const inp=ov.querySelector('.dv-in');if(!inp)return;const v=inp.value.trim();if(!v)return;
+  d.comment=v;save();draw();setTimeout(()=>{const b=ov.querySelector('.dy-rbody');if(b)b.scrollTop=b.scrollHeight},30)};
+ const close=()=>{ov._cleanup();ov.classList.add('dy-out');setTimeout(()=>ov.remove(),380)};
+ ov.onclick=e=>{
+  if(!ed){const tb=e.target.closest('.dv-trb');if(tb){const h=tb.parentNode;h.classList.remove('tr-on');tb.remove();return}
+   const mk=(h,html)=>{const bx=document.createElement('div');bx.className='dv-trb';bx.innerHTML=html;h.appendChild(bx);h.classList.add('tr-on')};
+   const ti=e.target.closest('.dv-title.dv-fo');if(ti&&d.trTitle){mk(ti,esc(d.trTitle));return}
+   const fp=e.target.closest('.dv-body.dv-fo');if(fp&&d.tr){mk(fp,d.tr.split(/\n+/).filter(Boolean).map(p=>'<p>'+dyMark(p)+'</p>').join(''));return}}
+  const z=e.target.closest('[data-dv]');
+  if(z&&!ed&&!e.target.closest('button')){const k=z.dataset.dv,dcc=c.deco[o]||(c.deco[o]={});
+   if(k==='dev')modal(c.devLine||'',v=>{c.devLine=v.trim();save();draw()});
+   else if(k==='cm')modal(c.cmLine||'',v=>{c.cmLine=v.trim();save();draw()});
+   else if(k==='copy')modal(dcc.text||'',v=>{dcc.text=v.trim();dcc.ts=Date.now();save();draw();rDiary(1)});
+   else if(k==='line')modal(dcc.line!==undefined?dcc.line:'寫於London·winter:',v=>{dcc.line=v.trim();save();draw()});
+   else if(k==='cmt')showFeedSheet([{label:'编辑点评',run:()=>{const inp=ov.querySelector('.dv-in');inp.value=d.comment||'';ov.querySelector('.dv-box').classList.add('has');inp.focus()}},{label:'删除点评',run:()=>{if(confirm('删除这条点评？')){d.comment='';save();draw()}}},{label:'取消',run:()=>{}}]);
+   return}
+  const t=e.target.closest('button');if(!t)return;
+  if(t.hasAttribute('data-x'))close();
+  else if(t.hasAttribute('data-send'))send();
+  else if(t.hasAttribute('data-cmav')){
+   const pick=()=>dyPickAv(src=>{c.cmAv=src;save();draw()});
+   if(c.cmAv)showFeedSheet([{label:'从手机相册更换',run:pick},{label:'恢复默认头像',run:()=>{c.cmAv='';save();draw()}},{label:'取消',run:()=>{}}]);else pick()}
+  else if(t.dataset.mk){
+   const ta=ov.querySelector('.dy-b-in'),a=ta.selectionStart,z2=ta.selectionEnd;
+   if(a===z2){toast('先选中一段文字');return}
+   let sel=ta.value.slice(a,z2);if(sel.includes('\n')){toast('请在同一段内选择');return}
+   sel=sel.replace(/\[\[(?:红|蓝)[:：]([\s\S]*?)\]\]/g,'$1');
+   ta.setRangeText(t.dataset.mk==='x'?sel:`[[${t.dataset.mk}:${sel}]]`,a,z2,'select');grow(ta)}
+  else if(t.hasAttribute('data-cancel')){if(isNew)close();else{ed=false;draw()}}
+  else if(t.hasAttribute('data-ok')){
+   const ti=dyPlain(ov.querySelector('.dy-t-in').value.trim()),bo=ov.querySelector('.dy-b-in').value.trim();
+   if(!bo){if(isNew&&!ti){close();return}toast('正文不能为空');return}
+   d.title=ti;d.content=bo;d.tr=(ov.querySelector('.dy-r-in').value||'').trim();d.trTitle=(ov.querySelector('.dy-rt-in').value||'').trim();if(isNew){S.diaries.push(d);isNew=false}
+   save();ed=false;draw();rDiary(1)}};
+ draw();document.body.appendChild(ov)}
+
+/* ===== 情侣拍立得 ===== */
+const ppl=()=>S.polas||(S.polas=[]);
+const ppToday=o=>ppl().find(x=>x.owner===o&&x.date===dyDate(Date.now()));
+const ppMD=s=>String(s||'').slice(5).replace('-','.');
+function ppPartner(){
+ if(DY.owner!=='me'&&P(DY.owner))return DY.owner;
+ if(DY.pp&&P(DY.pp)&&!P(DY.pp).blocked)return DY.pp;
+ const f=S.personas.find(x=>!x.blocked);return f?f.id:null}
+function ppAlbum(){const pt=ppPartner();return ppl().filter(x=>x.owner==='me'||x.owner===pt).sort((a,b)=>b.time-a.time)}
+const ppCard=(p,cls)=>`<div class="pp-card ${cls||''}"><div class="pp-ph"><img src="${p.img}" alt=""></div><div class="pp-cap">${esc(p.cap||'')}</div><small>${ppMD(p.date)}</small></div>`;
+function ppRender(){
+ const pt=ppPartner(),plus='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>';
+ const slot=(o,i)=>{const w=who(o),t=ppToday(o),nm=o==='me'?(S.me.name||'我'):w.name;
+  return `<div class="pp-slot dy-it" style="--i:${i}"><div class="pp-who"><span class="av">${av(w)}</span><b>${esc(nm)}</b></div>${t?`<div class="pp-wrap r${i%2}" data-pp-view="${t.id}">${ppCard(t)}</div>`:`<div class="pp-empty" data-pp-add="${o}">${plus}<span>今天还没有</span></div>`}<button class="dy-btn${t?'':' fill'}" data-pp-add="${o}">${t?'重新打印':(o==='me'?'上传并打印':'上传 ta 的生图')}</button></div>`};
+ const today=`<div class="pp-pair">${slot('me',1)}${pt?slot(pt,2):'<div class="pp-slot"><div class="empty" style="padding:30px 0">先添加一个角色</div></div>'}</div><p class="pp-hint dy-it" style="--i:3">${dyDate(Date.now()).replace(/-/g,'.')} · 今日拍立得　${pt?'点上方头像可切换对象':''}</p>`;
+ const al=ppAlbum();
+ const grid=al.length?`<h4 class="pp-h dy-it" style="--i:4">相册</h4><div class="pp-grid">${al.map((p,i)=>`<div class="pp-mini dy-it" style="--i:${i+5}" data-pp-view="${p.id}">${ppCard(p,'pp-sm')}<em>${esc(p.owner==='me'?(S.me.name||'我'):who(p.owner).name)}</em></div>`).join('')}</div>`:'';
+ return today+grid}
+function ppCrop(src){return new Promise((res,rej)=>{const im=new Image();im.onload=()=>{const s=Math.min(im.width,im.height),cv=document.createElement('canvas');cv.width=cv.height=Math.min(720,s);cv.getContext('2d').drawImage(im,(im.width-s)/2,(im.height-s)/2,s,s,0,0,cv.width,cv.height);res(cv.toDataURL('image/jpeg',.86))};im.onerror=rej;im.src=src})}
+function ppAdd(o){
+ if(ppToday(o)&&!confirm('今天已经有一张了，重新打印会替换它，继续？'))return;
+ pickImage(src=>{ppCrop(src).then(img=>ppPrint(o,img)).catch(()=>toast('图片读取失败'))})}
+function ppPrint(owner,img){
+ const old=document.getElementById('pp-print');if(old)old.remove();
+ const date=dyDate(Date.now()),nm=owner==='me'?(S.me.name||'我'):who(owner).name;
+ const ov=document.createElement('div');ov.id='pp-print';
+ ov.innerHTML=`<button class="pt-x" data-x aria-label="关闭">×</button>
+ <div class="pt-stage"><div class="pt-printer go"><i class="pt-led"></i><div class="pt-slit"></div><div class="pt-clip"><div class="pt-out">${ppCard({img,cap:'',date})}</div></div></div><p class="pt-st">打印中…</p></div>
+ <div class="pt-after"><input maxlength="24" placeholder="写一句话（可留空）"><div class="pt-btns"><button class="dy-btn" data-x>取消</button><button class="dy-btn fill" data-ok>收进相册</button></div></div>`;
+ const pr=ov.querySelector('.pt-printer'),st=ov.querySelector('.pt-st'),cap=ov.querySelector('.pp-cap'),inp=ov.querySelector('input');
+ const tm=setTimeout(()=>{pr.classList.remove('go');pr.classList.add('done');ov.classList.add('done');st.textContent='打印完成'},3700);
+ inp.oninput=()=>{cap.textContent=inp.value};
+ const close=()=>{clearTimeout(tm);ov.classList.add('dy-out');setTimeout(()=>ov.remove(),380)};
  ov.onclick=e=>{const t=e.target.closest('button');if(!t)return;
   if(t.hasAttribute('data-x'))close();
-  else if(t.hasAttribute('data-ed'))modal(d.content||'',v=>{if(!v.trim())return;d.content=v.trim();save();dyOpen(id);rDiary(1)});
-  else if(t.hasAttribute('data-rm')&&confirm('删除这篇日记？')){ov.classList.add('dy-out');setTimeout(()=>{ov.remove();S.diaries=S.diaries.filter(x=>x.id!==id);save();rDiary(1)},380)}};
+  else if(t.hasAttribute('data-ok')){
+   S.polas=ppl().filter(x=>!(x.owner===owner&&x.date===date));
+   S.polas.push({id:uid(),owner,date,img,cap:inp.value.trim(),time:Date.now()});save();close();DY.tab='pola';if(owner!=='me')DY.pp=owner;rDiary();toast(nm+' 的拍立得已收进相册')}};
  document.body.appendChild(ov)}
+async function ppSave(p){
+ try{
+  const W=840,H=1010,cv=document.createElement('canvas');cv.width=W;cv.height=H;const x=cv.getContext('2d'),c=D();
+  const sans='-apple-system,"PingFang SC","Noto Sans SC",sans-serif',ff=c.font?fontStack(c.font):sans;
+  x.fillStyle='#fff';x.fillRect(0,0,W,H);
+  const im=await new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src=p.img});
+  x.fillStyle='#e6e6e6';x.fillRect(40,40,760,760);x.drawImage(im,40,40,760,760);
+  x.fillStyle='#111';x.font='42px '+ff;x.textAlign='center';x.textBaseline='middle';x.fillText(p.cap||'',W/2,868,W-100);
+  x.fillStyle='#a0a0a0';x.font='24px '+sans;x.textAlign='right';x.fillText(p.date.replace(/-/g,'.'),W-48,H-46);
+  const blob=await new Promise(r=>cv.toBlob(r,'image/png'));if(!blob)throw new Error('生成失败');
+  const file=new File([blob],'polaroid-'+p.date+'.png',{type:'image/png'});
+  if(navigator.canShare&&navigator.canShare({files:[file]}))await navigator.share({files:[file]});
+  else{const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=file.name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);toast('图片已生成')}
+ }catch(e){if(e&&e.name==='AbortError')return;toast('保存图片失败：'+((e&&e.message)||e))}}
+function ppView(id){
+ const p=ppl().find(x=>x.id===id);if(!p)return;
+ const old=document.getElementById('pp-view');if(old)old.remove();
+ const nm=p.owner==='me'?(S.me.name||'我'):who(p.owner).name;
+ const ov=document.createElement('div');ov.id='pp-view';
+ ov.innerHTML=`<div class="pv-card">${ppCard(p)}<p>${esc(nm)} · ${p.date.replace(/-/g,'.')}</p><div class="pt-btns"><button class="dy-btn" data-save>保存图片</button><button class="dy-btn" data-cap>改文字</button><button class="dy-btn" data-del>删除</button></div></div>`;
+ const close=()=>{ov.classList.add('dy-out');setTimeout(()=>ov.remove(),300)};
+ ov.onclick=e=>{const t=e.target.closest('button');
+  if(!t){if(!e.target.closest('.pp-card'))close();return}
+  if(t.hasAttribute('data-save'))ppSave(p);
+  else if(t.hasAttribute('data-cap'))modal(p.cap||'',v=>{p.cap=v.trim().slice(0,24);save();close();rDiary(1);setTimeout(()=>ppView(id),320)});
+  else if(t.hasAttribute('data-del')&&confirm('删除这张拍立得？')){S.polas=ppl().filter(x=>x.id!==id);save();close();rDiary(1)}};
+ document.body.appendChild(ov)}
+
 function dySettings(){
  const old=document.getElementById('dy-set');if(old)old.remove();const c=D(),o=DY.owner,sc=c.sched[o]||{};
  const fonts=[['','跟随全局字体'],...FONT_BUILTIN.map(x=>[x.id,x.name]),...S.fonts.map(x=>[x.id,x.name+'（自定义）'])];
@@ -5060,17 +5230,18 @@ function dySettings(){
  <div class="f"><span>日记字体</span>${sel('font',fonts)}</div>
  <div class="f"><span>字号 ${c.size}</span><input type="range" min="13" max="20" step="1" value="${c.size}" data-k="size"></div>
  <div class="f"><span>行距 ${c.lh}</span><input type="range" min="1.5" max="2.4" step="0.1" value="${c.lh}" data-k="lh"></div>
- <div class="f"><span>纸张</span>${sel('paper',[['plain','素白'],['warm','米黄'],['lined','横线'],['grid','方格']])}</div>
+ <div class="f"><span>发布设备</span><input type="text" data-k="devLine" value="${esc(c.devLine)}" placeholder="iPhone18"></div>
+ <div class="f"><span>点评装饰</span><input type="text" data-k="cmLine" value="${esc(c.cmLine)}" placeholder="missing 12 a.m."></div>
  <div class="f"><span>头像框</span>${sel('frame',[['none','无'],['ring','细圈'],['double','双圈'],['polaroid','拍立得']])}</div>
  <div class="f"><span>入场动效</span>${sel('fx',[['none','无'],['fade','淡入'],['rise','上浮淡入'],['blur','模糊淡入'],['slow','逐段缓显']])}</div>
- <label class="f"><input type="checkbox" data-k="noteHide" ${c.noteHide?'checked':''}>小纸条点开读过后渐隐变淡（再点恢复）</label>
+ <label class="f"><input type="checkbox" data-k="noteHide" ${c.noteHide?'checked':''}>留言点开读过后渐隐变淡（再点恢复）</label>
  <h4>长日记</h4>
  <div class="f"><span>生成篇数</span><input type="number" min="1" max="5" value="${c.count}" data-k="count"></div>
  <div class="f"><span>每篇字数</span><input type="number" min="100" max="2000" step="50" value="${c.len}" data-k="len"></div>
  ${o==='me'?'<p class="note" style="color:var(--sub);font-size:12.5px">定时写日记：切换到某个角色后，在主页点“每天 … 自动写”设置时间。</p>':`<div class="f"><span>${esc(who(o).name)}</span><label style="display:flex;align-items:center;gap:6px;flex:1;font-size:13.5px"><input type="checkbox" data-sk="on" ${sc.on?'checked':''}>每天<input type="time" data-sk="time" value="${sc.time||'22:00'}" style="width:auto">自动写</label></div>`}
  <div class="f"><span>系统提示词</span><button class="dy-btn" data-reset="sys" style="margin-left:auto">恢复默认</button></div><textarea data-k="sys">${esc(c.sys)}</textarea>
  <div class="f"><span>外加提示词</span></div><textarea data-k="extra" placeholder="例如：多写一些心理活动；用更口语的语气…">${esc(c.extra)}</textarea>
- <h4>小纸条</h4>
+ <h4>留言板</h4>
  <div class="f"><span>自动留言</span>${sel('nauto',[[0,'关闭'],[10,'聊天后 10% 概率'],[30,'聊天后 30% 概率'],[60,'聊天后 60% 概率']])}</div>
  <div class="f"><span>系统提示词</span><button class="dy-btn" data-reset="nsys" style="margin-left:auto">恢复默认</button></div><textarea data-k="nsys">${esc(c.nsys)}</textarea>
  <div class="f"><span>外加提示词</span></div><textarea data-k="nextra" placeholder="例如：纸条里带一点小玩笑…">${esc(c.nextra)}</textarea></div>`;
@@ -5361,6 +5532,323 @@ setInterval(dyTick,30000);document.addEventListener('visibilitychange',()=>{if(!
 .dy-pa .dy-more{flex:none;width:46px}
 .dy-seg small{opacity:.55;margin-left:4px;font-size:11px;font-weight:400}
 </style>
+
+<style id="dy-clean-style">
+/* ===== 日记 · 干净黑白 ===== */
+.dy{--dy-paper:#fff;--dy-ink:#111;--dy-sub:#8a8a8a;--dy-line:#ececec;--dy-dot:rgba(0,0,0,.36)}
+[data-theme=dark] .dy{--dy-paper:#161616;--dy-ink:#ececec;--dy-sub:#8a8a8a;--dy-line:#2a2a2a;--dy-dot:rgba(255,255,255,.3)}
+.dy-clean .dy-owners{padding:0 0 14px;gap:6px}
+.dy-clean .dy-chip{background:transparent;border:1px solid var(--line);color:var(--sub);padding:3px 12px 3px 3px}
+.dy-clean .dy-chip.on{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.dy-clean .dy-post{background:transparent;border:1px solid var(--line);border-radius:14px;box-shadow:none}
+[data-theme=dark] .dy-clean .dy-post{border-color:var(--line)}
+.dy-clean .dy-pcover{height:96px}
+.dy-clean .dy-pa{border-top:1px solid var(--line)}
+.dy-clean .dy-pa i{background:var(--line)}
+.dy-clean .dy-seg{background:none;border-radius:0;padding:0;margin:18px 0 14px;border-bottom:1px solid var(--line)}
+.dy-clean .dy-seg button{padding:10px 4px;border-radius:0;color:var(--sub);border-bottom:2px solid transparent;margin-bottom:-1px;font-size:14.5px}
+.dy-clean .dy-seg button.on{background:none;box-shadow:none;color:var(--ink);border-bottom-color:var(--ink)}
+.dy-clean .dy-btn{background:transparent;border:1px solid var(--line);color:var(--ink);font-weight:500;padding:8px 16px}
+.dy-clean .dy-btn.fill{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.dy-clean .dy-act{margin-bottom:16px}
+.dy-clean .dy-card{background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:16px 2px;margin:0}
+.dy-clean .dy-date{border-right:0;padding-right:0;width:44px}
+.dy-clean .dy-cb p{color:var(--sub)}
+
+/* 留言板 */
+.mb-list{display:flex;flex-direction:column;gap:10px;padding-top:2px}
+.mb-item{display:flex;gap:12px;padding:14px;border:1px solid var(--line);border-radius:14px;background:transparent;cursor:pointer;transition:opacity .5s,filter .5s}
+.mb-item>.av{flex:none;width:34px;height:34px;border-radius:50%;font-size:13px}
+.mb-main{min-width:0;flex:1}
+.mb-top{display:flex;align-items:center;gap:8px}
+.mb-top b{font-size:14px;font-weight:600;color:var(--ink);max-width:8em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mb-top time{font-size:11.5px;color:var(--sub)}
+.mb-item .dy-x{position:static;margin-left:auto;color:var(--sub);opacity:.6;font-size:17px}
+.mb-item p{margin-top:6px;font-size:var(--dy-size);line-height:1.7;color:var(--ink);white-space:pre-wrap;word-break:break-word;font-family:var(--dy-font)}
+.mb-item.dim{opacity:.38;filter:blur(1.2px)}
+
+/* 阅读页：白色点阵手账 */
+#dy-read{--gp:calc(var(--dy-size)*var(--dy-lh)/2);background:var(--bg)}
+#dy-read .dy-rbar{padding:8px 8px}
+#dy-read .dy-rbar span{text-align:center;font-size:15px;font-weight:600;color:var(--ink)}
+#dy-read .dy-rbar .ok{font-weight:700}
+#dy-read .dy-rbody{padding:8px 16px calc(40px + env(safe-area-inset-bottom,0px));max-width:680px}
+.dy-sheet{position:relative;margin:6px 0 0 22px;padding:22px 20px 30px 34px;background:var(--dy-paper);border-radius:4px 14px 14px 4px;box-shadow:0 0 0 1px var(--dy-line),0 12px 32px rgba(0,0,0,.05);min-height:68vh}
+[data-theme=dark] .dy-sheet{box-shadow:0 0 0 1px var(--dy-line)}
+.dy-sheet::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;background-image:radial-gradient(circle,var(--dy-dot) .9px,transparent 1.4px);background-size:var(--gp) var(--gp);background-position:10px 6px}
+.dy-p-blank .dy-sheet::before{display:none}
+.dy-p-lined .dy-sheet::before{background-image:repeating-linear-gradient(transparent 0,transparent calc(var(--dy-size)*var(--dy-lh) - 1px),var(--dy-line) calc(var(--dy-size)*var(--dy-lh) - 1px),var(--dy-line) calc(var(--dy-size)*var(--dy-lh)));background-size:auto;background-position:0 62px}
+.dy-p-grid .dy-sheet::before{background-image:linear-gradient(var(--dy-line) 1px,transparent 1px),linear-gradient(90deg,var(--dy-line) 1px,transparent 1px);background-size:22px 22px;background-position:10px 6px}
+.dy-sheet>*{position:relative;z-index:1}
+.dy-sheet>.dy-rings{position:absolute;z-index:2;left:-22px;top:14px;bottom:14px;width:44px;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='40' viewBox='0 0 44 40'%3E%3Crect x='31' y='14' width='9' height='12' rx='3' fill='%23111'/%3E%3Cellipse cx='18' cy='18' rx='16' ry='5.5' fill='none' stroke='%23a9a9a9' stroke-width='2.4'/%3E%3Cellipse cx='18' cy='22' rx='16' ry='5.5' fill='none' stroke='%23d4d4d4' stroke-width='2.2'/%3E%3C/svg%3E") repeat-y;background-size:44px 40px}
+[data-theme=dark] .dy-sheet>.dy-rings{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='40' viewBox='0 0 44 40'%3E%3Crect x='31' y='14' width='9' height='12' rx='3' fill='%23000'/%3E%3Cellipse cx='18' cy='18' rx='16' ry='5.5' fill='none' stroke='%23777' stroke-width='2.4'/%3E%3Cellipse cx='18' cy='22' rx='16' ry='5.5' fill='none' stroke='%23aaa' stroke-width='2.2'/%3E%3C/svg%3E")}
+#dy-read .dy-rmeta{margin-bottom:12px}
+#dy-read .dy-rmeta .av{width:36px;height:36px}
+#dy-read .dy-rbody h2{font-size:22px;font-weight:700;line-height:1.4;margin:0 0 14px;padding-bottom:12px;border-bottom:1px solid var(--dy-line);color:var(--dy-ink)}
+#dy-read .dy-text,#dy-read.dy-p-lined .dy-text,#dy-read.dy-p-grid .dy-text{background:none;border:0;padding:0;border-radius:0}
+#dy-read .dy-text p{margin:0 0 calc(var(--dy-size)*var(--dy-lh)/2)}
+.dy-sheet .dy-t-in,.dy-sheet .dy-b-in{all:unset;display:block;width:100%;box-sizing:border-box;color:var(--dy-ink);font-family:var(--dy-font);caret-color:var(--dy-ink)}
+.dy-sheet .dy-t-in{font-size:22px;font-weight:700;line-height:1.4;padding:0 0 12px;margin-bottom:14px;border-bottom:1px solid var(--dy-line)}
+.dy-sheet .dy-b-in{font-size:var(--dy-size);line-height:var(--dy-lh);white-space:pre-wrap;word-break:break-word;overflow:hidden;min-height:320px}
+.dy-sheet .dy-t-in::placeholder,.dy-sheet .dy-b-in::placeholder{color:var(--dy-sub);opacity:.7}
+.dy-sheet .dy-cm{margin-top:26px;padding-top:12px;border-top:1px dashed var(--dy-line)}
+.dy-sheet .dy-cm textarea{background:transparent;border:0;padding:0;outline:none;resize:none;color:var(--dy-ink);font-size:14px}
+
+/* 拍立得 · 今日 */
+.pp-pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:6px 0 4px}
+.pp-slot{display:flex;flex-direction:column;align-items:center;gap:12px;min-width:0}
+.pp-who{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--sub);max-width:100%}
+.pp-who .av{width:22px;height:22px;font-size:10px;border-radius:50%}
+.pp-who b{font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pp-wrap{width:100%;cursor:pointer}.pp-wrap.r0{rotate:-2deg}.pp-wrap.r1{rotate:2deg}
+.pp-empty{width:100%;aspect-ratio:190/236;border:1.5px dashed var(--line);border-radius:3px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--sub);font-size:12.5px;cursor:pointer}
+.pp-empty svg{width:26px;height:26px}
+.pp-hint{text-align:center;font-size:12px;color:var(--sub);margin:16px 0 4px}
+.pp-h{font-size:12px;letter-spacing:.14em;color:var(--sub);font-weight:500;margin:22px 0 10px}
+.pp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.pp-mini{cursor:pointer;text-align:center}.pp-mini em{display:block;font-style:normal;font-size:10.5px;color:var(--sub);margin-top:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pp-card{background:#fff;color:#111;padding:10px 10px 0;border-radius:3px;box-shadow:0 0 0 1px rgba(0,0,0,.06),0 6px 18px rgba(0,0,0,.12);box-sizing:border-box;width:100%}
+.pp-ph{aspect-ratio:1;background:#e6e6e6;overflow:hidden}.pp-ph img{width:100%;height:100%;object-fit:cover;display:block}
+.pp-cap{height:34px;line-height:34px;font-size:13px;text-align:center;font-family:var(--dy-font,inherit);overflow:hidden;white-space:nowrap;text-overflow:ellipsis;padding:0 4px}
+.pp-card small{display:block;text-align:right;font-size:9.5px;color:#9a9a9a;padding:0 2px 8px;margin-top:-4px;letter-spacing:.05em}
+.pp-sm{padding:5px 5px 0}.pp-sm .pp-cap{height:20px;line-height:20px;font-size:10px}.pp-sm small{font-size:8px;padding-bottom:4px;margin-top:-2px}
+
+/* 拍立得 · 打印机动画 */
+#pp-print{position:fixed;inset:0;z-index:60;background:var(--bg);color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;padding:env(safe-area-inset-top,0px) 20px env(safe-area-inset-bottom,0px);animation:dyFade .3s}
+.pt-x{position:absolute;top:calc(10px + env(safe-area-inset-top,0px));right:12px;font-size:28px;line-height:1;color:var(--sub);padding:6px 12px}
+.pt-stage{display:flex;flex-direction:column;align-items:center;gap:22px}
+.pt-printer{position:relative;width:260px;height:300px;border-radius:60px;background:linear-gradient(160deg,#2e2e2e,#0e0e0e);box-shadow:0 22px 44px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.14)}
+[data-theme=dark] .pt-printer{background:linear-gradient(160deg,#f6f6f6,#c9c9c9);box-shadow:0 22px 44px rgba(0,0,0,.6),inset 0 1px 0 #fff}
+.pt-printer.go{animation:ptShake .09s linear infinite}
+.pt-slit{position:absolute;top:30px;left:22px;right:22px;height:24px;border-radius:12px;background:#000;box-shadow:inset 0 3px 6px rgba(0,0,0,.85),0 1px 0 rgba(255,255,255,.16)}
+.pt-led{position:absolute;bottom:20px;right:32px;width:8px;height:8px;border-radius:50%;background:#555}
+.pt-printer.go .pt-led{background:#fff;animation:ptBlink .5s steps(2) infinite}
+[data-theme=dark] .pt-led{background:#999}[data-theme=dark] .pt-printer.go .pt-led{background:#111}
+.pt-clip{position:absolute;top:42px;left:0;right:0;height:242px;overflow:hidden;border-radius:0 0 44px 44px}
+.pt-printer.done .pt-clip{overflow:visible}
+.pt-out{position:absolute;left:35px;top:0;width:190px;transform:translateY(-100%);animation:ptFeed 3.6s ease-in-out forwards}
+.pt-printer.done .pt-out{animation:ptLift .9s cubic-bezier(.2,.8,.2,1) forwards}
+.pt-out .pp-ph img{filter:brightness(2.6) contrast(.25) grayscale(1) blur(7px);animation:ptDev 3.2s ease-out 3.5s forwards}
+.pt-out .pp-card{box-shadow:0 0 0 1px rgba(0,0,0,.08),0 4px 14px rgba(0,0,0,.25)}
+.pt-st{font-size:13px;color:var(--sub);letter-spacing:.12em;height:18px}
+.pt-after{display:flex;flex-direction:column;align-items:center;gap:14px;width:100%;max-width:300px;opacity:0;pointer-events:none;transition:opacity .6s .5s}
+#pp-print.done .pt-after{opacity:1;pointer-events:auto}
+.pt-after input{width:100%;box-sizing:border-box;text-align:center;background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:8px 0;font-size:15px;color:var(--ink);outline:none}
+.pt-btns{display:flex;gap:10px;justify-content:center}
+#pp-print .dy-btn,#pp-view .dy-btn{background:transparent;border:1px solid var(--line);color:var(--ink);padding:9px 18px;border-radius:999px;font-size:13.5px}
+#pp-print .dy-btn.fill{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+@keyframes ptFeed{0%{transform:translateY(-100%)}10%{transform:translateY(-100%)}20%{transform:translateY(-82%)}27%{transform:translateY(-82%)}43%{transform:translateY(-58%)}50%{transform:translateY(-58%)}65%{transform:translateY(-33%)}71%{transform:translateY(-33%)}88%{transform:translateY(-7%)}93%{transform:translateY(-7%)}100%{transform:translateY(0)}}
+@keyframes ptLift{from{transform:translateY(0) rotate(0) scale(1)}to{transform:translateY(40px) rotate(-3deg) scale(1.1)}}
+@keyframes ptDev{to{filter:none}}
+@keyframes ptShake{0%{transform:translate(0,0)}25%{transform:translate(.7px,.3px)}50%{transform:translate(0,-.3px)}75%{transform:translate(-.7px,.2px)}100%{transform:translate(0,0)}}
+@keyframes ptBlink{50%{opacity:.2}}
+
+/* 拍立得 · 查看 */
+#pp-view{position:fixed;inset:0;z-index:61;background:var(--shade);display:flex;align-items:center;justify-content:center;animation:dyFade .25s}
+.pv-card{width:min(78vw,320px);display:flex;flex-direction:column;align-items:center;gap:14px;background:var(--bg);padding:20px 18px 18px;border-radius:18px}
+.pv-card .pp-card{rotate:-1.5deg}
+.pv-card p{font-size:12.5px;color:var(--sub);margin:4px 0 0}
+</style>
+
+
+<style id="dy-clean2-style">
+/* 左滑 编辑/删除 */
+.dy-sw{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+.dy-clean .dy-sw .dy-card{position:relative;z-index:1;background:var(--bg);border-bottom:0;touch-action:pan-y;transition:transform .25s cubic-bezier(.2,.8,.2,1);-webkit-user-select:none;user-select:none}
+.dy-sw-act{position:absolute;right:0;top:0;bottom:0;width:136px;display:flex}
+.dy-sw-act button{flex:1;font-size:14px;font-weight:600;color:#fff;background:#2b2b2b}
+.dy-sw-act .del{background:#e5484d}
+
+/* 重点标记：红色下划线 / 蓝色荧光笔 */
+.mk-r{background:linear-gradient(#e5383b,#e5383b) 0 100%/100% 2px no-repeat;padding-bottom:2px;-webkit-box-decoration-break:clone;box-decoration-break:clone;animation:mkR .7s ease-out .6s backwards}
+.mk-b{background:linear-gradient(transparent 16%,rgba(70,160,255,.42) 16%,rgba(70,160,255,.42) 90%,transparent 90%) 0 0/100% 100% no-repeat;border-radius:2px;-webkit-box-decoration-break:clone;box-decoration-break:clone;animation:mkB .8s ease-out .6s backwards}
+@keyframes mkR{from{background-size:0 2px}}
+@keyframes mkB{from{background-size:0 100%}}
+.dy-still .mk-r,.dy-still .mk-b{animation:none}
+
+/* 阅读页：无顶栏，头像即返回 */
+#dy-read{padding-top:calc(env(safe-area-inset-top,0px) + 10px)}
+#dy-read .dy-rbar{padding:0 8px 6px}
+.dy-back{display:flex;align-items:center;gap:2px;padding:0;background:none;color:var(--dy-sub)}
+.dy-back svg{width:22px;height:22px;flex:none;margin-left:-6px}
+.dy-back .av{width:36px;height:36px;border-radius:50%}
+.dy-tools{display:flex;gap:8px;margin:-4px 0 12px;flex-wrap:wrap}
+.dy-tools button{padding:5px 12px;border-radius:999px;border:1px solid var(--dy-line);font-size:12.5px;color:var(--dy-ink);background:var(--dy-paper)}
+.dy-tools u{text-decoration-color:#e5383b;text-decoration-thickness:2px;text-underline-offset:3px}
+.dy-tools i{font-style:normal;background:linear-gradient(transparent 16%,rgba(70,160,255,.42) 16%,rgba(70,160,255,.42) 90%,transparent 90%);padding:0 2px}
+
+/* 点评：独立底色 + 贴纸 */
+.dy-sheet .dy-cm{--cm-bg:#f1f1ef;position:relative;margin-top:30px;padding:12px 14px 16px;background:var(--cm-bg);border:0;border-radius:12px;min-height:176px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.05)}
+[data-theme=dark] .dy-sheet .dy-cm{--cm-bg:#232323;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.dy-sheet .dy-cm::before{content:'';position:absolute;top:-9px;left:50%;width:72px;height:18px;margin-left:-36px;background:rgba(0,0,0,.09);rotate:-2deg}
+[data-theme=dark] .dy-sheet .dy-cm::before{background:rgba(255,255,255,.12)}
+.cm-h{display:flex;align-items:center;justify-content:space-between}
+.dy-sheet .dy-cm label{font-size:12px;letter-spacing:.14em;color:var(--dy-sub)}
+.cm-stk{display:flex;align-items:center;gap:4px;padding:4px 10px;border-radius:999px;background:var(--dy-paper);color:var(--dy-ink);font-size:12.5px;box-shadow:0 0 0 1px var(--dy-line)}
+.cm-stk svg{width:15px;height:15px}
+.dy-sheet .dy-cm textarea{display:block;width:100%;box-sizing:border-box;margin-top:8px;background:transparent;border:0;padding:0;outline:none;resize:none;color:var(--dy-ink);font-size:14.5px;line-height:1.7;min-height:110px;font-family:var(--dy-font)}
+.cm-layer{position:absolute;inset:0;pointer-events:none}
+.cm-s{position:absolute;pointer-events:auto;touch-action:none;transform:translate(-50%,-50%);cursor:grab}
+.cm-i svg{display:block;width:100%;height:auto;filter:drop-shadow(0 1px 1.5px rgba(0,0,0,.25))}
+.cm-s.sel .cm-i{outline:1.5px dashed var(--dy-sub);outline-offset:3px;border-radius:6px}
+.cm-bar{position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);display:flex;gap:2px;background:var(--ink);border-radius:999px;padding:3px 6px;z-index:5;white-space:nowrap}
+.cm-bar button{width:26px;height:24px;color:var(--bg);font-size:15px;line-height:1}
+#dy-stk{position:fixed;inset:0;z-index:62;background:var(--shade);display:flex;align-items:flex-end;justify-content:center;animation:dyFade .25s}
+#dy-stk>div{width:100%;max-width:640px;background:var(--bg);color:var(--ink);border-radius:20px 20px 0 0;padding:16px 18px calc(22px + env(safe-area-inset-bottom,0px))}
+#dy-stk b{font-size:15px}
+.stk-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:14px}
+.stk-grid button{aspect-ratio:1;padding:8px;border-radius:14px;background:var(--p)}
+.stk-grid svg{width:100%;height:100%}
+</style>
+
+
+<style id="dy-clean3-style">
+/* ===== 日记详情：帖子式 ===== */
+#dy-read{overflow:hidden}
+#dy-read .dy-rbody{padding:14px 22px calc(48px + env(safe-area-inset-bottom,0px));max-width:680px}
+.dv{color:var(--ink)}
+.dv-head{display:flex;align-items:center;gap:14px}
+.dv-av{position:relative;flex:none;width:58px;height:58px;padding:0;background:none;display:block;border:0}
+.dv-av .av{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;overflow:hidden;font-size:22px;background:var(--av);box-shadow:0 0 0 1px rgba(0,0,0,.06),0 3px 12px rgba(0,0,0,.28)}
+[data-theme=dark] .dv-av .av{box-shadow:0 0 0 1px rgba(255,255,255,.14),0 3px 14px rgba(0,0,0,.7)}
+.dv-av .av img{width:100%;height:100%;object-fit:cover;display:block}
+.dv-plus{position:absolute;left:-4px;bottom:-4px;width:26px;height:26px;border-radius:50%;background:#000;border:2.5px solid #fff;box-sizing:border-box;box-shadow:0 1px 4px rgba(0,0,0,.3)}
+.dv-plus::before,.dv-plus::after{content:'';position:absolute;left:50%;top:50%;background:#fff;border-radius:1px;transform:translate(-50%,-50%)}
+.dv-plus::before{width:10px;height:2px}.dv-plus::after{width:2px;height:10px}
+.dv-id{min-width:0;flex:1}
+.dv-nm{display:flex;align-items:center;gap:8px}
+.dv-nm b{font-size:20px;font-weight:700;max-width:9em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dv-hd{font-size:15.5px;color:#3b9ae1;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+[data-theme=dark] .dv-hd{color:#4aa3f0}
+.dv-bd{width:19px;height:19px;flex:none}
+.dv-sub{margin-top:5px;font-size:13px;line-height:1.45;color:var(--sub);cursor:pointer;word-break:break-all}
+.dv-sub:empty::before{content:'点此写一句装饰文字';opacity:.5}
+.dv-copy{margin:20px 0 0;font-size:16px;line-height:1.8;white-space:pre-wrap;word-break:break-word;font-family:var(--dy-font);cursor:pointer}
+.dv-line{display:flex;align-items:center;gap:8px;margin:18px 0 18px;color:#3b9ae1;font-size:15.5px;font-weight:500;cursor:pointer}
+[data-theme=dark] .dv-line{color:#4aa3f0}
+.dv-line em{font-style:normal}
+.dv-icw{position:relative;flex:none;width:24px;height:24px;display:grid;place-items:center}
+.dv-ic{width:100%;height:100%;object-fit:contain}
+.dv-ic.night,.dv-fb{display:none}
+[data-theme=dark] .dv-ic.day{display:none}[data-theme=dark] .dv-ic.night{display:block}
+.dv-icw.bad .dv-ic{display:none!important}.dv-icw.bad .dv-fb{display:block;width:20px;height:20px}
+.dv-title{font-size:18px;font-weight:700;line-height:1.5;margin:4px 0 10px;font-family:var(--dy-font)}
+.dv-body p{margin:0 0 .9em;font-size:var(--dy-size);line-height:var(--dy-lh);white-space:pre-wrap;word-break:break-word;font-family:var(--dy-font)}
+.dv-hr{border:0;border-top:1px solid var(--line);margin:26px 0 24px}
+.dv-cm{position:relative;min-height:170px}
+.dv-cm .cm-stk{margin-left:auto;padding:5px;border-radius:50%;background:transparent;box-shadow:none;color:var(--sub);flex:none}
+.dv-cm .cm-stk svg{width:19px;height:19px}
+.dv-cmt{all:unset;display:block;width:100%;box-sizing:border-box;margin-top:14px;min-height:64px;color:var(--ink);font-size:16px;line-height:1.8;white-space:pre-wrap;word-break:break-word;overflow:hidden;font-family:var(--dy-font);caret-color:var(--ink)}
+.dv-cmt::placeholder{color:var(--sub);opacity:.6}
+/* 编辑 */
+.dv-edit .dy-t-in,.dv-edit .dy-b-in{all:unset;display:block;width:100%;box-sizing:border-box;color:var(--ink);font-family:var(--dy-font);caret-color:var(--ink)}
+.dv-edit .dy-t-in{font-size:21px;font-weight:700;line-height:1.4;padding:4px 0 12px;margin-bottom:12px;border-bottom:1px solid var(--line)}
+.dv-edit .dy-b-in{font-size:var(--dy-size);line-height:var(--dy-lh);white-space:pre-wrap;word-break:break-word;overflow:hidden;min-height:320px}
+.dv-edit .dy-t-in::placeholder,.dv-edit .dy-b-in::placeholder{color:var(--sub);opacity:.6}
+.dv-edit .dy-tools button{background:var(--bg);border-color:var(--line);color:var(--ink)}
+#dy-read .dy-rbar{padding:0 10px 6px}
+#dy-set .f>input[type=text]{flex:1;min-width:0}
+</style>
+
+
+<style id="dy-clean4-style">
+/* 详情页：字号/头像收小 */
+.dv-head{gap:10px}
+.dv-av{width:44px;height:44px}
+.dv-av .av{box-shadow:none;border:1.5px solid #c8c8c8;box-sizing:border-box;font-size:17px}
+[data-theme=dark] .dv-av .av{box-shadow:none;border-color:#fff}
+.dv-plus{width:18px;height:18px;border-width:2px;left:-3px;bottom:-3px;box-shadow:none}
+.dv-plus::before{width:7px;height:1.6px}.dv-plus::after{width:1.6px;height:7px}
+.dv-nm{gap:6px}
+.dv-nm b{font-size:15px}
+.dv-hd{font-size:12px}
+.dv-sub{font-size:11px;margin-top:3px}
+.dv-bd{width:14px;height:14px}
+.dv-copy{font-size:13px;line-height:1.75;margin:12px 0 0}
+.dv-copy.empty{color:var(--sub);opacity:.6}
+.dv-line{font-size:12px;gap:6px;margin:12px 0 14px}
+.dv-icw{width:14px;height:14px}
+.dv-icw.bad .dv-fb{width:13px;height:13px}
+.dv-title{font-size:13px;margin:2px 0 8px}
+.dv-body p{font-size:13px}
+.dv-hr{margin:20px 0 18px}
+.dv-uh .dv-av{width:34px;height:34px}
+.dv-uh .dv-av .av{font-size:13px}
+.dv-uh .dv-plus{width:14px;height:14px;border-width:1.5px;left:-3px;bottom:-3px}
+.dv-uh .dv-plus::before{width:6px;height:1.4px}.dv-uh .dv-plus::after{width:1.4px;height:6px}
+.dv-uh .dv-nm b{font-size:13px}
+.dv-uh .dv-bd{width:13px;height:13px}
+.dv-cm{min-height:0}
+.dv-cmt{font-size:13px;margin-top:10px;min-height:48px}
+.dv-edit .dy-t-in{font-size:13px;font-weight:700}
+.dv-edit .dy-b-in{font-size:13px}
+</style>
+
+
+<style id="dy-clean5-style">
+/* 翻译覆盖层（同心声：黑底白字，夜间白底黑字） */
+.dv-tip{font-size:11px;color:var(--sub);margin:0 0 8px}
+.dv-body p.dv-fo{position:relative;cursor:pointer}
+.dv-trb{position:absolute;z-index:4;left:-8px;right:-8px;top:-6px;min-height:calc(100% + 12px);box-sizing:border-box;padding:7px 10px;border-radius:12px;background:#050505;color:#fff;font-weight:800;font-size:13px;line-height:1.75;white-space:pre-wrap;word-break:break-word;box-shadow:0 6px 18px rgba(0,0,0,.25);animation:dyFade .2s}
+[data-theme=dark] .dv-trb{background:#fff;color:#111}
+/* 点评：展示 + 底部输入框 */
+.dv-ct{margin:10px 0 0;font-size:13px;line-height:1.8;white-space:pre-wrap;word-break:break-word;font-family:var(--dy-font);cursor:pointer}
+#dy-read .dy-rbody{padding-bottom:24px}
+.dv-bar{flex:none;padding:8px 16px calc(10px + env(safe-area-inset-bottom,0px));background:var(--bg)}
+.dv-box{display:flex;align-items:center;gap:10px;max-width:680px;margin:0 auto;box-sizing:border-box;border:1px solid #d9d9d9;border-left:4px solid #d0d0d0;padding:7px 10px 7px 12px;background:var(--bg)}
+[data-theme=dark] .dv-box{border-color:#3a3a3a;border-left-color:#555}
+.dv-in{all:unset;flex:1;min-width:0;font-size:13px;line-height:1.5;color:var(--ink);font-weight:500;caret-color:#3b9ae1}
+.dv-in::placeholder{color:#3b9ae1;opacity:1;font-weight:500}
+[data-theme=dark] .dv-in::placeholder{color:#4aa3f0}
+.dv-send{flex:none;display:none;font-size:12px;font-weight:600;color:#3b9ae1;padding:4px 2px}
+.dv-box.has .dv-send{display:block}
+.dv-bav{flex:none;width:30px;height:30px;padding:0;border-radius:50%;overflow:hidden;border:1.5px solid #c8c8c8;box-sizing:border-box;display:block;background:none}
+[data-theme=dark] .dv-bav{border-color:#fff}
+.dv-bav img,.dv-bav svg{width:100%;height:100%;object-fit:cover;display:block}
+.dv-av .av svg{width:100%;height:100%;display:block}
+</style>
+
+
+<style id="dy-clean6-style">
+.dv-bar{padding:4px 16px calc(env(safe-area-inset-bottom,0px)*.35 + 4px)}
+.dv-box{gap:8px;border-left-width:3px;padding:3px 8px 3px 10px}
+.dv-in{font-size:12px;line-height:1.4}
+.dv-send{font-size:11px;padding:2px}
+.dv-bav{width:24px;height:24px;border-width:1.2px}
+.dv-body{position:relative}
+.dv-body.dv-fo{cursor:pointer}
+.dv-rl{font-size:11px;color:var(--sub);margin:18px 0 6px;padding-top:12px;border-top:1px solid var(--line)}
+.dv-edit .dy-r-in{all:unset;display:block;width:100%;box-sizing:border-box;color:var(--ink);font-size:13px;line-height:1.8;white-space:pre-wrap;word-break:break-word;overflow:hidden;min-height:80px;font-family:var(--dy-font);caret-color:var(--ink)}
+.dv-edit .dy-r-in::placeholder{color:var(--sub);opacity:.6}
+</style>
+
+
+<style id="dy-clean7-style">
+.dv-bar{padding:4px 16px calc(env(safe-area-inset-bottom,0px)*.6 + 6px)}
+.dv-in{font-size:11px}
+.dv-in::placeholder{font-size:11px}
+.dv-send{font-size:10.5px}
+</style>
+
+
+<style id="dy-clean8-style">
+.dv-trb{position:relative;left:auto;right:auto;top:auto;min-height:0;margin:0 -8px}
+.dv-body.tr-on>p{display:none}
+.dv-title.tr-on>span{display:none}
+.dv-title.dv-fo{cursor:pointer}
+.dv-title .dv-trb{font-size:13px;font-weight:800;padding:5px 10px}
+.dv-edit .dy-rt-in{all:unset;display:block;width:100%;box-sizing:border-box;color:var(--ink);font-size:13px;margin-bottom:8px;padding:4px 0;border-bottom:1px solid var(--line);font-family:var(--dy-font)}
+.dv-edit .dy-rt-in::placeholder{color:var(--sub);opacity:.6}
+</style>
+
+
+<style id="dy-clean9-style">
+.dv-trb p{margin:0 0 .9em;font-size:13px;line-height:var(--dy-lh,1.9);white-space:pre-wrap;word-break:break-word}
+.dv-trb p:last-child{margin-bottom:0}
+.dv-trb .mk-b{background-image:linear-gradient(transparent 16%,rgba(80,170,255,.6) 16%,rgba(80,170,255,.6) 90%,transparent 90%)}
+[data-theme=dark] .dv-trb .mk-b{background-image:linear-gradient(transparent 16%,rgba(70,160,255,.42) 16%,rgba(70,160,255,.42) 90%,transparent 90%)}
+</style>
+
 
 <style id="v76-style">
 /* v76 quote / recall */
